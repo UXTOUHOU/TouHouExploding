@@ -1,0 +1,10 @@
+S:\编程\c#\自制\东方游戏\技术预览版\code\TouHou Exploding\TouHou Exploding\bin\Debug\TouHou Exploding.exe.config
+S:\编程\c#\自制\东方游戏\技术预览版\code\TouHou Exploding\TouHou Exploding\obj\Debug\TouHou_Exploding.tstForm.resources
+S:\编程\c#\自制\东方游戏\技术预览版\code\TouHou Exploding\TouHou Exploding\obj\Debug\TouHou_Exploding.Properties.Resources.resources
+S:\编程\c#\自制\东方游戏\技术预览版\code\TouHou Exploding\TouHou Exploding\obj\Debug\TouHou Exploding.csproj.GenerateResource.Cache
+S:\编程\c#\自制\东方游戏\技术预览版\code\TouHou Exploding\TouHou Exploding\bin\Debug\TouHou Exploding.exe
+S:\编程\c#\自制\东方游戏\技术预览版\code\TouHou Exploding\TouHou Exploding\bin\Debug\TouHou Exploding.pdb
+S:\编程\c#\自制\东方游戏\技术预览版\code\TouHou Exploding\TouHou Exploding\obj\Debug\TouHou Exploding.exe
+S:\编程\c#\自制\东方游戏\技术预览版\code\TouHou Exploding\TouHou Exploding\obj\Debug\TouHou Exploding.pdb
+S:\编程\c#\自制\东方游戏\技术预览版\code\TouHou Exploding\TouHou Exploding\bin\Debug\JsonFx.Json.dll
+S:\编程\c#\自制\东方游戏\技术预览版\code\TouHou Exploding\TouHou Exploding\obj\Debug\TouHou Exploding.csprojResolveAssemblyReference.cache
