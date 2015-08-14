@@ -30,12 +30,18 @@ namespace TouHou_Exploding
             private List<Object> _objList = new List<Object>();
             private List<int> _idList = new List<int>();
             private int _currentID = 0;
-            public IDList (string _name)
+            public IDList (string _name)//初始化一个空list
             {
                 name = _name;
                 id = -1;
             }
-            public IDList(Object obj)//输入的obj需要集成IID接口
+            public IDList(List<Object> list)//由已有ID导入
+            {
+                name = list.GetType().ToString();
+                id = -1;
+                SetID(list);
+            }
+            public IDList(Object obj)//自动填补名称 输入的obj需要集成IID接口
             {
                 name = obj.GetType().ToString();
                 ApplyID(obj);
@@ -52,9 +58,35 @@ namespace TouHou_Exploding
                 _ChangeObjID (obj,_currentID);
                 return _currentID;
             }
-            public bool SetID(Object obj, int id)//为obj注册为某ID
+            public List<Object> SetID(List<Object> list)//为大量obj注册为其内置的ID，如果ID不可被注册（即已被占用）则返回其本身（如已存在会删除旧ID重新注册）
+            {
+                var temp = new List<Object>();
+                foreach (Object a in list)
+                {
+                    if (SetID(a) == false) temp.Add(a);
+                }
+                return temp;
+            }
+            public void ForcedSetID(List<Object> list)//同上，但是会为已占用ID自动新ID（如已存在会删除旧ID重新注册）
+            {
+                var temp = SetID(list);
+                foreach (Object a in temp)
+                {
+                    ApplyID(a);
+                }
+            }
+            public bool SetID(Object obj)//为obj注册为其内置的ID，如果ID不可被注册（即已被占用）返回假（如已存在会删除旧ID重新注册）
+            {
+                var temp = (IID)obj;
+                return SetID(obj, temp.id);
+            }
+            public bool SetID(Object obj, int id)//为obj注册为某ID，如果ID不可被注册（即已被占用）返回假（如已存在会删除旧ID重新注册）
             {
                 if (IsExist(id)) return false;
+                if (IsExist(obj))
+                {
+                    Del(obj);
+                }
                 _objList.Add(obj);
                 _idList.Add(id);
                 _ChangeObjID(obj, id);
