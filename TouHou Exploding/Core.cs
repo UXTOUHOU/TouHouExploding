@@ -15,6 +15,7 @@ namespace TouHou_Exploding
         public Team[] team { get; set; }//游戏所有的队伍
         public List<Player> player { get; set; }//所有参与的玩家
         public Player nowPlayer { get; set; }//当前操作的玩家
+        public Character character { get; set; }//赛场召唤区
         public Core(GameConfig setting)
         {
             if(setting.mod==GameConfig.GameMod.Common)
@@ -33,6 +34,7 @@ namespace TouHou_Exploding
             public Map.MapSave battleMap { get; set; }//空即为不指定地图，自动生成（暂不支持提前指定地图
             public List<PolicyCard> policyCards { get; set; }//本局系统提供的策略牌，空为自动生成
             public List<Character> characters { get; set; }//本局系统提供的人物卡，空为自动生成
+            public List<Player.PlayerSave> player { get; set; }//玩家设定
             public enum GameMod { Common, Master, Custom }
             public GameConfig()
             {
@@ -56,7 +58,6 @@ namespace TouHou_Exploding
         public Statue playerStatue { get; set; }
         public int bDot { get; set; }
         public List<PolicyCard> policyCard { get; set; }//玩家手中的策略牌
-        public List<Character> character { get; set; }//玩家的召唤去
         public List<Unit> unit { get; set; }//玩家场上的单位
         public List<Unit> deadCard { get; set; }//击毁区
         public enum Type { Player, AI, Watcher, Custom }
@@ -67,6 +68,10 @@ namespace TouHou_Exploding
         public class Statue
         {
 
+        }
+        public class PlayerSave
+        {
+            public List<PolicyCard> policyCard { get; set; }//玩家手中的策略牌
         }
     }
     public class Team:IDProvider.IID
