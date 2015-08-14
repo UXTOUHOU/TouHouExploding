@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 
 namespace TouHou_Exploding
 {
-    class Basic
+    public class Basic
     {
         public class Skill
         {
+            public bool CanUse()
+            {
+                return false;
+            }
+        } 
+        public abstract class Effect
+        {
 
         }
-        class Attrack
+        class Art
         {
 
         }

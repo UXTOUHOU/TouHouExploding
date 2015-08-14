@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 namespace TouHou_Exploding
 {
     [DataContract]
-    class Card:IDProvider.IID
+    public class Card:IDProvider.IID
     {
         [DataMember]
         public int cost { get; set; }
@@ -17,18 +17,18 @@ namespace TouHou_Exploding
         public int id { get; set; }
 
     }
-    class PolicyCard : Card
+    public class PolicyCard : Card
     {
 
     }
-    class Character : Card
+    public class Character : Card
     {
         public Type type { get; set; }
         public Unit.Attribute unit { get; set; }//召唤出的角色属性
-        public enum Type{ Common,Hero,Servent }//Common召唤出的为普通单位，Hero为少女单位，Servent为基本效果产生的单位
+        public enum Type{ Common,Hero,Servant }//Common召唤出的为普通单位，Hero为少女单位，Servent为基本效果产生的单位
     }
    [DataContract]
-    class Unit : IDProvider.IID 
+   public class Unit : IDProvider.IID 
    {
        public Character card
        {
@@ -45,14 +45,35 @@ namespace TouHou_Exploding
        public Map.Region at { get; set; }
        [DataMember]
        public Attribute attribute { get; set; }
+       [DataMember]
        public Statue statue { get; set; }
        public Unit(Character transCard)
        {
            attribute = transCard.unit.Clone();
+           _card = transCard;
        }
+       public bool Attack(Unit target)//攻击指令，如果不能攻击返回假
+       {
+           return false;
+       }
+       public int Hurt(int blood)//体力流失，返回剩余血量，死亡返回-1
+       {
+           attribute.blood -= blood;
+           if(attribute.blood<=0)
+           {
+               Die();
+               return -1;
+           }
+           return attribute.blood;
+       }
+       public void Die()
+       {
+
+       } 
        public class Attribute//属性
        {
            public string name { get; set; }//不解释
+           public Character.Type type { get; set; }//角色类型
            public int blood { get; set; }//血量
            public int mobility { get; set; }//机动性
            public int attack { get; set; }//攻击伤害
@@ -65,7 +86,7 @@ namespace TouHou_Exploding
            }
            public enum MoveMethous{ Walk,Fly,Transport }
        }
-       public class Statue//人物状态
+       public class Statue//人物附加状态
        {
 
        }

@@ -13,16 +13,21 @@ namespace TouHou_Exploding
 {
     public class IDProvider//用于分发临时ID，被分发对象需继承接口IID，未分配时为-1
     {
-
+        //以下为动态ID分配
+        public IDList CID { get; set; }//(CardID)-区别卡牌
+        public IDList UID { get; set; }//(UnitID)-区别单位-由卡牌/技能召唤出的单位ID
+        public IDList PID { get; set; }//(PlayerID)-区别玩家
+        public IDList RID { get; set; }//(RegionID)-区别不同地区方块
+        public IDList TID { get; set; }//(TeamID)-区别不同队
         public interface IID
         {
             int id { get; set; }
         }
-        class IDList<T> : IID//用于单项ID管理 T最好别是int
+        public class IDList : IID//用于单项ID管理
         {
             public string name { get; set; }
             public int id { get; set; }//无指定ID时为-1
-            private List<T> _objList = new List<T>();
+            private List<Object> _objList = new List<Object>();
             private List<int> _idList = new List<int>();
             private int _currentID = 0;
             public IDList (string _name)
@@ -30,12 +35,12 @@ namespace TouHou_Exploding
                 name = _name;
                 id = -1;
             }
-            public IDList (T obj)//输入的obj需要集成IID接口
+            public IDList(Object obj)//输入的obj需要集成IID接口
             {
                 name = obj.GetType().ToString();
                 ApplyID(obj);
             }
-            public int ApplyID(T obj)//输入的obj需要集成IID接口，如已存在输入-1
+            public int ApplyID(Object obj)//输入的obj需要集成IID接口，如已存在输入-1
             {
                 if (IsExist(obj)) return -1;
                 do
@@ -47,7 +52,7 @@ namespace TouHou_Exploding
                 _ChangeObjID (obj,_currentID);
                 return _currentID;
             }
-            public bool SetID(T obj, int id)//为obj注册为某ID
+            public bool SetID(Object obj, int id)//为obj注册为某ID
             {
                 if (IsExist(id)) return false;
                 _objList.Add(obj);
@@ -55,7 +60,7 @@ namespace TouHou_Exploding
                 _ChangeObjID(obj, id);
                 return true;
             }
-            public bool Del(T obj)//删除某个对象，并把该对象id值改为-1，不存在返回假
+            public bool Del(Object obj)//删除某个对象，并把该对象id值改为-1，不存在返回假
             {
                 int index = _GetIndex(obj);
                 if (index == -1) return false;
@@ -64,10 +69,10 @@ namespace TouHou_Exploding
                 _ChangeObjID(obj, -1);
                 return true;
             }
-            private int _GetIndex(T obj)//查找某对象表中索引值，如无则返回-1
+            private int _GetIndex(Object obj)//查找某对象表中索引值，如无则返回-1
             {
                 int index = 0;
-                foreach (T a in _objList)
+                foreach (Object a in _objList)
                 {
                     index++;
                     if (a.Equals(obj)) return index;
@@ -84,7 +89,7 @@ namespace TouHou_Exploding
                 }
                 return -1;
             }
-            public int GetID(T obj)//查找某对象ID，如无则返回-1
+            public int GetID(Object obj)//查找某对象ID，如无则返回-1
             {
                 int index = _GetIndex (obj);
                 if (index == -1)
@@ -96,9 +101,9 @@ namespace TouHou_Exploding
                     return _idList[index];
                 }
             }
-            public bool IsExist(T obj)//查找某对象是否在表中
+            public bool IsExist(Object obj)//查找某对象是否在表中
             {
-                foreach (T a in _objList)
+                foreach (Object a in _objList)
                 {
                     if (a.Equals(obj)) return true;
                 }
@@ -108,7 +113,7 @@ namespace TouHou_Exploding
             {
                 return _objList.Count <= index;
             }
-            private void _ChangeObjID(T obj,int _id)//更改输入obj的id值
+            private void _ChangeObjID(Object obj, int _id)//更改输入obj的id值
             {
                 var a = (IID)obj;
                 a.id = _id;
@@ -121,10 +126,10 @@ namespace TouHou_Exploding
                 }
                 return false;
             }
-            public T GetObj(int id)//由ID获取对象，如果没有会返回default(T)
+            public Object GetObj(int id)//由ID获取对象，如果没有会返回default(T)
             {
                 int index = _GetIndex(id);
-                if (index == -1) return default(T);
+                if (index == -1) return null;
                 return _objList[index];
             }
             public int GetNumber()//获取现存对象数

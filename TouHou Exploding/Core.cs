@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace TouHou_Exploding
 {
-    class Core
+    public class Core
     {
+        public IDProvider idProvider { get; set; }
+        public Map map { set; get; }
+        public Team[] team { get; set; }
+        public Player[] player { get; set; }
         public Core(GameConfig Setting)
         {
 
@@ -31,22 +35,39 @@ namespace TouHou_Exploding
 
         }
     }
-    class Player
+    public class Player:IDProvider.IID
     {
-        public int ID { get; set; }
+        public int id { get; set; }
         public string name { get; set; }
         public Type PlayerType { get; set; }
         public Team AtTeam { get; set; }
         public Statue PlayerStatue { get; set; }
         public int BDot { get; set; }
         public enum Type { Player, AI, Watcher, Custom }
+        public Player()
+        {
+            
+        }
         public class Statue
         {
 
         }
     }
-    class Team
+    public class Team:IDProvider.IID
     {
-
+        private Core _core;
+        public int id { get; set; }
+        public string name { get; set; }
+        public List<Player> playerList { get; set; }
+        public Team(Core core)
+        {
+            _core = core;
+            _core.idProvider.TID.ApplyID(this);
+        }
+        public void Add(Player player)
+        {
+            playerList.Add(player);
+            player.AtTeam = this;
+        }
     }
 }
