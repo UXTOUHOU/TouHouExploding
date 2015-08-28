@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 namespace TouHou_Exploding
 {
     [DataContract]
-    public class Card:IDProvider.IID
+    public abstract class Card:IDProvider.IID
     {
         [DataMember]
         public int cost { get; set; }
@@ -21,11 +21,97 @@ namespace TouHou_Exploding
     {
 
     }
-    public class Character : Card
+    public abstract class Character : Card
     {
+        private Core _core;
         public Type type { get; set; }
         public Unit.Attribute unit { get; set; }//召唤出的角色属性
         public enum Type{ Common,Hero,Servant }//Common召唤出的为普通单位，Hero为少女单位，Servent为基本效果产生的单位
+        public class CharacterSave
+        {
+
+        }
+        public enum Preset { 毛玉, 天狗, 妖精, 永远亭的兔子, 自爆人形, 河童重工, 博丽灵梦, 魂魄妖梦, 十六夜咲夜, Custom }
+        public Character(Core core, CharacterSave save)
+        {
+
+        }
+        public Unit ToBattle()
+        {
+            Unit x =new Unit(this);
+            return x;
+        }
+        public Character(Core core, Preset preset)
+        {
+            _core = core;
+            unit = new Unit.Attribute();
+            switch (preset)
+            {
+                case Preset.毛玉 :
+                    {
+                        unit.blood = 9;
+                        unit.mobility = 2;
+                        unit.attack = 2;
+                        unit.range = 2;
+                        //unit.Skill
+                    }
+                    break;
+                case Preset.天狗:
+                    {
+                        unit.blood = 9;
+                        unit.mobility = 4;
+                        unit.attack = 5;
+                        unit.range = 1;
+                    }
+                    break;
+                case Preset.妖精:
+                    {
+                        unit.blood = 8;
+                        unit.mobility = 3;
+                        unit.attack = 2;
+                        unit.range = -1;//-1即为特殊情况，要要使用自带的特殊方法判断：对射程3（不含）以下的单位额外造成1伤害。
+                    }
+                    break;
+                case Preset.永远亭的兔子:
+                    {
+                        unit.blood = 9;
+                        unit.mobility = 2;
+                        unit.attack = 2;
+                        unit.range = 2;
+                    }
+                    break;
+                case Preset.自爆人形:
+                    {
+
+                    }
+                    break;
+                case Preset.河童重工:
+                    {
+
+                    }
+                    break;
+                case Preset.博丽灵梦:
+                    {
+
+                    }
+                    break;
+                case Preset.魂魄妖梦:
+                    {
+
+                    }
+                    break;
+                case Preset.十六夜咲夜:
+                    {
+
+                    }
+                    break;
+                case Preset.Custom:
+                    {
+
+                    }
+                    break;
+            }
+        } 
     }
    [DataContract]
    public class Unit : IDProvider.IID 

@@ -20,7 +20,14 @@ namespace TouHou_Exploding
         {
             if(setting.mod==GameConfig.GameMod.Common)
             {
-                
+                if (setting.battleMap == null)
+                {
+                    map = new Map(this);
+                }
+                if (setting.policyCards == null)
+                {
+
+                }
             }
         }
         public Process NextStep()//返回下一个过程
@@ -30,7 +37,6 @@ namespace TouHou_Exploding
         public class GameConfig
         {
             public GameMod mod { get; set; }//游戏模式：普通
-            public int playerNum { get; set; }//游戏人数：2
             public Map.MapSave battleMap { get; set; }//空即为不指定地图，自动生成（暂不支持提前指定地图
             public List<PolicyCard> policyCards { get; set; }//本局系统提供的策略牌，空为自动生成
             public List<Character> characters { get; set; }//本局系统提供的人物卡，空为自动生成
@@ -39,7 +45,6 @@ namespace TouHou_Exploding
             public GameConfig()
             {
                 mod = GameMod.Common;
-                playerNum = 2;
             }
         }
         public enum Process { RoomClosing,RoomLoading, RoomWaiting, RoomPreparing, RoundStarting, RoundPreparing, RoundAction, RoundEnding, RoomEnding }//房间关闭，房间读取，房间等待，房间准备，回合开始，回合准备，回合行动，回合结束，房间结算
@@ -71,6 +76,10 @@ namespace TouHou_Exploding
         }
         public class PlayerSave
         {
+            public int id { get; set; }
+            public string name { get; set; }
+            public Player.Type type { get; set; }//人物类型
+            public int team { set; get; }//队伍，只有0 1
             public List<PolicyCard> policyCard { get; set; }//玩家手中的策略牌
         }
     }

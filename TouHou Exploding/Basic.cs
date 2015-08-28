@@ -8,8 +8,10 @@ namespace TouHou_Exploding
 {
     public class Basic
     {
-        public class Skill
+        public class Skill:IDProvider.IID
         {
+            public string name { get; set; }
+            public int id { get; set; }
             public bool CanUse()
             {
                 return false;
