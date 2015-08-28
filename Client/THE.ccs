@@ -1,0 +1,20 @@
+<Solution>
+  <PropertyGroup Name="THE" Version="2.3.1.2" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Project Name="BattleScene.csd" Type="Scene" />
+        <Project Name="CardsGallery.csd" Type="Scene" />
+        <Project Name="GameHall.csd" Type="Scene" />
+        <Project Name="MainScene.csd" Type="Scene" />
+        <Project Name="PauseMenu.csd" Type="Scene" />
+        <Project Name="Config.csd" Type="Scene" />
+        <Image Name="Card_0.png" />
+        <Project Name="Tutorial.csd" Type="Scene" />
+        <Project Name="AbandonedCards.csd" Type="Scene" />
+        <Project Name="test.csd" Type="Scene" />
+        <Project Name="Staff.csd" Type="Scene" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>
