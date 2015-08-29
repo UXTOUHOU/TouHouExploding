@@ -187,3 +187,12 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+*.lib
+*.dll
+*.rar
+*.tlog
+*.exe
+*.sdf
+*.suo
+*.suo
+Severs/TouHou Exploding.v12.suo
