@@ -30,10 +30,13 @@
     <ClCompile Include="..\Classes\CLayerChessBoard.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CBattle.cpp">
+    <ClCompile Include="..\Classes\CSceneBattle.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CSceneBattle.cpp">
+    <ClCompile Include="..\Classes\CPVPMode.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CTutorialMode.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,10 +59,13 @@
     <ClInclude Include="..\Classes\CLayerChessBoard.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CBattle.h">
+    <ClInclude Include="..\Classes\CSceneBattle.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CSceneBattle.h">
+    <ClInclude Include="..\Classes\CPVPMode.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CTutorialMode.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

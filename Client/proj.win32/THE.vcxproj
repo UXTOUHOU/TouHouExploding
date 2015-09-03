@@ -80,6 +80,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies);$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END)</AdditionalDependencies>
@@ -99,6 +100,9 @@ xcopy /Y /Q "$(COCOS_FRAMEWORKS)\cocos2d-x-3.6\prebuilt\win32\*.*" "$(OutDir)"
 xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
 </Command>
     </PreLinkEvent>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -138,20 +142,22 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\CBattle.cpp" />
+    <ClCompile Include="..\Classes\CPVPMode.cpp" />
     <ClCompile Include="..\Classes\CSceneBattle.cpp" />
     <ClCompile Include="..\Classes\CCard.cpp" />
     <ClCompile Include="..\Classes\CLayerChessBoard.cpp" />
+    <ClCompile Include="..\Classes\CTutorialMode.cpp" />
     <ClCompile Include="..\Classes\Effects.cpp" />
     <ClCompile Include="..\Classes\main.cpp" />
     <ClCompile Include="..\Classes\CSceneMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\CBattle.h" />
+    <ClInclude Include="..\Classes\CPVPMode.h" />
     <ClInclude Include="..\Classes\CSceneBattle.h" />
     <ClInclude Include="..\Classes\CCard.h" />
     <ClInclude Include="..\Classes\CLayerChessBoard.h" />
+    <ClInclude Include="..\Classes\CTutorialMode.h" />
     <ClInclude Include="..\Classes\Effects.h" />
     <ClInclude Include="..\Classes\main.h" />
     <ClInclude Include="..\Classes\CSceneMenu.h" />
