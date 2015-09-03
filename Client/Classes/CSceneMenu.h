@@ -10,11 +10,18 @@ USING_NS_CC_EXT;
 class CSceneMenu : public cocos2d::Scene
 {
 public:
+	static CSceneMenu *pSceneMenu;
+	static CSceneMenu *getInstance()
+	{
+		if (pSceneMenu == NULL)
+			pSceneMenu = CSceneMenu::create();
+		return pSceneMenu;
+	}
 	// there's no 'id' in cpp, so we recommend returning the class instance pointer
-	static cocos2d::Scene* createScene();
+	//static cocos2d::Scene* createScene();
 
 	// Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
-	virtual bool init();
+	virtual bool init() override;
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(CSceneMenu);

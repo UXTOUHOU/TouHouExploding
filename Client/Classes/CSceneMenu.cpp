@@ -1,26 +1,28 @@
 #include "CSceneMenu.h"
-#include "CSceneBattle.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
+#include "CTutorialMode.h"
+#include "CPVPMode.h"
 
 USING_NS_CC;
 
 using namespace cocostudio::timeline;
+CSceneMenu *pSceneMenu = NULL;
 
-Scene* CSceneMenu::createScene()
-{
-	// 'scene' is an autorelease object
-	auto scene = CSceneMenu::create();
-	
-	// 'layer' is an autorelease object
-	auto layer = Layer::create();
-
-	// add layer as a child to scene
-	scene->addChild(layer);
-
-	// return the scene
-	return scene;
-}
+//Scene* CSceneMenu::createScene()
+//{
+//	//// 'scene' is an autorelease object
+//	//auto scene = CSceneMenu::create();
+//	//
+//	//// 'layer' is an autorelease object
+//	//auto layer = Layer::create();
+//
+//	//// add layer as a child to scene
+//	//scene->addChild(layer);
+//
+//	//// return the scene
+//	//return scene;
+//}
 
 // on "init" you need to initialize your instance
 bool CSceneMenu::init()
@@ -288,9 +290,11 @@ void CSceneMenu::OnButtonGameHallJoinGame()
 	//测试 进入游戏场景
 	if (currentScene != sceneGameHall)
 		return;
+
 	auto director = Director::getInstance();
-	Scene *test = CSceneBattle::createScene();
-	director->replaceScene(test);
+	//Scene *test = CSceneBattle::createScene();
+	CPVPMode *scene = CPVPMode::create();
+	director->replaceScene(scene);
 
 	//
 	return;
@@ -321,11 +325,13 @@ void CSceneMenu::OnButtonConfigReturn()
 
 void CSceneMenu::OnButtonConfigTutorial()
 {
-	//从设置界面进入教程界面
+	////从设置界面进入教程界面
 	if (currentScene != sceneConfig)
 		return;
-	layerTutorial->setVisible(true);
-	layerConfig->setVisible(false);
+	CTutorialMode *tutorial = CTutorialMode::create();
+	tutorial->startTutorial();
+	//layerTutorial->setVisible(true);
+	//layerConfig->setVisible(false);
 	currentScene = sceneTutorial;
 }
 

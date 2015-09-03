@@ -6,6 +6,8 @@
 
 USING_NS_CC;
 
+bool gbTest = true;
+
 std::string WStrToUTF8(const std::wstring& src)
 {
 	std::string dest;
@@ -91,7 +93,6 @@ bool CSceneBattle::init()
 	nodeSummonPool = Node::create();
 	nodeSummonPool->setVisible(false);
 	panelCards->addChild(nodeSummonPool);
-	AddSummonPool(1);
 	//cardDescribe
 	textCardDescribe = nodeBackGround->getChildByName<ui::Text *>("Text_CardDescribe");
 	textRoundCountdown = nodeBackGround->getChildByName<ui::Text *>("Text_RoundCountdown");
@@ -191,7 +192,7 @@ bool CSceneBattle::init()
 					{
 						nodeHandCards->removeChild(it);
 						it->removeFromParent();
-						RedrawCards(nodeHandCards);
+						_redrawCards(nodeHandCards);
 						textCardDescribe->setString("");
 						event->stopPropagation();
 						break;
@@ -200,9 +201,10 @@ bool CSceneBattle::init()
 			}
 		}
 		else if (sceneAbandonedCards == currentScene){
-			//test
-			AddAbandonedCards(0);
-			//
+			if (gbTest)
+			{
+				AddAbandonedCards(0);
+			}
 			Rect rectScrollView;
 			rectScrollView.size = scrollViewAbandonedCards->getCustomSize();
 			rectScrollView.origin = scrollViewAbandonedCards->getPosition();
@@ -253,20 +255,6 @@ bool CSceneBattle::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerMouse, panelCards);
 	//
 	//countdown
-
-	//test
-	AddHandCards(0);
-	AddHandCards(1);
-	RoundCountdown(5.F);
-	for (int i = 0; i < 12; ++i)
-	{
-		Sprite *sprite = CreateUnitSprite(i + 1);
-		chessBoard->ShowSprite(sprite, i, 0);
-		if (i < 11)
-			Effects::Moveable(sprite);
-		else
-			Effects::Moved(sprite);
-	}
 	//
 	return true;
 }
@@ -279,7 +267,7 @@ Scene* CSceneBattle::createScene()
 	return scene;
 }
 
-void CSceneBattle::RedrawCards(Node *node)
+void CSceneBattle::_redrawCards(Node *node)
 {
 	auto vec = node->getChildren();
 	int cardsCount = node->getChildrenCount(),
@@ -313,7 +301,7 @@ void CSceneBattle::AddHandCards(int cardID)
 	card->setScale(cardScale);
 
 	nodeHandCards->addChild(card);
-	RedrawCards(nodeHandCards);
+	_redrawCards(nodeHandCards);
 }
 
 void CSceneBattle::AddSummonPool(int cardID)
@@ -323,7 +311,7 @@ void CSceneBattle::AddSummonPool(int cardID)
 	card->setScale(cardScale);
 
 	nodeSummonPool->addChild(card);
-	RedrawCards(nodeSummonPool);
+	_redrawCards(nodeSummonPool);
 }
 
 void CSceneBattle::AddAbandonedCards(int cardID)
@@ -343,7 +331,7 @@ void CSceneBattle::OnButtonReturnMainMenu()
 {
 	if (currentScene != scenePauseMenu)
 		return;
-	auto scene = CSceneMenu::createScene();
+	auto scene = CSceneMenu::create();//Scene();
 	Director::getInstance()->replaceScene(scene);
 }
 
@@ -430,12 +418,6 @@ void DelHandCards(int cardID)
 {
 	log("DeleteHandCard:%d", cardID);
 }
-
-//Sprite *CreateCardSprite(int cardID)
-//{
-//	char fileName[20];
-//	return Sprite::create(GetCardFileName(fileName, cardID));
-//}
 
 void CSceneBattle::RoundCountdown(float t)
 {
