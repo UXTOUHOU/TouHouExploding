@@ -19,6 +19,8 @@ namespace NetWork
         }
         //以上是Ack委托部分，Ack的判定标准是调用AckedArrive方法
 
+
+
         [DataMember]
         public string NetContent//字符串（命令）模式的内容。如果不是命令模式，读取无效
         {
