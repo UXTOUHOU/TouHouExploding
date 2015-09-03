@@ -6,7 +6,7 @@
 class CLayerChessBoard : public Layer
 {
 public:
-	virtual bool init();
+	virtual bool init() override;
 	CREATE_FUNC(CLayerChessBoard);
 
 	//

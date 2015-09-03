@@ -6,6 +6,9 @@
 
 USING_NS_CC;
 
+std::string WStrToUTF8(const std::wstring& src);
+extern bool gbTest;
+
 class CSceneBattle : public cocos2d::Scene
 {
 public:
@@ -16,7 +19,7 @@ public:
 	const float cardScale = panelCardHeight / cardHeight;
 
 	static cocos2d::Scene* createScene();
-	virtual bool init();
+	virtual bool init() override;
 	CREATE_FUNC(CSceneBattle);
 
 	CLayerChessBoard *chessBoard;
@@ -72,7 +75,7 @@ public:
 	void RoundCountdown(float n);
 private:
 	//删除或插入手牌之后对summonPool或者handCards中的卡片重新排序
-	void RedrawCards(Node *node);	
+	void _redrawCards(Node *node);	
 };
 
 ////将card添加为father的child并修改为指定的大小
