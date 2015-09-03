@@ -12,61 +12,35 @@ namespace TEST
     {
         static void Main(string[] args)
         {
+            
+
+            Console.WriteLine("\n------Finsh------");
+            Console.Read();
+        }
+        public static void JsonTest()//测试json的一系列语句
+        {
             Girl g = new Girl();
             g.Name = "Alice";
             //People p = (People)g;
             People p = new People();
-            Console.WriteLine("g:{0},P:{1}",g.GetType (),p.GetType());
+            Console.WriteLine("g:{0},P:{1}", g.GetType(), p.GetType());
+            g.relates[0].ID = 8888888;
             string gjson = JsonHelper.GetJson(g);
             string pjson = JsonHelper.GetJson(p);
             Console.WriteLine(gjson);
             Console.WriteLine(pjson);
             Console.WriteLine("\n-----------------------------------");
-            Object gobj = JsonHelper.ParseFromJson(gjson);
-            Object pobj = JsonHelper.ParseFromJson(pjson);
-            gjson = JsonHelper.GetJson(g);
-            pjson = JsonHelper.GetJson(p);
+            Girl gobj = JsonHelper.ParseFromJson<Girl>(gjson);
+            Object pobj = JsonHelper.ParseFromJson<People>(pjson);
+            //Girl gobjg = (Girl)gobj;
+            gobj.relates[0].ID = 111111;
+            gjson = JsonHelper.GetJson(gobj);
+            pjson = JsonHelper.GetJson(pobj);
             Console.WriteLine(gjson);
             Console.WriteLine(pjson);
-            Console.WriteLine("\n------Finsh------");
-            Console.Read();
+            Console.WriteLine("g:{0},P:{1}", gobj.GetType(), pobj.GetType());
+
         }
-        [DataContract]
-        public class Girl : People
-        {
-            [DataMember]
-            public string Sex = "Girl";
-            [DataMember]
-            private string Character = "Calm and Generals";
-            [DataMember]
-            public People Husband = new People();
-        }
-        [DataContract]
-        public class People
-        {
-            [DataMember]
-            public bool IsAdult;
-            [DataMember]
-            public bool IsPeople=true;
-            [DataMember]
-            public int ID = 10000;
-            [DataMember]
-            public string Name;
-            [DataMember]
-            public int Age { get; set; }
-            [DataMember]
-            public Nationality Nation = Nationality.Chinese;
-            [DataMember]
-            private string NickName;
-            [DataMember]
-            private string SecretName="HIM";
-            [DataMember]
-            public List<People> relates;
-            public void SetNickName(string name)
-            {
-                NickName = name;
-            }
-            public enum Nationality { Chinese, English };
-        }
+       
     }
 }
