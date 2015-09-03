@@ -366,7 +366,16 @@ namespace TouHou_Exploding
                 return Encoding.UTF8.GetString(stream.ToArray());
             }
         }
+        public static string GetJson(object obj, IEnumerable<Type> knownTypes = null)//对象转json（无泛型版）
+        {
+            var json = new DataContractJsonSerializer(obj.GetType(), knownTypes);
 
+            using (var stream = new MemoryStream())
+            {
+                json.WriteObject(stream, obj);
+                return Encoding.UTF8.GetString(stream.ToArray());
+            }
+        }
         public static Dictionary<string, object> GetDictionaryFromJson(string JSON)
         {
             return (Dictionary<string, object>)new JavaScriptSerializer().DeserializeObject(JSON);
@@ -377,6 +386,13 @@ namespace TouHou_Exploding
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(JSON)))
             {
                 return (T)new DataContractJsonSerializer(typeof(T), knownTypes).ReadObject(ms);
+            }
+        }
+        public static object ParseFromJson(string JSON, IEnumerable<Type> knownTypes = null)//json转对象（无泛型版）
+        {
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(JSON)))
+            {
+                return new DataContractJsonSerializer(typeof(object), knownTypes).ReadObject(ms);
             }
         }
     }
