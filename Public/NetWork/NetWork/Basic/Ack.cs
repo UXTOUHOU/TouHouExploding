@@ -20,6 +20,7 @@ namespace NetWork
         private string ackID;
         public Ack(string toAckID)//从ID创建回复对象
         {
+
             netAttribute = Community.NetAttributes.Respond;
             ackID = toAckID;
         }
