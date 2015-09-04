@@ -13,9 +13,26 @@ namespace TEST
         static void Main(string[] args)
         {
             
-
+            
             Console.WriteLine("\n------Finsh------");
-            Console.Read();
+            Console.ReadKey();
+        }
+        public static void Log(object s)
+        {
+            Console.WriteLine(s);
+        }
+
+        
+        public static void TheDiffenceBetweenNewAndVirtual()
+        {
+            A a = new A();
+            A b = new A1();
+            A c = new A2();
+            A2 d = new A2();
+            a.a1();
+            b.a1();
+            c.a1();
+            d.a1();
         }
         public static void JsonTest()//测试json的一系列语句
         {
@@ -38,6 +55,11 @@ namespace TEST
             pjson = JsonHelper.GetJson(pobj);
             Console.WriteLine(gjson);
             Console.WriteLine(pjson);
+            Console.WriteLine("\n-----------------------------------");
+            //gjson = JsonHelper.GetJson<Girl>(gobj);
+            ////pjson = JsonHelper.GetJson<People>(pobj);
+            //Console.WriteLine(gjson);
+            //Console.WriteLine(pjson);
             Console.WriteLine("g:{0},P:{1}", gobj.GetType(), pobj.GetType());
 
         }

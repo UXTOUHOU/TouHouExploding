@@ -7,9 +7,10 @@ using System.Runtime.Serialization;
 
 namespace NetWork
 {
+    [DataContract]
     public sealed class Ack : Community//通知，无须回复。所有通知都需要继承于此类
     {
-        new public string NetContent
+        public override string NetContent
         {
             get
             {

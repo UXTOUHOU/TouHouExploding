@@ -69,4 +69,31 @@ namespace TEST
     {
         string ClassName { get; set; }
     }
+    public class A
+    {
+        public void a2()
+        {
+            Console.WriteLine("我是A");
+        }
+        public virtual void a1()
+        {
+            Console.WriteLine("我是虚A");
+        }
+    }
+    public class A1 : A
+    {
+        public override void a1()
+        {
+            Console.WriteLine("我是复写A1，复写了虚A");
+        }
+    }
+    public class A2 : A
+    {
+        public new void a1()
+        {
+            Console.WriteLine("我是newA2，复写了虚A");
+        }
+    }
+  
+    
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Web.Script.Serialization;
 using System.Xml;
 using JsonFx.Json;
+using System.Reflection;
 
 namespace NetWork
 {
@@ -366,7 +367,7 @@ namespace NetWork
                 return Encoding.UTF8.GetString(stream.ToArray());
             }
         }
-        public static string GetJson(object obj, IEnumerable<Type> knownTypes = null)//对象转json（无泛型版）
+        public static string GetJson(object obj, IEnumerable<Type> knownTypes = null)//对象转json（无泛型版）这个是自制的，不是虫子的这个是自制的，不是虫子的
         {
             var json = new DataContractJsonSerializer(obj.GetType(), knownTypes);
 
@@ -388,12 +389,20 @@ namespace NetWork
                 return (T)new DataContractJsonSerializer(typeof(T), knownTypes).ReadObject(ms);
             }
         }
-        public static object ParseFromJson(string JSON, IEnumerable<Type> knownTypes = null)//json转对象（无泛型版）
+        public static object ParseFromJsonWithType(string JSON, Type t , IEnumerable<Type> knownTypes = null)//json转对象（使用Type作为依据）这个是自制的，不是虫子的
         {
-            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(JSON)))
+            if (t != null)
             {
-                return new DataContractJsonSerializer(typeof(object), knownTypes).ReadObject(ms);
+                //以下的代码就是曲折的实现这句伪代码（使用反射实现）
+                //object obj = JsonHelper.ParseFromJson<t>(json);
+                Type jh = typeof(JsonHelper);
+                MethodInfo mi = jh.GetMethod("ParseFromJson").MakeGenericMethod(t);
+                object obj = mi.Invoke(null, new object[] { JSON, null });
+
+                return obj;
             }
-        }
+            return null;
+        } 
+
     }
 }

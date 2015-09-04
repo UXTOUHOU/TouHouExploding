@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 namespace NetWork
 {
     [DataContract]
-    public abstract class Community//一切被发送的json都要继承自Community基类
+    public class Community//一切被发送的json都要继承自Community基类
     {
         public delegate void AckedEventHandler(object sender,AckedEventArgs e);//如果收到Ack执行委托中的方法，请注意，如果NeedAck为false这一部分无效。注：委托使用.NET设计规范
         public event AckedEventHandler Acked;//Acked事件，收到Ack后需要调用什么方法别客气往里面放
@@ -22,7 +22,7 @@ namespace NetWork
 
 
         [DataMember]
-        public string NetContent//字符串（命令）模式的内容。如果不是命令模式，读取无效
+        public virtual string NetContent//字符串（命令）模式的内容。如果不是命令模式，读取无效
         {
             set
             {
@@ -77,7 +77,6 @@ namespace NetWork
         [DataMember]
         protected NetAttributes netAttribute;//数据包的属性（仅限自己和子类访问）
 
-        [DataMember]
         public NetMods NetMod//数据包的传送模式，会自动设置
         {
             get
@@ -85,6 +84,7 @@ namespace NetWork
                 return netMod;
             }
         }
+        [DataMember]
         private NetMods netMod = NetMods.Object;
 
 
@@ -100,6 +100,11 @@ namespace NetWork
         public string ToJson()//把自己转换为Json
         {
             return JsonHelper.GetJson(this);
+        }
+
+        public string GetJson()//和ToJson只是名字不同罢了
+        {
+            return ToJson();
         }
 
 

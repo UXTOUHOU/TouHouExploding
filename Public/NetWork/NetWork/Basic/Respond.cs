@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 
 namespace NetWork
 {
+    [DataContract]
     public class Respond : Community//通知，无须回复。所有通知都需要继承于此类
     {
         public string RespondID//该指令回复的ID
