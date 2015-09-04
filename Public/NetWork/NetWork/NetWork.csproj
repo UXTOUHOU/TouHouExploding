@@ -48,15 +48,23 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Basic\Community.cs" />
-    <Compile Include="Basic\Enquire.cs" />
-    <Compile Include="Basic\Notice.cs" />
-    <Compile Include="Basic\Respond.cs" />
+    <Compile Include="Commend\Basic\Community.cs" />
+    <Compile Include="Commend\Basic\Enquire.cs" />
+    <Compile Include="Commend\Basic\Notice.cs" />
+    <Compile Include="Commend\Basic\Respond.cs" />
+    <Compile Include="Commend\Error\Error.cs" />
+    <Compile Include="Commend\Error\List.cs" />
+    <Compile Include="Commend\Global\Chat.cs" />
+    <Compile Include="Commend\Global\KeepContact.cs" />
+    <Compile Include="Commend\Login\IUser.cs" />
+    <Compile Include="Commend\Login\Login.cs" />
+    <Compile Include="Commend\Login\Version.cs" />
     <Compile Include="Factory\Factory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Basic\Ack.cs" />
+    <Compile Include="Commend\Basic\Ack.cs" />
     <Compile Include="Support\Support.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

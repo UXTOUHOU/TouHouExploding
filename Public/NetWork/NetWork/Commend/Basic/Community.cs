@@ -9,8 +9,34 @@ using System.Runtime.Serialization;
 namespace NetWork
 {
     [DataContract]
-    public class Community//一切被发送的json都要继承自Community基类
+    public class Community//一切被发送的json都要继承自Community基类，代号：00000
     {
+        [DataMember]
+        public virtual string NetID//代号，用于区分种类，每个继承类都要复写，注意与CommunityID的区别
+        {
+            get
+            {
+                return "00000";
+            }
+        }
+
+        [DataMember]
+        public readonly string CommunityID;//只读，此次通讯的ID编号，生成方式为时间+10位随机数
+
+        [DataMember]
+        public readonly string ClassName;//发送的类的名字，只读，自动生成
+
+        public string NetTime//该类生成的时间。执行ToJson时生成，所以执行ToJson后请尽快发送
+        {
+            get 
+            {
+                return netTime;
+            } 
+        }
+        [DataMember]
+        private string netTime;
+
+
         public delegate void AckedEventHandler(object sender,AckedEventArgs e);//如果收到Ack执行委托中的方法，请注意，如果NeedAck为false这一部分无效。注：委托使用.NET设计规范
         public event AckedEventHandler Acked;//Acked事件，收到Ack后需要调用什么方法别客气往里面放
         public class AckedEventArgs : EventArgs//按说这里应该放上面方法会感兴趣的数值，然而我并没有想好有什么可感兴趣的，就先这样吧。
@@ -45,27 +71,11 @@ namespace NetWork
         }
         private string netContent;
 
+        [DataMember]
         public bool NeedAck = false;//设定接受到是否需要立刻回复已收到的包
 
-        public string CommunityID//只读
-        {
-            get
-            {
-                return communityID;
-            }
-        }
-        [DataMember]
-        private string communityID;//此通讯的ID，生成方式为时间+10位随机数
 
-        [DataMember]
-        private string className;//存储发送的类的名字，同时发送的也是它
-        public string ClassName//发送的类的名字，只读
-        {
-            get
-            {
-                return className;
-            }
-        }
+        
 
         public NetAttributes NetAttribute//只读
         {
@@ -92,13 +102,14 @@ namespace NetWork
 
         public Community()
         {
-            className = this.GetType().ToString();//自动设置类名
-            communityID = getRamdomID();
+            ClassName = this.GetType().ToString();//自动设置类名
+            CommunityID = getRamdomID();
         }
 
 
         public string ToJson()//把自己转换为Json
         {
+            netTime = DateTime.Now.ToString("yyMMddhhmmssfff");
             return JsonHelper.GetJson(this);
         }
 
@@ -121,7 +132,7 @@ namespace NetWork
         {
             int temp = Guid.NewGuid().GetHashCode();
             if (temp < 0) temp = -temp;
-            return DateTime.Now.ToString("ddhhmmssfff") + temp.ToString();
+            return DateTime.Now.ToString("yyMMddhhmmssfff") + temp.ToString();
         }
 
 

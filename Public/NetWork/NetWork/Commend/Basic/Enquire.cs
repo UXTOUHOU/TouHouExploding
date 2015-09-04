@@ -10,6 +10,16 @@ namespace NetWork
     [DataContract]
     public class Enquire : Community//询问。所有询问都需要继承于此类
     {
+        [DataMember]
+        public override string NetID
+        {
+            get
+            {
+                return "00002";
+            }
+        }
+
+
         public delegate void RespondedEventHandler(object sender, RespondedEventArgs e);//如果收到Respond执行委托中的方法。注：委托使用.NET设计规范
         public event RespondedEventHandler Responded;//Acked事件，收到Ack后需要调用什么方法别客气往里面放
         public class RespondedEventArgs : EventArgs//这里是方法会感兴趣的数值——Respond！回复内容！

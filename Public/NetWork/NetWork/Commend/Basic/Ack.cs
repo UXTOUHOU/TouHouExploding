@@ -10,6 +10,14 @@ namespace NetWork
     [DataContract]
     public sealed class Ack : Community//通知，无须回复。所有通知都需要继承于此类
     {
+        [DataMember]
+        public override string NetID
+        {
+            get
+            {
+                return "00004";
+            }
+        }
         public override string NetContent
         {
             get
