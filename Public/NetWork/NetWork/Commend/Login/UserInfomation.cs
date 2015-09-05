@@ -7,13 +7,13 @@ using System.Runtime.Serialization;
 
 namespace NetWork
 {
-    public interface IUser
+    public sealed class UserInformation
     {
         [DataMember]
-        string User { get; set; }
+        public string UserID { get; set; }
         [DataMember]
-        string Password { get; set; }
+        public string Password { get; set; }
         [DataMember]
-        string NickName { get; set; }
+        public string NickName { get; set; }
     }
 }

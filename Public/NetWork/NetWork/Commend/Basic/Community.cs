@@ -11,7 +11,6 @@ namespace NetWork
     [DataContract]
     public class Community//一切被发送的json都要继承自Community基类，代号：00000
     {
-        [DataMember]
         public virtual string NetID//代号，用于区分种类，每个继承类都要复写，注意与CommunityID的区别
         {
             get

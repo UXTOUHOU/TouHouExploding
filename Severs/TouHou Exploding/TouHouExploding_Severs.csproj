@@ -35,6 +35,7 @@
     <Reference Include="JsonFx.Json">
       <HintPath>..\..\..\..\..\..\参考\zjsnHelper(6)\Debug\JsonFx.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />

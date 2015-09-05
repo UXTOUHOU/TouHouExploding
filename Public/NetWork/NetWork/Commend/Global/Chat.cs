@@ -24,6 +24,7 @@ namespace NetWork
         [DataMember]
         public string Content;//聊天的内容
     }
+    [DataContract]
     public class ChatCome : Notice//客户端接受聊天内容，暂未启用
     {
         [DataMember]

@@ -39,6 +39,7 @@ namespace NetWork
             IsKeepContacted = isKeepContacted;
         }
     }
+    [DataContract]
     public class IsContacted : Notice
     {
         [DataMember]

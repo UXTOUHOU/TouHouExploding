@@ -28,6 +28,7 @@ namespace NetWork
             Password = password;
         }
     }
+    [DataContract]
     public class LoginR : Respond
     {
         [DataMember]
@@ -39,13 +40,13 @@ namespace NetWork
             }
         }
         [DataMember]
-        public IUser UserInfo;
-        public LoginR(GetVersion toRespond,IUser userInfo)//返回成功 生成类的方法
+        public UserInformation UserInfo;
+        public LoginR(Login toRespond, UserInformation userInfo)//返回成功 生成类的方法
             : base(toRespond)
         {
             UserInfo = userInfo;
         }
-        public LoginR(GetVersion toRespond, Error error)//返回失败 生成类的方法
+        public LoginR(Login toRespond, Error error)//返回失败 生成类的方法
             : base(toRespond)
         {
             Error = error;

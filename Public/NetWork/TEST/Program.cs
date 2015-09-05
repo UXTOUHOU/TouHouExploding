@@ -12,8 +12,14 @@ namespace TEST
     {
         static void Main(string[] args)
         {
-            
-            
+            Error u = new PwdError();
+            var l = new LoginR(new Login("haha", "1234567890"), u);
+            string s = JsonHelper.GetJson(l);
+            Log(s);
+            var o = JsonHelper.ParseFromJson<LoginR>(s);
+            Log(JsonHelper.GetJson(o));
+
+
             Console.WriteLine("\n------Finsh------");
             Console.ReadKey();
         }

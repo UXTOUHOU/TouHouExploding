@@ -58,9 +58,9 @@ namespace NetWork
     }
 
     [DataContract]
-    public class PswError : LoginError//密码错误
+    public class PwdError : LoginError//密码错误
     {
-        public PswError()
+        public PwdError()
         {
             EID = 200002;
             ErrorMsg = "咳咳……密码不对哦，不许进！";

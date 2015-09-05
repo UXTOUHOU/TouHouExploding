@@ -51,9 +51,14 @@ namespace NetWork
         {
             Error = null;
         }
-        public void SetError(Error e)//设置错误
+        public bool SetError(Error e)//设置错误，返回格式是否正确，不正确不加载（必须为Error类本身，不能是其子类）
         {
+            if (e.GetType().ToString() != typeof(Error).ToString())
+            {
+                return false;
+            }
             Error = e;
+            return true;
         }
         
 

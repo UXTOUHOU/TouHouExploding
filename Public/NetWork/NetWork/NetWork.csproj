@@ -52,11 +52,12 @@
     <Compile Include="Commend\Basic\Enquire.cs" />
     <Compile Include="Commend\Basic\Notice.cs" />
     <Compile Include="Commend\Basic\Respond.cs" />
+    <Compile Include="Commend\EnterRoom\EnterRoom.cs" />
     <Compile Include="Commend\Error\Error.cs" />
     <Compile Include="Commend\Error\List.cs" />
     <Compile Include="Commend\Global\Chat.cs" />
     <Compile Include="Commend\Global\KeepContact.cs" />
-    <Compile Include="Commend\Login\IUser.cs" />
+    <Compile Include="Commend\Login\UserInfomation.cs" />
     <Compile Include="Commend\Login\Login.cs" />
     <Compile Include="Commend\Login\Version.cs" />
     <Compile Include="Factory\Factory.cs" />
@@ -64,9 +65,7 @@
     <Compile Include="Commend\Basic\Ack.cs" />
     <Compile Include="Support\Support.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commend\EnterRoom\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
