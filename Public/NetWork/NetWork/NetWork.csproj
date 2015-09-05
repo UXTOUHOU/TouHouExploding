@@ -53,6 +53,8 @@
     <Compile Include="Commend\Basic\Notice.cs" />
     <Compile Include="Commend\Basic\Respond.cs" />
     <Compile Include="Commend\EnterRoom\EnterRoom.cs" />
+    <Compile Include="Commend\EnterRoom\Player.cs" />
+    <Compile Include="Commend\EnterRoom\Room.cs" />
     <Compile Include="Commend\Error\Error.cs" />
     <Compile Include="Commend\Error\List.cs" />
     <Compile Include="Commend\Global\Chat.cs" />
