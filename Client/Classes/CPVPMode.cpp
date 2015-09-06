@@ -28,6 +28,9 @@ bool CPVPMode::init()
 		else
 			Effects::Moved(sprite);
 	}
+
+	CPVPConnect *connect = new CPVPConnect;
+	connect->init();
 	//
 	return true;
 }

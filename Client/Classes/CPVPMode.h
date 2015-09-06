@@ -1,5 +1,6 @@
 #pragma once
 #include "CSceneBattle.h"
+#include "CPVPConnect.h"
 #include "Effects.h"
 
 /*

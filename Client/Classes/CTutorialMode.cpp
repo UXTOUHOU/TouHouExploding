@@ -21,7 +21,6 @@ bool CTutorialMode::init()
 	richTextDialogue = ui::RichText::create();
 	richTextDialogue->setAnchorPoint(Point(0, 1));
 	richTextDialogue->setPosition(Point(0, 220));//////
-	//richTextDialogue->setContentSize(Size(800, 200));
 	layout->addChild(richTextDialogue);
 	//
 	labelDialogue = Label::create();
