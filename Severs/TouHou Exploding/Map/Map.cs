@@ -10,7 +10,7 @@ namespace TouHou_Exploding
     {
         private Core _core;
         private Region[,] _regionList;//第一个索引值为列(8)，第二个为行(12)
-        public Map(Core core,Region[,] map)//自动读取一张地图，并将区块注册至区域表
+        public Map(Core core, Region[,] map)//自动读取一张地图，并将区块注册至区域表
         {
             _core = core;
             _regionList = map;
@@ -34,7 +34,7 @@ namespace TouHou_Exploding
                 }
             }
         }
-        private Region[,] MakeMap(MapType mapType=MapType.Common)//直接生成地图不注册区域
+        private Region[,] MakeMap(MapType mapType = MapType.Common)//直接生成地图不注册区域
         {
             var idList = new IDProvider.IDList("");
             var temp = new Region[8, 12];
@@ -42,7 +42,7 @@ namespace TouHou_Exploding
             {
                 for (int y = 0; y < temp.GetLength(1); y++)
                 {
-                    int[] a=new int[2]{x,y};
+                    int[] a = new int[2] { x, y };
                     temp[x, y] = new Region(idList, a);
                 }
             }
@@ -53,7 +53,7 @@ namespace TouHou_Exploding
                     temp[x, y].specialHere = Region.Special.Birth;
                     temp[x, y].owner = _core.team[0];
                 }
-                for (int y = temp.GetLength(1)-2; y < temp.GetLength(1); y++)
+                for (int y = temp.GetLength(1) - 2; y < temp.GetLength(1); y++)
                 {
                     temp[x, y].specialHere = Region.Special.Birth;
                     temp[x, y].owner = _core.team[1];
@@ -68,7 +68,7 @@ namespace TouHou_Exploding
                         temp[x, y].specialHere = Region.Special.Birth;
                         temp[x, y].owner = _core.team[0];
                     }
-                    for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(0) - 1; y++) 
+                    for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(0) - 1; y++)
                     {
                         temp[x, y].specialHere = Region.Special.Birth;
                         temp[x, y].owner = _core.team[1];
@@ -84,14 +84,14 @@ namespace TouHou_Exploding
                         temp[x, y].specialHere = Region.Special.Birth;
                         temp[x, y].owner = _core.team[0];
                     }
-                    for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(0) - 1; y++) 
+                    for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(0) - 1; y++)
                     {
                         temp[x, y].specialHere = Region.Special.Birth;
                         temp[x, y].owner = _core.team[1];
                     }
                 }
             }
-            
+
             return temp;
         }
         public enum MapType { Common }
@@ -112,34 +112,6 @@ namespace TouHou_Exploding
             {
                 return new Map(core);
             }
-        }
-        public class Region:IDProvider.IID
-        {
-            public int id { get; set; }//ID
-            public int[] locate { get; set; }//坐标
-            public Special specialHere { get; set; }//地区特别属性
-            public Team owner { get; set; }//归属
-            public Terrain terrainHere { get; set; }//地形
-            public Statue stateHere { get; set; }//地区状态
-            public Unit unitHere { get; set; }//在此位置的单位
-            public Region(IDProvider.IDList idList,int[] _locate)//第一参数为ID提供者，第二参数为坐标
-            {
-                idList.ApplyID(this);
-                locate = _locate;
-                specialHere = Special.Common;
-            }
-            public enum Special { Common,Base,Birth,Custom }//一般/基地/召唤地/自定义
-        }
-        public class Terrain
-        {
-            public string name;
-            public enum Type { Plain,Hill,River,Sea,Custom }
-
-        }
-        public class Statue
-        {
-            public string name;
-            public enum Type { None,Custom }
         }
     }
 }

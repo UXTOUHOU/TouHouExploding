@@ -8,6 +8,7 @@ using System.Text;
 using System.Web.Script.Serialization;
 using System.Xml;
 using JsonFx.Json;
+using System.Reflection;
 
 namespace TouHou_Exploding
 {

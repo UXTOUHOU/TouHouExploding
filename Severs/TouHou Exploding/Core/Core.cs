@@ -38,9 +38,9 @@ namespace TouHou_Exploding
         {
             public GameMod mod { get; set; }//游戏模式：普通
             public Map.MapSave battleMap { get; set; }//空即为不指定地图，自动生成（暂不支持提前指定地图
-            public List<PolicyCard> policyCards { get; set; }//本局系统提供的策略牌，空为自动生成
+            public List<PolicyCard> policyCards { get; set; }//本局系统提供的策略牌，空为玩家自带
             public List<Character> characters { get; set; }//本局系统提供的人物卡，空为自动生成
-            public List<Player.PlayerSave> player { get; set; }//玩家设定
+            public List<Player> player { get; set; }//玩家设定
             public enum GameMod { Common, Master, Custom }
             public GameConfig()
             {
@@ -53,51 +53,6 @@ namespace TouHou_Exploding
 
         }
     }
-    public class Player:IDProvider.IID
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public Type playerType { get; set; }
-        public Team atTeam { get; set; }
-        public int baseBlood { get; set; }
-        public Statue playerStatue { get; set; }
-        public int bDot { get; set; }
-        public List<PolicyCard> policyCard { get; set; }//玩家手中的策略牌
-        public List<Unit> unit { get; set; }//玩家场上的单位
-        public List<Unit> deadCard { get; set; }//击毁区
-        public enum Type { Player, AI, Watcher, Custom }
-        public Player()
-        {
-            
-        }
-        public class Statue
-        {
-
-        }
-        public class PlayerSave
-        {
-            public int id { get; set; }
-            public string name { get; set; }
-            public Player.Type type { get; set; }//人物类型
-            public int team { set; get; }//队伍，只有0 1
-            public List<PolicyCard> policyCard { get; set; }//玩家手中的策略牌
-        }
-    }
-    public class Team:IDProvider.IID
-    {
-        private Core _core;
-        public int id { get; set; }
-        public string name { get; set; }
-        public List<Player> playerList { get; set; }
-        public Team(Core core)
-        {
-            _core = core;
-            _core.idProvider.TID.ApplyID(this);
-        }
-        public void Add(Player player)
-        {
-            playerList.Add(player);
-            player.atTeam = this;
-        }
-    }
+    
+    
 }

@@ -105,7 +105,7 @@
             this.ClientSize = new System.Drawing.Size(384, 461);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "tstForm";
-            this.Text = "东方你妈瞬间爆炸测试系统-技术预览V1";
+            this.Text = "东方瞬间爆炸测试系统-技术预览V1";
             this.Load += new System.EventHandler(this.tstForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

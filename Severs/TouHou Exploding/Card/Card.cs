@@ -8,12 +8,9 @@ using System.Runtime.Serialization;
 
 namespace TouHou_Exploding
 {
-    [DataContract]
     public abstract class Card:IDProvider.IID
     {
-        [DataMember]
         public int cost { get; set; }
-        [DataMember]
         public int id { get; set; }
 
     }
@@ -113,7 +110,6 @@ namespace TouHou_Exploding
             }
         } 
     }
-   [DataContract]
    public class Unit : IDProvider.IID 
    {
        public Character card
@@ -123,15 +119,10 @@ namespace TouHou_Exploding
                return _card;
            }
        }
-       [DataMember]
        private Character _card;
-       [DataMember]
        public int id { get; set; }
-       [DataMember]
-       public Map.Region at { get; set; }
-       [DataMember]
+       public Region at { get; set; }
        public Attribute attribute { get; set; }
-       [DataMember]
        public Statue statue { get; set; }
        public Unit(Character transCard)
        {

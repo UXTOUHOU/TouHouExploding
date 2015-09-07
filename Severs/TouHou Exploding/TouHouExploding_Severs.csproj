@@ -35,7 +35,6 @@
     <Reference Include="JsonFx.Json">
       <HintPath>..\..\..\..\..\..\参考\zjsnHelper(6)\Debug\JsonFx.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -50,21 +49,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Basic.cs" />
-    <Compile Include="Card.cs" />
-    <Compile Include="ConsoleForm.cs" />
-    <Compile Include="Core.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="Support.cs" />
-    <Compile Include="tstForm.cs">
+    <Compile Include="Map\Region.cs" />
+    <Compile Include="WaitToComplete\Basic.cs" />
+    <Compile Include="Card\Card.cs" />
+    <Compile Include="Core\Core.cs" />
+    <Compile Include="Map\Map.cs" />
+    <Compile Include="Player\Player.cs" />
+    <Compile Include="Support\Support.cs" />
+    <Compile Include="Player\Team.cs" />
+    <Compile Include="Test\tstForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="tstForm.Designer.cs">
+    <Compile Include="Test\tstForm.Designer.cs">
       <DependentUpon>tstForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="tstForm.resx">
+    <EmbeddedResource Include="Test\tstForm.resx">
       <DependentUpon>tstForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -88,6 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Card\Character\" />
+    <Folder Include="Card\PolicyCard\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
