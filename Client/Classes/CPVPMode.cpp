@@ -1,6 +1,5 @@
 #include "CPVPMode.h"
 
-
 CPVPMode::CPVPMode()
 {
 
@@ -28,6 +27,11 @@ bool CPVPMode::init()
 		else
 			Effects::Moved(sprite);
 	}
+
 	//
+	CPVPConnect *connect = CPVPConnect::getInstance();
+	connect->login("123", "456");
+	connect->askRoomList();
+
 	return true;
 }

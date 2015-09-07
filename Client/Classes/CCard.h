@@ -22,21 +22,4 @@ public:
 	void ShowCard(Rect rect, Node *father);
 	void ShowCard(Point position, float scale, Node *father);
 	void DelHandCards();
-	//void SetCardSize(Size size);
-	//void SetCardPosition(Point position);
 };
-
-//class CardSprite
-//{
-//public:
-//	Sprite *sprite;
-//
-//	void ShowCard(Point point);
-//	void SetCardScale(float scale);
-//
-//	static CardSprite *create(const char *fileName);
-//	//返回卡片缩放后的数据
-//	Rect GetCardViewRect();
-//	float GetCardViewWidth();
-//	float GetCardViewHeight();
-//};
