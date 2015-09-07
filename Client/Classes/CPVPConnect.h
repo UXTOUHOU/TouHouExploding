@@ -3,7 +3,7 @@
 #include <WinSock2.h>
 using namespace std;
 
-enum Order_Type{
+enum OrderType{
 	//Global Order
 	OT_Common_Inform		= 1,	//通知
 	OT_Common_Reply			= 2,	//回复
@@ -60,7 +60,7 @@ enum Order_Type{
 	OT_SC_UseCard			= 62003,//使用卡牌
 	OT_SC_UseSkill			= 62004,//使用技能
 	OT_SC_Summon			= 62005,//召唤少女
-	OT_SC_EndTurn			= 62006,//结束行动
+	OT_SC_AnnounceEndTurn	= 62006,//结束行动
 	OT_SC_SpecialEvent		= 62007,//特殊事件
 
 	OT_SC_MandatoryEndTurn	= 62008,//强制回合结束
@@ -69,19 +69,99 @@ enum Order_Type{
 	OT_SC_BattleResult		= 72001,//宣布战果
 };
 
+class JsonElement final
+{
+public:
+	const char *name;
+	rapidjson::Type type;
+	union uInf{
+		void *pvoid;
+		int num;
+		string *pstr;
+	}information;
+
+	JsonElement(const char *infName, rapidjson::Type infType, void *inf)
+	{
+		type = infType;
+		information.pvoid = inf;
+		name = infName;
+	}
+	JsonElement(const char *infName, rapidjson::Type infType, int inf)
+	{
+		type = infType;
+		information.num = inf;
+		name = infName;
+	}
+};
+
 class CPVPConnect
 {
 public:
+	static CPVPConnect *pPVPConnect;
+	static CPVPConnect *getInstance()
+	{
+		if (pPVPConnect == NULL)
+			pPVPConnect = new CPVPConnect;
+		return pPVPConnect;
+	}
+
 	sockaddr_in serverAddr;
 	SOCKET clientSocket;
 
 	void init();
 
+	//发送CS命令
+		//Global Order
+	void keepConnect();
+	void sendChat();
+		//Login
 	void login(string playerName,string passWord);
+	void versionCheck(int version);
+	void askRoomList();
+		//RO
+	void unitMove(int x, int y);
+	void unitAttack(int x, int y);
+	void useCard(int cardID);
+	void useSkill(int skillID);
+	void summon(int unitID);
+	void endTurn();
+	////获取SC命令
+	//string liveCheck();
+	//string announceChat();
+	//	//Add Room
+	//string flashRoomList();
+	//string AnnounceReady();
+	//string Start();
+	//string KickingPlayer();
+	//	//Game Init
+	//string battleGround();////
+	//string nextStage();
+
+	//string stageException();
+	//string allInformation();
+	//string gameEnd();
+	//string event();
+	//	//Round Start
+	//string newRoundState();
+	//	//Round Prepare
+	//string newState();
+	//	//Round Operation
+	//string unitMove();
+	//string unitAttack();
+	//string useCard();
+	//string useSkill();
+	//string summon();
+	//string announceEndTurn();
+	//string specialEvent();
+	//	//Game End Account
+	//string mandatoryEndTurn();
 
 	CPVPConnect();
 	~CPVPConnect();
 private:
-	void _sendToServer(std::string str);
+	void _sendToServer(string str);
+	int _nowOrderID;	//当前的指令编号
+
+	string _makeJsonString(JsonElement *element,...);
 };
 
