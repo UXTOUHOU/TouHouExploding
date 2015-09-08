@@ -69,30 +69,44 @@ enum OrderType{
 	OT_SC_BattleResult		= 72001,//宣布战果
 };
 
-class JsonElement final
+struct OrderParam
 {
-public:
 	const char *name;
 	rapidjson::Type type;
-	union uInf{
-		void *pvoid;
-		int num;
-		string *pstr;
-	}information;
 
-	JsonElement(const char *infName, rapidjson::Type infType, void *inf)
+	OrderParam();
+	OrderParam(const char *infName, rapidjson::Type infType)
 	{
 		type = infType;
-		information.pvoid = inf;
-		name = infName;
-	}
-	JsonElement(const char *infName, rapidjson::Type infType, int inf)
-	{
-		type = infType;
-		information.num = inf;
 		name = infName;
 	}
 };
+
+extern map<OrderType, vector<OrderParam> > g_mapOrderParam;
+
+//class JsonElement final
+//{
+//public:
+//	OrderParam param;
+//	union uInf{
+//		void *pvoid;
+//		int num;
+//		string *pstr;
+//	}information;
+//
+//	JsonElement(const char *infName, rapidjson::Type infType, void *inf)
+//	{
+//		param.type = infType;
+//		information.pvoid = inf;
+//		param.name = infName;
+//	}
+//	JsonElement(const char *infName, rapidjson::Type infType, int inf)
+//	{
+//		param.type = infType;
+//		information.num = inf;
+//		param.name = infName;
+//	}
+//};
 
 class CPVPConnect
 {
@@ -113,9 +127,9 @@ public:
 	//发送CS命令
 		//Global Order
 	void keepConnect();
-	void sendChat();
+	void sendChat(const string &msg);
 		//Login
-	void login(string playerName,string passWord);
+	void login(const string &playerName,const string &passWord);
 	void versionCheck(int version);
 	void askRoomList();
 		//RO
@@ -125,6 +139,30 @@ public:
 	void useSkill(int skillID);
 	void summon(int unitID);
 	void endTurn();
+	//获取接受命令的参数
+		//Global Order
+	void parseAnnounceChat(const string &strJSON, string &playerName, string &msg);
+		//Add Room
+	void parseFlashRoomList(const string &strJSON, map<int, pair<string, string> > &vecRoomList);
+		//Game Init
+	void parseBattleGround(const string &strJSON);///
+	void parseStateException(const string &strJSON, int &exp);
+	void parseAllInformation(const string &strJSON);///
+	void parseEvent(const string &strJSON);///
+		//Round Start
+	void parseNewRoundState(const string &strJSON);///
+		//Round Prepare
+	void parseNewState(const string &strJSON);///
+		//Round Operation
+	void parseUnitMove(const string &strJSON, int &unitID, int &targetX, int &targetY);
+	void parseUnitAttack(const string &strJSON, int &unitID, int &targetX, int &targetY);
+	void parseUseCard(const string &strJSON, int &cardID, int &targetX, int &targetY);
+	void parseUseSkill(const string &strJSON, int &skillID, int &targetX, int &targetY);
+	void parseSummon(const string &strJSON, int &unitID);
+	void parseSpecialEvent(const string &strJSON);///
+		//Game End Account
+	void parseBattleResult(const string &strJSON);///
+
 	////获取SC命令
 	//string liveCheck();
 	//string announceChat();
@@ -162,6 +200,9 @@ private:
 	void _sendToServer(string str);
 	int _nowOrderID;	//当前的指令编号
 
-	string _makeJsonString(JsonElement *element,...);
+	//创建Json
+	string _makeJsonString(OrderType order, ...);
+	//解析Json
+	void _parse(const string &strJSON, OrderType order, ...);
 };
 

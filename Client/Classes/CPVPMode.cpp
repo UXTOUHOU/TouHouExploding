@@ -13,6 +13,7 @@ CPVPMode::~CPVPMode()
 bool CPVPMode::init()
 {
 	CSceneBattle::init();
+	CPVPConnect *connect = CPVPConnect::getInstance();
 	//test
 	AddHandCards(0);
 	AddHandCards(1);
@@ -28,10 +29,8 @@ bool CPVPMode::init()
 			Effects::Moved(sprite);
 	}
 
-	//
-	CPVPConnect *connect = CPVPConnect::getInstance();
 	connect->login("123", "456");
 	connect->askRoomList();
-
+	//
 	return true;
 }
