@@ -156,12 +156,25 @@ void CPVPConnect::askRoomList()
 	_sendToServer(_makeJsonString(OT_CS_AskRoomList, NULL));
 }
 
-void CPVPConnect::parseAnnounceChat(const string &strJSON, string &playerName, string &msg)
+//void CPVPConnect::parseAnnounceChat(const string &strJSON, string &playerName, string &msg)
+//{
+//	_parse(strJSON, OT_SC_AnnounceChat, &playerName, &msg, NULL);
+//}
+
+OrderType CPVPConnect::getOrderType(const string &strJSON)
 {
-	_parse(strJSON, OT_SC_AnnounceChat, &playerName, &msg, NULL);
+	Document document;
+	document.Parse<0>(strJSON.c_str());
+	if (document.HasParseError())
+	{
+		CCAssert(false, "JSON½á¹¹´íÎó");
+		return OrderType::OT_NULL;
+	}
+
+	return (OrderType)document["OrderType"].GetInt();
 }
 
-void CPVPConnect::_parse(const string &strJSON, OrderType order, ...)
+void CPVPConnect::parse(const string &strJSON, OrderType order, ...)
 {
 	Document document;
 	document.Parse<0>(strJSON.c_str());

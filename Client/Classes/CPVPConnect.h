@@ -4,6 +4,7 @@
 using namespace std;
 
 enum OrderType{
+	OT_NULL					= 0,	//出现异常时的值
 	//Global Order
 	OT_Common_Inform		= 1,	//通知
 	OT_Common_Reply			= 2,	//回复
@@ -83,30 +84,6 @@ struct OrderParam
 };
 
 extern map<OrderType, vector<OrderParam> > g_mapOrderParam;
-
-//class JsonElement final
-//{
-//public:
-//	OrderParam param;
-//	union uInf{
-//		void *pvoid;
-//		int num;
-//		string *pstr;
-//	}information;
-//
-//	JsonElement(const char *infName, rapidjson::Type infType, void *inf)
-//	{
-//		param.type = infType;
-//		information.pvoid = inf;
-//		param.name = infName;
-//	}
-//	JsonElement(const char *infName, rapidjson::Type infType, int inf)
-//	{
-//		param.type = infType;
-//		information.num = inf;
-//		param.name = infName;
-//	}
-//};
 
 class CPVPConnect
 {
@@ -194,15 +171,18 @@ public:
 	//	//Game End Account
 	//string mandatoryEndTurn();
 
+	//获得命令类型
+	OrderType getOrderType(const string &strJSON);
+	//解析Json，order之后的参数必须全部是完全按照设计时顺序排列的参数的指针，并以NULL结尾。
+	void parse(const string &strJSON, OrderType order, ...);
+
 	CPVPConnect();
 	~CPVPConnect();
 private:
 	void _sendToServer(string str);
 	int _nowOrderID;	//当前的指令编号
 
-	//创建Json
+	//创建Json，order之后的参数必须全部是完全按照设计时顺序排列的参数的指针，并以NULL结尾。
 	string _makeJsonString(OrderType order, ...);
-	//解析Json
-	void _parse(const string &strJSON, OrderType order, ...);
 };
 
