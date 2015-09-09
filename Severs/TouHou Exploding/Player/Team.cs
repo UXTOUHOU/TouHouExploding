@@ -15,7 +15,7 @@ namespace TouHou_Exploding
         public Team(Core core)
         {
             _core = core;
-            _core.idProvider.TID.ApplyID(this);
+            _core.IDP.TID.ApplyID(this);
         }
         public void Add(Player player)
         {

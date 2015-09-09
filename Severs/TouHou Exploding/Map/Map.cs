@@ -18,7 +18,7 @@ namespace TouHou_Exploding
             {
                 for (int y = 0; y < map.GetLength(1); y++)
                 {
-                    _core.idProvider.RID.SetID(_regionList[x, y]);
+                    _core.IDP.RID.SetID(_regionList[x, y]);
                 }
             }
         }
@@ -30,7 +30,7 @@ namespace TouHou_Exploding
             {
                 for (int y = 0; y < _regionList.GetLength(1); y++)
                 {
-                    _core.idProvider.RID.SetID(_regionList[x, y]);
+                    _core.IDP.RID.SetID(_regionList[x, y]);
                 }
             }
         }
@@ -51,12 +51,12 @@ namespace TouHou_Exploding
                 for (int y = 0; y < 2; y++)
                 {
                     temp[x, y].specialHere = Region.Special.Birth;
-                    temp[x, y].owner = _core.team[0];
+                    temp[x, y].owner = _core.RoomTeam[0];
                 }
                 for (int y = temp.GetLength(1) - 2; y < temp.GetLength(1); y++)
                 {
                     temp[x, y].specialHere = Region.Special.Birth;
-                    temp[x, y].owner = _core.team[1];
+                    temp[x, y].owner = _core.RoomTeam[1];
                 }
             }
             if (temp.GetLength(0) % 2 == 0) //设定基地，自动基地判断大小
@@ -66,12 +66,12 @@ namespace TouHou_Exploding
                     for (int y = 0; y <= 0; y++)
                     {
                         temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = _core.team[0];
+                        temp[x, y].owner = _core.RoomTeam[0];
                     }
                     for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(0) - 1; y++)
                     {
                         temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = _core.team[1];
+                        temp[x, y].owner = _core.RoomTeam[1];
                     }
                 }
             }
@@ -82,12 +82,12 @@ namespace TouHou_Exploding
                     for (int y = 0; y <= 0; y++)
                     {
                         temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = _core.team[0];
+                        temp[x, y].owner = _core.RoomTeam[0];
                     }
                     for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(0) - 1; y++)
                     {
                         temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = _core.team[1];
+                        temp[x, y].owner = _core.RoomTeam[1];
                     }
                 }
             }
