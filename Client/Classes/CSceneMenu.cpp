@@ -3,6 +3,7 @@
 #include "ui/CocosGUI.h"
 #include "CTutorialMode.h"
 #include "CPVPMode.h"
+#include "CCard.h"
 
 USING_NS_CC;
 
@@ -27,21 +28,22 @@ CSceneMenu *pSceneMenu = NULL;
 // on "init" you need to initialize your instance
 bool CSceneMenu::init()
 {
-	//mainMenu
-	auto nodeMainMenu = CSLoader::createNode("MainScene.csb");
-	//添加按钮click事件的捕捉
-	auto buttonStart = nodeMainMenu->getChildByName<ui::Button *>("Button_StartGame");
-	buttonStart->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonStart, this));
-	auto buttonGallery = nodeMainMenu->getChildByName<ui::Button *>("Button_CardsGallery");
-	buttonGallery->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonGallery, this));
-	auto buttonConfig = nodeMainMenu->getChildByName<ui::Button *>("Button_Config");
-	buttonConfig->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonConfig, this));
-	auto buttonExit = nodeMainMenu->getChildByName<ui::Button *>("Button_Exit");
-	buttonExit->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonExit, this));
+	////mainMenu
+	//auto nodeMainMenu = CSLoader::createNode("MainScene.csb");
+	////添加按钮click事件的捕捉
+	//auto buttonStart = nodeMainMenu->getChildByName<ui::Button *>("Button_StartGame");
+	//buttonStart->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonStart, this));
+	//auto buttonGallery = nodeMainMenu->getChildByName<ui::Button *>("Button_CardsGallery");
+	//buttonGallery->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonGallery, this));
+	//auto buttonConfig = nodeMainMenu->getChildByName<ui::Button *>("Button_Config");
+	//buttonConfig->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonConfig, this));
+	//auto buttonExit = nodeMainMenu->getChildByName<ui::Button *>("Button_Exit");
+	//buttonExit->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonExit, this));
 
-	layerMainMenu = Layer::create();
-	layerMainMenu->addChild(nodeMainMenu);
-	addChild(layerMainMenu);
+	//layerMainMenu = Layer::create();
+	//layerMainMenu->addChild(nodeMainMenu);
+	//addChild(layerMainMenu);
+	addChild(CMainMenu::getInstance());
 	//
 
 	//gameHallMenu
@@ -68,6 +70,13 @@ bool CSceneMenu::init()
 
 	auto buttonGalleryReturn = cardsGalleryMenuNode->getChildByName<ui::Button *>("Button_ReturnMainMenu");
 	buttonGalleryReturn->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonGalleryReturn, this));
+	scrollViewCardGallery = cardsGalleryMenuNode->getChildByName<ui::ScrollView *>("ScrollView_CardList");
+
+	auto cardDetailNode = CSLoader::createNode("CardDetail.csb");
+	layerCardDetail = Layer::create();
+	layerCardDetail->addChild(cardDetailNode);
+	addChild(layerCardDetail);
+	layerCardDetail->setVisible(false);
 	//
 
 	//configMenu
@@ -171,6 +180,23 @@ bool CSceneMenu::init()
 				//listViewRoomList->setFocused(true);
 			}
 			log("MouseDown");
+		}else if (sceneCardDetail == currentScene){
+			/////
+			Point point = eventMouse->getLocationInView();
+
+			point -= eventMouse->getLocationInView();
+			auto &vecCards = scrollViewCardGallery->getChildren();
+			for (auto itCard : vecCards)
+			{
+				CCard *card = (CCard *)itCard;
+				Rect rect;
+				rect.origin = card->getPosition();
+				rect.size = card->getContentSize();
+				if (rect.containsPoint(point))
+				{
+					ShowCardDetail(card->ID);
+				}
+			}
 		}
 	};
 	//鼠标滚轮
@@ -365,6 +391,22 @@ void CSceneMenu::OnButtonStaffReturn()
 	layerStaff->setVisible(false);
 	layerConfig->setVisible(true);
 	currentScene = sceneConfig;
+}
+
+void CSceneMenu::ShowCardDetail(int cardID)
+{
+	auto card = layerCardDetail->getChildByName<Sprite *>("Sprite_Card");
+	char fileName[100];
+	card->setTexture(GetCardFileName(fileName, cardID));
+	layerCardDetail->setVisible(true);
+	currentScene = sceneCardDetail;
+}
+
+void CSceneMenu::ReturnCardGallery()
+{
+	layerCardDetail->setVisible(false);
+	layerCardsGallery->setVisible(true);
+	currentScene = sceneGallery;
 }
 
 void CSceneMenu::AddRoomList(std::string ID, std::string roomName, std::string playerName)

@@ -2,7 +2,7 @@
   <Properties>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
-        <LastPublishType Value="VS" />
+        <LastPublishType Value="Resource" />
         <IsLastPublish Value="True" />
         <LastRunType Value="Windows" />
       </Value>
@@ -29,8 +29,11 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="GameHall.csd" />
+          <FilePathData Path="BattleScene.csd" />
+          <FilePathData Path="CardsGallery.csd" />
+          <FilePathData Path="CardDetail.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="GameHall.csd" />
+        <ActiveDocument Path="CardsGallery.csd" />
       </Value>
     </Item>
   </Properties>

@@ -34,19 +34,49 @@ CPVPConnect::~CPVPConnect()
 
 void CPVPConnect::init()
 {
-	_nowOrderID = 0;
+	_NowOrderID = 0;
 
-	addOrderParam(OT_CS_SendChat, 
+	addOrderParam(OT_CS_KeepConnect,
+		NULL);
+	addOrderParam(OT_CS_SendChat,
 		&OrderParam("Message", kStringType),
 		NULL);
 	addOrderParam(OT_CS_Login,
 		&OrderParam("PlayerName", kStringType),
 		&OrderParam("PassWord", kStringType),
 		NULL);
+	addOrderParam(OT_CS_VersionCheck,
+		&OrderParam("Version", kNumberType),
+		NULL);
 	addOrderParam(OT_CS_AskRoomList,
 		NULL);
-	//addOrderParam();
-	//addOrderParam();
+	addOrderParam(OT_CS_UnitMove,
+		&OrderParam("UnitID", kNumberType),
+		&OrderParam("TargetX", kNumberType),
+		&OrderParam("TargetY", kNumberType),
+		NULL);
+	addOrderParam(OT_CS_UnitAttack,
+		&OrderParam("UnitID", kNumberType),
+		&OrderParam("TargetX", kNumberType),
+		&OrderParam("TargetY", kNumberType),
+		NULL);
+	addOrderParam(OT_CS_UseCard,
+		&OrderParam("CardID", kNumberType),
+		&OrderParam("TargetX", kNumberType),
+		&OrderParam("TargetY", kNumberType),
+		NULL);
+	addOrderParam(OT_CS_UseSkill,
+		&OrderParam("SkillID", kNumberType),
+		&OrderParam("TargetX", kNumberType),
+		&OrderParam("TargetY", kNumberType),
+		NULL);
+	addOrderParam(OT_CS_Summon,
+		&OrderParam("UnitID", kNumberType),
+		&OrderParam("TargetX", kNumberType),
+		&OrderParam("TargetY", kNumberType),
+		NULL);
+	addOrderParam(OT_CS_EndTurn,
+		NULL);
 	//addOrderParam();
 	//addOrderParam();
 	//addOrderParam();
@@ -78,90 +108,67 @@ void CPVPConnect::init()
 	setsockopt(clientSocket, IPPROTO_TCP, TCP_NODELAY, t, sizeof(t));
 }
 
-void CPVPConnect::_sendToServer(std::string str)
+void CPVPConnect::_SendToServer(std::string str)
 {
 	::send(clientSocket, str.c_str(), str.length(), 0);
 }
 
-//void CPVPConnect::keepConnect()
-//{
-//	_sendToServer(_makeJsonString(&JsonElement("Order", kNumberType, OT_CS_KeepConnect),
-//		NULL));
-//}
-//
-//void CPVPConnect::sendChat(string msg)
-//{
-//	_sendToServer(_makeJsonString(&JsonElement("Order", kNumberType, OT_CS_SendChat),
-//		&JsonElement("Message", kStringType, &msg),
-//		NULL));
-//}
-//
-void CPVPConnect::login(const string &playerName, const string &passWord)
+void CPVPConnect::KeepConnect()
 {
-	_sendToServer(_makeJsonString(OT_CS_Login, &playerName, &passWord));
-}
-//
-//void CPVPConnect::versionCheck(int version)
-//{
-//	_sendToServer(_makeJsonString(&JsonElement("Order", kNumberType, OT_CS_VersionCheck),
-//		&JsonElement("ClientVersion", kNumberType, version),
-//		NULL));
-//}
-//
-//void CPVPConnect::unitMove(int x, int y)
-//{
-//	_sendToServer(_makeJsonString(&JsonElement("Order", kNumberType, OT_CS_UnitMove),
-//		&JsonElement("PositionX", kNumberType, x),
-//		&JsonElement("PositionY", kNumberType, y),
-//		NULL));
-//}
-//
-//void CPVPConnect::unitAttack(int x, int y)
-//{
-//	_sendToServer(_makeJsonString(&JsonElement("Order", kNumberType, OT_CS_UnitAttack),
-//		&JsonElement("PositionX", kNumberType, x),
-//		&JsonElement("PositionY", kNumberType, y),
-//		NULL));
-//}
-//
-//void CPVPConnect::useCard(int cardID)
-//{
-//	_sendToServer(_makeJsonString(&JsonElement("Order", kNumberType, OT_CS_UseCard),
-//		&JsonElement("CardID", kNumberType, cardID),
-//		NULL));
-//}
-//
-//void CPVPConnect::useSkill(int skillID)
-//{
-//	_sendToServer(_makeJsonString(&JsonElement("Order", kNumberType, OT_CS_UseSkill),
-//		&JsonElement("CardID", kNumberType, skillID),
-//		NULL));
-//}
-//
-//void CPVPConnect::summon(int unitID)
-//{
-//	_sendToServer(_makeJsonString(&JsonElement("Order", kNumberType, OT_CS_Summon),
-//		&JsonElement("CardID", kNumberType, unitID),
-//		NULL));
-//}
-//
-//void CPVPConnect::endTurn()
-//{
-//	_sendToServer(_makeJsonString(&JsonElement("Order", kNumberType, OT_CS_EndTurn),
-//		NULL));
-//}
-//
-void CPVPConnect::askRoomList()
-{
-	_sendToServer(_makeJsonString(OT_CS_AskRoomList, NULL));
+	_SendToServer(_MakeJsonString(OT_CS_KeepConnect, NULL));
 }
 
-//void CPVPConnect::parseAnnounceChat(const string &strJSON, string &playerName, string &msg)
-//{
-//	_parse(strJSON, OT_SC_AnnounceChat, &playerName, &msg, NULL);
-//}
+void CPVPConnect::SendChat(const string &msg)
+{
+	_SendToServer(_MakeJsonString(OT_CS_SendChat, &msg, NULL));
+}
 
-OrderType CPVPConnect::getOrderType(const string &strJSON)
+void CPVPConnect::Login(const string &playerName, const string &passWord)
+{
+	_SendToServer(_MakeJsonString(OT_CS_Login, &playerName, &passWord, NULL));
+}
+
+void CPVPConnect::VersionCheck(int version)
+{
+	_SendToServer(_MakeJsonString(OT_CS_VersionCheck, &version, NULL));
+}
+
+void CPVPConnect::UnitMove(int unitID, int x, int y)
+{
+	_SendToServer(_MakeJsonString(OT_CS_UnitMove, &unitID, &x, &y, NULL));
+}
+
+void CPVPConnect::UnitAttack(int unitID, int x, int y)
+{
+	_SendToServer(_MakeJsonString(OT_CS_UnitAttack, &unitID, &x, &y, NULL));
+}
+
+void CPVPConnect::UseCard(int cardID, int x, int y)
+{
+	_SendToServer(_MakeJsonString(OT_CS_UseCard, &cardID, &x, &y, NULL));
+}
+
+void CPVPConnect::UseSkill(int skillID, int x, int y)
+{
+	_SendToServer(_MakeJsonString(OT_CS_UseSkill, &skillID, &x, &y, NULL));
+}
+
+void CPVPConnect::Summon(int unitID, int x, int y)
+{
+	_SendToServer(_MakeJsonString(OT_CS_Summon, &unitID, &x, &y, NULL));
+}
+
+void CPVPConnect::EndTurn()
+{
+	_SendToServer(_MakeJsonString(OT_CS_EndTurn, NULL));
+}
+
+void CPVPConnect::AskRoomList()
+{
+	_SendToServer(_MakeJsonString(OT_CS_AskRoomList, NULL));
+}
+
+OrderType CPVPConnect::GetOrderType(const string &strJSON)
 {
 	Document document;
 	document.Parse<0>(strJSON.c_str());
@@ -174,7 +181,7 @@ OrderType CPVPConnect::getOrderType(const string &strJSON)
 	return (OrderType)document["OrderType"].GetInt();
 }
 
-void CPVPConnect::parse(const string &strJSON, OrderType order, ...)
+void CPVPConnect::Parse(const string &strJSON, OrderType order, ...)
 {
 	Document document;
 	document.Parse<0>(strJSON.c_str());
@@ -216,7 +223,7 @@ void CPVPConnect::parse(const string &strJSON, OrderType order, ...)
 	}
 }
 
-string CPVPConnect::_makeJsonString(OrderType order, ...)
+string CPVPConnect::_MakeJsonString(OrderType order, ...)
 {
 	va_list listObject;
 	va_start(listObject, order);
@@ -226,7 +233,7 @@ string CPVPConnect::_makeJsonString(OrderType order, ...)
 	rapidjson::Value root(kObjectType);
 
 	rapidjson::Value vOrderID(kNumberType);
-	vOrderID.SetInt(++_nowOrderID);
+	vOrderID.SetInt(++_NowOrderID);
 	root.AddMember("OrderID", vOrderID, allocator);
 
 	rapidjson::Value vOrderType(kNumberType);

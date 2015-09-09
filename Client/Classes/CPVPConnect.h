@@ -103,42 +103,42 @@ public:
 
 	//发送CS命令
 		//Global Order
-	void keepConnect();
-	void sendChat(const string &msg);
+	void KeepConnect();
+	void SendChat(const string &msg);
 		//Login
-	void login(const string &playerName,const string &passWord);
-	void versionCheck(int version);
-	void askRoomList();
+	void Login(const string &playerName,const string &passWord);
+	void VersionCheck(int version);
+	void AskRoomList();
 		//RO
-	void unitMove(int x, int y);
-	void unitAttack(int x, int y);
-	void useCard(int cardID);
-	void useSkill(int skillID);
-	void summon(int unitID);
-	void endTurn();
+	void UnitMove(int unitID, int x, int y);
+	void UnitAttack(int unitID, int x, int y);
+	void UseCard(int cardID, int x, int y);
+	void UseSkill(int skillID, int x, int y);
+	void Summon(int unitID, int x, int y);
+	void EndTurn();
 	//获取接受命令的参数
 		//Global Order
-	void parseAnnounceChat(const string &strJSON, string &playerName, string &msg);
+	void ParseAnnounceChat(const string &strJSON, string &playerName, string &msg);
 		//Add Room
-	void parseFlashRoomList(const string &strJSON, map<int, pair<string, string> > &vecRoomList);
+	void ParseFlashRoomList(const string &strJSON, map<int, pair<string, string> > &vecRoomList);
 		//Game Init
-	void parseBattleGround(const string &strJSON);///
-	void parseStateException(const string &strJSON, int &exp);
-	void parseAllInformation(const string &strJSON);///
-	void parseEvent(const string &strJSON);///
+	void ParseBattleGround(const string &strJSON);///
+	void ParseStateException(const string &strJSON, int &exp);
+	void ParseAllInformation(const string &strJSON);///
+	void ParseEvent(const string &strJSON);///
 		//Round Start
-	void parseNewRoundState(const string &strJSON);///
+	void ParseNewRoundState(const string &strJSON);///
 		//Round Prepare
-	void parseNewState(const string &strJSON);///
+	void ParseNewState(const string &strJSON);///
 		//Round Operation
-	void parseUnitMove(const string &strJSON, int &unitID, int &targetX, int &targetY);
-	void parseUnitAttack(const string &strJSON, int &unitID, int &targetX, int &targetY);
-	void parseUseCard(const string &strJSON, int &cardID, int &targetX, int &targetY);
-	void parseUseSkill(const string &strJSON, int &skillID, int &targetX, int &targetY);
-	void parseSummon(const string &strJSON, int &unitID);
-	void parseSpecialEvent(const string &strJSON);///
+	void ParseUnitMove(const string &strJSON, int &unitID, int &targetX, int &targetY);
+	void ParseUnitAttack(const string &strJSON, int &unitID, int &targetX, int &targetY);
+	void ParseUseCard(const string &strJSON, int &cardID, int &targetX, int &targetY);
+	void ParseUseSkill(const string &strJSON, int &skillID, int &targetX, int &targetY);
+	void ParseSummon(const string &strJSON, int &unitID);
+	void ParseSpecialEvent(const string &strJSON);///
 		//Game End Account
-	void parseBattleResult(const string &strJSON);///
+	void ParseBattleResult(const string &strJSON);///
 
 	////获取SC命令
 	//string liveCheck();
@@ -172,17 +172,17 @@ public:
 	//string mandatoryEndTurn();
 
 	//获得命令类型
-	OrderType getOrderType(const string &strJSON);
+	OrderType GetOrderType(const string &strJSON);
 	//解析Json，order之后的参数必须全部是完全按照设计时顺序排列的参数的指针，并以NULL结尾。
-	void parse(const string &strJSON, OrderType order, ...);
+	void Parse(const string &strJSON, OrderType order, ...);
 
 	CPVPConnect();
 	~CPVPConnect();
 private:
-	void _sendToServer(string str);
-	int _nowOrderID;	//当前的指令编号
+	void _SendToServer(string str);
+	int _NowOrderID;	//当前的指令编号
 
 	//创建Json，order之后的参数必须全部是完全按照设计时顺序排列的参数的指针，并以NULL结尾。
-	string _makeJsonString(OrderType order, ...);
+	string _MakeJsonString(OrderType order, ...);
 };
 

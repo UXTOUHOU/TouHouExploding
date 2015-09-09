@@ -84,7 +84,7 @@ void CLayerChessBoard::MouseMove(float mouseX, float mouseY)
 		0 <= y && y < 8)
 	{
 		//test
-		ShowSelectCell(x, y);
+		ShowAtkRange(x, y, 3);
 		//
 		log("ChessBoard %d %d", x, y);
 	}

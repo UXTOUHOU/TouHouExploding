@@ -192,7 +192,7 @@ bool CSceneBattle::init()
 					{
 						nodeHandCards->removeChild(it);
 						it->removeFromParent();
-						_redrawCards(nodeHandCards);
+						_RedrawCards(nodeHandCards);
 						textCardDescribe->setString("");
 						event->stopPropagation();
 						break;
@@ -267,7 +267,7 @@ Scene* CSceneBattle::createScene()
 	return scene;
 }
 
-void CSceneBattle::_redrawCards(Node *node)
+void CSceneBattle::_RedrawCards(Node *node)
 {
 	auto vec = node->getChildren();
 	int cardsCount = node->getChildrenCount(),
@@ -301,7 +301,7 @@ void CSceneBattle::AddHandCards(int cardID)
 	card->setScale(cardScale);
 
 	nodeHandCards->addChild(card);
-	_redrawCards(nodeHandCards);
+	_RedrawCards(nodeHandCards);
 }
 
 void CSceneBattle::AddSummonPool(int cardID)
@@ -311,7 +311,7 @@ void CSceneBattle::AddSummonPool(int cardID)
 	card->setScale(cardScale);
 
 	nodeSummonPool->addChild(card);
-	_redrawCards(nodeSummonPool);
+	_RedrawCards(nodeSummonPool);
 }
 
 void CSceneBattle::AddAbandonedCards(int cardID)

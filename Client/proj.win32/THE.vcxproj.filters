@@ -10,6 +10,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\LayerMenu">
+      <UniqueIdentifier>{bcd982a9-90c4-4459-83c6-5da28d289076}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -19,12 +22,6 @@
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Effects.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CSceneMenu.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CCard.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\CLayerChessBoard.cpp">
@@ -42,6 +39,36 @@
     <ClCompile Include="..\Classes\CPVPConnect.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\CCard.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CSceneMenu.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LayerMenu.cpp">
+      <Filter>src\LayerMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainMenu.cpp">
+      <Filter>src\LayerMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameHall.cpp">
+      <Filter>src\LayerMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Staff.cpp">
+      <Filter>src\LayerMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tutorial.cpp">
+      <Filter>src\LayerMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CardDetail.cpp">
+      <Filter>src\LayerMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CardsGallery.cpp">
+      <Filter>src\LayerMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Config.cpp">
+      <Filter>src\LayerMenu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -51,9 +78,6 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Effects.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CSceneMenu.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\CCard.h">
@@ -73,6 +97,33 @@
     </ClInclude>
     <ClInclude Include="..\Classes\CPVPConnect.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CSceneMenu.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LayerMenu.h">
+      <Filter>src\LayerMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainMenu.h">
+      <Filter>src\LayerMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameHall.h">
+      <Filter>src\LayerMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Staff.h">
+      <Filter>src\LayerMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tutorial.h">
+      <Filter>src\LayerMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CardDetail.h">
+      <Filter>src\LayerMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CardsGallery.h">
+      <Filter>src\LayerMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Config.h">
+      <Filter>src\LayerMenu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

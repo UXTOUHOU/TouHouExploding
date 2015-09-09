@@ -48,6 +48,8 @@ public:
 		sceneAbandonedCards,
 	}currentScene;
 
+	//行动
+	void UnitAttack();
 	//投降和结束回合
 	void OnButtonGiveUp();
 	void OnButtonEndTurn();
@@ -75,7 +77,7 @@ public:
 	void RoundCountdown(float n);
 private:
 	//删除或插入手牌之后对summonPool或者handCards中的卡片重新排序
-	void _redrawCards(Node *node);	
+	void _RedrawCards(Node *node);	
 };
 
 ////将card添加为father的child并修改为指定的大小

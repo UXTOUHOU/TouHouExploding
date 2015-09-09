@@ -7,6 +7,16 @@
 
 USING_NS_CC_EXT;
 
+enum SceneType{
+	sceneMainMenu,
+	sceneGameHall,
+	sceneGallery,
+	sceneConfig,
+	sceneTutorial,
+	sceneStaff,
+	sceneCardDetail,
+};
+
 class CSceneMenu : public cocos2d::Scene
 {
 public:
@@ -26,25 +36,19 @@ public:
 	// implement the "static create()" method manually
 	CREATE_FUNC(CSceneMenu);
 
-	Layer *layerMainMenu;
+	//Layer *layerMainMenu;
 	Layer *layerConfig;
 	Layer *layerGameHall;
 	Layer *layerCardsGallery;
+	Layer *layerCardDetail;
 	Layer *layerTutorial;
 	Layer *layerStaff;
 
 	ui::ScrollView *scrollViewTutorial;
-	
+	ui::ScrollView *scrollViewCardGallery;
 	ui::ListView *listViewRoomList;
 
-	enum {
-		sceneMainMenu,
-		sceneGameHall,
-		sceneGallery,
-		sceneConfig,
-		sceneTutorial,
-		sceneStaff,
-	}currentScene;
+	SceneType currentScene;
 
 	//主菜单
 	void OnButtonStart();
@@ -63,6 +67,8 @@ public:
 	void OnButtonConfigStaff();
 	//卡牌浏览
 	void OnButtonGalleryReturn();
+	void ShowCardDetail(int cardID);
+	void ReturnCardGallery();
 	//教程
 	void OnButtonTutorialReturn();
 	//职员表
