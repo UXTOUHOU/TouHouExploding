@@ -13,7 +13,10 @@ public:
 	virtual bool init() override;
 	CREATE_FUNC(CCardsGallery);
 
-	virtual SceneType Enter() override;
+	virtual void Enter() override;
+	virtual void OnButtonReturn() override;
+	
+	ui::ScrollView *scrollViewCardGallery;
 
 	CCardsGallery();
 	~CCardsGallery();

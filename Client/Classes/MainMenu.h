@@ -14,7 +14,13 @@ public:
 	virtual bool init() override;
 	CREATE_FUNC(CMainMenu);
 
-	virtual SceneType Enter() override;
+	virtual void Enter() override;
+	virtual void OnButtonReturn() override;
+
+	void OnButtonStart();
+	void OnButtonGallery();
+	void OnButtonConfig();
+	void OnButtonExit();
 
 	CMainMenu();
 	~CMainMenu();

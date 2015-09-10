@@ -5,10 +5,17 @@
 #include "CPVPMode.h"
 #include "CCard.h"
 
+#include "MainMenu.h"
+#include "Config.h"
+#include "GameHall.h"
+#include "CardsGallery.h"
+#include "CardDetail.h"
+
 USING_NS_CC;
 
 using namespace cocostudio::timeline;
-CSceneMenu *pSceneMenu = NULL;
+CSceneMenu *CSceneMenu::pSceneMenu = NULL;
+CLayerMenu *CSceneMenu::currentScene = CMainMenu::getInstance();
 
 //Scene* CSceneMenu::createScene()
 //{
@@ -29,82 +36,25 @@ CSceneMenu *pSceneMenu = NULL;
 bool CSceneMenu::init()
 {
 	////mainMenu
-	//auto nodeMainMenu = CSLoader::createNode("MainScene.csb");
-	////添加按钮click事件的捕捉
-	//auto buttonStart = nodeMainMenu->getChildByName<ui::Button *>("Button_StartGame");
-	//buttonStart->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonStart, this));
-	//auto buttonGallery = nodeMainMenu->getChildByName<ui::Button *>("Button_CardsGallery");
-	//buttonGallery->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonGallery, this));
-	//auto buttonConfig = nodeMainMenu->getChildByName<ui::Button *>("Button_Config");
-	//buttonConfig->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonConfig, this));
-	//auto buttonExit = nodeMainMenu->getChildByName<ui::Button *>("Button_Exit");
-	//buttonExit->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonExit, this));
-
-	//layerMainMenu = Layer::create();
-	//layerMainMenu->addChild(nodeMainMenu);
-	//addChild(layerMainMenu);
 	addChild(CMainMenu::getInstance());
 	//
 
 	//gameHallMenu
-	selectedRoom = NULL;
-	auto gameHallMenuNode = CSLoader::createNode("GameHall.csb");
-	layerGameHall = Layer::create();
-	layerGameHall->addChild(gameHallMenuNode);
-	addChild(layerGameHall);
-	layerGameHall->setVisible(false);
-
-	auto buttonGameGallJoinGame = gameHallMenuNode->getChildByName<ui::Button *>("Button_JoinGame");
-	buttonGameGallJoinGame->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonGameHallJoinGame, this));
-	auto buttonGameGallReturn = gameHallMenuNode->getChildByName<ui::Button *>("Button_ReturnMainMenu");
-	buttonGameGallReturn->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonGameHallReturn, this));
-	
-	listViewRoomList = gameHallMenuNode->getChildByName<ui::ListView *>("ListView_RoomList");
+	addChild(CGameHall::getInstance());
 
 	//cardsGallery
-	auto cardsGalleryMenuNode = CSLoader::createNode("CardsGallery.csb");
-	layerCardsGallery = Layer::create();
-	layerCardsGallery->addChild(cardsGalleryMenuNode);
-	addChild(layerCardsGallery);
-	layerCardsGallery->setVisible(false);
+	addChild(CCardsGallery::getInstance());
 
-	auto buttonGalleryReturn = cardsGalleryMenuNode->getChildByName<ui::Button *>("Button_ReturnMainMenu");
-	buttonGalleryReturn->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonGalleryReturn, this));
-	scrollViewCardGallery = cardsGalleryMenuNode->getChildByName<ui::ScrollView *>("ScrollView_CardList");
-
-	auto cardDetailNode = CSLoader::createNode("CardDetail.csb");
-	layerCardDetail = Layer::create();
-	layerCardDetail->addChild(cardDetailNode);
-	addChild(layerCardDetail);
-	layerCardDetail->setVisible(false);
+	addChild(CCardDetail::getInstance());
 	//
 
 	//configMenu
-	auto configMenuNode = CSLoader::createNode("Config.csb");
-	layerConfig = Layer::create();
-	layerConfig->addChild(configMenuNode);
-	addChild(layerConfig);
-	layerConfig->setVisible(false);
-
-	auto buttonConfigReturn = configMenuNode->getChildByName<ui::Button *>("Button_ReturnMainMenu");
-	buttonConfigReturn->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonConfigReturn, this));
-	auto buttonTutorial = configMenuNode->getChildByName<ui::Button *>("Button_Tutorial");
-	buttonTutorial->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonConfigTutorial, this));
-	auto buttonStaff = configMenuNode->getChildByName<ui::Button *>("Button_Staff");
-	buttonStaff->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonConfigStaff, this));
+	addChild(CConfig::getInstance());
 	//
 
-	//Tutorial
-	auto tutorialNode = CSLoader::createNode("Tutorial.csb");
-	layerTutorial = Layer::create();
-	layerTutorial->addChild(tutorialNode);
-	addChild(layerTutorial);
-	layerTutorial->setVisible(false);
-
-	auto buttonTutorialReturn = tutorialNode->getChildByName<ui::Button *>("Button_ReturnConfig");
-	buttonTutorialReturn->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonTutorialReturn, this));
-	scrollViewTutorial = tutorialNode->getChildByName<ui::ScrollView *>("ScrollView_Tutorial");
-	//
+	////Tutorial
+	//addChild(layerTutorial);
+	////
 	//esc键
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyReleased = [this](EventKeyboard::KeyCode keyCode, Event *event)
@@ -112,41 +62,35 @@ bool CSceneMenu::init()
 		//按下了ESC
 		if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
 		{
-			switch (currentScene)
-			{
-			case sceneMainMenu:
-				exit(0);
-				break;
-			case sceneConfig:
-				OnButtonConfigReturn();
-				break;
-			case sceneGallery:
-				OnButtonGalleryReturn();
-				break;
-			case sceneGameHall:
-				OnButtonGameHallReturn();
-				break;
-			case sceneTutorial:
-				OnButtonTutorialReturn();
-				break;
-			case sceneStaff:
-				OnButtonStaffReturn();
-				break;
-			}
+			currentScene->OnButtonReturn();
+			//switch (currentScene)
+			//{
+			//case sceneMainMenu:
+			//	exit(0);
+			//	break;
+			//case sceneConfig:
+			//	OnButtonConfigReturn();
+			//	break;
+			//case sceneGallery:
+			//	OnButtonGalleryReturn();
+			//	break;
+			//case sceneGameHall:
+			//	OnButtonGameHallReturn();
+			//	break;
+			//case sceneTutorial:
+			//	OnButtonTutorialReturn();
+			//	break;
+			//case sceneStaff:
+			//	OnButtonStaffReturn();
+			//	break;
+			//}
 			log("%s", "esc");
 		}
 	};
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	//
 	//staff
-	auto staffNode = CSLoader::createNode("Staff.csb");
-	layerStaff = Layer::create();
-	layerStaff->addChild(staffNode);
 	addChild(layerStaff);
-	layerStaff->setVisible(false);
-
-	auto buttonStaffReturn = staffNode->getChildByName<ui::Button *>("Button_ReturnConfig");
-	buttonStaffReturn->addClickEventListener(CC_CALLBACK_0(CSceneMenu::OnButtonStaffReturn, this));
 	//
 	//鼠标事件
 	auto listenerMouse = EventListenerMouse::create();
@@ -259,85 +203,7 @@ bool CSceneMenu::init()
 	return true;
 }
 
-void CSceneMenu::OnButtonConfig()
-{
-	//进入设置菜单
-	if (currentScene != sceneMainMenu)
-		return;
-	layerMainMenu->setVisible(false);
-	layerConfig->setVisible(true);
-	currentScene = sceneConfig;
-}
 
-void CSceneMenu::OnButtonStart()
-{
-	//进入游戏大厅
-	if (currentScene != sceneMainMenu)
-		return;
-	layerMainMenu->setVisible(false);
-	layerGameHall->setVisible(true);
-	currentScene = sceneGameHall;
-
-	///ConnectToServer
-	///GetRoomList
-	///ShowRoomList
-}
-
-void CSceneMenu::OnButtonExit()
-{
-	//退出游戏
-	if (currentScene != sceneMainMenu)
-		return;
-	exit(0);
-}
-
-void CSceneMenu::OnButtonGallery()
-{
-	//进入卡牌浏览
-	if (currentScene != sceneMainMenu)
-		return;
-	layerMainMenu->setVisible(false);
-	layerCardsGallery->setVisible(true);
-	currentScene = sceneGallery;
-}
-
-void CSceneMenu::OnButtonGalleryReturn()
-{
-	//返回主菜单
-	if (currentScene != sceneGallery)
-		return;
-	layerCardsGallery->setVisible(false);
-	layerMainMenu->setVisible(true);
-	currentScene = sceneMainMenu;
-}
-
-void CSceneMenu::OnButtonGameHallJoinGame()
-{
-	//测试 进入游戏场景
-	if (currentScene != sceneGameHall)
-		return;
-
-	auto director = Director::getInstance();
-	//Scene *test = CSceneBattle::createScene();
-	CPVPMode *scene = CPVPMode::create();
-	director->replaceScene(scene);
-
-	//
-	return;
-	if (NULL == selectedRoom)
-		return;
-	//join selectedRoom
-}
-
-void CSceneMenu::OnButtonGameHallReturn()
-{
-	//返回主菜单
-	if (currentScene != sceneGameHall)
-		return;
-	layerGameHall->setVisible(false);
-	layerMainMenu->setVisible(true);
-	currentScene = sceneMainMenu;
-}
 
 void CSceneMenu::OnButtonConfigReturn()
 {

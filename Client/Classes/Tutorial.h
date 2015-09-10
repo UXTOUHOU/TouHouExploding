@@ -12,8 +12,11 @@ public:
 	}
 	virtual bool init() override;
 	CREATE_FUNC(CTutorial);
+	virtual void Enter() override;
+	virtual void OnButtonReturn() override;
 
-	virtual SceneType Enter() override;
+	ui::ScrollView *scrollViewTutorial;
+
 
 	CTutorial();
 	~CTutorial();

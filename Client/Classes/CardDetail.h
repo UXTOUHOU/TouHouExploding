@@ -14,7 +14,8 @@ public:
 	virtual bool init() override;
 	CREATE_FUNC(CCardDetail);
 
-	virtual SceneType Enter() override;
+	virtual void Enter() override;
+	virtual void OnButtonReturn() override;
 
 	CCardDetail();
 	~CCardDetail();

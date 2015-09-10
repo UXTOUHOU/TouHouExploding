@@ -20,6 +20,7 @@ enum SceneType{
 class CSceneMenu : public cocos2d::Scene
 {
 public:
+	static CLayerMenu *currentScene;
 	static CSceneMenu *pSceneMenu;
 	static CSceneMenu *getInstance()
 	{
@@ -48,13 +49,13 @@ public:
 	ui::ScrollView *scrollViewCardGallery;
 	ui::ListView *listViewRoomList;
 
-	SceneType currentScene;
+	//SceneType currentScene;
 
-	//主菜单
-	void OnButtonStart();
-	void OnButtonGallery();
-	void OnButtonConfig();
-	void OnButtonExit();
+	////主菜单
+	//void OnButtonStart();
+	//void OnButtonGallery();
+	//void OnButtonConfig();
+	//void OnButtonExit();
 	//游戏大厅
 	ui::Layout *selectedRoom;
 	void OnButtonGameHallJoinGame();
