@@ -13,7 +13,8 @@ public:
 	virtual bool init() override;
 	CREATE_FUNC(CStaff);
 
-	virtual SceneType Enter() override;
+	virtual void Enter() override;
+	virtual void OnButtonReturn() override;
 
 	CStaff();
 	~CStaff();

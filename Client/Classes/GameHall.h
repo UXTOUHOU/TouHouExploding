@@ -13,7 +13,11 @@ public:
 	virtual bool init() override;
 	CREATE_FUNC(CGameHall);
 
-	virtual SceneType Enter() override;
+	virtual void Enter() override;
+	virtual void OnButtonReturn() override;
+	void OnButtonJoinGame();
+
+	ui::ListView *roomList;
 
 	CGameHall();
 	~CGameHall();
