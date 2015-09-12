@@ -49,10 +49,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     FileUtils::getInstance()->addSearchPath("res");
 
     // create a scene. it's an autorelease object
-   // auto scene = CSceneMenu::createScene();
-	auto scene = CSceneMenu::create();
     // run
-    director->runWithScene(scene);
+    director->runWithScene(CSceneMenu::getInstance());
 
     return true;
 }

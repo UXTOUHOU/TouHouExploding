@@ -84,6 +84,5 @@ private:
 //void ShowCard(Card *card, Rect rect, Node *father);
 //void ShowCard(Card *card, Point position, float scale, Node *father);
 //返回卡图的文件名
-char *GetCardFileName(char *fileName, int cardID);
 ////由ID创建card的Sprite
 //Sprite *CreateCardSprite(int cardID);

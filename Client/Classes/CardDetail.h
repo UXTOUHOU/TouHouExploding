@@ -17,6 +17,8 @@ public:
 	virtual void Enter() override;
 	virtual void OnButtonReturn() override;
 
+	void ShowCardDetail(int cardID);
+
 	CCardDetail();
 	~CCardDetail();
 };

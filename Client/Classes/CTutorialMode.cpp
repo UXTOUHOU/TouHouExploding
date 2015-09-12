@@ -60,7 +60,7 @@ CTutorialMode::~CTutorialMode()
 void CTutorialMode::startTutorial()
 {
 	auto director = Director::getInstance();
-	director->replaceScene(this);
+	director->pushScene(this);
 }
 
 void CTutorialMode::_showText(std::wstring wstrName, std::wstring wstrWord)

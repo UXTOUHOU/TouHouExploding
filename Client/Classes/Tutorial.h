@@ -14,7 +14,7 @@ public:
 	CREATE_FUNC(CTutorial);
 	virtual void Enter() override;
 	virtual void OnButtonReturn() override;
-
+	virtual void OnMouseScroll(EventMouse *eventMouse) override;
 	ui::ScrollView *scrollViewTutorial;
 
 

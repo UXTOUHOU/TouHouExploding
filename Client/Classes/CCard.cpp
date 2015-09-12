@@ -61,6 +61,17 @@ void CCard::DelHandCards()
 
 }
 
+char *GetCardFileName(char *fileName, int cardID)
+{
+	//返回 Card_ID.png 格式的图片名
+	strcpy(fileName, "Card_");
+	char strID[10];
+	_itoa(cardID, strID, 10);
+	strcat(fileName, strID);
+	strcat(fileName, ".png");
+	return fileName;
+}
+
 
 //void Card::SetCardSize(Size size)
 //{

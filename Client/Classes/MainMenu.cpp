@@ -22,7 +22,15 @@ bool CMainMenu::init()
 
 	addChild(nodeMainMenu);
 	//
-	setVisible(false);
+	return true;
+}
+
+CMainMenu::CMainMenu()
+{
+}
+
+CMainMenu::~CMainMenu()
+{
 }
 
 void CMainMenu::Enter()

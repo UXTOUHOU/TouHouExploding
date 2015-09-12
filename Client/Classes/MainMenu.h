@@ -8,7 +8,7 @@ public:
 	static CMainMenu *getInstance()
 	{
 		if (!pMainMenu)
-			pMainMenu = create();
+			pMainMenu = CMainMenu::create();
 		return pMainMenu;
 	}
 	virtual bool init() override;

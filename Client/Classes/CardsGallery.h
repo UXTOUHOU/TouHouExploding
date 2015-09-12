@@ -15,6 +15,7 @@ public:
 
 	virtual void Enter() override;
 	virtual void OnButtonReturn() override;
+	virtual void OnMouseDown(EventMouse *eventMouse) override;
 	
 	ui::ScrollView *scrollViewCardGallery;
 

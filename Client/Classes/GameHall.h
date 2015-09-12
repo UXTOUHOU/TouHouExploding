@@ -15,9 +15,15 @@ public:
 
 	virtual void Enter() override;
 	virtual void OnButtonReturn() override;
-	void OnButtonJoinGame();
+	virtual void OnMouseDown(EventMouse *eventMouse) override;
+	virtual void OnMouseScroll(EventMouse *eventMouse) override;
 
-	ui::ListView *roomList;
+	void OnButtonJoinGame();
+	void EffectSelectRoom(ui::Layout *room);
+	void AddRoomList(std::string ID, std::string roomName, std::string playerName);
+
+	ui::ListView *listViewRoomList;
+	ui::Layout *selectedRoom;
 
 	CGameHall();
 	~CGameHall();

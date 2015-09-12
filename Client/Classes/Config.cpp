@@ -1,5 +1,7 @@
 #include "Config.h"
 #include "MainMenu.h"
+#include "Tutorial.h"
+#include "Staff.h"
 
 CConfig *CConfig::pConfig = NULL;
 
@@ -37,4 +39,16 @@ void CConfig::OnButtonReturn()
 {
 	Leave();
 	CMainMenu::getInstance()->Enter();
+}
+
+void CConfig::OnButtonTutorial()
+{
+	Leave();
+	CTutorial::getInstance()->Enter();
+}
+
+void CConfig::OnButtonStaff()
+{
+	Leave();
+	CStaff::getInstance()->Enter();
 }

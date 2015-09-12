@@ -23,3 +23,5 @@ public:
 	void ShowCard(Point position, float scale, Node *father);
 	void DelHandCards();
 };
+
+char *GetCardFileName(char *fileName, int cardID);

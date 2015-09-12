@@ -21,14 +21,18 @@ bool CPVPMode::init()
 	RoundCountdown(1000.F);
 	for (int i = 0; i < 12; ++i)
 	{
-		Sprite *sprite = CreateUnitSprite(i + 1);
-		chessBoard->ShowSprite(sprite, i, 0);
+		chessBoard->SetUnit(i + 1, i, 0);
+		//HPÏÔÊ¾²âÊÔ
+		auto cell = chessBoard->GetCell(i, 0);
+		cell->SetHP(10);
+		chessBoard->addChild(cell->unitState.lblHP);
+		//
 		if (i < 4)
-			Effects::Moveable(sprite);
+			cell->Moveable();
 		else if (i < 8)
-			Effects::Normal(sprite);
+			cell->Normal();
 		else
-			Effects::Moved(sprite);
+			cell->Moved();
 	}
 
 	connect->Login("123", "456");

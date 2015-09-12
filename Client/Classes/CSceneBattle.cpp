@@ -282,17 +282,6 @@ void CSceneBattle::_RedrawCards(Node *node)
 	}
 }
 
-char *GetCardFileName(char *fileName, int cardID)
-{
-	//返回 Card_ID.png 格式的图片名
-	strcpy(fileName, "Card_");
-	char strID[10];
-	_itoa(cardID, strID, 10);
-	strcat(fileName, strID);
-	strcat(fileName, ".png");
-	return fileName;
-}
-
 void CSceneBattle::AddHandCards(int cardID)
 {
 	//init
@@ -331,8 +320,7 @@ void CSceneBattle::OnButtonReturnMainMenu()
 {
 	if (currentScene != scenePauseMenu)
 		return;
-	auto scene = CSceneMenu::create();//Scene();
-	Director::getInstance()->replaceScene(scene);
+	Director::getInstance()->popScene();
 }
 
 void CSceneBattle::OnButtonContinue()

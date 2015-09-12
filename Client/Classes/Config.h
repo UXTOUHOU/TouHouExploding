@@ -16,6 +16,8 @@ public:
 
 	virtual void Enter() override;
 	virtual void OnButtonReturn() override;
+	void OnButtonTutorial();
+	void OnButtonStaff();
 
 	CConfig();
 	~CConfig();

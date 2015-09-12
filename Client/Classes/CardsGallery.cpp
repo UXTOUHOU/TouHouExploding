@@ -1,5 +1,7 @@
 #include "CardsGallery.h"
+#include "CardDetail.h"
 #include "MainMenu.h"
+#include "CCard.h"
 
 CCardsGallery *CCardsGallery::pCardGallery = NULL;
 
@@ -38,4 +40,23 @@ void CCardsGallery::OnButtonReturn()
 		return;
 	Leave();
 	CMainMenu::getInstance()->Enter();
+}
+
+void CCardsGallery::OnMouseDown(EventMouse *eventMouse)
+{
+	Point point = eventMouse->getLocationInView();
+
+	point -= eventMouse->getLocationInView();
+	auto &vecCards = scrollViewCardGallery->getChildren();
+	for (auto itCard : vecCards)
+	{
+		CCard *card = (CCard *)itCard;
+		Rect rect;
+		rect.origin = card->getPosition();
+		rect.size = card->getContentSize();
+		if (rect.containsPoint(point))
+		{
+			CCardDetail::getInstance()->ShowCardDetail(card->ID);
+		}
+	}
 }

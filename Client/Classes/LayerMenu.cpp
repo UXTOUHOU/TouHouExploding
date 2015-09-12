@@ -9,6 +9,10 @@ void CLayerMenu::OnMouseMove(EventMouse *eventMouse)
 {
 }
 
+void CLayerMenu::OnMouseScroll(EventMouse *eventMouse)
+{
+}
+
 void CLayerMenu::OnMouseDown(EventMouse *eventMouse)
 {
 }
