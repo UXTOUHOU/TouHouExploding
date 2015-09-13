@@ -32,8 +32,10 @@
           <FilePathData Path="BattleScene.csd" />
           <FilePathData Path="CardsGallery.csd" />
           <FilePathData Path="CardDetail.csd" />
+          <FilePathData Path="AbandonedCards.csd" />
+          <FilePathData Path="PauseMenu.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="CardsGallery.csd" />
+        <ActiveDocument Path="PauseMenu.csd" />
       </Value>
     </Item>
   </Properties>

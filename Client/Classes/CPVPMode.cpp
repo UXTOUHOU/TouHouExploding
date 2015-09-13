@@ -26,6 +26,11 @@ bool CPVPMode::init()
 		auto cell = chessBoard->GetCell(i, 0);
 		cell->SetHP(10);
 		chessBoard->addChild(cell->unitState.lblHP);
+		if (i % 2)
+			cell->SetCamp(UC_YOURSELF);
+		else
+			cell->SetCamp(UC_ENEMY);
+		chessBoard->addChild(cell->unitState.camp);
 		//
 		if (i < 4)
 			cell->Moveable();
