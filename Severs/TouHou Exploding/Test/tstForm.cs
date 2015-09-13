@@ -43,7 +43,7 @@ namespace TouHou_Exploding
 
         private void tstForm_Load(object sender, EventArgs e)
         {
-            
+            new Core();
         }
         
     }

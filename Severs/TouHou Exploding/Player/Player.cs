@@ -33,7 +33,7 @@ namespace TouHou_Exploding
             public int id { get; set; }
             public string name { get; set; }
             public Player.Type type { get; set; }//人物类型
-            public int team { set; get; }//队伍，只有0 1
+            public int RoomTeam { set; get; }//队伍，只有0 1
             public List<PolicyCard> policyCard { get; set; }//玩家手中的策略牌
         }
         */
