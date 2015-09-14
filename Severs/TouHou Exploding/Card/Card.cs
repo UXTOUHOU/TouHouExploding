@@ -10,17 +10,27 @@ namespace TouHou_Exploding
 {
     public abstract class Card:IDProvider.IID
     {
+        protected Core _core;
         public int cost { get; set; }
         public int id { get; set; }
+        public Card(Core core)
+        {
+            _core = core;
+            _core.IDP.CID.ApplyID(this);
+        }
 
     }
     public class PolicyCard : Card
     {
+        public PolicyCard(Core core)
+            : base(core)
+        {
 
+        }
     }
     public abstract class Character : Card
     {
-        private Core _core;
+        
         public Type type { get; set; }
         public Unit.Attribute unit { get; set; }//召唤出的角色属性
         public enum Type{ Common,Hero,Servant }//Common召唤出的为普通单位，Hero为少女单位，Servent为基本效果产生的单位
@@ -30,6 +40,7 @@ namespace TouHou_Exploding
         }
         public enum Preset { 毛玉, 天狗, 妖精, 永远亭的兔子, 自爆人形, 河童重工, 博丽灵梦, 魂魄妖梦, 十六夜咲夜, Custom }
         public Character(Core core, CharacterSave save)
+            :base(core)
         {
 
         }
@@ -39,6 +50,7 @@ namespace TouHou_Exploding
             return x;
         }
         public Character(Core core, Preset preset)
+            :base(core)
         {
             _core = core;
             unit = new Unit.Attribute();

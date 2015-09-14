@@ -38,26 +38,37 @@ namespace TouHou_Exploding
         public Player NowPlayer { get; set; }//当前操作的玩家
         public List<Character> Characters { get; set; }//赛场召唤区
         //public List<Character> WaitingCharacter { get; set; }//赛场卡牌
-        public Time NowTime;
+        public int Round = 1;
+        public Time NowTime//获取当前的白天/黑夜状态
+        {
+            get
+            {
+                if ((Round / 2) % 2 == 0)
+                {
+                    return Time.Day;
+                }
+                else
+                {
+                    return Time.Night;
+                }
+            }
+        }
         public Core(Player A=null, Player B=null)
         {
             IDP = new IDProvider();
-            RoomTeam = new Team[2];
+            RoomTeam = new Team[2];//初始化队伍
             RoomTeam[0] = new Team(this);
             RoomTeam[1] = new Team(this);
             RoomMap = new Map(this);
             NowProcess = Process.RoomPreparing;
-            RoomTeam = new Team[2];//初始化队伍
-            if (A == null) A = new Player();
-            if (B == null) B = new Player();
+            if (A == null) A = new Player(RoomTeam[0]);
+            if (B == null) B = new Player(RoomTeam[1]);
             PlayerA = A;//初始化玩家
             PlayerB = B;
-            A.atTeam = RoomTeam[0];
-            B.atTeam = RoomTeam[1];
         }
         private void Starting()
         {
-            
+            IncreaseCharacters();
         }
         private void Preparing()
         {
@@ -69,8 +80,18 @@ namespace TouHou_Exploding
         }
         private void Ending()
         {
-
+            Round++;
         }
+
+        private void IncreaseCharacters(int number=6)//补齐召唤区少女至所需数目
+        {
+            while (Characters.Count() < number)
+            {
+                
+            }
+        }
+
+
 
         public Process NextStep()//进入下一个过程 返回下一个过程
         {

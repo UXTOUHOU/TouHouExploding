@@ -16,11 +16,16 @@ namespace TouHou_Exploding
         {
             _core = core;
             _core.IDP.TID.ApplyID(this);
+            playerList = new List<Player>();
         }
         public void Add(Player player)
         {
             playerList.Add(player);
             player.atTeam = this;
+        }
+        public Core GetCore()
+        {
+            return _core;
         }
     }
 }

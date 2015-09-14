@@ -8,6 +8,7 @@ namespace TouHou_Exploding
 {
     public class Player : IDProvider.IID
     {
+        private Core _core;
         public int id { get; set; }
         public string name { get; set; }
         public Type playerType { get; set; }
@@ -19,9 +20,11 @@ namespace TouHou_Exploding
         public List<Unit> unit { get; set; }//玩家场上的单位
         public List<Unit> deadCard { get; set; }//击毁区
         public enum Type { Player, AI, Watcher, Custom }
-        public Player()
+        public Player(Team team)
         {
-
+            _core = team.GetCore();
+            _core.IDP.PID.ApplyID(this);
+            team.Add(this);
         }
         public class Statue
         {
