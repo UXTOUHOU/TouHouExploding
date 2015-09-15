@@ -35,10 +35,11 @@ void CCell::SetHP(int HP)
 	if (!unitState.lblHP)
 	{
 		unitState.lblHP = Label::create();
-		unitState.lblHP->setSystemFontSize(16);
-		unitState.lblHP->setPosition(unit->getPosition() + Point(-75.F / 2 + 3, 75.F / 2 - 3));
+		unitState.lblHP->setSystemFontSize(12);
+		unitState.lblHP->setScale(1.33F);
+		unitState.lblHP->setPosition(unit->getPosition() + Point(-75.F / 2 + 3, 75.F / 2 - 1));
 		unitState.lblHP->setAnchorPoint(Point(0, 1));
-		unitState.lblHP->setColor(Color3B::RED);
+		//unitState.lblHP->setColor(Color3B::RED);
 	}
 	std::wstring wHP;
 	std::wstringstream wss;
@@ -58,10 +59,64 @@ void CCell::SetAttribute(std::string attribute)
 	{
 		unitState.lblAttribute = Label::create();
 		unitState.lblAttribute->setSystemFontSize(24);
-		unitState.lblAttribute->setPosition(unit->getPosition() + Point(75.F / 2 - 3, 75.F / 2 - 3));
 		unitState.lblAttribute->setAnchorPoint(Point(0, 0));
+		//backGround->addChild(unitState.lblAttribute);
+		//
+		unitState.attributeBackground = DrawNode::create();
+		unitState.attributeBackground->setAnchorPoint(Point(0, 0));
 	}
 	unitState.lblAttribute->setString(attribute);
+	unitState.lblAttribute->setVisible(false);
+
+	auto position = unitState.lblAttribute->getPosition();
+	auto size = unitState.lblAttribute->getContentSize();
+	Size border(_attributeBorderWidth, _attributeBorderWidth);
+	position += border;
+	
+	Vec2 verts[4] = { position, position, position, position };
+	verts[0] -= border;
+	verts[1] += Point(-border.width, size.height + border.height);
+	verts[2] += size + border;
+	verts[3] += Point(size.width + border.width, -border.height);
+	unitState.attributeBackground->drawPolygon(verts, 4, Color4F(0, 0, 0, 0.7F), 0, Color4F(0, 0, 0, 0));
+	unitState.attributeBackground->setOpacity(50);
+	unitState.attributeBackground->setVisible(false);
+}
+
+void CCell::SetAttributeVisable(bool visable)
+{
+	if (!unitState.lblAttribute)
+		return;
+	unitState.attributeBackground->setVisible(visable);
+	unitState.lblAttribute->setVisible(visable);
+}
+
+void CCell::SetAttributePosition(Point position)
+{
+	if (!unitState.lblAttribute)
+		return;
+	unitState.attributeBackground->setPosition(position);
+	position += Point(_attributeBorderWidth, _attributeBorderWidth);
+	unitState.lblAttribute->setPosition(position);
+}
+
+void CCell::SetCamp(UnitCamp campType)
+{
+	if (!unitState.camp)
+	{
+		unitState.camp = Sprite::create();
+		unitState.camp->setAnchorPoint(Point(1, 1));
+		unitState.camp->setPosition(unit->getPosition() + Point(75.F / 2 - 1, 75.F / 2 - 1));
+	}
+	if (campType == UC_YOURSELF)
+		unitState.camp->setTexture("CampBlue.png");
+	else if (campType == UC_ENEMY)
+		unitState.camp->setTexture("CampRed.png");
+}
+
+void CCell::SetCampVisable(bool visable)
+{
+	unitState.camp->setVisible(visable);
 }
 
 void CCell::Moveable()
@@ -101,6 +156,7 @@ CCell::CCell()
 	unitState.lblHP = NULL;
 	unitState.camp = NULL;
 	unitState.lblAttribute = NULL;
+	unitState.attributeBackground = NULL;
 }
 
 CCell::~CCell()

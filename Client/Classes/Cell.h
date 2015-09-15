@@ -18,11 +18,18 @@ public:
 	Sprite *unit;
 	void SetUnit(int unitID, Point postiton);
 	void DelUnit();
-	struct
+	struct UnitState
 	{
 		Label *lblHP;
-		DrawNode *camp;
+		Sprite *camp;
 		Label *lblAttribute;
+		DrawNode *attributeBackground;
+		UnitState(){
+			lblHP = NULL;
+			camp = NULL;
+			attributeBackground = NULL;
+			lblAttribute = NULL;
+		}
 	}unitState;
 	//单位左上角的HP显示
 	void SetHP(int HP);
@@ -33,6 +40,7 @@ public:
 	//鼠标悬停时的属性悬浮窗
 	void SetAttribute(std::string attribute);
 	void SetAttributeVisable(bool visable);
+	void SetAttributePosition(Point position);
 	//特效
 	void Moveable();					//未移动的单位
 	void Moved();						//已移动的单位
@@ -44,4 +52,6 @@ public:
 	
 	CCell();
 	~CCell();
+private:
+	const float _attributeBorderWidth = 5;
 };

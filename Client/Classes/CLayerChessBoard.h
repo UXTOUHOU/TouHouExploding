@@ -20,9 +20,11 @@ public:
 
 	CCell *GetCell(int x, int y);
 	void ChangeUnitPosition(int x1, int y1, int x2, int y2);
+	void ShowAttribut(float dt);
 
 	void MouseMove(float mouseX, float mouseY);
 private:
+	CCell *_currentCell;
 	const float _spacingX = 75, _spacingY = 75;
 	Point _chessBoardPosition;
 
