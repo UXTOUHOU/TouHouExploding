@@ -40,7 +40,13 @@ namespace NetWork
             netAttribute = Community.NetAttributes.Respond;
             ackID = toAckID;
         }
-        public static Ack GetAck(Enquire toAck)//从对象创建回复
+        public Ack(Community toAck)//从ID创建回复对象
+        {
+            netAttribute = Community.NetAttributes.Respond;
+            ackID = toAck.CommunityID;
+        }
+
+        public static Ack GetAck(Community toAck)//从对象创建回复
         {
              return new Ack(toAck.CommunityID);
         }

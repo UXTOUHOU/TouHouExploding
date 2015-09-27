@@ -8,15 +8,17 @@ using System.Runtime.Serialization;
 
 namespace TouHou_Exploding
 {
-    public abstract class Card:IDProvider.IID
+    public abstract class Card : IDProvider.IID
     {
-        protected Core _core;
+        public Core GameCore;
         public int cost { get; set; }
         public int id { get; set; }
+        public abstract CardType GetCardType();
+        public enum CardType { PolicyCard, CommonCharacter, Hero } 
         public Card(Core core)
         {
-            _core = core;
-            _core.IDP.CID.ApplyID(this);
+            GameCore = core;
+            GameCore.IDP.CID.ApplyID(this);
         }
 
     }
@@ -25,7 +27,12 @@ namespace TouHou_Exploding
         public PolicyCard(Core core)
             : base(core)
         {
+            
+        }
 
+        public override CardType GetCardType()
+        {
+            return CardType.PolicyCard;
         }
     }
     public abstract class Character : Card
@@ -34,93 +41,22 @@ namespace TouHou_Exploding
         public Type type { get; set; }
         public Unit.Attribute unit { get; set; }//召唤出的角色属性
         public enum Type{ Common,Hero,Servant }//Common召唤出的为普通单位，Hero为少女单位，Servent为基本效果产生的单位
-        public class CharacterSave
+        //public enum Preset { 毛玉, 天狗, 妖精, 永远亭的兔子, 自爆人形, 河童重工, 博丽灵梦, 魂魄妖梦, 十六夜咲夜, Custom }
+        public Unit ToBattle(int[] locate)
         {
-
-        }
-        public enum Preset { 毛玉, 天狗, 妖精, 永远亭的兔子, 自爆人形, 河童重工, 博丽灵梦, 魂魄妖梦, 十六夜咲夜, Custom }
-        public Character(Core core, CharacterSave save)
-            :base(core)
-        {
-
-        }
-        public Unit ToBattle()
-        {
-            Unit x =new Unit(this);
+            Unit x =new Unit(this,locate);
             return x;
         }
-        public Character(Core core, Preset preset)
+        public Character(Core core)
             :base(core)
         {
-            _core = core;
+            GameCore = core;
             unit = new Unit.Attribute();
-            switch (preset)
-            {
-                case Preset.毛玉 :
-                    {
-                        unit.blood = 9;
-                        unit.mobility = 2;
-                        unit.attack = 2;
-                        unit.range = 2;
-                        //unit.Skill
-                    }
-                    break;
-                case Preset.天狗:
-                    {
-                        unit.blood = 9;
-                        unit.mobility = 4;
-                        unit.attack = 5;
-                        unit.range = 1;
-                    }
-                    break;
-                case Preset.妖精:
-                    {
-                        unit.blood = 8;
-                        unit.mobility = 3;
-                        unit.attack = 2;
-                        unit.range = -1;//-1即为特殊情况，要要使用自带的特殊方法判断：对射程3（不含）以下的单位额外造成1伤害。
-                    }
-                    break;
-                case Preset.永远亭的兔子:
-                    {
-                        unit.blood = 9;
-                        unit.mobility = 2;
-                        unit.attack = 2;
-                        unit.range = 2;
-                    }
-                    break;
-                case Preset.自爆人形:
-                    {
-
-                    }
-                    break;
-                case Preset.河童重工:
-                    {
-
-                    }
-                    break;
-                case Preset.博丽灵梦:
-                    {
-
-                    }
-                    break;
-                case Preset.魂魄妖梦:
-                    {
-
-                    }
-                    break;
-                case Preset.十六夜咲夜:
-                    {
-
-                    }
-                    break;
-                case Preset.Custom:
-                    {
-
-                    }
-                    break;
-            }
-        } 
+        }
+        public override CardType GetCardType()
+        {
+            return CardType.CommonCharacter;
+        }
     }
    public class Unit : IDProvider.IID 
    {
@@ -136,15 +72,57 @@ namespace TouHou_Exploding
        public Region at { get; set; }
        public Attribute attribute { get; set; }
        public Statue statue { get; set; }
-       public Unit(Character transCard)
+       public Unit(Character transCard,int[] buildLocate)
        {
            attribute = transCard.unit.Clone();
            _card = transCard;
+           _card.GameCore.RoomMap.RegionList[buildLocate[0], buildLocate[1]].MoveHere(this);
+            _card.GameCore.IDP.UID.ApplyID(this);
        }
-       public bool Attack(Unit target)//攻击指令，如果不能攻击返回假
+       public int GetDistance(Unit a,Unit b=null)//计算ab单位的距离，无法计算返回-1
+        {
+            if (b == null) b = this;
+            if(a.at == null || b.at == null) return -1;
+            int distanceX = a.at.locate[0] - b.at.locate[0];
+            int distanceY = a.at.locate[1] - b.at.locate[1];
+            if (distanceX < 0) distanceX = -distanceX;
+            if (distanceY < 0) distanceY = -distanceY;
+            return distanceX + distanceY;
+        }
+        public int GetDistance(Region r)//计算该单位到某格子的距离，无法计算返回-1
+        {
+            if (this.at == null) return -1;
+            int distanceX = this.at.locate[0] - r.locate[0];
+            int distanceY = this.at.locate[1] - r.locate[1];
+            if (distanceX < 0) distanceX = -distanceX;
+            if (distanceY < 0) distanceY = -distanceY;
+            return distanceX + distanceY;
+        }
+        public bool Attack(Unit target)//攻击指令，如果不能攻击返回假
        {
-           return false;
-       }
+            if (CanAttack(target) == false)
+            {
+                return false;
+            }
+            target.Hurt(attribute.attack);
+            return true;
+        }
+       public virtual bool CanAttack(Unit target)//检测是否可以攻击某单位，重写这个方法可更改射程判断规则
+        {
+            return GetDistance(target) <= attribute.range;
+        }
+       public bool Move(Region region)//移动到某个位置，不能移动返回假
+        {
+            if(CanMove(region)==false)
+            {
+                return false;
+            }
+            return region.MoveHere(this);
+        }
+        public virtual bool CanMove(Region region)//检测是否可以移动到某位置，重写这个方法可更改移动判断规则
+        {
+            return GetDistance(region) <= attribute.mobility;
+        }
        public int Hurt(int blood)//体力流失，返回剩余血量，死亡返回-1
        {
            attribute.blood -= blood;
@@ -155,9 +133,11 @@ namespace TouHou_Exploding
            }
            return attribute.blood;
        }
-       public void Die()
+       public virtual void Die()
        {
-
+            at.unitHere = null;
+            at = null;
+            _card.GameCore.IDP.UID.Del(this);
        } 
        public class Attribute//属性
        {
@@ -179,6 +159,27 @@ namespace TouHou_Exploding
        {
 
        }
+    }
+
+    public class HeroCard:Character
+    {
+        public HeroCard(Core core)
+            :base(core)
+        {
+
+        }
+        public override CardType GetCardType()
+        {
+            return CardType.Hero;
+        }
+    }
+    public class HeroUnit : Unit
+    {
+        public HeroUnit(HeroCard heroCard,int[] locate)
+            : base(heroCard,locate)
+        {
+
+        }
     }
 
 }

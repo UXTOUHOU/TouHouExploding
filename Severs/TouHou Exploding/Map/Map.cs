@@ -8,29 +8,29 @@ namespace TouHou_Exploding
 {
     public class Map
     {
-        private Core _core;
-        private Region[,] _regionList;//第一个索引值为列(8)，第二个为行(12)
+        public Core GameCore;
+        public Region[,] RegionList;//第一个索引值为列(8)，第二个为行(12)
         public Map(Core core, Region[,] map)//自动读取一张地图，并将区块注册至区域表
         {
-            _core = core;
-            _regionList = map;
+            GameCore = core;
+            RegionList = map;
             for (int x = 0; x < map.GetLength(0); x++)//注册区块
             {
                 for (int y = 0; y < map.GetLength(1); y++)
                 {
-                    _core.IDP.RID.SetID(_regionList[x, y]);
+                    GameCore.IDP.RID.SetID(RegionList[x, y]);
                 }
             }
         }
         public Map(Core core)//自动生成一张地图 第一个参数为其所在核心，会自动分配地区ID并将区块注册至区域表
         {
-            _core = core;
-            _regionList = MakeMap();
-            for (int x = 0; x < _regionList.GetLength(0); x++)//注册区块
+            GameCore = core;
+            RegionList = MakeMap();
+            for (int x = 0; x < RegionList.GetLength(0); x++)//注册区块
             {
-                for (int y = 0; y < _regionList.GetLength(1); y++)
+                for (int y = 0; y < RegionList.GetLength(1); y++)
                 {
-                    _core.IDP.RID.SetID(_regionList[x, y]);
+                    GameCore.IDP.RID.SetID(RegionList[x, y]);
                 }
             }
         }
@@ -51,12 +51,12 @@ namespace TouHou_Exploding
                 for (int y = 0; y < 2; y++)
                 {
                     temp[x, y].specialHere = Region.Special.Birth;
-                    temp[x, y].owner = _core.RoomTeam[0];
+                    temp[x, y].owner = GameCore.RoomTeam[0];
                 }
                 for (int y = temp.GetLength(1) - 2; y < temp.GetLength(1); y++)
                 {
                     temp[x, y].specialHere = Region.Special.Birth;
-                    temp[x, y].owner = _core.RoomTeam[1];
+                    temp[x, y].owner = GameCore.RoomTeam[1];
                 }
             }
             if (temp.GetLength(0) % 2 == 0) //设定基地，自动基地判断大小
@@ -66,12 +66,12 @@ namespace TouHou_Exploding
                     for (int y = 0; y <= 0; y++)
                     {
                         temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = _core.RoomTeam[0];
+                        temp[x, y].owner = GameCore.RoomTeam[0];
                     }
                     for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(0) - 1; y++)
                     {
                         temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = _core.RoomTeam[1];
+                        temp[x, y].owner = GameCore.RoomTeam[1];
                     }
                 }
             }
@@ -82,12 +82,12 @@ namespace TouHou_Exploding
                     for (int y = 0; y <= 0; y++)
                     {
                         temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = _core.RoomTeam[0];
+                        temp[x, y].owner = GameCore.RoomTeam[0];
                     }
                     for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(0) - 1; y++)
                     {
                         temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = _core.RoomTeam[1];
+                        temp[x, y].owner = GameCore.RoomTeam[1];
                     }
                 }
             }
