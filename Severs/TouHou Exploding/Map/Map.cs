@@ -108,7 +108,7 @@ namespace TouHou_Exploding
                 public int stateHereID { get; set; }//地区状态
                 public int unitHereID { get; set; }//在此位置的单位
             }
-            public Map TurnToMap(Core core)//未完成
+            public Map ToMap(Core core)//未完成
             {
                 return new Map(core);
             }

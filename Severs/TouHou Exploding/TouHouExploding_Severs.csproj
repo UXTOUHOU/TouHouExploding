@@ -49,8 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Card\Character\TestCard\MissTest.cs" />
     <Compile Include="Map\Region.cs" />
-    <Compile Include="WaitToComplete\Basic.cs" />
+    <Compile Include="Card\Basic.cs" />
     <Compile Include="Card\Card.cs" />
     <Compile Include="Core\Core.cs" />
     <Compile Include="Map\Map.cs" />
@@ -91,8 +92,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Card\Character\BasicCard\" />
     <Folder Include="Card\Character\HeroCard\" />
     <Folder Include="Card\PolicyCard\" />
+    <Folder Include="WaitToComplete\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,24 +8,45 @@ namespace TouHou_Exploding
 {
     public class Team : IDProvider.IID
     {
-        private Core _core;
+        public Core GameCore;
         public int id { get; set; }
         public string name { get; set; }
+        public int blood { get; set; }//基地血量
         public List<Player> playerList { get; set; }
+       
+
         public Team(Core core)
         {
-            _core = core;
-            _core.IDP.TID.ApplyID(this);
+            GameCore = core;
+            GameCore.IDP.TID.ApplyID(this);
             playerList = new List<Player>();
+            blood = 4;
         }
         public void Add(Player player)
         {
+            if (player.atTeam != null) player.atTeam.Leave(player);
             playerList.Add(player);
             player.atTeam = this;
         }
-        public Core GetCore()
+        public void BeAttack()
         {
-            return _core;
+            blood--;
+            GameCore.CheckWin();
+        }
+        public bool IsFailed()//检查该队伍是不是全员失败
+        {
+            if (blood <= 0) return true;
+            foreach (Player p in playerList)
+            {
+                if(p.HaveFailed() == false)
+                    return false;
+            }
+            return true;
+        }
+        public void Leave(Player player)
+        {
+            player.atTeam=null;
+            this.playerList.Remove(player);
         }
     }
 }
