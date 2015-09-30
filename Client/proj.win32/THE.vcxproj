@@ -30,7 +30,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -38,7 +38,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -53,7 +53,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -262,46 +262,70 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\Ack.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\CardAttribute.cpp" />
     <ClCompile Include="..\Classes\CardDetail.cpp" />
     <ClCompile Include="..\Classes\CardsGallery.cpp" />
+    <ClCompile Include="..\Classes\ChessBoardPosition.cpp" />
+    <ClCompile Include="..\Classes\Community.cpp" />
     <ClCompile Include="..\Classes\Config.cpp" />
-    <ClCompile Include="..\Classes\CPVPConnect.cpp" />
-    <ClCompile Include="..\Classes\CPVPMode.cpp" />
-    <ClCompile Include="..\Classes\CSceneBattle.cpp" />
-    <ClCompile Include="..\Classes\CCard.cpp" />
-    <ClCompile Include="..\Classes\CLayerChessBoard.cpp" />
-    <ClCompile Include="..\Classes\CTutorialMode.cpp" />
+    <ClCompile Include="..\Classes\FloatingWindow.cpp" />
+    <ClCompile Include="..\Classes\PVPConnect.cpp" />
+    <ClCompile Include="..\Classes\PVPMode.cpp" />
+    <ClCompile Include="..\Classes\SceneBattle.cpp" />
+    <ClCompile Include="..\Classes\Card.cpp" />
+    <ClCompile Include="..\Classes\ChessBoard.cpp" />
+    <ClCompile Include="..\Classes\Skill.cpp" />
+    <ClCompile Include="..\Classes\SkillOperate.cpp" />
+    <ClCompile Include="..\Classes\ToolFunc.cpp" />
+    <ClCompile Include="..\Classes\TutorialMode.cpp" />
     <ClCompile Include="..\Classes\Effects.cpp" />
+    <ClCompile Include="..\Classes\Enquire.cpp" />
     <ClCompile Include="..\Classes\GameHall.cpp" />
     <ClCompile Include="..\Classes\MainMenu.cpp" />
     <ClCompile Include="..\Classes\LayerMenu.cpp" />
     <ClCompile Include="..\Classes\main.cpp" />
-    <ClCompile Include="..\Classes\CSceneMenu.cpp" />
+    <ClCompile Include="..\Classes\SceneMenu.cpp" />
+    <ClCompile Include="..\Classes\Notice.cpp" />
+    <ClCompile Include="..\Classes\Respond.cpp" />
     <ClCompile Include="..\Classes\Staff.cpp" />
     <ClCompile Include="..\Classes\Tutorial.cpp" />
     <ClCompile Include="..\Classes\Cell.cpp" />
+    <ClCompile Include="..\Classes\Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\Ack.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\CardAttribute.h" />
     <ClInclude Include="..\Classes\CardDetail.h" />
     <ClInclude Include="..\Classes\CardsGallery.h" />
+    <ClInclude Include="..\Classes\ChessBoardPosition.h" />
+    <ClInclude Include="..\Classes\Community.h" />
     <ClInclude Include="..\Classes\Config.h" />
-    <ClInclude Include="..\Classes\CPVPConnect.h" />
-    <ClInclude Include="..\Classes\CPVPMode.h" />
-    <ClInclude Include="..\Classes\CSceneBattle.h" />
-    <ClInclude Include="..\Classes\CCard.h" />
-    <ClInclude Include="..\Classes\CLayerChessBoard.h" />
-    <ClInclude Include="..\Classes\CTutorialMode.h" />
+    <ClInclude Include="..\Classes\FloatingWindow.h" />
+    <ClInclude Include="..\Classes\PVPConnect.h" />
+    <ClInclude Include="..\Classes\PVPMode.h" />
+    <ClInclude Include="..\Classes\SceneBattle.h" />
+    <ClInclude Include="..\Classes\Card.h" />
+    <ClInclude Include="..\Classes\ChessBoard.h" />
+    <ClInclude Include="..\Classes\Skill.h" />
+    <ClInclude Include="..\Classes\SkillOperate.h" />
+    <ClInclude Include="..\Classes\ToolFunc.h" />
+    <ClInclude Include="..\Classes\TutorialMode.h" />
     <ClInclude Include="..\Classes\Effects.h" />
+    <ClInclude Include="..\Classes\Enquire.h" />
     <ClInclude Include="..\Classes\GameHall.h" />
     <ClInclude Include="..\Classes\MainMenu.h" />
     <ClInclude Include="..\Classes\LayerMenu.h" />
     <ClInclude Include="..\Classes\main.h" />
-    <ClInclude Include="..\Classes\CSceneMenu.h" />
+    <ClInclude Include="..\Classes\SceneMenu.h" />
+    <ClInclude Include="..\Classes\Notice.h" />
+    <ClInclude Include="..\Classes\Respond.h" />
     <ClInclude Include="..\Classes\Staff.h" />
     <ClInclude Include="..\Classes\Tutorial.h" />
     <ClInclude Include="..\Classes\Cell.h" />
+    <ClInclude Include="..\Classes\Unit.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />

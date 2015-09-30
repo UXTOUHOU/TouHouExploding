@@ -1,57 +1,57 @@
 #pragma once
 
 #include "cocostudio/CocoStudio.h"
+#include "ChessboardPosition.h"
+#include "SceneBattle.h"
+#include "Chessboard.h"
+#include "Unit.h"
 
-char *GetUnitFileName(char *fileName, int unitID);
-
-enum UnitCamp
-{
-	UC_YOURSELF,
-	UC_ENEMY,
-};
+//char *GetUnitFileName(char *fileName, int unitID);
+class CCell;
 
 class CCell
 {
 public:
 	Point cellPosition;
+	ChessboardPosition chessboardPosition;
 
-	Sprite *unit;
-	void SetUnit(int unitID, Point postiton);
+	CUnit *unit;
+	//struct UnitState
+	//{
+	//	//enum StateType{
+	//	//	ST_Moveable,
+	//	//	ST_Moved,
+	//	//}state;
+	//	UnitState() :
+	//		lblHP(NULL),
+	//		groupType(UG_YOURSELF),
+	//		group(NULL),
+	//		lblAttribute(NULL),
+	//		attributeBackground(NULL),
+	//		bMoveable(false),
+	//		skillNum(1)
+	//	{
+	//	}
+	//}unitState;
+
+	ChessboardPosition GetCellNum();
+	void SetUnit(int unitID, ChessboardPosition postiton);
 	void DelUnit();
-	struct UnitState
-	{
-		Label *lblHP;
-		Sprite *camp;
-		Label *lblAttribute;
-		DrawNode *attributeBackground;
-		UnitState(){
-			lblHP = NULL;
-			camp = NULL;
-			attributeBackground = NULL;
-			lblAttribute = NULL;
-		}
-	}unitState;
-	//单位左上角的HP显示
-	void SetHP(int HP);
-	void SetHPVisable(bool visable);
-	//单位右上角的阵营显示
-	void SetCamp(UnitCamp campType);
-	void SetCampVisable(bool visable);
-	//鼠标悬停时的属性悬浮窗
-	void SetAttribute(std::string attribute);
-	void SetAttributeVisable(bool visable);
-	void SetAttributePosition(Point position);
+	void SwapUnit(CCell *cell);
 	//特效
-	void Moveable();					//未移动的单位
-	void Moved();						//已移动的单位
-	void Normal();						//通常状态
-	void Blink(Point position);			//闪烁至某格
-	void MoveTo(Point position);
+	void MoveWithPath(std::list<ChessboardPosition> &listMovePath);
+
+	static ActionInterval *Moveable();									//未移动的单位
+	static ActionInterval *Moved();										//已移动的单位
+	//static Action *Normal();											//通常状态
+	static ActionInterval *Blink(Point position);						//闪烁至某格
+	static ActionInterval *BeAttacked();								//
+	static ActionInterval *MoveToPosition(ChessboardPosition position);
 
 	Sprite *backGround;
 	
 	CCell();
 	~CCell();
-private:
+protected:
 	const float _attributeBorderWidth = 5;
 };

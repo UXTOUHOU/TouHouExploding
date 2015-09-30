@@ -1,4 +1,4 @@
-<UserData Version="2.3.1.2">
+<UserData Version="2.3.2.3">
   <Properties>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
@@ -28,14 +28,16 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
+          <FilePathData Path="AbandonedCards.csd" />
           <FilePathData Path="GameHall.csd" />
+          <FilePathData Path="MainScene.csd" />
           <FilePathData Path="BattleScene.csd" />
           <FilePathData Path="CardsGallery.csd" />
-          <FilePathData Path="CardDetail.csd" />
-          <FilePathData Path="AbandonedCards.csd" />
-          <FilePathData Path="PauseMenu.csd" />
+          <FilePathData Path="Config.csd" />
+          <FilePathData Path="CardView.csd" />
+          <FilePathData Path="ChessboardDialog.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="PauseMenu.csd" />
+        <ActiveDocument Path="ChessboardDialog.csd" />
       </Value>
     </Item>
   </Properties>

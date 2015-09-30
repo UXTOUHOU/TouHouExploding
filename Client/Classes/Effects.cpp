@@ -1,5 +1,5 @@
 //#include "Effects.h"
-//#include "CLayerChessBoard.h"
+//#include "CLayerChessboard.h"
 //
 //void Effects::Moveable(unit *unit)
 //{

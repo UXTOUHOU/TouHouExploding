@@ -1,6 +1,6 @@
 #include "GameHall.h"
 #include "MainMenu.h"
-#include "CPVPMode.h"
+#include "PVPMode.h"
 
 CGameHall *CGameHall::pGameHall = NULL;
 
@@ -16,7 +16,7 @@ bool CGameHall::init()
 	auto buttonGameGallReturn = gameHallMenuNode->getChildByName<ui::Button *>("Button_ReturnMainMenu");
 	buttonGameGallReturn->addClickEventListener(CC_CALLBACK_0(CGameHall::OnButtonReturn, this));
 
-	listViewRoomList = gameHallMenuNode->getChildByName<ui::ListView *>("ListView_RoomList");
+	listViewRoomList = gameHallMenuNode->getChildByName<ui::ListView *>("ListView_Room");
 	selectedRoom = NULL;
 	return true;
 }

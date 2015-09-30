@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "CSceneMenu.h"
+#include "SceneMenu.h"
 #include "cocos-ext.h"
 #include "ui\CocosGUI.h"
 #include "cocostudio\CocoStudio.h"
@@ -30,7 +30,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
-    if(!glview) {
+    if(!glview) 
+	{
 		//glview = GLViewImpl::createWithRect("THE", Rect(0, 0, 960, 640));
 		//glview = GLViewImpl::createWithRect("THE", Rect(0, 0, 1280, 720));
 		glview = GLViewImpl::createWithRect("THE", Rect(0, 0, 1440, 900));
@@ -39,6 +40,18 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		director->setOpenGLView(glview);
     }
 	director->getOpenGLView()->setDesignResolutionSize(1440, 900, ResolutionPolicy::SHOW_ALL);
+	//调整窗口位置
+	RECT rect;
+	LPRECT lpRect = &rect;
+	GetWindowRect(glview->getWin32Window(), lpRect);
+	float deltaX, deltaY;
+	deltaX = lpRect->left - 100;
+	deltaY = lpRect->top - 100;
+	lpRect->top = 100;
+	lpRect->bottom -= deltaY;
+	lpRect->left = 100;
+	lpRect->right -= deltaX;
+	SetWindowPos(glview->getWin32Window(), HWND_TOP, lpRect->left, lpRect->top, lpRect->right - lpRect->left, lpRect->bottom - lpRect->top, SWP_SHOWWINDOW);
 	//director->getOpenGLView()->setDesignResolutionSize(1280, 720, ResolutionPolicy::SHOW_ALL);
 	// turn on display FPS
     director->setDisplayStats(true);
