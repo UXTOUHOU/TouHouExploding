@@ -36,6 +36,15 @@ namespace TouHou_Exploding
             unit = new List<Unit>();
             deadCard = new List<Unit>();
         }
+        public bool Unactivition()
+        {
+            bool result = false;
+            foreach (Unit u in unit)
+            {
+                if (u.Unactivition()) result = true;
+            }
+            return result;
+        }
         public void Reset()
         {
             if(bDot<8) bDot = 8;

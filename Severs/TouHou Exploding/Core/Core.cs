@@ -44,7 +44,7 @@ namespace TouHou_Exploding
         public Core()//输入参数，Team和Player要是想指定要同时输入
         {
             IDP = new IDProvider();
-
+            Characters = new List<Character>();
         }
 
         private void GameStart()
@@ -67,19 +67,32 @@ namespace TouHou_Exploding
    
             if(WaitingCharacters == null)//如果没有指定卡堆，生成卡堆
             {
-
+                MakeCardList();
             }
 
 
         }
-        public bool MakeCardsList()
+        public bool MakeCardList()
         {
             if (nowProcess != Process.RoomPreparing) return false;
+
             List<Character> addList = new List<Character>
             {
-
+                new MissTest(this),
+                new MissTest(this),
+                new MissTest(this),
+                new MissTest(this),
+                new MissTest(this),
+                new MissTest(this),
+                new MissTest(this),
+                new MissTest(this),
+                new MissTest(this),
+                new MissTest(this),
+                new MissTest(this)
             };
-            foreach(Character c in addList)
+
+            WaitingCharacters = new List<Character>();
+            foreach (Character c in addList)
             {
                 WaitingCharacters.Add(c);
             }
@@ -123,16 +136,19 @@ namespace TouHou_Exploding
         }
         private void Starting()
         {
-            IncreaseCharacters();//补充卡牌
+            IncreaseCharacters();//补充召唤区
             if (NowPlayer == null) NowPlayer = Players[0];//判断是不是第一轮
-            int index = Players.IndexOf(NowPlayer);//判断是不是一轮结束并指定操作人员
-            if(index  == Players.Count - 1)
-            {
-                RoundOver();
-            }
             else
             {
-                NowPlayer = Players[index + 1];
+                int index = Players.IndexOf(NowPlayer);//判断是不是一轮结束并指定操作人员
+                if(index  == Players.Count - 1)
+                {
+                    RoundOver();
+                }
+                else
+                {
+                    NowPlayer = Players[index + 1];
+                }
             }
         }
         private void Preparing()
@@ -145,6 +161,7 @@ namespace TouHou_Exploding
         }
         private void Ending()
         {
+            NowPlayer.Unactivition();
             
         }
         private void RoundOver()//所有玩家轮过一次
@@ -156,7 +173,7 @@ namespace TouHou_Exploding
         }
         private void IncreaseCharacters(int number=6)//补齐召唤区少女至所需数目
         {
-            while (Characters.Count() < number&&Characters.Count!=0)
+            while (Characters.Count() < number&&WaitingCharacters.Count!=0)
             {
                 Character toAdd = WaitingCharacters[random.Next(WaitingCharacters.Count)];
                 Characters.Add(toAdd);
@@ -170,7 +187,7 @@ namespace TouHou_Exploding
         {
             switch (NowProcess)
             {
-                case Process.RoomPreparing: nowProcess = Process.RoundStarting; GameStart(); Starting(); break;
+                case Process.RoomPreparing: GameStart(); nowProcess = Process.RoundStarting;  Starting(); break;
                 case Process.RoundStarting: nowProcess = Process.RoundPreparing; Preparing(); break;
                 case Process.RoundPreparing: nowProcess = Process.RoundAction; Action(); break;
                 case Process.RoundAction: nowProcess = Process.RoundEnding; Ending(); break;

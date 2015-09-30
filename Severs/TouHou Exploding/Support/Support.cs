@@ -126,7 +126,7 @@ namespace TouHou_Exploding
             }
             private int _GetIndex(Object obj)//查找某对象表中索引值，如无则返回-1
             {
-                int index = 0;
+                int index = -1;
                 foreach (Object a in _objList)
                 {
                     index++;
