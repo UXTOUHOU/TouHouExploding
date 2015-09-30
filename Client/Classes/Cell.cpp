@@ -1,26 +1,30 @@
 #include "Cell.h"
-#include "CSceneBattle.h"
 
-char *GetUnitFileName(char *fileName, int unitID)
+void CCell::SetUnit(int unitID, ChessboardPosition position)
 {
-	//返回 Unit_ID.png 格式的图片名
-	strcpy(fileName, "Unit_");
-	char strID[10];
-	_itoa(unitID, strID, 10);
-	strcat(fileName, strID);
-	strcat(fileName, ".png");
-	return fileName;
+	Point point = CLayerChessboard::getInstance()->GetChessboardPosition(position);
+	if (unit)
+	{
+		unit->removeFromParentAndCleanup(true);
+		unit->setPosition(point);
+	}
+	else{
+		unit = CUnit::create();
+		unit->SetChessboardPosition(position);
+		unit->initWithFile(GetUnitFileName(unitID));
+		unit->InitCardAttribute(unitID);
+		unit->setScale(1.5F);
+		unit->setPosition(point);
+		unit->SetHP(unit->hp);
+		unit->SetHPPosition(position);
+		unit->SetHPVisible(true);
+	}
+	CCAssert(unit, "单位图片不存在");
 }
 
-void CCell::SetUnit(int unitID, Point position)
+ChessboardPosition CCell::GetCellNum()
 {
-	if (unit)
-		unit->removeFromParentAndCleanup(true);
-	char fileName[20];
-	unit = Sprite::create(GetUnitFileName(fileName, unitID));
-	unit->setPosition(position);
-	unit->setScale(1.5);
-	CCAssert(unit, "单位图片不存在");
+	return chessboardPosition;// chessboardPosition;
 }
 
 void CCell::DelUnit()
@@ -30,135 +34,88 @@ void CCell::DelUnit()
 	unit = NULL;
 }
 
-void CCell::SetHP(int HP)
+void CCell::SwapUnit(CCell *cell)
 {
-	if (!unitState.lblHP)
-	{
-		unitState.lblHP = Label::create();
-		unitState.lblHP->setSystemFontSize(12);
-		unitState.lblHP->setScale(1.33F);
-		unitState.lblHP->setPosition(unit->getPosition() + Point(-75.F / 2 + 3, 75.F / 2 - 1));
-		unitState.lblHP->setAnchorPoint(Point(0, 1));
-		//unitState.lblHP->setColor(Color3B::RED);
-	}
-	std::wstring wHP;
-	std::wstringstream wss;
-	wss << HP;
-	wss >> wHP;
-	unitState.lblHP->setString(WStrToUTF8(wHP));
+	auto tUnit = cell->unit;
+	cell->unit = unit;
+	unit = tUnit;
 }
 
-void CCell::SetHPVisable(bool visable)
+ActionInterval *CCell::Moveable()
 {
-	unitState.lblHP->setVisible(visable);
-}
-
-void CCell::SetAttribute(std::string attribute)
-{
-	if (!unitState.lblAttribute)
-	{
-		unitState.lblAttribute = Label::create();
-		unitState.lblAttribute->setSystemFontSize(24);
-		unitState.lblAttribute->setAnchorPoint(Point(0, 0));
-		//backGround->addChild(unitState.lblAttribute);
-		//
-		unitState.attributeBackground = DrawNode::create();
-		unitState.attributeBackground->setAnchorPoint(Point(0, 0));
-	}
-	unitState.lblAttribute->setString(attribute);
-	unitState.lblAttribute->setVisible(false);
-
-	auto position = unitState.lblAttribute->getPosition();
-	auto size = unitState.lblAttribute->getContentSize();
-	Size border(_attributeBorderWidth, _attributeBorderWidth);
-	position += border;
-	
-	Vec2 verts[4] = { position, position, position, position };
-	verts[0] -= border;
-	verts[1] += Point(-border.width, size.height + border.height);
-	verts[2] += size + border;
-	verts[3] += Point(size.width + border.width, -border.height);
-	unitState.attributeBackground->drawPolygon(verts, 4, Color4F(0, 0, 0, 0.7F), 0, Color4F(0, 0, 0, 0));
-	unitState.attributeBackground->setOpacity(50);
-	unitState.attributeBackground->setVisible(false);
-}
-
-void CCell::SetAttributeVisable(bool visable)
-{
-	if (!unitState.lblAttribute)
-		return;
-	unitState.attributeBackground->setVisible(visable);
-	unitState.lblAttribute->setVisible(visable);
-}
-
-void CCell::SetAttributePosition(Point position)
-{
-	if (!unitState.lblAttribute)
-		return;
-	unitState.attributeBackground->setPosition(position);
-	position += Point(_attributeBorderWidth, _attributeBorderWidth);
-	unitState.lblAttribute->setPosition(position);
-}
-
-void CCell::SetCamp(UnitCamp campType)
-{
-	if (!unitState.camp)
-	{
-		unitState.camp = Sprite::create();
-		unitState.camp->setAnchorPoint(Point(1, 1));
-		unitState.camp->setPosition(unit->getPosition() + Point(75.F / 2 - 1, 75.F / 2 - 1));
-	}
-	if (campType == UC_YOURSELF)
-		unitState.camp->setTexture("CampBlue.png");
-	else if (campType == UC_ENEMY)
-		unitState.camp->setTexture("CampRed.png");
-}
-
-void CCell::SetCampVisable(bool visable)
-{
-	unitState.camp->setVisible(visable);
-}
-
-void CCell::Moveable()
-{
-	unit->stopAllActions();
 	auto move1 = MoveBy::create(1, Point(0, 5));
 	auto move2 = move1->reverse();
-	unit->runAction(RepeatForever::create(Sequence::create(move1, move2, NULL)));
+	return RepeatForever::create(Sequence::create(move1, move2, NULL));
 }
 
-void CCell::Moved()
+ActionInterval *CCell::Moved()
 {
-	unit->stopAllActions();
-	unit->setOpacity(100);
+	return TintTo::create(0.F, 120, 120, 120);
 }
 
-void CCell::Normal()
+//Action *CCell::Normal()
+//{
+//	unit->setOpacity(255);
+//}
+
+ActionInterval *CCell::Blink(Point position)
 {
-	unit->stopAllActions();
-	unit->setOpacity(255);
+	return MoveTo::create(0, position);
 }
 
-void CCell::Blink(Point position)
+ActionInterval *CCell::MoveToPosition(ChessboardPosition position)
 {
-	unit->setPosition(position);
+	//unit->stopAllActions();
+	//unit->runAction(
+	return MoveTo::create(1, CLayerChessboard::getInstance()->GetChessboardPosition(position));
 }
 
-void CCell::MoveTo(Point position)
+ActionInterval *CCell::BeAttacked()
 {
-	unit->stopAllActions();
-	unit->runAction(MoveTo::create(1, position));
+	return Spawn::create(Sequence::create(MoveBy::create(0.08F, Point(6, 0)),
+		MoveBy::create(0.12F, Point(-6, 0)),
+		NULL),
+		Sequence::create(TintTo::create(0.F, Color3B(209, 130, 130)),
+		DelayTime::create(0.2F),
+		TintTo::create(0.F, Color3B::WHITE),
+		NULL),
+		//Sequence::create(TintTo::create(0.08F, Color3B(149, 70, 70)),
+		//TintTo::create(0.12F, Color3B::WHITE),
+		//NULL),
+		NULL);
 }
 
-CCell::CCell()
+CCell::CCell() :
+	unit(NULL),
+	chessboardPosition(-1, -1)
 {
-	unit = NULL;
-	unitState.lblHP = NULL;
-	unitState.camp = NULL;
-	unitState.lblAttribute = NULL;
-	unitState.attributeBackground = NULL;
 }
 
 CCell::~CCell()
 {
+}
+
+void CCell::MoveWithPath(list<ChessboardPosition> &listMovePath)
+{
+	if (!listMovePath.empty())
+	{
+		ChangeState(PS_WaitMoveAnimateEnd);
+		auto &selectedCell = CLayerChessboard::getInstance()->selectedCell;
+		auto target = *listMovePath.begin();
+		selectedCell->unit->SetHPPosition(target);
+		selectedCell->unit->SetGroupPosition(target);
+		unit->runAction(Sequence::create(MoveTo::create(0.7F, target.CastPoint()),
+			CallFunc::create([&selectedCell, &listMovePath](){selectedCell->MoveWithPath(listMovePath); }),
+			NULL));
+		auto *nextCell = CLayerChessboard::getInstance()->GetCell(*listMovePath.begin());
+		SwapUnit(nextCell);
+		selectedCell = nextCell;
+		listMovePath.pop_front();
+	}
+	else{
+		//unitState.state = UnitState::StateType::ST_Moved;
+		unit->SetMoveable(false);
+		unit->runAction(Moved());
+		ChangeState(PS_SelectUnitBehavior);
+	}
 }
