@@ -49,14 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Card\Character\TestCard\MissTest.cs" />
     <Compile Include="Map\Region.cs" />
-    <Compile Include="WaitToComplete\Basic.cs" />
+    <Compile Include="Card\Basic.cs" />
     <Compile Include="Card\Card.cs" />
     <Compile Include="Core\Core.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Support\Support.cs" />
     <Compile Include="Player\Team.cs" />
+    <Compile Include="Test\Test.cs" />
     <Compile Include="Test\tstForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +67,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Card\Unit.cs" />
     <EmbeddedResource Include="Test\tstForm.resx">
       <DependentUpon>tstForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -91,8 +94,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Card\Character\" />
+    <Folder Include="Card\Character\BasicCard\" />
+    <Folder Include="Card\Character\HeroCard\" />
     <Folder Include="Card\PolicyCard\" />
+    <Folder Include="WaitToComplete\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

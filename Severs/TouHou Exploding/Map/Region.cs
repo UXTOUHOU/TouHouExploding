@@ -21,6 +21,17 @@ namespace TouHou_Exploding
             locate = _locate;
             specialHere = Special.Common;
         }
+        public bool MoveHere(Unit unit)//移动到此格。成功返回真，失败返回假
+        {
+            if (unitHere != null) return false;
+            if (unit.at != null)
+            {
+                unit.at.unitHere = null;
+            }
+            unitHere = unit;
+            unit.at = this;
+            return true;
+        }
         public enum Special { Common, Base, Birth, Custom }//一般/基地/召唤地/自定义
 
         public class Statue

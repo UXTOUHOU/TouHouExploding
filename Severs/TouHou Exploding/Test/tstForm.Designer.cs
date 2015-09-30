@@ -31,8 +31,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.logTxtBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.commondTxtBox = new System.Windows.Forms.TextBox();
-            this.commondBtn = new System.Windows.Forms.Button();
+            this.commendTxtBox = new System.Windows.Forms.TextBox();
+            this.commendBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -69,8 +69,8 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.Controls.Add(this.commondTxtBox, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.commondBtn, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.commendTxtBox, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.commendBtn, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 432);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -79,24 +79,24 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(378, 26);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
-            // commondTxtBox
+            // commendTxtBox
             // 
-            this.commondTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.commondTxtBox.Location = new System.Drawing.Point(3, 3);
-            this.commondTxtBox.Name = "commondTxtBox";
-            this.commondTxtBox.Size = new System.Drawing.Size(312, 21);
-            this.commondTxtBox.TabIndex = 0;
+            this.commendTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.commendTxtBox.Location = new System.Drawing.Point(3, 3);
+            this.commendTxtBox.Name = "commendTxtBox";
+            this.commendTxtBox.Size = new System.Drawing.Size(312, 21);
+            this.commendTxtBox.TabIndex = 0;
             // 
-            // commondBtn
+            // commendBtn
             // 
-            this.commondBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.commondBtn.Location = new System.Drawing.Point(321, 3);
-            this.commondBtn.Name = "commondBtn";
-            this.commondBtn.Size = new System.Drawing.Size(54, 20);
-            this.commondBtn.TabIndex = 1;
-            this.commondBtn.Text = "Send";
-            this.commondBtn.UseVisualStyleBackColor = true;
-            this.commondBtn.Click += new System.EventHandler(this.commondBtn_Click);
+            this.commendBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.commendBtn.Location = new System.Drawing.Point(321, 3);
+            this.commendBtn.Name = "commendBtn";
+            this.commendBtn.Size = new System.Drawing.Size(54, 20);
+            this.commendBtn.TabIndex = 1;
+            this.commendBtn.Text = "Send";
+            this.commendBtn.UseVisualStyleBackColor = true;
+            this.commendBtn.Click += new System.EventHandler(this.commondBtn_Click);
             // 
             // tstForm
             // 
@@ -120,8 +120,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox logTxtBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TextBox commondTxtBox;
-        private System.Windows.Forms.Button commondBtn;
+        private System.Windows.Forms.TextBox commendTxtBox;
+        private System.Windows.Forms.Button commendBtn;
 
     }
 }

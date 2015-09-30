@@ -8,165 +8,143 @@ using System.Runtime.Serialization;
 
 namespace TouHou_Exploding
 {
-    public abstract class Card:IDProvider.IID
+    public abstract class Card : IDProvider.IID
     {
+        public Core GameCore;
+        
         public int cost { get; set; }
         public int id { get; set; }
-
+        public virtual string name { get; set; }
+        public virtual string description { get; set; }//对该卡牌的描述
+        public abstract CardType GetCardType();
+        public enum CardType { PolicyCard, CommonCharacter, Hero } 
+        public Card(Core core)
+        {
+            GameCore = core;
+            GameCore.IDP.CID.ApplyID(this);
+        }
+        public virtual void Discard()//丢弃卡牌
+        {
+            GameCore.IDP.CID.Del(this);
+        }
     }
-    public class PolicyCard : Card
+    public abstract class PolicyCard : Card
     {
+        public Player Owner;
+        public PolicyCard(Player player)
+            : base(player.GameCore)
+        {
+            GameCore = player.GameCore;
+            Owner = player;
+            player.policyCard.Add(this);
+            GameCore.IDP.CID.ApplyID(this);
+    }
+        public override void Discard()
+        {
+            base.Discard();
+            Owner.policyCard.Remove(this);
+        }
 
+        public override CardType GetCardType()
+        {
+            return CardType.PolicyCard;
+        }
+        public abstract bool Fuction(UseInput uInput = null); //策略牌使用时执行的操作
+
+        public virtual bool Use(UseInput uInput = null) //任何一个策略牌的使用方法
+        {
+            if (Owner.bDot < cost)
+            {
+                return false;
+            }
+            Owner.policyCard.Remove(this);
+            GameCore.IDP.CID.Del(this);
+            if(Fuction(uInput))
+            {
+                Owner.bDot -= cost;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } 
+        public class UseInput//新输入继承此类
+        {
+
+        } 
     }
     public abstract class Character : Card
     {
-        private Core _core;
+        public override string name
+        {
+            get
+            {
+                return unitAttribute.name;
+            }
+            set
+            {
+                unitAttribute.name = value;
+            }
+        }
+        public override string description
+        {
+            get
+            {
+                return base.description;
+            }
+
+            set
+            {
+                base.description = value;
+            }
+        }
         public Type type { get; set; }
-        public Unit.Attribute unit { get; set; }//召唤出的角色属性
+        public Unit.Attribute unitAttribute { get; set; }//召唤出的角色属性
         public enum Type{ Common,Hero,Servant }//Common召唤出的为普通单位，Hero为少女单位，Servent为基本效果产生的单位
-        public class CharacterSave
+        //public enum Preset { 毛玉, 天狗, 妖精, 永远亭的兔子, 自爆人形, 河童重工, 博丽灵梦, 魂魄妖梦, 十六夜咲夜, Custom }
+        public Unit ToBattle(int[] locate, Player owner)//上战场，把卡片转换为单位。已经召唤过的话会返回空
         {
-
-        }
-        public enum Preset { 毛玉, 天狗, 妖精, 永远亭的兔子, 自爆人形, 河童重工, 博丽灵梦, 魂魄妖梦, 十六夜咲夜, Custom }
-        public Character(Core core, CharacterSave save)
-        {
-
-        }
-        public Unit ToBattle()
-        {
-            Unit x =new Unit(this);
+            if (owner.action.HaveCall == true) return null;
+            if (!GameCore.RoomMap.RegionList[locate[0],locate[1]].owner.Equals(owner.atTeam)) return null;//判断是否有权限
+            owner.action.HaveCall = true;
+            Unit x =new Unit(this,locate,owner);
             return x;
         }
-        public Character(Core core, Preset preset)
+        public Character(Core core)
+            :base(core)
         {
-            _core = core;
-            unit = new Unit.Attribute();
-            switch (preset)
-            {
-                case Preset.毛玉 :
-                    {
-                        unit.blood = 9;
-                        unit.mobility = 2;
-                        unit.attack = 2;
-                        unit.range = 2;
-                        //unit.Skill
-                    }
-                    break;
-                case Preset.天狗:
-                    {
-                        unit.blood = 9;
-                        unit.mobility = 4;
-                        unit.attack = 5;
-                        unit.range = 1;
-                    }
-                    break;
-                case Preset.妖精:
-                    {
-                        unit.blood = 8;
-                        unit.mobility = 3;
-                        unit.attack = 2;
-                        unit.range = -1;//-1即为特殊情况，要要使用自带的特殊方法判断：对射程3（不含）以下的单位额外造成1伤害。
-                    }
-                    break;
-                case Preset.永远亭的兔子:
-                    {
-                        unit.blood = 9;
-                        unit.mobility = 2;
-                        unit.attack = 2;
-                        unit.range = 2;
-                    }
-                    break;
-                case Preset.自爆人形:
-                    {
-
-                    }
-                    break;
-                case Preset.河童重工:
-                    {
-
-                    }
-                    break;
-                case Preset.博丽灵梦:
-                    {
-
-                    }
-                    break;
-                case Preset.魂魄妖梦:
-                    {
-
-                    }
-                    break;
-                case Preset.十六夜咲夜:
-                    {
-
-                    }
-                    break;
-                case Preset.Custom:
-                    {
-
-                    }
-                    break;
-            }
-        } 
+            GameCore = core;
+            unitAttribute = new Unit.Attribute();
+            SetAttribute();
+        }
+        public override void Discard()
+        {
+            base.Discard();
+            if (GameCore.Characters.Contains(this))//判断是否处于卡堆
+                GameCore.Characters.Remove(this);
+            if (GameCore.WaitingCharacters.Contains(this))//判断是否处于召唤区
+                GameCore.WaitingCharacters.Remove(this);
+        }
+        protected abstract void SetAttribute();//继承类必须实现这个方法，在其中写该角色的数值
+        public override CardType GetCardType()
+        {
+            return CardType.CommonCharacter;
+        }
     }
-   public class Unit : IDProvider.IID 
-   {
-       public Character card
-       {
-           get
-           {
-               return _card;
-           }
-       }
-       private Character _card;
-       public int id { get; set; }
-       public Region at { get; set; }
-       public Attribute attribute { get; set; }
-       public Statue statue { get; set; }
-       public Unit(Character transCard)
-       {
-           attribute = transCard.unit.Clone();
-           _card = transCard;
-       }
-       public bool Attack(Unit target)//攻击指令，如果不能攻击返回假
-       {
-           return false;
-       }
-       public int Hurt(int blood)//体力流失，返回剩余血量，死亡返回-1
-       {
-           attribute.blood -= blood;
-           if(attribute.blood<=0)
-           {
-               Die();
-               return -1;
-           }
-           return attribute.blood;
-       }
-       public void Die()
-       {
 
-       } 
-       public class Attribute//属性
-       {
-           public string name { get; set; }//不解释
-           public Character.Type type { get; set; }//角色类型
-           public int blood { get; set; }//血量
-           public int mobility { get; set; }//机动性
-           public int attack { get; set; }//攻击伤害
-           public int range { get; set; }//射程
-           public List<Basic.Skill> skill { get; set; }//单位技能
-           public MoveMethous moveMethous;//移动方式
-           public Attribute Clone()
-           {
-               return (Attribute)this.MemberwiseClone();
-           }
-           public enum MoveMethous{ Walk,Fly,Transport }
-       }
-       public class Statue//人物附加状态
-       {
+    public abstract class Hero:Character
+    {
+        public Hero(Core core)
+            :base(core)
+        {
 
-       }
+        }
+        public override CardType GetCardType()
+        {
+            return CardType.Hero;
+        }
     }
+    
 
 }

@@ -115,9 +115,18 @@ namespace TouHou_Exploding
                 _ChangeObjID(obj, -1);
                 return true;
             }
+            public bool Del(int id)//删除某个ID的对象，并把该对象id值改为-1，不存在返回假
+            {
+                int index = _GetIndex(id);
+                if (index == -1) return false;
+                _ChangeObjID(_objList[index], -1);
+                _objList.RemoveAt(index);
+                _idList.RemoveAt(index);
+                return true;
+            }
             private int _GetIndex(Object obj)//查找某对象表中索引值，如无则返回-1
             {
-                int index = 0;
+                int index = -1;
                 foreach (Object a in _objList)
                 {
                     index++;
