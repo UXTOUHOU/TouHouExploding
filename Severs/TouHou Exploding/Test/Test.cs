@@ -34,6 +34,7 @@ namespace TouHou_Exploding
             单位移动(game.Players[1].unit[0], 1, 7);
             到行动阶段();
 
+            卡牌召唤(game.Characters[0], 3, 1);
             单位激活(game.Players[0].unit[0]);
             单位移动(game.Players[0].unit[0], 1, 5);
             单位攻击(game.Players[0].unit[0], game.Players[1].unit[0]);
@@ -42,9 +43,36 @@ namespace TouHou_Exploding
             单位攻击(game.Players[1].unit[0], game.Players[0].unit[0]);
             到行动阶段();
 
+            单位移动(game.Players[0].unit[1], 3, 4);
             单位攻击(game.Players[0].unit[0], game.Players[1].unit[0]);
-            到行动阶段();
+            单位移动(game.Players[0].unit[0], 2, 7);
+            到行动阶段(game.Players[0]);
 
+            单位移动(game.Players[0].unit[1], 3, 7);
+            单位移动(game.Players[0].unit[0], 2, 10);
+            单位攻击基地(game.Players[0].unit[0], game.Players[1]);
+            到行动阶段(game.Players[0]);
+
+            单位移动(game.Players[0].unit[1], 3, 10);
+            单位攻击基地(game.Players[0].unit[0], game.Players[1]);
+            单位攻击基地(game.Players[0].unit[1], game.Players[1]);
+            到行动阶段(game.Players[0]);
+
+            单位攻击基地(game.Players[0].unit[0], game.Players[1]);
+            单位攻击基地(game.Players[0].unit[1], game.Players[1]);
+            到行动阶段(game.Players[0]);
+        }
+        public bool 结束战报()
+        {
+            if (game.NowProcess == Core.Process.RoomEnding)
+            {
+                if (game.GameEndReport.statue == Core.EndReport.Statue.SomeoneWin)
+                    Monitor.Log("该场赢家为:" + game.GameEndReport.Winner.name + "(ID:" + game.GameEndReport.Winner.id + ")");
+                if (game.GameEndReport.statue == Core.EndReport.Statue.Draw)
+                    Monitor.Log("该场为平局！");
+                return true;
+            }
+            return false;
         }
         public void 查询B点(Player player)
         {
@@ -68,6 +96,16 @@ namespace TouHou_Exploding
         {
             Monitor.Log("单位(ID:" + unit.id.ToString() + ")尝试移动至(" + x.ToString() + "," + y.ToString() + ")。结果:" + unit.Move(x,y).ToString());
         }
+        public void 单位攻击基地(Unit unit, Player beAttacked)
+        {
+            Monitor.Log("单位(ID:" + unit.id.ToString() + ")尝试攻击玩家"+beAttacked.name+"(ID:"+beAttacked.id+")的队伍(ID:"+beAttacked.atTeam.id+")基地。结果:" + unit.AttackBase(beAttacked));
+            Monitor.Log("被攻击队伍(ID:" + beAttacked.atTeam.id + ")剩余血量:" + beAttacked.blood);
+        }
+        public void 单位攻击基地(Unit unit, Team beAttacked)
+        {
+            Monitor.Log("单位(ID:" + unit.id.ToString() + ")尝试攻击队伍(ID:"+beAttacked.id+")基地。结果:" + unit.AttackBase(beAttacked));
+            Monitor.Log("被攻击队伍(ID:" + beAttacked.id + ")剩余血量:" + beAttacked.blood);
+        }
         public void 单位攻击(Unit unit, Unit beAttacked)
         {
             Monitor.Log("单位(ID:" + unit.id.ToString() + ")尝试攻击(ID:" + beAttacked.id + ")。结果:" + unit.Attack(beAttacked).ToString());
@@ -81,13 +119,25 @@ namespace TouHou_Exploding
         {
             Monitor.Log("单位(ID:" + unit.id.ToString() + ")待机。结果:" + unit.Unactivition().ToString());
         }
-        public void 到行动阶段()
+        public void 到行动阶段(Player player=null)
         {
+            if(game.NowProcess == Core.Process.RoomEnding)
+            {
+                Monitor.Log("游戏已经结束");
+                结束战报();
+                return;
+            }
             下一阶段();
-            while (game.NowProcess != Core.Process.RoundAction) 下一阶段();
+            while ((game.NowProcess != Core.Process.RoundAction) || (game.NowPlayer != player && player != null)) 下一阶段();
         }
         public void 下一阶段()
         {
+            if (game.NowProcess == Core.Process.RoomEnding)
+            {
+                Monitor.Log("游戏已经结束");
+                结束战报();
+                return;
+            }
             Core.Process p = game.NextStep();
             Monitor.Log(p.ToString());
             if (p == Core.Process.RoundStarting) Monitor.Log("控制权切换至玩家:" + game.NowPlayer.name + "(ID:" + game.NowPlayer.id + ")");

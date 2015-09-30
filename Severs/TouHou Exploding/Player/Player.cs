@@ -66,13 +66,13 @@ namespace TouHou_Exploding
         public bool HaveFailed()
         {
             if (action.HaveSurrender == true) return true;
-            if(deadCard.Count<=6) return true;
+            if (deadCard.Count >= 6) return true;
             if(atTeam.blood <= 0) return true;
             return false;
         }
         public void BaseAttack()
         {
-            atTeam.BeAttack();
+            atTeam.BeAttacked();
         }
         public class Statue
         {

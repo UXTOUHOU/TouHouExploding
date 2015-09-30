@@ -107,6 +107,7 @@ namespace TouHou_Exploding
         {
             if (owner.action.HaveCall == true) return null;
             if (!GameCore.RoomMap.RegionList[locate[0],locate[1]].owner.Equals(owner.atTeam)) return null;//判断是否有权限
+            if (GameCore.RoomMap.GetRegion(locate).unitHere != null) return null;
             owner.action.HaveCall = true;
             Unit x =new Unit(this,locate,owner);
             return x;

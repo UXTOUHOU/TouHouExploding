@@ -70,10 +70,12 @@ namespace TouHou_Exploding
         public bool Activition()//激活角色，返回是否成功激活，所有角色中只能同时激活一个
         {
             if (action.HaveAction == true) return false;
-            foreach (Unit u in Owner.unit)
-            {
-                if (u.action.IsAction == true) return false;
-            }
+            //foreach (Unit u in Owner.unit)
+            //{
+            //    if (u.action.IsAction == true) return false;
+            //}
+            //↑改为如有激活，自动沉默
+            Owner.Unactivition();
 
             action.IsAction = true;
             return true;
@@ -108,6 +110,39 @@ namespace TouHou_Exploding
             if (action.HaveAttack == true) return false;
             return GetDistance(target) <= attribute.range;
         }
+        public virtual bool CanAttack(Region region)//检测是否可以攻击某位置，重写这个方法可更改射程判断规则
+        {
+            if (Owner.bDot <= 1) return false;
+            if (action.HaveAction == true) return false;
+            if (action.HaveAttack == true) return false;
+            return GetDistance(region) <= attribute.range;
+        }
+
+        public virtual bool AttackBase(Team beAttacked)
+        {
+            if (CanAttackBase(beAttacked))
+            {
+                beAttacked.BeAttacked();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public virtual bool AttackBase(Player beAttacked)
+        {
+            return AttackBase(beAttacked.atTeam);
+        }
+        public virtual bool CanAttackBase(Team beAttacked)
+        {
+            if (beAttacked.blood <= 0) return false;
+            foreach(Region r in beAttacked.Base)
+            {
+                if (CanAttack(r)) return true;
+            }
+            return false;
+        }
         public bool Move(int x,int y)
         {
             return Move(GameCore.RoomMap.RegionList[x, y]);
@@ -135,6 +170,7 @@ namespace TouHou_Exploding
             if (Owner.bDot <= 1) return false;
             if (action.HaveAction == true) return false;
             if (action.HaveMove == true) return false;
+            if (region.unitHere != null) return false;
             Owner.bDot--;
             return GetDistance(region) <= attribute.mobility;
         }
@@ -153,7 +189,7 @@ namespace TouHou_Exploding
             at.unitHere = null;
             at = null;
             //_card.GameCore.IDP.UID.Del(this);
-            //↑单位死亡还是别除名了。。。要不哪天那帮没节操的策划编个复活技能……
+            //↑单位死亡还是别除名了。。。要是哪天那帮没节操的策划编个复活技能……
             Owner.unit.Remove(this);
             if (card.GetCardType() == Card.CardType.Hero)
             {
