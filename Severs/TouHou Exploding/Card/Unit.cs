@@ -22,7 +22,7 @@ namespace TouHou_Exploding
         public Region at { get; set; }
         public Attribute attribute { get; set; }
         public Action action { get; set; }
-        public Statue statue { get; set; }
+        public State state { get; set; }
 
         public bool IsDead
         {
@@ -221,6 +221,7 @@ namespace TouHou_Exploding
         }
         public class Attribute//属性
         {
+            public string typeID { get; set; }//该单位的种类ID
             public string name { get; set; }//不解释
             public string description { get; set; }//对该角色的描述
             public Character.Type type { get; set; }//角色类型
@@ -240,7 +241,7 @@ namespace TouHou_Exploding
             }
             public enum MoveMethous { Walk, Fly, Transport }
         }
-        public class Statue//人物附加状态
+        public class State//人物附加状态
         {
 
         }
