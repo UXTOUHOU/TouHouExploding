@@ -34,6 +34,10 @@ namespace TouHou_Exploding
                 }
             }
         }
+        public Region GetRegion(int[] locate)
+        {
+            return RegionList[locate[0], locate[1]];
+        }
         private Region[,] MakeMap(MapType mapType = MapType.Common)//直接生成地图不注册区域
         {
             var idList = new IDProvider.IDList("");
@@ -65,13 +69,11 @@ namespace TouHou_Exploding
                 {
                     for (int y = 0; y <= 0; y++)
                     {
-                        temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = GameCore.RoomTeam[0];
+                        temp[x, y].specialHere = Region.Special.Base;
                     }
-                    for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(0) - 1; y++)
+                    for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(1) - 1; y++)
                     {
-                        temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = GameCore.RoomTeam[1];
+                        temp[x, y].specialHere = Region.Special.Base;
                     }
                 }
             }
@@ -81,13 +83,11 @@ namespace TouHou_Exploding
                 {
                     for (int y = 0; y <= 0; y++)
                     {
-                        temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = GameCore.RoomTeam[0];
+                        temp[x, y].specialHere = Region.Special.Base;
                     }
-                    for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(0) - 1; y++)
+                    for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(1) - 1; y++)
                     {
-                        temp[x, y].specialHere = Region.Special.Birth;
-                        temp[x, y].owner = GameCore.RoomTeam[1];
+                        temp[x, y].specialHere = Region.Special.Base;
                     }
                 }
             }

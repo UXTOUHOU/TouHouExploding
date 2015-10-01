@@ -26,6 +26,15 @@ namespace TouHou_Exploding
         public Player NowPlayer { get; set; }//当前操作的玩家
         public List<Character> Characters { get; set; }//赛场召唤区
         public List<Character> WaitingCharacters { get; set; }//卡池
+        public EndReport GameEndReport
+        {
+            get
+            {
+                if (NowProcess != Process.RoomEnding) return null;
+                return _endRpt;
+            }
+        }
+        private EndReport _endRpt;
         public int Round = 1;
         public Time NowTime//获取当前的白天/黑夜状态
         {
@@ -100,10 +109,12 @@ namespace TouHou_Exploding
         }
         private void GameEnd()//游戏结局执行方法
         {
-
+            if (NowProcess == Process.RoomPreparing) return;
+            nowProcess = Process.RoomEnding;
         }
         public EndReport CheckWin()//未完成，检查是否有人胜利，输出战报信息暂未结束获胜输出null
         {
+            if (NowProcess == Process.RoomPreparing) return null;
             Team winner=null;
             int temp = 0;
             foreach(Team t in RoomTeam)
@@ -120,12 +131,16 @@ namespace TouHou_Exploding
             if (temp == RoomTeam.Count())
             {
                 var endRpt = new EndReport() { statue = EndReport.Statue.Draw };
+                _endRpt = endRpt;
+                GameEnd();
                 return endRpt;
             }
             if (temp == RoomTeam.Count() - 1)
             {
                 var endRpt = new EndReport() { Winner = winner, statue=EndReport.Statue.SomeoneWin };
-
+                _endRpt = endRpt;
+                GameEnd();
+                return endRpt;
             }
             return null;
         }

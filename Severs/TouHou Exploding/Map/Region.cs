@@ -11,7 +11,20 @@ namespace TouHou_Exploding
         public int id { get; set; }//ID
         public int[] locate { get; set; }//坐标
         public Special specialHere { get; set; }//地区特别属性
-        public Team owner { get; set; }//归属
+        public Team owner
+        {
+            get
+            {
+                return _owner;
+            }
+            set
+            {
+                _owner = value;
+                value.OwnRegion.Add(this);
+            }
+            }//归属
+        //GameCore.RoomTeam[1].OwnRegion.Add(temp[x, y]);
+        private Team _owner;
         public Terrain terrainHere { get; set; }//地形
         public Statue stateHere { get; set; }//地区状态
         public Unit unitHere { get; set; }//在此位置的单位

@@ -13,13 +13,26 @@ namespace TouHou_Exploding
         public string name { get; set; }
         public int blood { get; set; }//基地血量
         public List<Player> playerList { get; set; }
-       
+        public List<Region> OwnRegion { get; set; }
+        public List<Region> Base
+        {
+            get
+            {
+                List<Region> R = new List<Region>();
+                foreach(Region r in OwnRegion)
+                {
+                    if (r.specialHere == Region.Special.Base) R.Add(r);
+                }
+                return R;
+            }
+        }
 
         public Team(Core core)
         {
             GameCore = core;
             GameCore.IDP.TID.ApplyID(this);
             playerList = new List<Player>();
+            OwnRegion = new List<Region>();
             blood = 4;
         }
         public void Add(Player player)
@@ -28,7 +41,7 @@ namespace TouHou_Exploding
             playerList.Add(player);
             player.atTeam = this;
         }
-        public void BeAttack()
+        public void BeAttacked()
         {
             blood--;
             GameCore.CheckWin();
