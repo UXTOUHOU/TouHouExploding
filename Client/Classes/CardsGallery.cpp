@@ -1,7 +1,7 @@
 #include "CardsGallery.h"
 #include "CardDetail.h"
 #include "MainMenu.h"
-#include "CCard.h"
+#include "Card.h"
 
 CCardsGallery *CCardsGallery::pCardGallery = NULL;
 

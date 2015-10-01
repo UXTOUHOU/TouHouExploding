@@ -1,6 +1,6 @@
 #include "CardDetail.h"
 #include "CardsGallery.h"
-#include "CCard.h"
+#include "Card.h"
 
 CCardDetail *CCardDetail::pCardDetail = NULL;
 
@@ -38,8 +38,7 @@ void CCardDetail::OnButtonReturn()
 void CCardDetail::ShowCardDetail(int cardID)
 {
 	auto card = getChildByName<Sprite *>("Sprite_Card");
-	char fileName[100];
-	card->setTexture(GetCardFileName(fileName, cardID));
+	card->setTexture(GetCardFileName(cardID));
 	//Enter();
 	//currentScene = sceneCardDetail;
 }

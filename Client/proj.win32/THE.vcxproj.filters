@@ -16,6 +16,18 @@
     <Filter Include="src\MenuScene">
       <UniqueIdentifier>{bcd982a9-90c4-4459-83c6-5da28d289076}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\NetWork">
+      <UniqueIdentifier>{d5f35c99-8745-4ed7-ad0b-6b136f2fc8a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NetWork\Child">
+      <UniqueIdentifier>{0b158eb8-aac3-4698-b2db-b09de7cf8d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\BattleScene\Part">
+      <UniqueIdentifier>{568b5b45-bb4f-4cb6-ad3a-14fd33b21731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\MenuScene\ChildLayer">
+      <UniqueIdentifier>{b127b9b5-d408-455b-9bcb-2639125a4ef9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -24,56 +36,92 @@
     <ClCompile Include="..\Classes\main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CPVPMode.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\Community.cpp">
+      <Filter>src\NetWork</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CTutorialMode.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\Ack.cpp">
+      <Filter>src\NetWork\Child</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CPVPConnect.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\Enquire.cpp">
+      <Filter>src\NetWork\Child</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CCard.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\Notice.cpp">
+      <Filter>src\NetWork\Child</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Respond.cpp">
+      <Filter>src\NetWork\Child</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Cell.cpp">
+      <Filter>src\BattleScene\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Effects.cpp">
+      <Filter>src\BattleScene\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CardDetail.cpp">
+      <Filter>src\MenuScene\ChildLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CardsGallery.cpp">
+      <Filter>src\MenuScene\ChildLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Config.cpp">
+      <Filter>src\MenuScene\ChildLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameHall.cpp">
+      <Filter>src\MenuScene\ChildLayer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\LayerMenu.cpp">
       <Filter>src\MenuScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MainMenu.cpp">
-      <Filter>src\MenuScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameHall.cpp">
-      <Filter>src\MenuScene</Filter>
+      <Filter>src\MenuScene\ChildLayer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Staff.cpp">
-      <Filter>src\MenuScene</Filter>
+      <Filter>src\MenuScene\ChildLayer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Tutorial.cpp">
+      <Filter>src\MenuScene\ChildLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ChessBoardPosition.cpp">
+      <Filter>src\BattleScene\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Card.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PVPConnect.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PVPMode.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TutorialMode.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SceneMenu.cpp">
       <Filter>src\MenuScene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CardDetail.cpp">
-      <Filter>src\MenuScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CardsGallery.cpp">
-      <Filter>src\MenuScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Config.cpp">
-      <Filter>src\MenuScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CSceneBattle.cpp">
+    <ClCompile Include="..\Classes\SceneBattle.cpp">
       <Filter>src\BattleScene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Effects.cpp">
-      <Filter>src\BattleScene</Filter>
+    <ClCompile Include="..\Classes\ChessBoard.cpp">
+      <Filter>src\BattleScene\Part</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CLayerChessBoard.cpp">
-      <Filter>src\BattleScene</Filter>
+    <ClCompile Include="..\Classes\Unit.cpp">
+      <Filter>src\BattleScene\Part</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CSceneMenu.cpp">
-      <Filter>src\MenuScene</Filter>
+    <ClCompile Include="..\Classes\CardAttribute.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Cell.cpp">
-      <Filter>src\BattleScene</Filter>
+    <ClCompile Include="..\Classes\ToolFunc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FloatingWindow.cpp">
+      <Filter>src\BattleScene\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill.cpp">
+      <Filter>src\BattleScene\Part</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SkillOperate.cpp">
+      <Filter>src\BattleScene\Part</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,56 +131,92 @@
     <ClInclude Include="..\Classes\main.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CCard.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\Classes\Community.h">
+      <Filter>src\NetWork</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CPVPMode.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\Classes\Ack.h">
+      <Filter>src\NetWork\Child</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CTutorialMode.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\Classes\Enquire.h">
+      <Filter>src\NetWork\Child</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CPVPConnect.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\Classes\Notice.h">
+      <Filter>src\NetWork\Child</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Respond.h">
+      <Filter>src\NetWork\Child</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Cell.h">
+      <Filter>src\BattleScene\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Effects.h">
+      <Filter>src\BattleScene\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CardDetail.h">
+      <Filter>src\MenuScene\ChildLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CardsGallery.h">
+      <Filter>src\MenuScene\ChildLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Config.h">
+      <Filter>src\MenuScene\ChildLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameHall.h">
+      <Filter>src\MenuScene\ChildLayer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\LayerMenu.h">
       <Filter>src\MenuScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MainMenu.h">
-      <Filter>src\MenuScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameHall.h">
-      <Filter>src\MenuScene</Filter>
+      <Filter>src\MenuScene\ChildLayer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Staff.h">
-      <Filter>src\MenuScene</Filter>
+      <Filter>src\MenuScene\ChildLayer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Tutorial.h">
+      <Filter>src\MenuScene\ChildLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Card.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PVPConnect.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PVPMode.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TutorialMode.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SceneMenu.h">
       <Filter>src\MenuScene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CardDetail.h">
-      <Filter>src\MenuScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CardsGallery.h">
-      <Filter>src\MenuScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Config.h">
-      <Filter>src\MenuScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CSceneBattle.h">
+    <ClInclude Include="..\Classes\SceneBattle.h">
       <Filter>src\BattleScene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Effects.h">
-      <Filter>src\BattleScene</Filter>
+    <ClInclude Include="..\Classes\ChessBoard.h">
+      <Filter>src\BattleScene\Part</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CLayerChessBoard.h">
-      <Filter>src\BattleScene</Filter>
+    <ClInclude Include="..\Classes\Unit.h">
+      <Filter>src\BattleScene\Part</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CSceneMenu.h">
-      <Filter>src\MenuScene</Filter>
+    <ClInclude Include="..\Classes\CardAttribute.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Cell.h">
-      <Filter>src\BattleScene</Filter>
+    <ClInclude Include="..\Classes\ChessBoardPosition.h">
+      <Filter>src\BattleScene\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ToolFunc.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FloatingWindow.h">
+      <Filter>src\BattleScene\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill.h">
+      <Filter>src\BattleScene\Part</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SkillOperate.h">
+      <Filter>src\BattleScene\Part</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

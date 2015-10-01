@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CSceneMenu.h"
+#include "SceneMenu.h"
 #include "cocostudio\CocoStudio.h"
 
 class CLayerMenu : public Layer
