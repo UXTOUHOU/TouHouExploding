@@ -19,7 +19,7 @@ namespace TouHou_Exploding
                 return atTeam.blood;
             }
         }
-        public Statue playerStatue { get; set; }
+        public State playerstate { get; set; }
         public int bDot { get; set; }
         public Action action;
         public List<PolicyCard> policyCard { get; set; }//玩家手中的策略牌
@@ -74,7 +74,7 @@ namespace TouHou_Exploding
         {
             atTeam.BeAttacked();
         }
-        public class Statue
+        public class State
         {
 
         }

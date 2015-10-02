@@ -130,14 +130,14 @@ namespace TouHou_Exploding
             }
             if (temp == RoomTeam.Count())
             {
-                var endRpt = new EndReport() { statue = EndReport.Statue.Draw };
+                var endRpt = new EndReport() { state = EndReport.State.Draw };
                 _endRpt = endRpt;
                 GameEnd();
                 return endRpt;
             }
             if (temp == RoomTeam.Count() - 1)
             {
-                var endRpt = new EndReport() { Winner = winner, statue=EndReport.Statue.SomeoneWin };
+                var endRpt = new EndReport() { Winner = winner, state=EndReport.State.SomeoneWin };
                 _endRpt = endRpt;
                 GameEnd();
                 return endRpt;
@@ -214,8 +214,8 @@ namespace TouHou_Exploding
         public class EndReport//输出完结战报
         {
             public Team Winner;
-            public Statue statue;
-            public enum Statue
+            public State state;
+            public enum State
             {
                 SomeoneWin,Draw//,SomeoneExit//一方获胜，平局，一方退出
             }

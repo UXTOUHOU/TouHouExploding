@@ -66,9 +66,9 @@ namespace TouHou_Exploding
         {
             if (game.NowProcess == Core.Process.RoomEnding)
             {
-                if (game.GameEndReport.statue == Core.EndReport.Statue.SomeoneWin)
+                if (game.GameEndReport.state == Core.EndReport.State.SomeoneWin)
                     Monitor.Log("该场赢家为:" + game.GameEndReport.Winner.name + "(ID:" + game.GameEndReport.Winner.id + ")");
-                if (game.GameEndReport.statue == Core.EndReport.Statue.Draw)
+                if (game.GameEndReport.state == Core.EndReport.State.Draw)
                     Monitor.Log("该场为平局！");
                 return true;
             }

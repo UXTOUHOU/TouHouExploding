@@ -11,9 +11,10 @@ namespace TouHou_Exploding
     public abstract class Card : IDProvider.IID
     {
         public Core GameCore;
-        
+        public int id { get; set; }//该卡牌每场自动分配的ID
+
+        public virtual string typeID { get; set; }//该卡牌所属种类的ID
         public int cost { get; set; }
-        public int id { get; set; }
         public virtual string name { get; set; }
         public virtual string description { get; set; }//对该卡牌的描述
         public abstract CardType GetCardType();
@@ -87,6 +88,19 @@ namespace TouHou_Exploding
                 unitAttribute.name = value;
             }
         }
+        public override string typeID
+        {
+            get
+            {
+                return unitAttribute.typeID;
+            }
+
+            set
+            {
+                unitAttribute.typeID = value;
+            }
+        }
+      
         public override string description
         {
             get

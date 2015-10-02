@@ -26,7 +26,7 @@ namespace TouHou_Exploding
         //GameCore.RoomTeam[1].OwnRegion.Add(temp[x, y]);
         private Team _owner;
         public Terrain terrainHere { get; set; }//地形
-        public Statue stateHere { get; set; }//地区状态
+        public State stateHere { get; set; }//地区状态
         public Unit unitHere { get; set; }//在此位置的单位
         public Region(IDProvider.IDList idList, int[] _locate)//第一参数为ID提供者，第二参数为坐标
         {
@@ -47,7 +47,7 @@ namespace TouHou_Exploding
         }
         public enum Special { Common, Base, Birth, Custom }//一般/基地/召唤地/自定义
 
-        public class Statue
+        public class State
         {
             public string name;
             public enum Type { None, Custom }
