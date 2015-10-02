@@ -267,26 +267,13 @@ bool CLayerChessboard::init()
 	_dialogNode->setVisible(false);
 	addChild(_dialogNode);
 	//
-	return true;
-}
-
-void CLayerChessboard::update(float delta)
-{
-	Layer::update(delta);
-
-	switch (playerState)
+	//Skill
+	SkillOperate::AddEventSkillEndListener([](void *)
 	{
-	case PS_RunningSkill:
-		if (g_bRunningSkill == false)
-		{
-			//test
-			ChangeState(PS_SelectUnitBehavior);
-			//
-		}
-		break;
-	default:
-		break;
-	}
+		ChangeState(PS_SelectUnitBehavior);
+	});
+	//
+	return true;
 }
 
 void CLayerChessboard::SetUnit(int unitID, int x, int y)
@@ -302,7 +289,8 @@ void CLayerChessboard::ShowMapCell(Sprite *sprite, int x, int y)
 
 void CLayerChessboard::DelUnit(ChessboardPosition position)
 {
-	_cell[position.y][position.x]->DelUnit();
+	_cell[position.y][position.x]->unit->UnitDeath();
+	_cell[position.y][position.x]->unit = NULL;
 }
 
 Point CLayerChessboard::GetChessboardPosition(ChessboardPosition position)
@@ -481,10 +469,17 @@ void CLayerChessboard::OnClickCell(int x, int y)
 		SelectOperateUnit(targetPosition);
 		break;
 	case PS_RunningSkill:
+		SkillOperate::mutexSkill.lock();
+		if (SkillOperate::bWaitSelectCell)
+		{
+			SkillOperate::cellSkillTarget = GetCell(targetPosition);
+			SkillOperate::bWaitSelectCell = false;
+		}
+		SkillOperate::mutexSkill.unlock();
 		break;
 	case PS_WaitSelectCell:
 		SkillOperate::mutexSkill.lock();
-		SkillOperate::g_cellSkillTarget = GetCell(targetPosition);
+		SkillOperate::cellSkillTarget = GetCell(targetPosition);
 		SkillOperate::mutexSkill.unlock();
 		break;
 	//case PS_SelectSkillTarget:
@@ -516,7 +511,18 @@ void CLayerChessboard::OnClickCell(int x, int y)
 		{
 			ChangeState(PS_WaitAttackAnimateEnd);
 			cell->unit->runAction(Sequence::create((ActionInterval *)CCell::BeAttacked(),
-				CallFunc::create([](){ChangeState(PS_SelectUnitBehavior); }),
+				CallFunc::create([cell, this]()
+				{
+					cell->unit->ChangeHP(-this->selectedCell->unit->atk);
+					if (cell->unit->GetHP() == 0)
+					{
+						cell->unit->UnitDeath();
+						cell->unit = NULL;
+					}
+					else
+						this->selectedCell->unit->SetCanAttack(false);
+					ChangeState(PS_SelectUnitBehavior); 
+				}),
 				NULL));
 		}
 	}
@@ -679,11 +685,12 @@ void CLayerChessboard::OnButtonSkill_1()
 	ChangeState(PS_RunningSkill);
 	//test
 	static CSkill_1 *skill = new CSkill_1;
-	if (skill->RunSkill())
-	{
-		skill = NULL;
-		ChangeState(PS_SelectUnitBehavior);
-	}
+	skill->RunSkill();
+	//if (skill->RunSkill())
+	//{
+	//	skill = NULL;
+	//	ChangeState(PS_SelectUnitBehavior);
+	//}
 	//
 	HideSelectUnitSkillList();
 }
@@ -787,15 +794,15 @@ wstring LineBreak(const wstring &wstr, int n)
 void CLayerChessboard::_OnButtonDialogYes()
 {
 	SkillOperate::mutexSkill.lock();
-	SkillOperate::g_bClickDialogButton = true;
-	SkillOperate::g_bDialogReturn = true;
+	SkillOperate::bClickDialogButton = true;
+	SkillOperate::bDialogReturn = true;
 	SkillOperate::mutexSkill.unlock();
 }	
 
 void CLayerChessboard::_OnButtonDialogNo()
 {
 	SkillOperate::mutexSkill.lock();
-	SkillOperate::g_bClickDialogButton = true;
-	SkillOperate::g_bDialogReturn = false;
+	SkillOperate::bClickDialogButton = true;
+	SkillOperate::bDialogReturn = false;
 	SkillOperate::mutexSkill.unlock();
 }

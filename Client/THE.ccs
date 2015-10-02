@@ -87,7 +87,6 @@
         <Image Name="events3-1.jpg" />
         <Image Name="events3-2.jpg" />
         <Image Name="Hakurei-Reimu.png" />
-        <Image Name="HelloWorld.png" />
         <Image Name="left1-1.png" />
         <Image Name="left1-2.png" />
         <Image Name="right.png" />
@@ -101,6 +100,7 @@
         <Image Name="volume1.png" />
         <Image Name="Volume2.png" />
         <Project Name="ChessboardDialog.csd" Type="Scene" />
+        <Project Name="SetDeck.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>

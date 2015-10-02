@@ -7,6 +7,7 @@
 #include "SceneBattle.h"
 #include "FloatingWindow.h"
 #include "Skill.h"
+#include "SkillOperate.h"
 #define CHESSBOARD_MAX_X 12
 #define CHESSBOARD_MAX_Y 8
 using namespace std;
@@ -16,7 +17,7 @@ class ChessboardPosition;
 class CCell;
 
 extern mutex mutexSkill;
-extern CCell *g_cellSkillTarget;
+extern CCell *SkillOperate::cellSkillTarget;
 const int g_floatingWindowZOrder = 100;
 
 class CLayerChessboard : public Layer
@@ -32,7 +33,6 @@ public:
 			pChessboard = CLayerChessboard::create();
 		return pChessboard;
 	}
-	virtual void update(float delta) override;
 
 	bool startRecordMovePath;
 	list<ChessboardPosition> listMovePath;

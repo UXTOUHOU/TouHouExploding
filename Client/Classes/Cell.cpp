@@ -27,13 +27,6 @@ ChessboardPosition CCell::GetCellNum()
 	return chessboardPosition;// chessboardPosition;
 }
 
-void CCell::DelUnit()
-{
-	if (unit)
-		unit->removeFromParentAndCleanup(true);
-	unit = NULL;
-}
-
 void CCell::SwapUnit(CCell *cell)
 {
 	auto tUnit = cell->unit;

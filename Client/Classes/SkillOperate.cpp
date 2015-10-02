@@ -2,11 +2,12 @@
 #include "Unit.h"
 #include "Cell.h"
 
+bool SkillOperate::bWaitSelectCell = false;
 mutex SkillOperate::mutexSkill;
-CCell *SkillOperate::g_cellSkillTarget = NULL;
+CCell *SkillOperate::cellSkillTarget = NULL;
 mutex SkillOperate::mutexDialog;
-bool SkillOperate::g_bClickDialogButton = false;
-bool SkillOperate::g_bDialogReturn = false;
+bool SkillOperate::bClickDialogButton = false;
+bool SkillOperate::bDialogReturn = false;
 
 void SkillOperate::NormalDamage(CUnit *unit, int damage)
 {
@@ -16,21 +17,27 @@ void SkillOperate::NormalDamage(CUnit *unit, int damage)
 			{
 				unit->ChangeHP(-damage);
 				if (unit->GetHP() == 0)
+				{
 					unit->UnitDeath();
+					CLayerChessboard::getInstance()->GetCell(unit->GetChessboardPosition())->unit = NULL;
+				}
 			}),
 		NULL));
 }
-
+       
 CUnit *SkillOperate::SelectUnit()
 {
 	CCell *cell = NULL;
+	bWaitSelectCell = true;
+	cellSkillTarget = NULL;
 	while (cell == NULL)
 	{
 		mutexSkill.lock();
-		cell = g_cellSkillTarget;
+		cell = cellSkillTarget;
 		mutexSkill.unlock();
 		Sleep(1);
 	}
+	bWaitSelectCell = false;
 	return cell->unit;
 }
 
@@ -44,11 +51,22 @@ bool SkillOperate::ChessboardDialog(string str)
 	while (!clickDialogButton)
 	{
 		mutexDialog.lock();
-		clickDialogButton = g_bClickDialogButton;
-		dialogReturn = g_bDialogReturn;
+		clickDialogButton = bClickDialogButton;
+		dialogReturn = bDialogReturn;
 		mutexDialog.unlock();
 		Sleep(1);
 	}
 	chessboard->SetDialogVisible(false);
 	return dialogReturn;
 }
+
+void SkillOperate::DispatchEventSkillEnd()
+{
+	Director::getInstance()->getEventDispatcher()->dispatchCustomEvent("SkillEnd", NULL);
+}
+
+void SkillOperate::AddEventSkillEndListener(const function<void(EventCustom *)> &callBack)
+{
+	Director::getInstance()->getEventDispatcher()->addCustomEventListener("SkillEnd", callBack);
+}
+

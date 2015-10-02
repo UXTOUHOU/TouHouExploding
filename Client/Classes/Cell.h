@@ -36,7 +36,6 @@ public:
 
 	ChessboardPosition GetCellNum();
 	void SetUnit(int unitID, ChessboardPosition postiton);
-	void DelUnit();
 	void SwapUnit(CCell *cell);
 	//ÌØÐ§
 	void MoveWithPath(std::list<ChessboardPosition> &listMovePath);

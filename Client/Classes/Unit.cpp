@@ -50,7 +50,15 @@ void CUnit::InitCardAttribute(int unitID)
 
 void CUnit::UnitDeath()
 {
-	CLayerChessboard::getInstance()->DelUnit(_chessboardPosition);
+	removeFromParentAndCleanup(true);
+	if (_lblHP)
+		_lblHP->removeFromParentAndCleanup(true);
+	if (_group)
+		_group->removeFromParentAndCleanup(true);
+	if (_lblAttribute)
+		_lblAttribute->removeFromParentAndCleanup(true);
+	if (_attributeBackground)
+		_attributeBackground->removeFromParentAndCleanup(true);
 }
 
 void CUnit::SetChessboardPosition(ChessboardPosition position)
@@ -140,11 +148,10 @@ void CUnit::ChangeHP(int deltaHP)
 	std::wstring wHP;
 	std::wstringstream wss;
 	_HP += deltaHP;
-	if (_HP <= 0)
-	{
-		UnitDeath();
-		return;
-	}
+	//if (_HP <= 0)
+	//{
+	//	UnitDeath();
+	//}
 	wss << _HP;
 	wss >> wHP;
 	_lblHP->setString(WStrToUTF8(wHP));

@@ -11,6 +11,15 @@ enum UnitGroup
 	UG_YOURSELF,
 	UG_ENEMY,
 };
+
+enum UnitState
+{
+	US_Silence,			//沉默
+	US_Slowed,			//减速
+	US_Dizzy,
+	US_AmplifyDamage,	//伤害加深
+};
+
 class CCell;
 
 class CUnit : public Sprite, public CCardAttribute
@@ -18,6 +27,8 @@ class CUnit : public Sprite, public CCardAttribute
 public:
 	virtual bool init() override;
 	CREATE_FUNC(CUnit);
+	bool IfExistState(UnitState state);
+	int StateRestRound(UnitState state);
 	void InitCardAttribute(int unitID);
 	void UnitDeath();
 	void SetChessboardPosition(ChessboardPosition position);
@@ -61,6 +72,10 @@ private:
 	Label *_lblAttribute;
 	DrawNode *_attributeBackground;
 
+	vector< pair<UnitState, int> > _unitState;	//附加状态
+
 	bool _moveable;
 	bool _canAttack;
+
+	void _UpdateStateRestRound();		//更新状态剩余回合
 };

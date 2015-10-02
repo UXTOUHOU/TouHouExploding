@@ -8,14 +8,17 @@ class CCard;
 class CCell;
 namespace SkillOperate
 {
-	extern bool g_bRunningSkill;
+	extern bool bWaitSelectCell;
+	extern bool bRunningSkill;
 	extern mutex mutexSkill;
-	extern CCell *g_cellSkillTarget;
+	extern CCell *cellSkillTarget;
 	extern mutex mutexDialog;
-	extern bool g_bClickDialogButton;
-	extern bool g_bDialogReturn;
-
+	extern bool bClickDialogButton;
+	extern bool bDialogReturn;
 	//vector<CSkill *> vecOnUnitDead;
+
+	void DispatchEventSkillEnd();
+	void AddEventSkillEndListener(const function<void(EventCustom *)> &callBack);
 
 	void NormalDamage(CUnit *unit, int damage);
 	CUnit *SelectUnit();

@@ -19,7 +19,7 @@ ChessboardPosition::ChessboardPosition() :
 //	return *this;
 //}
 
-bool ChessboardPosition::operator==(ChessboardPosition &rhs)
+bool ChessboardPosition::operator==(ChessboardPosition &rhs) const
 {
 	if (x == rhs.x &&
 		y == rhs.y)
@@ -27,7 +27,7 @@ bool ChessboardPosition::operator==(ChessboardPosition &rhs)
 	return false;
 }
 
-bool ChessboardPosition::operator!=(ChessboardPosition &rhs)
+bool ChessboardPosition::operator!=(ChessboardPosition &rhs) const
 {
 	return !(*this == rhs);
 }
@@ -38,7 +38,7 @@ void ChessboardPosition::SetPosition(int _x, int _y)
 	y = _y;
 }
 
-Point ChessboardPosition::CastPoint()
+Point ChessboardPosition::CastPoint() const
 {
 	return CLayerChessboard::getInstance()->GetChessboardPosition(*this);
 }
@@ -48,19 +48,23 @@ Point ChessboardPosition::CastPoint()
 //	return CLayerChessboard::getInstance()->GetCell(*this);
 //}
 
-bool ChessboardPosition::Adjacent(ChessboardPosition &position)
+bool ChessboardPosition::Adjacent(ChessboardPosition &position) const
 {
 	return abs(position.x - x) + abs(position.y - y) == 1;
-
 }
 
-bool ChessboardPosition::InRange(ChessboardPosition &position, int range)
+bool ChessboardPosition::InRange(ChessboardPosition &position, int range) const
 {
 	return abs(position.x - x) + abs(position.y - y) <= range;
 }
 
-bool ChessboardPosition::OnChessboard()
+bool ChessboardPosition::OnChessboard() const
 {
 	return 0 <= x && x < CHESSBOARD_MAX_X &&
 		0 <= y && y < CHESSBOARD_MAX_Y;
+}
+
+int ChessboardPosition::Distance(ChessboardPosition position) const
+{
+	return abs(x - position.x) + abs(y - position.y);
 }

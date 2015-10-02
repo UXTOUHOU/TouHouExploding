@@ -107,7 +107,7 @@ public:
 	int timeCount;
 	void RoundCountdown(float n);
 	//Õ½¶·Á÷³Ì
-
+	void SetDeck();
 	void StartYourTurn();
 	void EndYourTurn();
 	void SelectUnit();

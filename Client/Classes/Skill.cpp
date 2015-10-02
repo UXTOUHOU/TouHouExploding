@@ -1,31 +1,53 @@
 #include "Skill.h"
 extern std::mutex mutexSkill;
 
-bool SkillOperate::g_bRunningSkill = false;
+bool SkillOperate::bRunningSkill = false;
 
-bool CSkill::RunSkill()
+void CSkill::RunSkill()
 {
 	SkillOperate::mutexSkill.lock();
-	if (!g_bRunningSkill)
+	if (!bRunningSkill)
 	{
 		//initState
-		g_bClickDialogButton = false;
+		bClickDialogButton = false;
 		//
 		std::thread thrSkill(&CSkill::OnSkillStart, this);
 		thrSkill.detach();
 	}
-	else{
-		SkillOperate::mutexSkill.unlock();
-		return true;
-	}
 	SkillOperate::mutexSkill.unlock();
-	return false;
+}
+
+bool CSkill::GetUsable() const
+{
+	return _usable;
+}
+
+void CSkill::SetUsable(bool usable)
+{
+	_usable = usable;
+}
+
+bool CSkill::IsSelectable(ChessboardPosition unitPosition, ChessboardPosition position)
+{
+	int distance = unitPosition.Distance(position);
+	return _minSkillRange <= distance &&
+		distance <= _maxSkillRange;
+}
+
+bool CSkill::IsTarget(ChessboardPosition cursor, ChessboardPosition position)
+{
+	return position == cursor;
 }
 
 void CSkill_1::OnSkillStart()
 {
+	SetUsable(false);
+	//
 	auto unit = SelectUnit();
-	bool b = ChessboardDialog(WStrToUTF8(L"是否支付1B对该单位造成额外的2点伤害？"));
-	NormalDamage(unit, 2);
-	g_bRunningSkill = false;
+	bool buttonYes = ChessboardDialog(WStrToUTF8(L"是否支付1B对该单位造成额外的2点伤害？"));
+	if (buttonYes)
+		NormalDamage(unit, 2);
+	//
+	bRunningSkill = false;
+	DispatchEventSkillEnd();
 }
