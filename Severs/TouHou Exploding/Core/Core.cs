@@ -11,6 +11,7 @@ namespace TouHou_Exploding
         //public GameConfig gameConfig { get; set; }//游戏设置
         Random random = new Random();//全局随机器
         public IDProvider IDP { get; set; }//ID分配机
+        public NeedRespond needRespond { get; set; }//服务器需要挂起询问的对象
         public Map RoomMap { set; get; }//游戏地图
         public Process NowProcess //游戏进度
         {

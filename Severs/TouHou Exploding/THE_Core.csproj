@@ -50,8 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Card\Character\TestCard\MissTest.cs" />
+    <Compile Include="Core\Basic.cs" />
     <Compile Include="Map\Region.cs" />
-    <Compile Include="Card\Basic.cs" />
+    <Compile Include="Card\Skill.cs" />
     <Compile Include="Card\Card.cs" />
     <Compile Include="Core\Core.cs" />
     <Compile Include="Map\Map.cs" />
