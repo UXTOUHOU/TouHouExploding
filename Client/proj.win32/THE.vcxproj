@@ -277,6 +277,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Card.cpp" />
     <ClCompile Include="..\Classes\ChessBoard.cpp" />
     <ClCompile Include="..\Classes\Skill.cpp" />
+    <ClCompile Include="..\Classes\SkillEvent.cpp" />
     <ClCompile Include="..\Classes\SkillOperate.cpp" />
     <ClCompile Include="..\Classes\ToolFunc.cpp" />
     <ClCompile Include="..\Classes\TutorialMode.cpp" />
@@ -310,6 +311,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Card.h" />
     <ClInclude Include="..\Classes\ChessBoard.h" />
     <ClInclude Include="..\Classes\Skill.h" />
+    <ClInclude Include="..\Classes\SkillEvent.h" />
     <ClInclude Include="..\Classes\SkillOperate.h" />
     <ClInclude Include="..\Classes\ToolFunc.h" />
     <ClInclude Include="..\Classes\TutorialMode.h" />

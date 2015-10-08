@@ -28,6 +28,9 @@
     <Filter Include="src\MenuScene\ChildLayer">
       <UniqueIdentifier>{b127b9b5-d408-455b-9bcb-2639125a4ef9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Skill">
+      <UniqueIdentifier>{86aa7182-c014-4c5d-a4cd-83675dee7645}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -118,10 +121,13 @@
       <Filter>src\BattleScene\Part</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Skill.cpp">
-      <Filter>src\BattleScene\Part</Filter>
+      <Filter>src\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SkillEvent.cpp">
+      <Filter>src\Skill</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SkillOperate.cpp">
-      <Filter>src\BattleScene\Part</Filter>
+      <Filter>src\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,10 +219,13 @@
       <Filter>src\BattleScene\Part</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Skill.h">
-      <Filter>src\BattleScene\Part</Filter>
+      <Filter>src\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SkillEvent.h">
+      <Filter>src\Skill</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SkillOperate.h">
-      <Filter>src\BattleScene\Part</Filter>
+      <Filter>src\Skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

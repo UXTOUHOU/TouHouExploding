@@ -541,6 +541,11 @@ void ChangeState(PlayerState newState)
 	oldState = newState;
 }
 
+void CSceneBattle::SetDeck()
+{
+	auto deck = CSLoader::createNode("SetDeck.csb");
+}
+
 void CSceneBattle::StartYourTurn()
 {
 	//回合开始时重置单位状态

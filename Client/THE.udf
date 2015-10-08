@@ -36,8 +36,9 @@
           <FilePathData Path="Config.csd" />
           <FilePathData Path="CardView.csd" />
           <FilePathData Path="ChessboardDialog.csd" />
+          <FilePathData Path="SetDeck.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="ChessboardDialog.csd" />
+        <ActiveDocument Path="SetDeck.csd" />
       </Value>
     </Item>
   </Properties>

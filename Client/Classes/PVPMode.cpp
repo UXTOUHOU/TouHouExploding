@@ -53,6 +53,7 @@ bool CPVPMode::init()
 	//connect->Login("123", "456");
 	//connect->AskRoomList();
 
+	SetDeck();
 	StartYourTurn();
 	//
 	return true;
