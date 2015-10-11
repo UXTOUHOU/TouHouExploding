@@ -1,4 +1,4 @@
-﻿namespace TouHou_Exploding
+﻿namespace THE_Core
 {
     partial class tstForm
     {

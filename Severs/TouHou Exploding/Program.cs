@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TouHou_Exploding
+namespace THE_Core
 {
     static class Program
     {

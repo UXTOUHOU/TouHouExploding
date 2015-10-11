@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Room.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -77,10 +78,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NetWorkCore\NetWorkCore.csproj">
+      <Project>{aef60dde-87ce-4c94-b963-efe02d8e4ac1}</Project>
+      <Name>NetWorkCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TouHou Exploding\THE_Core.csproj">
       <Project>{ac4c0160-c3b7-48a1-9745-281f232f7eaa}</Project>
       <Name>THE_Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Room\" />
+    <Folder Include="Severs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

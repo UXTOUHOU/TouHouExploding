@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 
 
-namespace TouHou_Exploding
+namespace THE_Core
 {
     public abstract class Skill//:IDProvider.IID
     {

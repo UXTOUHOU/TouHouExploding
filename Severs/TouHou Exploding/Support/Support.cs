@@ -10,7 +10,7 @@ using System.Xml;
 using JsonFx.Json;
 using System.Reflection;
 
-namespace TouHou_Exploding
+namespace THE_Core
 {
     public class IDProvider//用于分发临时ID，被分发对象需继承接口IID，未分配时为-1
     {

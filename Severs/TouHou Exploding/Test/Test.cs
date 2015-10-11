@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TouHou_Exploding
+namespace THE_Core
 {
     public class Test
     {
@@ -17,6 +17,7 @@ namespace TouHou_Exploding
         }
         public void 测试()
         {
+
             下一阶段();
             输出召唤池信息(true);
             到行动阶段();
@@ -62,6 +63,26 @@ namespace TouHou_Exploding
             单位攻击基地(game.Players[0].unit[1], game.Players[1]);
             到行动阶段(game.Players[0]);
         }
+        //public class TestA
+        //{
+        //    public int a { get; set; }
+        //    public static int TestValue(TestA aa)
+        //    {
+        //        aa.a = 4;
+        //        return aa.a;
+        //    }
+        //    public static int OutTestValue(out TestA aa)
+        //    {
+        //        aa.a = 4;
+        //        return aa.a;
+        //    }
+        //    public static int RefTestValue(ref TestA aa)
+        //    {
+        //        aa.a = 4;
+        //        return aa.a;
+        //    }
+        //}
+
         public bool 结束战报()
         {
             if (game.NowProcess == Core.Process.RoomEnding)

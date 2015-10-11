@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TouHou_Exploding.Properties
+namespace THE_Core.Properties
 {
 
 

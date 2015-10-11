@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TouHou_Exploding
+namespace THE_Core
 {
     public class Core
     {

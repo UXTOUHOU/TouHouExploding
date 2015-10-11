@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TouHou_Exploding
+namespace THE_Core
 {
     public partial class tstForm : Form
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
 
-namespace TouHou_Exploding
+namespace THE_Core
 {
     public abstract class Card : IDProvider.IID
     {
