@@ -18,8 +18,11 @@ namespace NetWork
                 return "11001";
             }
         }
+        /// <summary>
+        /// 这里填客户端问询的版本号
+        /// </summary>
         [DataMember]
-        public string MyVersion;//这里填客户端问询的版本号
+        public string MyVersion;
         public GetVersion(string myVersion)
         {
             MyVersion = myVersion;
@@ -35,12 +38,21 @@ namespace NetWork
                 return "11001R";//R代表回复
             }
         }
+        /// <summary>
+        /// 这里填询问的版本号
+        /// </summary>
         [DataMember]
-        public string EnquireVersion;//这里填询问的版本号
+        public string EnquireVersion;
+        /// <summary>
+        /// 这里填所询问的版本号是否还能使用
+        /// </summary>
         [DataMember]
-        public bool CanUse;//这里填所询问的版本号是否还能使用
+        public bool CanUse;
+        /// <summary>
+        /// 这里是当前最新的版本号
+        /// </summary>
         [DataMember]
-        public string NowVersion;//这里是当前最新的版本号
+        public string NowVersion;
         public GetVersionR(GetVersion toRespond, bool canUse, string nowVersion=null)
             : base(toRespond)
         {

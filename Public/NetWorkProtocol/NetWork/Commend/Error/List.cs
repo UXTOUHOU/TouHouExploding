@@ -7,8 +7,11 @@ using System.Runtime.Serialization;
 
 namespace NetWork
 {
+    /// <summary>
+    /// 一般不用
+    /// </summary>
     [DataContract]
-    public class NoneError : Error//一般不用
+    public class NoneError : Error
     {
         public NoneError()
         {
@@ -17,8 +20,11 @@ namespace NetWork
             ErrorMsg = null;
         }
     }
+    /// <summary>
+    /// 未归类错误
+    /// </summary>
     [DataContract]
-    public class UnclassedError : Error//未归类错误
+    public class UnclassedError : Error
     {
         public UnclassedError()
         {
@@ -27,8 +33,11 @@ namespace NetWork
             ErrorMsg = "抱歉啦QAQ...出现了某些错误。";
         }
     }
+    /// <summary>
+    /// 自定义错误
+    /// </summary>
     [DataContract]
-    public class CustomError : Error//自定义错误
+    public class CustomError : Error
     {
         public CustomError(string eMsg)
         {
@@ -37,8 +46,11 @@ namespace NetWork
             ErrorMsg = eMsg;
         }
     }
+    /// <summary>
+    /// 登陆错误的基类
+    /// </summary>
     [DataContract]
-    public class LoginError : Error//登陆错误的基类
+    public class LoginError : Error
     {
         public LoginError()
         {
@@ -47,8 +59,11 @@ namespace NetWork
             ErrorMsg = "啊啊啊啊救命啊！登陆出现问题啦！！！";
         }
     }
+    /// <summary>
+    /// 用户名错误
+    /// </summary>
     [DataContract]
-    public class UserError : LoginError//用户名错误
+    public class UserError : LoginError
     {
         public UserError()
         {
@@ -57,8 +72,11 @@ namespace NetWork
         }
     }
 
+    /// <summary>
+    /// 密码错误
+    /// </summary>
     [DataContract]
-    public class PwdError : LoginError//密码错误
+    public class PwdError : LoginError
     {
         public PwdError()
         {
@@ -66,8 +84,11 @@ namespace NetWork
             ErrorMsg = "咳咳……密码不对哦，不许进！";
         }
     }
+    /// <summary>
+    /// 封号
+    /// </summary>
     [DataContract]
-    public class BannedError : LoginError//封号
+    public class BannedError : LoginError
     {
         public BannedError()
         {
@@ -75,8 +96,11 @@ namespace NetWork
             ErrorMsg = "你·个·大·坏·蛋！被~封~号~了~吧~活！该！哈哈哈哈哈哈";
         }
     }
+    /// <summary>
+    /// 拒绝登陆
+    /// </summary>
     [DataContract]
-    public class RefusedError : LoginError//拒绝登陆
+    public class RefusedError : LoginError
     {
         public RefusedError()
         {

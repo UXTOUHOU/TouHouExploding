@@ -41,12 +41,22 @@ namespace NetWork
         }
         [DataMember]
         public UserInformation UserInfo;
-        public LoginR(Login toRespond, UserInformation userInfo)//返回成功 生成类的方法
+        /// <summary>
+        /// 返回成功 生成类的方法
+        /// </summary>
+        /// <param name="toRespond"></param>
+        /// <param name="userInfo"></param>
+        public LoginR(Login toRespond, UserInformation userInfo)
             : base(toRespond)
         {
             UserInfo = userInfo;
         }
-        public LoginR(Login toRespond, Error error)//返回失败 生成类的方法
+        /// <summary>
+        /// 返回失败 生成类的方法
+        /// </summary>
+        /// <param name="toRespond"></param>
+        /// <param name="error"></param>
+        public LoginR(Login toRespond, Error error)
             : base(toRespond)
         {
             Error = error;

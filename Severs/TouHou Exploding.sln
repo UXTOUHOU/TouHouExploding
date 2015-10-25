@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "THE_Severs", "THE_Severs\TH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetWorkCore", "NetWorkCore\NetWorkCore.csproj", "{AEF60DDE-87CE-4C94-B963-EFE02D8E4AC1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetWorkProtocol", "..\Public\NetWorkProtocol\NetWork\NetWorkProtocol.csproj", "{A73C8226-23C8-429F-A08F-CC9E51A6E10B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AEF60DDE-87CE-4C94-B963-EFE02D8E4AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEF60DDE-87CE-4C94-B963-EFE02D8E4AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEF60DDE-87CE-4C94-B963-EFE02D8E4AC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A73C8226-23C8-429F-A08F-CC9E51A6E10B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A73C8226-23C8-429F-A08F-CC9E51A6E10B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A73C8226-23C8-429F-A08F-CC9E51A6E10B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A73C8226-23C8-429F-A08F-CC9E51A6E10B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

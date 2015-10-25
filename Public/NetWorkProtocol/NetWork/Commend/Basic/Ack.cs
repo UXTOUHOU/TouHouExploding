@@ -7,8 +7,11 @@ using System.Runtime.Serialization;
 
 namespace NetWork
 {
+    /// <summary>
+    /// 通知，无须回复。所有通知都需要继承于此类
+    /// </summary>
     [DataContract]
-    public sealed class Ack : Community//通知，无须回复。所有通知都需要继承于此类
+    public sealed class Ack : Community
     {
         [DataMember]
         public override string NetID
@@ -25,7 +28,10 @@ namespace NetWork
                 return null;
             }
         }
-        public string AckID//该指令回复的ID
+        /// <summary>
+        /// 该指令回复的ID
+        /// </summary>
+        public string AckID
         {
             get
             {
@@ -34,19 +40,32 @@ namespace NetWork
         }
         [DataMember]
         private string ackID;
-        public Ack(string toAckID)//从ID创建回复对象
+        /// <summary>
+        /// 从ID创建回复对象
+        /// </summary>
+        /// <param name="toAckID"></param>
+        public Ack(string toAckID)
         {
 
             netAttribute = Community.NetAttributes.Respond;
             ackID = toAckID;
         }
-        public Ack(Community toAck)//从ID创建回复对象
+        /// <summary>
+        /// 从ID创建回复对象
+        /// </summary>
+        /// <param name="toAck"></param>
+        public Ack(Community toAck)//
         {
             netAttribute = Community.NetAttributes.Respond;
             ackID = toAck.CommunityID;
         }
 
-        public static Ack GetAck(Community toAck)//从对象创建回复
+        /// <summary>
+        /// 从对象创建回复
+        /// </summary>
+        /// <param name="toAck"></param>
+        /// <returns></returns>
+        public static Ack GetAck(Community toAck)
         {
              return new Ack(toAck.CommunityID);
         }

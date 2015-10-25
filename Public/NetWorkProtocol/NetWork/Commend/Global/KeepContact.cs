@@ -32,9 +32,16 @@ namespace NetWork
         }
         [DataMember]
         public bool IsKeepContacted;
+        /// <summary>
+        /// 客户端发送01001的间隔时间，单位秒，默认15，如果IskeepContacted为假，该值无效
+        /// </summary>
         [DataMember]
-        public int IntervalTime = 15;//客户端发送01001的间隔时间，单位秒，默认15，如果IskeepContacted为假，该值无效
-        public StartKeepContacted(bool isKeepContacted)//输入是否持续保持联系
+        public int IntervalTime = 15;
+        /// <summary>
+        /// 输入是否持续保持联系
+        /// </summary>
+        /// <param name="isKeepContacted"></param>
+        public StartKeepContacted(bool isKeepContacted)
         {
             IsKeepContacted = isKeepContacted;
         }
