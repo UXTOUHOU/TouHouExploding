@@ -48,6 +48,7 @@ namespace NetWork
             this.bufferSize = bufferSize;
             state = State.Resting;
             seversAddress = null;
+            useSendAsync = true;
         }
         public Client(string localAddress, int port = 80, int bufferSize = 1024)
             :this(NetCore.GetIPAddress(localAddress)[0], port, bufferSize)
@@ -61,6 +62,7 @@ namespace NetWork
             this.bufferSize = bufferSize;
             buffer = new byte[bufferSize];
             state = State.Resting;
+            useSendAsync = true;
         }
 
         /// <summary>
@@ -140,10 +142,10 @@ namespace NetWork
             return Send(msg, true);
         }
         /// <summary>
-        /// 发送数据，第二个参数决定是否显示信息。只影响发送成功的情况。
+        /// 发送数据，第二个参数决定是否显示信息。只影响发送成功的情况。第三个参数为发送完成后的回调方法，如果填了则默认此次发送使用异步模式。
         /// </summary>
         /// <returns></returns>
-        public bool Send(string msg, bool ShowMsg)
+        public bool Send(string msg, bool ShowMsg, AsyncCallback callBack = null)
         {
             if (state != State.Connecting) return false;
             byte[] sendBuffer = Encoding.Unicode.GetBytes(msg);
@@ -170,9 +172,9 @@ namespace NetWork
             }
             try
             {
-                if (useSendAsync)//检测发送是否使用异步方法
+                if (useSendAsync || callBack != null)//检测发送是否使用异步方法
                 {
-                    networkStream.BeginWrite(sendBuffer, 0, sendBuffer.Length, null, null);
+                    networkStream.BeginWrite(sendBuffer, 0, sendBuffer.Length, callBack, null);
                 }
                 else
                 {
