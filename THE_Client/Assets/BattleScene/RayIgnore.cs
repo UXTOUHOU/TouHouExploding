@@ -2,13 +2,10 @@
 using System.Collections;
 
 public class RayIgnore : MonoBehaviour, ICanvasRaycastFilter
-
 {
-
 	public bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera)
 	{
-		Debug.Log("t");
-		return true;
+		return false;
 	}
 	// Use this for initialization
 	void Start () {

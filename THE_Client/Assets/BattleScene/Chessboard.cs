@@ -17,11 +17,13 @@ namespace Chessboard
 	}
 	public class Chessboard : MonoBehaviour
 	{
-		static Chessboard singleton = null;
 		public GameObject cellGrid;
 		public GameObject chessboardRect;
 		public GameObject chessboardCellPrefab;
+		public GameObject canvas;
 		private Cell[,] cell = new Cell[12, 8];
+		private static Chessboard singleton = null;
+		private static float newCellSize;
 
 		private const int chessboardMaxX = 12;
 		private const int chessboardMaxY = 8;
@@ -38,44 +40,49 @@ namespace Chessboard
 
 		// Use this for initialization
 		void Start () {
+			//Init
 			singleton = this;
 			RectTransform anchor = chessboardRect.GetComponent<RectTransform>();
 			Vector2 chessboardSize = new Vector2(Screen.width *(anchor.anchorMax.x - anchor.anchorMin.x),
 				Screen.height * (anchor.anchorMax.y - anchor.anchorMin.y));
-			float newCellSize = Math.Min(chessboardSize.x / chessboardMaxX, chessboardSize.y / chessboardMaxY);
-			cellGrid.GetComponent<GridLayoutGroup>().cellSize = new Vector2(newCellSize, newCellSize);
+			newCellSize = Math.Min(chessboardSize.x / chessboardMaxX, chessboardSize.y / chessboardMaxY);
+
+			//测试
 			for (int x = 0; x < chessboardMaxX; ++x)
 				for (int y = 0; y < chessboardMaxY; ++y)
 				{
+					//原来是为了在Grid中定位，有空删掉
 					cell[x, y] = new Cell();
 					GameObject newObj = new GameObject();
 					newObj.name = x + " " + y;
 					newObj.AddComponent<RectTransform>();
 					cell[x, y].obj = newObj;
-					newObj.transform.SetParent(cellGrid.transform);
-				}
-			foreach (var item in cell)
-			{
-				if (item.unit == null)
-				{
-					//Debug.Log();
+
+					//每个格子的黑色背景
+					var item = cell[x, y];
 					item.background = Instantiate(chessboardCellPrefab.transform.FindChild("Background").gameObject);
-					item.background.transform.SetParent(item.obj.transform);
+					item.background.name = x + " " + y;
+					item.background.transform.SetParent(canvas.transform);
+					item.background.transform.localPosition = GetCellLocation(new ChessboardPosition(x, y));
 					item.background.transform.localScale = new Vector3(newCellSize / 75, newCellSize / 75, 1);
 
+					//每个格子添加一个单位
 					item.unit = new Unit(1);
-					item.unit.image.transform.SetParent(item.obj.transform);
+					item.unit.image.transform.SetParent(canvas.transform);
+					item.unit.image.transform.localPosition = GetCellLocation(new ChessboardPosition(x, y));
 					item.unit.image.transform.localScale = new Vector3(newCellSize / 75, newCellSize / 75, 1);
-					//item.unit.image.transform.position = chessboardRect.transform.localPosition;
-
-					//Debug.Log(item.unit);
-					//Debug.Log(item.unit.image);
-					//Debug.Log(item.obj);
-					//item.unit.image.transform.SetParent(item.obj.transform);
 				}
-			}
+			//
 		}
-	
+
+		//左下为起点
+		private Vector2 GetCellLocation(ChessboardPosition position)
+		{
+			const float pivot = 0.5F;
+			RectTransform anchor = chessboardRect.GetComponent<RectTransform>();
+			return new Vector2(anchor.localPosition.x + (position.x + pivot) * newCellSize,
+				anchor.localPosition.y - (chessboardMaxY - position.y - pivot) * newCellSize);
+		}
 		// Update is called once per frame
 		void Update () {
 	

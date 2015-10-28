@@ -12,6 +12,9 @@ namespace Chessboard
 			image = new GameObject();
 			image.AddComponent<Image>();
 			image.GetComponent<Image>().sprite = CreateUnitSprite(unitID);
+
+			//事件穿透
+			image.AddComponent<RayIgnore>();
 		}
 
 		private Sprite CreateUnitSprite(int unitID)
