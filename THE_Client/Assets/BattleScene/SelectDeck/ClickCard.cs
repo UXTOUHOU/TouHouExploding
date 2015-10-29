@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ClickCard : MonoBehaviour {
 	public GameObject clickedCard;
-	private SelectDeckManager deckManager;
+	private SelectDeck deckManager;
 
 	public enum CardPanel
 	{
@@ -34,7 +34,7 @@ public class ClickCard : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		deckManager = GameObject.Find("/Main Camera").transform.GetComponent<SelectDeckManager>();
+		deckManager = GameObject.Find("/Main Camera").transform.GetComponent<SelectDeck>();
 	}
 	
 	// Update is called once per frame

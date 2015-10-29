@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SelectDeckManager : MonoBehaviour {
+public class SelectDeck : MonoBehaviour {
 	public GameObject cardListPrefab;
 	public GameObject deckListPrefab;
 	public GameObject cardListInner;
@@ -89,7 +89,7 @@ public class SelectDeckManager : MonoBehaviour {
 			GameObject newCard = Instantiate(cardListPrefab.transform.FindChild("Panel").gameObject);
 			newCard.name = "Panel_Card_" + cardID[i];
 			newCard.transform.SetParent(cardListInner.transform);
-			Texture2D cardTexture = Resources.Load<Texture2D>("Card_" + cardID[i]);
+			Texture2D cardTexture = Resources.Load<Texture2D>("Cards/Card_" + cardID[i].ToString().PadLeft(4, '0'));
 			Sprite cardSprite = Sprite.Create(cardTexture, new Rect(0, 0, cardTexture.width, cardTexture.height), new Vector2(0.5f, 0.5f));
 			newCard.transform.FindChild("Card").GetComponent<Image>().sprite = cardSprite;
 		}

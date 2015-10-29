@@ -17,7 +17,6 @@ namespace Chessboard
 	}
 	public class Chessboard : MonoBehaviour
 	{
-		public GameObject cellGrid;
 		public GameObject chessboardRect;
 		public GameObject chessboardCellPrefab;
 		public GameObject canvas;
