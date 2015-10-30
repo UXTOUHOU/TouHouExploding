@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Globalization;
 
-namespace Chessboard
+namespace BattleScene
 {
 	public class CellEvent : MonoBehaviour
 	{
@@ -11,15 +11,26 @@ namespace Chessboard
 
 		public void OnLeftButtonDown()
 		{
+			switch(BattleProcess.playerState)
+			{
+			case PlayerState.PS_WaitingOperate:
+				//if(unit.group == yours)
+				BattleProcess.ChangeState(PlayerState.PS_SelectUnitBehavior);
+				cell.ShowOperateButton();
+				Chessboard.SelectedCell = cell;
+				break;
+			default:
+				break;
+			}
 			Debug.Log("Press Cell:" + background.name);
 		}
 
 		public void OnMouseEnter()
 		{
-			switch (BattleScene.playerState)
+			switch (BattleProcess.playerState)
 			{
 			case PlayerState.PS_WaitingOperate:
-				cell.SetBackgroundColor(new Color(0, 0, 0));
+				cell.SetBackgroundColor(Cell.selected);
 				break;
 			default:
 				break;
@@ -29,6 +40,14 @@ namespace Chessboard
 
 		public void OnMouseLeave()
 		{
+			switch (BattleProcess.playerState)
+			{
+			case PlayerState.PS_WaitingOperate:
+				Chessboard.ClearBackground();
+				break;
+			default:
+				break;
+			}
 			Debug.Log("Leave Cell:" + background.name);
 		}
 		// Use this for initialization

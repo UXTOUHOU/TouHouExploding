@@ -46,7 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BattleScene\BattleScene.cs" />
+     <Compile Include="Assets\BattleScene\BattleProcess.cs" />
+     <Compile Include="Assets\BattleScene\Button.cs" />
      <Compile Include="Assets\BattleScene\Cell.cs" />
      <Compile Include="Assets\BattleScene\CellEvent.cs" />
      <Compile Include="Assets\BattleScene\Chessboard.cs" />

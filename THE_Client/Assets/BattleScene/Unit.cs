@@ -2,11 +2,17 @@
 using System.Collections;
 using UnityEngine.UI;
 
-namespace Chessboard
+namespace BattleScene
 {
 	public class Unit
 	{
 		public GameObject image;
+
+		private int hp;
+		private GameObject textHP;
+		private int groupType;
+		private GameObject imageGroup;
+		//private GameObject _Attribute;
 		public Unit(int unitID)
 		{
 			image = new GameObject();
