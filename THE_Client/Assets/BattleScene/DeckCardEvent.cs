@@ -1,24 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DeckCardEvent : MonoBehaviour {
-	public GameObject card;
-
-	public void OnMouseDown()
+namespace BattleScene
+{
+	public class DeckCardEvent : MonoBehaviour
 	{
-		Debug.Log("Press Card:" + card.name);
-		//Test
-		Deck.RemoveDeckCard(card);
-		//
-	}
+		public GameObject card;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		public void OnMouseDown()
+		{
+			Debug.Log("Press Card:" + card.name);
+
+			Chessboard.SelectedCard = card;
+			BattleProcess.ChangeState(PlayerState.PS_SelectSummonPosition);
+	        //Test
+			//Deck.RemoveDeckCard(card);
+			//
+		}
+
+		// Use this for initialization
+		void Start() {
+
+		}
+
+		// Update is called once per frame
+		void Update() {
+
+		}
 	}
 }

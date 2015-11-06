@@ -51,17 +51,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -74,16 +68,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\BattleScene\BattleScene.cs" />
-    <Compile Include="Assets\BattleScene\CardDeckManager.cs" />
+    <Compile Include="Assets\BattleScene\BattleProcess.cs" />
+    <Compile Include="Assets\BattleScene\CardAttribute.cs" />
     <Compile Include="Assets\BattleScene\Cell.cs" />
     <Compile Include="Assets\BattleScene\CellEvent.cs" />
+    <Compile Include="Assets\BattleScene\Cemetery.cs" />
     <Compile Include="Assets\BattleScene\Chessboard.cs" />
+    <Compile Include="Assets\BattleScene\Deck.cs" />
+    <Compile Include="Assets\BattleScene\DeckCardEvent.cs" />
+    <Compile Include="Assets\BattleScene\GridCellSize.cs" />
+    <Compile Include="Assets\BattleScene\OperateButton.cs" />
     <Compile Include="Assets\BattleScene\RayIgnore.cs" />
     <Compile Include="Assets\BattleScene\SelectDeck\ClickCard.cs" />
+    <Compile Include="Assets\BattleScene\SelectDeck\SelectDeck.cs" />
     <Compile Include="Assets\BattleScene\SelectDeck\SelectDeckButton.cs" />
-    <Compile Include="Assets\BattleScene\SelectDeck\SelectDeckManager.cs" />
-    <Compile Include="Assets\BattleScene\SelectDeck\gridCellSize.cs" />
     <Compile Include="Assets\BattleScene\Test.cs" />
     <Compile Include="Assets\BattleScene\Unit.cs" />
     <Compile Include="Assets\BattleScene\UnitManager.cs" />

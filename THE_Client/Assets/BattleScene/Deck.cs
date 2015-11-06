@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+
 public class Deck : MonoBehaviour 
 {
 	private static Deck singleton;
@@ -21,10 +22,10 @@ public class Deck : MonoBehaviour
 	{
 		Deck deck = singleton;
 		GameObject card = Instantiate(deck.cardPrefab.transform.FindChild("Card").gameObject);
-		card.name = "Card_" + cardID.ToString().PadLeft(4, '0');									//Set name Card_0000
-		card.transform.SetParent(deck.canvas.transform);											//Set parent
-		card.GetComponent<Image>().sprite = SelectDeck.CreateCardSprite(cardID);					//Set card sprite
-		SetCardSize(card, deck.deckCardWidth, deck.deckCardHeight);									//Set size
+		card.name = "Card_" + cardID.ToString().PadLeft(4, '0');									//Set name "Card_XXXX"
+		card.transform.SetParent(deck.canvas.transform);										
+		card.GetComponent<Image>().sprite = SelectDeck.CreateCardSprite(cardID);				
+		SetCardSize(card, deck.deckCardWidth, deck.deckCardHeight);								
 		deck.deckCard.Add(card);
 		deck.SortDeckCard();
 	}
@@ -39,7 +40,7 @@ public class Deck : MonoBehaviour
 		Destroy(card);
 		deck.SortDeckCard();
 	}
-	private static void SetCardSize(GameObject card, float width, float height)
+	public static void SetCardSize(GameObject card, float width, float height)
 	{
 		var rectTransform = card.GetComponent<RectTransform>();
 		rectTransform.sizeDelta = new Vector2(width, height);
@@ -57,6 +58,7 @@ public class Deck : MonoBehaviour
 			deckPosition.x += deckCardWidth;
 		}
 	}
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -67,7 +69,7 @@ public class Deck : MonoBehaviour
 		deckCardHeight = (anchor.anchorMax.y - anchor.anchorMin.y) * Screen.height;
 		deckCardWidth = deckCardHeight * cardWidth / cardHeight;
 
-		//加入手牌测试
+		//Test 加入手牌
 		AddDeckCard(6);
 		AddDeckCard(11);
 		AddDeckCard(13);

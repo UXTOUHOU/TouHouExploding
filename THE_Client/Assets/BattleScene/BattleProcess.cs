@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using BattleScene;
+
 public enum PlayerState
 {
 	PS_Wait,					//对方的回合，不可操作
@@ -13,53 +14,140 @@ public enum PlayerState
 	PS_SelectAttackTarget,		//指定攻击目标
 	PS_SelectMovePosition,		//指定移动位置
 	PS_SelectSkill,				//选择使用的技能
-	PS_RunningSkill,			//执行技能中
+	PS_RunningSkill,            //执行技能中
+	PS_SelectSummonPosition,	//选择召唤位置
 	//PS_WaitSelectCell,		//自定技能的等待选择目标状态
 };
-public class BattleProcess : MonoBehaviour
+
+namespace BattleScene
 {
-	public static PlayerState playerState;
-	public static void ChangeState(PlayerState newState)
-	{ 
-		//退出的state
-		switch(playerState)
+	public class BattleProcess : MonoBehaviour
+	{
+		public static PlayerState playerState;
+
+		public GameObject CanvasObject;
+		public GameObject Account;
+		public static void ChangeState(PlayerState newState)
 		{
-		case PlayerState.PS_Wait:
-		case PlayerState.PS_WaitingOperate:
-			break;
-		case PlayerState.PS_SelectUnitBehavior:
+			Debug.Log("new state:" + newState);
+			//退出的state
+			switch (playerState)
+			{
+			case PlayerState.PS_Wait:
+			case PlayerState.PS_WaitingOperate:
+				break;
+			case PlayerState.PS_SelectUnitBehavior:
+				Cell.HideOperateButton();
+				Chessboard.ClearBackground();
+				break;
+			case PlayerState.PS_SelectMovePosition:
+			case PlayerState.PS_SelectAttackTarget:
+				Chessboard.ClearBackground();
+				break;
+			case PlayerState.PS_SelectSummonPosition:
+				Chessboard.SelectedCard = null;
+				Chessboard.ClearBackground();
+				break;
+			case PlayerState.PS_WaitMoveAnimateEnd:
+				Chessboard.SetAllUnitAttributeVisible(true);
+				break;
+			default:
+				Debug.Log("未定义退出state的行为");
+				break;
+			}
+			//进入的state
+			switch (newState)
+			{
+			case PlayerState.PS_Wait:
+			case PlayerState.PS_SelectSkill:
+				break;
+			case PlayerState.PS_WaitMoveAnimateEnd:
+				Chessboard.SetAllUnitAttributeVisible(false);
+				break;
+			case PlayerState.PS_WaitingOperate:
+				break;
+			case PlayerState.PS_SelectMovePosition:
+				Chessboard.SelectedCell.ShowMovableRange();
+				break;
+			case PlayerState.PS_SelectAttackTarget:
+				Chessboard.SelectedCell.ShowAttackableRange();
+				break;
+			case PlayerState.PS_SelectSummonPosition:
+				//显示所有可能召唤的地点
+				for (int x = 0; x < Chessboard.ChessboardMaxX; ++x)
+					for (int y = 0; y < Chessboard.ChessboardMaxY; ++y)
+					{
+						var cell = Chessboard.GetCell(new ChessboardPosition(x, y));
+						if (cell.IsCanSummonPlace())
+							cell.SetBackgroundColor(Cell.MovableColor);
+					}
+				break;
+			case PlayerState.PS_SelectUnitBehavior:
+				if (Chessboard.SelectedCell != null)
+					Chessboard.SelectedCell.ShowOperateButton();
+				break;
+			default:
+				Debug.Log("未定义进入state的行为");
+				break;
+			}
+			//
+			playerState = newState;
+		}
+
+		public void SetAccountActive(bool active)
+		{
+			Account.SetActive(active);
+			Account.transform.SetSiblingIndex(CanvasObject.transform.childCount);
+			//account.transform.SetParent(GameObject.Find("/Canvas").transform);
+		}
+
+		// Use this for initialization
+		void Start()
+		{
+			//test
+			playerState = PlayerState.PS_WaitingOperate;
+			//
 			Chessboard.ClearBackground();
-			break;
-		default:
-			Debug.Log("未定义退出state的行为");
-			break;
 		}
-		//进入的state
-		switch (newState)
+
+		// Update is called once per frame
+		void Update()
 		{
-		case PlayerState.PS_Wait:
-		case PlayerState.PS_SelectUnitBehavior:
-		case PlayerState.PS_SelectAttackTarget:
-		case PlayerState.PS_SelectMovePosition:
-		case PlayerState.PS_SelectSkill:
-			break;
-		default:
-			Debug.Log("未定义进入state的行为");
-			break;
+			//按下了右键
+			if (Input.GetMouseButtonUp(1))
+			{
+				switch (playerState)
+				{
+				case PlayerState.PS_SelectUnitBehavior:
+					ChangeState(PlayerState.PS_WaitingOperate);
+					break;
+				case PlayerState.PS_SelectAttackTarget:
+					ChangeState(PlayerState.PS_SelectUnitBehavior);
+					break;
+				case PlayerState.PS_SelectMovePosition:
+					if (Cell.RecordingMovePath)
+					{
+						//清空记录的移动路径
+						Cell.ClearMovePath();
+						//重新显示可移动范围
+						Chessboard.ClearBackground();
+						Chessboard.SelectedCell.ShowMovableRange();
+					}
+					else
+					{
+						ChangeState(PlayerState.PS_SelectUnitBehavior);
+					}
+					break;
+				case PlayerState.PS_SelectSkill:
+					ChangeState(PlayerState.PS_SelectUnitBehavior);
+					break;
+				case PlayerState.PS_SelectSummonPosition:
+					ChangeState(PlayerState.PS_WaitingOperate);
+					break;
+				case PlayerState.PS_WaitingOperate:
+					break;
+				}
+			}
 		}
-		//
-		playerState = newState;
-	}
-	// Use this for initialization
-	void Start () {
-		//test
-		playerState = PlayerState.PS_WaitingOperate;
-		//
-		Chessboard.ClearBackground();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }
