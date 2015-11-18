@@ -1,44 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Web.Script.Serialization;
 using System.Reflection;
+using System.Runtime.Serialization.Json;
+using JsonFx.Json;
 
-namespace NetWork
+namespace THE_Core
 {
     public class IDProvider//用于分发临时ID，被分发对象需继承接口IID，未分配时为-1
     {
         //以下为动态ID分配
-        public IDList CID { get; set; }//(CardID)-区别卡牌
+        public IDList CID { get; set; }//(CardID)-区别卡牌(召唤区少女也算卡牌)
         public IDList UID { get; set; }//(UnitID)-区别单位-由卡牌/技能召唤出的单位ID
         public IDList PID { get; set; }//(PlayerID)-区别玩家
         public IDList RID { get; set; }//(RegionID)-区别不同地区方块
         public IDList TID { get; set; }//(TeamID)-区别不同队
+        public IDProvider()
+        {
+            CID = new IDList(typeof(Card));
+            UID = new IDList(typeof(UnitBase));
+            PID = new IDList(typeof(Player));
+            RID = new IDList(typeof(ChessboardCell));
+            TID = new IDList(typeof(Team));
+        }
         public interface IID
         {
-            int id { get; set; }
+            int Id { get; set; }
         }
         public class IDList : IID//用于单项ID管理
         {
             public string name { get; set; }
-            public int id { get; set; }//无指定ID时为-1
+            public int Id { get; set; }//无指定ID时为-1
             private List<Object> _objList = new List<Object>();
             private List<int> _idList = new List<int>();
             private int _currentID = 0;
-            public IDList(string _name)//初始化一个空list
+            public IDList (string _name)//初始化一个空list
             {
                 name = _name;
-                id = -1;
+                Id = -1;
             }
             public IDList(List<Object> list)//由已有ID导入
             {
                 name = list.GetType().ToString();
-                id = -1;
+                Id = -1;
                 SetID(list);
+            }
+            public IDList(Type type)//由类型生成
+            {
+                name = type.ToString();
+                Id = -1;
             }
             public IDList(Object obj)//自动填补名称 输入的obj需要集成IID接口
             {
@@ -50,11 +61,11 @@ namespace NetWork
                 if (IsExist(obj)) return -1;
                 do
                 {
-                    _currentID++;
-                } while (IsExist(_currentID));
+                _currentID++;
+                }while (IsExist(_currentID));
                 _objList.Add(obj);
                 _idList.Add(_currentID);
-                _ChangeObjID(obj, _currentID);
+                _ChangeObjID (obj,_currentID);
                 return _currentID;
             }
             public List<Object> SetID(List<Object> list)//为大量obj注册为其内置的ID，如果ID不可被注册（即已被占用）则返回其本身（如已存在会删除旧ID重新注册）
@@ -77,7 +88,7 @@ namespace NetWork
             public bool SetID(Object obj)//为obj注册为其内置的ID，如果ID不可被注册（即已被占用）返回假（如已存在会删除旧ID重新注册）
             {
                 var temp = (IID)obj;
-                return SetID(obj, temp.id);
+                return SetID(obj, temp.Id);
             }
             public bool SetID(Object obj, int id)//为obj注册为某ID，如果ID不可被注册（即已被占用）返回假（如已存在会删除旧ID重新注册）
             {
@@ -100,9 +111,18 @@ namespace NetWork
                 _ChangeObjID(obj, -1);
                 return true;
             }
+            public bool Del(int id)//删除某个ID的对象，并把该对象id值改为-1，不存在返回假
+            {
+                int index = _GetIndex(id);
+                if (index == -1) return false;
+                _ChangeObjID(_objList[index], -1);
+                _objList.RemoveAt(index);
+                _idList.RemoveAt(index);
+                return true;
+            }
             private int _GetIndex(Object obj)//查找某对象表中索引值，如无则返回-1
             {
-                int index = 0;
+                int index = -1;
                 foreach (Object a in _objList)
                 {
                     index++;
@@ -122,7 +142,7 @@ namespace NetWork
             }
             public int GetID(Object obj)//查找某对象ID，如无则返回-1
             {
-                int index = _GetIndex(obj);
+                int index = _GetIndex (obj);
                 if (index == -1)
                 {
                     return -1;
@@ -147,13 +167,13 @@ namespace NetWork
             private void _ChangeObjID(Object obj, int _id)//更改输入obj的id值
             {
                 var a = (IID)obj;
-                a.id = _id;
+                a.Id = _id;
             }
             public bool IsExist(int id)//查找某ID是否在表中
             {
                 foreach (int a in _idList)
                 {
-                    if (a == id) return true;
+                    if (a==id) return true;
                 }
                 return false;
             }
@@ -200,7 +220,7 @@ namespace NetWork
         }
         public static string[] Divide(string commond)//用于分隔指令
         {
-            string[] str = commond.Split(' ');
+            string[] str = commond.Split (' ');
             return str;
         }
     }
@@ -259,7 +279,7 @@ namespace NetWork
                         fStream = new FileStream(path, FileMode.OpenOrCreate);
                     }
                     sw = new StreamWriter(fStream);
-
+                    
                 }
                 sw.Write(file);
                 sw.Close();
@@ -268,10 +288,10 @@ namespace NetWork
             }
             catch (IOException ex)
             {
-                MessageBox.Show("An IOException has been thrown!\r\n" + ex.ToString());
-                Console.WriteLine("An IOException has been thrown!");
-                Console.WriteLine(ex.ToString());
-                Console.ReadLine();
+                //MessageBox.Show("An IOException has been thrown!\r\n" + ex.ToString());
+                //Console.WriteLine("An IOException has been thrown!");
+                //Console.WriteLine(ex.ToString());
+                //Console.ReadLine();
                 return;
             }
         }
@@ -302,14 +322,14 @@ namespace NetWork
                 }
                 result = sr.ReadToEnd();
                 sr.Close();
-                sr = null;
+                sr = null;          
                 fStream.Close();
                 return result;
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine("An IOException has been thrown!");
-                Console.WriteLine(ex.ToString());
+            catch (IOException ex) 
+            { 
+                Console.WriteLine("An IOException has been thrown!"); 
+                Console.WriteLine(ex.ToString()); 
                 return null;
             }
 
@@ -375,10 +395,6 @@ namespace NetWork
                 return Encoding.UTF8.GetString(stream.ToArray());
             }
         }
-        public static Dictionary<string, object> GetDictionaryFromJson(string JSON)
-        {
-            return (Dictionary<string, object>)new JavaScriptSerializer().DeserializeObject(JSON);
-        }
 
         public static T ParseFromJson<T>(string JSON, IEnumerable<Type> knownTypes = null)//json转对象
         {
@@ -387,7 +403,7 @@ namespace NetWork
                 return (T)new DataContractJsonSerializer(typeof(T), knownTypes).ReadObject(ms);
             }
         }
-        public static object ParseFromJsonWithType(string JSON, Type t , IEnumerable<Type> knownTypes = null)//json转对象（使用Type作为依据）这个是自制的，不是虫子的
+        public static object ParseFromJsonWithType(string JSON, Type t, IEnumerable<Type> knownTypes = null)//json转对象（使用Type作为依据）这个是自制的，不是虫子的
         {
             if (t != null)
             {
@@ -400,7 +416,7 @@ namespace NetWork
                 return obj;
             }
             return null;
-        } 
+        }
 
     }
 }
