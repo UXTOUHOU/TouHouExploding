@@ -8,7 +8,7 @@ namespace THE_Core
 {
     public class Team : IDProvider.IID
     {
-        public Core GameCore;
+        public Game GameCore;
         public int Id { get; set; }
         public string Name { get; set; }
         public int blood { get; set; }//基地血量
@@ -27,7 +27,7 @@ namespace THE_Core
             }
         }
 
-        public Team(Core core)
+        public Team(Game core)
         {
             GameCore = core;
             GameCore.IDP.TID.ApplyID(this);

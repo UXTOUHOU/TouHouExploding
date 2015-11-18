@@ -9,6 +9,6 @@ namespace THE_Severs
 {
     class Room
     {
-        public Core roomCore { get; set; }
+        public Game roomCore { get; set; }
     }
 }

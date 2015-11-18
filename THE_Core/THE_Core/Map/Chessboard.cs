@@ -8,9 +8,9 @@ namespace THE_Core
 {
     public class Chessboard
     {
-        public Core GameCore;
+        public Game GameCore;
         public ChessboardCell[,] RegionList;//第一个索引值为列(8)，第二个为行(12)
-        public Chessboard(Core core, ChessboardCell[,] map)//自动读取一张地图，并将区块注册至区域表
+        public Chessboard(Game core, ChessboardCell[,] map)//自动读取一张地图，并将区块注册至区域表
         {
             GameCore = core;
             RegionList = map;
@@ -22,7 +22,7 @@ namespace THE_Core
                 }
             }
         }
-        public Chessboard(Core core)//自动生成一张地图 第一个参数为其所在核心，会自动分配地区ID并将区块注册至区域表
+        public Chessboard(Game core)//自动生成一张地图 第一个参数为其所在核心，会自动分配地区ID并将区块注册至区域表
         {
             GameCore = core;
             RegionList = MakeMap();
@@ -108,7 +108,7 @@ namespace THE_Core
                 public int stateHereID { get; set; }//地区状态
                 public int unitHereID { get; set; }//在此位置的单位
             }
-            public Chessboard ToMap(Core core)//未完成
+            public Chessboard ToMap(Game core)//未完成
             {
                 return new Chessboard(core);
             }

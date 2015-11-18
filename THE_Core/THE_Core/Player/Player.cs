@@ -8,7 +8,7 @@ namespace THE_Core
 {
     public class Player : IDProvider.IID
     {
-        public Core GameCore;
+        public Game GameCore;
         public int Id { get; set; }
         public string name { get; set; }
         public Type playerType { get; set; }
@@ -54,7 +54,7 @@ namespace THE_Core
                 u.Reset();
             }
         }
-        public UnitBase Call(Character character,int[] locate)
+        public UnitBase Call(SummonCard character,int[] locate)
         {
             return character.ToBattle(locate, this);
         }

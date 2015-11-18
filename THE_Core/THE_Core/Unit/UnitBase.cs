@@ -5,16 +5,16 @@ namespace THE_Core
 {
     public class UnitBase : IDProvider.IID
     {
-        public Character card
+        public SummonCard card
         {
             get
             {
                 return _card;
             }
         }
-        private Character _card;
+        private SummonCard _card;
         public int Id { get; set; }
-        public Core GameCore;
+        public Game GameCore;
         public Player Owner;
         public ChessboardCell Position { get; set; }
 
@@ -24,9 +24,9 @@ namespace THE_Core
         public string typeID { get; set; }//该单位的种类ID
         public string name { get; set; }//不解释
         public string description { get; set; }//对该角色的描述
-        public Character.Type type { get; set; }//角色类型
+        public SummonCard.Type type { get; set; }//角色类型
 
-        public UnitAttribute HP { get; set; }
+        public UnitAttribute HitPoint { get; set; }
         public UnitAttribute Mobility { get; set; }
         public UnitAttribute AttackPower { get; set; }
         public UnitAttribute AttackRange { get; set; }
@@ -37,25 +37,25 @@ namespace THE_Core
         {
             get
             {
-                if (HP.Current> 0) return false;
+                if (HitPoint.Current> 0) return false;
                 else return true;
             }
         }
 
-        public void InitAttribute(Character transCare)
+        public void InitAttribute(SummonCard transCare)
         {
             throw new NotImplementedException();
         }
             
 
-        public UnitBase(Character transCard, int[] buildLocate, Player owner)
+        public UnitBase(SummonCard transCard, int[] buildLocate, Player owner)
         {
             InitAttribute(transCard);
             _card = transCard;
             GameCore = _card.GameCore;
             Owner = owner;
             Owner.unit.Add(this);
-            _card.GameCore.RoomMap.RegionList[buildLocate[0], buildLocate[1]].MoveHere(this);
+            _card.GameCore.Chessboard.RegionList[buildLocate[0], buildLocate[1]].MoveHere(this);
             _card.GameCore.IDP.UID.ApplyID(this);
             action = new Action();
             foreach (Skill s in skill)
@@ -115,7 +115,7 @@ namespace THE_Core
             }
 
                 action.HaveAttack = true;
-            target.Hurt(attribute.attack);
+            target.Hurt(AttackPower.Current);
             return true;
         }
         public virtual bool CanAttack(UnitBase target)//检测是否可以攻击某单位，重写这个方法可更改射程判断规则
@@ -160,7 +160,7 @@ namespace THE_Core
         }
         public bool Move(int x,int y)
         {
-            return Move(GameCore.RoomMap.RegionList[x, y]);
+            return Move(GameCore.Chessboard.RegionList[x, y]);
         }
         public bool Move(ChessboardCell region)//移动到某个位置，不能移动返回假
         {
@@ -191,13 +191,13 @@ namespace THE_Core
         }
         public virtual int Hurt(int blood)//体力流失，返回剩余血量，死亡返回-1
         {
-            HP.Current -= blood;
-            if (HP.Current <= 0)
+            HitPoint.Current -= blood;
+            if (HitPoint.Current <= 0)
             {
                 Die();
                 return -1;
             }
-            return HP.Current;
+            return HitPoint.Current;
         }
         public virtual void Die()
         {
@@ -239,7 +239,7 @@ namespace THE_Core
             public string typeID { get; set; }//该单位的种类ID
             public string name { get; set; }//不解释
             public string description { get; set; }//对该角色的描述
-            public Character.Type type { get; set; }//角色类型
+            public SummonCard.Type type { get; set; }//角色类型
             public int blood { get; set; }//血量
             public int mobility { get; set; }//机动性
             public int attack { get; set; }//攻击伤害

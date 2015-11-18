@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace THE_Core
 {
-    public class MissTest : Character
+    public class MissTest : SummonCard
     {
-        public MissTest(Core core)
+        public MissTest(Game core)
             : base(core)
         {
 

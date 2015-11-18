@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace THE_Core
 {
+    [DebuggerDisplay("Name={Name}, Value={Current}/{Max}(Default)")]
     public abstract class UnitAttribute
     {
         public string Key

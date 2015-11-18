@@ -46,14 +46,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Card\Card.cs" />
-    <Compile Include="Card\Character\TestCard\MissTest.cs" />
+    <Compile Include="Card\HeroCard.cs" />
+    <Compile Include="Card\MissTest.cs" />
+    <Compile Include="Card\PolicyCard.cs" />
+    <Compile Include="Card\SpellCard.cs" />
+    <Compile Include="Card\SummonCard.cs" />
+    <Compile Include="Core\UnitSpool.cs" />
     <Compile Include="Unit\Girl.cs" />
     <Compile Include="Unit\Minion.cs" />
+    <Compile Include="Unit\Servant.cs" />
     <Compile Include="Unit\Skill.cs" />
     <Compile Include="Unit\UnitAttribute.cs" />
     <Compile Include="Unit\UnitBase.cs" />
     <Compile Include="Core\Basic.cs" />
-    <Compile Include="Core\Core.cs" />
+    <Compile Include="Core\Game.cs" />
     <Compile Include="Map\Chessboard.cs" />
     <Compile Include="Map\ChessboardCell.cs" />
     <Compile Include="Map\Position.cs" />
@@ -65,11 +71,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Card\Character\BasicCard\" />
-    <Folder Include="Card\Character\HeroCard\" />
-    <Folder Include="Card\PolicyCard\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
