@@ -52,10 +52,11 @@
     <Compile Include="Card\SpellCard.cs" />
     <Compile Include="Card\SummonCard.cs" />
     <Compile Include="Core\UnitSpool.cs" />
+    <Compile Include="Skill\SpellEffect.cs" />
     <Compile Include="Unit\Girl.cs" />
     <Compile Include="Unit\Minion.cs" />
     <Compile Include="Unit\Servant.cs" />
-    <Compile Include="Unit\Skill.cs" />
+    <Compile Include="Skill\Skill.cs" />
     <Compile Include="Unit\UnitAttribute.cs" />
     <Compile Include="Unit\UnitBase.cs" />
     <Compile Include="Core\Basic.cs" />
@@ -67,11 +68,17 @@
     <Compile Include="Player\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support\Support.cs" />
+    <Compile Include="Skill\Variable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="THE_Data.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="THE_Data.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

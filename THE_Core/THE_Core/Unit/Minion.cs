@@ -9,5 +9,7 @@ namespace THE_Core
     public class Minion : UnitBase
     {
         public Minion(SummonCard transCard, int[] buildLocate, Player owner) : base(transCard, buildLocate, owner)
+        {
+        }
     }
 }

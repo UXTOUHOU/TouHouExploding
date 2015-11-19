@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="THE_Data"
+    targetNamespace="http://tempuri.org/THE_Data.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/THE_Data.xsd"
+    xmlns:mstns="http://tempuri.org/THE_Data.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="THE_Data">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Units">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Unit" type="Unit" minOccurs="0" maxOccurs="unbounded">
+
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Skills">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Skill" type="Skill" minOccurs="0" maxOccurs="unbounded">
+                
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SpellEffects">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SpellEffect" type="SpellEffect" minOccurs="0" maxOccurs="unbounded">
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="UnitType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Girl"></xs:enumeration>
+      <xs:enumeration value="Minion"></xs:enumeration>
+      <xs:enumeration value="Servant"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AttributeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HitPoint"></xs:enumeration>
+      <xs:enumeration value="Mobility"></xs:enumeration>
+      <xs:enumeration value="AttackPower"></xs:enumeration>
+      <xs:enumeration value="AttackRange"></xs:enumeration>
+      <xs:enumeration value="Other"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SpellEffect">
+    <xs:sequence>
+      <xs:element name="Variable">
+        <xs:complexType>
+          <xs:attribute name="Index" type="xs:int"></xs:attribute>
+          <xs:attribute name="Description" type="xs:string"></xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:string"></xs:attribute>
+    <xs:attribute name="Name" type="xs:string"></xs:attribute>
+    <xs:attribute name="Description" type="xs:string"></xs:attribute>
+    <xs:attribute name="AffectAttribute" type="AttributeType"></xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="Unit">
+    <xs:attribute name="Id" type="xs:string"></xs:attribute>
+    <xs:attribute name="Name" type="xs:string"></xs:attribute>
+    <xs:attribute name="Description" type="xs:string"></xs:attribute>
+    <xs:attribute name="Provenance" type="xs:string"></xs:attribute>
+    <xs:attribute name="Type" type="UnitType"></xs:attribute>
+    <xs:attribute name="HitPoint" type="xs:int"></xs:attribute>
+    <xs:attribute name="Mobility" type="xs:int"></xs:attribute>
+    <xs:attribute name="AttackPower" type="xs:int"></xs:attribute>
+    <xs:attribute name="AttackRange" type="xs:int"></xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="Skill">
+  </xs:complexType>
+</xs:schema>
