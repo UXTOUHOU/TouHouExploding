@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace THE_Core
 {
-    public class Minion : Unit
+    public class UnitAttackPower: UnitAttribute
     {
-        public Minion(SummonCard transCard, int[] buildLocate, Player owner) : base(transCard, buildLocate, owner)
+        public UnitAttackPower(int Value) : base("AttackPower", "Attack Power", Value, UnitAttributeType.AttackPower)
         {
         }
     }

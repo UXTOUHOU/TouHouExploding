@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace THE_Core
 {
-    public class Minion : Unit
+    public class UnitHitPoint : UnitAttribute
     {
-        public Minion(SummonCard transCard, int[] buildLocate, Player owner) : base(transCard, buildLocate, owner)
+        public UnitHitPoint(int Value) : base("HitPoint", "Hit Point", Value, UnitAttributeType.HitPoint)
         {
         }
     }

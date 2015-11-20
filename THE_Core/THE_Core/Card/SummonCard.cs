@@ -45,23 +45,21 @@ namespace THE_Core
             }
         }
         public Type type { get; set; }
-        public UnitBase.Attribute unitAttribute { get; set; }//召唤出的角色属性
-        public enum Type { Minion, Girl, Servant }//Common召唤出的为普通单位，Hero为少女单位，Servent为基本效果产生的单位
-        //public enum Preset { 毛玉, 天狗, 妖精, 永远亭的兔子, 自爆人形, 河童重工, 博丽灵梦, 魂魄妖梦, 十六夜咲夜, Custom }
-        public UnitBase ToBattle(int[] locate, Player owner)//上战场，把卡片转换为单位。已经召唤过的话会返回空
+        public Unit.Attribute unitAttribute { get; set; }//召唤出的角色属性
+        public Unit ToBattle(int[] locate, Player owner)//上战场，把卡片转换为单位。已经召唤过的话会返回空
         {
             if (owner.action.HaveCall == true) return null;
-            if (!GameCore.Chessboard.RegionList[locate[0], locate[1]].owner.Equals(owner.atTeam)) return null;//判断是否有权限
+            if (!GameCore.Chessboard.CellList[locate[0], locate[1]].owner.Equals(owner.atTeam)) return null;//判断是否有权限
             if (GameCore.Chessboard.GetRegion(locate).unitHere != null) return null;
             owner.action.HaveCall = true;
-            UnitBase x = new UnitBase(this, locate, owner);
+            Unit x = new Unit(this, locate, owner);
             return x;
         }
         public SummonCard(Game core)
             : base(core)
         {
             GameCore = core;
-            unitAttribute = new UnitBase.Attribute();
+            unitAttribute = new Unit.Attribute();
             SetAttribute();
         }
         public override void Discard()

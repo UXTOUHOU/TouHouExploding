@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace THE_Core
 {
-    public class Girl : UnitBase
+    public class Girl : Unit
     {
         public Girl(SummonCard transCard, int[] buildLocate, Player owner) : base(transCard, buildLocate, owner)
         {

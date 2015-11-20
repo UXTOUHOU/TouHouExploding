@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<THE_Data xmlns="http://tempuri.org/THE_Data.xsd">
+  <Units>
+    <Unit Id="Unit_0000_01" Name="毛玉" Description="" Provenance="杂鱼" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0000_02" Name="鸦天狗" Description="" Provenance="杂鱼" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0000_03" Name="妖精" Description="" Provenance="杂鱼" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0000_04" Name="永远亭的兔子" Description="" Provenance="杂鱼" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0000_05" Name="自爆人形" Description="" Provenance="杂鱼" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0000_06" Name="河童重工" Description="" Provenance="杂鱼" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0001_01" Name="博丽灵梦" Description="" Provenance="主角" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0001_02" Name="雾雨魔理沙" Description="" Provenance="主角" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0060_01" Name="露米娅" Description="" Provenance="东方红魔乡" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0060_02" Name="大妖精" Description="" Provenance="东方红魔乡" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0060_03" Name="琪露诺" Description="" Provenance="东方红魔乡" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0060_04" Name="红美铃" Description="" Provenance="东方红魔乡" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0060_05" Name="小恶魔" Description="" Provenance="东方红魔乡" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0060_06" Name="帕秋莉诺雷杰" Description="" Provenance="东方红魔乡" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0060_07" Name="十六夜咲夜" Description="" Provenance="东方红魔乡" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0060_08" Name="蕾米莉亚斯卡雷特" Description="" Provenance="东方红魔乡" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0060_09" Name="芙兰朵露斯卡雷特" Description="" Provenance="东方红魔乡" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0060_10" Name="冴月麟" Description="" Provenance="东方红魔乡" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_01" Name="蕾蒂·霍瓦特洛克" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_02" Name="橙" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_03" Name="爱丽丝·玛格特洛依德" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_04" Name="莉莉白/莉莉黑" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_05" Name="露娜萨·普莉兹姆利巴" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_06" Name="梅露兰·普莉兹姆利巴" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_07" Name="莉莉卡·普莉兹姆利巴" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_08" Name="魂魄妖梦" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_09" Name="西行寺幽幽子" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_10" Name="八云蓝" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_11" Name="八云紫" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0070_12" Name="魂魄妖忌" Description="" Provenance="东方妖妖梦" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0075_01" Name="伊吹萃香 " Description="" Provenance="东方萃梦想" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0080_01" Name="莉格露·奈特巴格" Description="" Provenance="东方永夜抄" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0080_02" Name="米斯蒂娅·萝蕾拉" Description="" Provenance="东方永夜抄" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0080_03" Name="上白泽慧音" Description="" Provenance="东方永夜抄" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0080_04" Name="因幡帝" Description="" Provenance="东方永夜抄" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0080_05" Name="铃仙·优昙华院·因幡 " Description="" Provenance="东方永夜抄" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0080_06" Name="八意永琳" Description="" Provenance="东方永夜抄" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0080_07" Name="蓬莱山辉夜" Description="" Provenance="东方永夜抄" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0080_08" Name="藤原妹红" Description="" Provenance="东方永夜抄" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0090_01" Name="射命丸文" Description="" Provenance="东方花映冢" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0090_02" Name="梅蒂欣·梅兰可莉" Description="" Provenance="东方花映冢" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0090_03" Name="风见幽香" Description="" Provenance="东方花映冢" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0090_04" Name="小野塚小町" Description="" Provenance="东方花映冢" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0090_05" Name="四季映姬·亚玛萨那度" Description="" Provenance="东方花映冢" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0100_01" Name="秋静叶" Description="" Provenance="东方风神录" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0100_02" Name="秋穰子" Description="" Provenance="东方风神录" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0100_03" Name="键山雏" Description="" Provenance="东方风神录" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0100_04" Name="河城荷取" Description="" Provenance="东方风神录" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0100_05" Name="犬走椛" Description="" Provenance="东方风神录" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0100_06" Name="东风谷早苗 " Description="" Provenance="东方风神录" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0100_07" Name="八坂神奈子 " Description="" Provenance="东方风神录" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0100_08" Name="洩矢诹访子 " Description="" Provenance="东方风神录" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0105_01" Name="永江衣玖" Description="" Provenance="东方绯想天" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0105_02" Name="比那名居天子 " Description="" Provenance="东方绯想天" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0110_01" Name="琪斯美" Description="" Provenance="东方地灵殿" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0110_02" Name="黑谷山女" Description="" Provenance="东方地灵殿" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0110_03" Name="水桥帕露西" Description="" Provenance="东方地灵殿" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0110_04" Name="星熊勇仪" Description="" Provenance="东方地灵殿" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0110_05" Name="古明地觉" Description="" Provenance="东方地灵殿" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0110_06" Name="火焰猫燐" Description="" Provenance="东方地灵殿" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0110_07" Name="灵乌路空" Description="" Provenance="东方地灵殿" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0110_08" Name="古明地恋" Description="" Provenance="东方地灵殿" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0120_01" Name="娜兹玲" Description="" Provenance="东方星莲船" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0120_02" Name="多多良小伞" Description="" Provenance="东方星莲船" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0120_03" Name="云居一轮 & 云山 " Description="" Provenance="东方星莲船" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0120_04" Name="村纱水蜜" Description="" Provenance="东方星莲船" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0120_05" Name="寅丸星 " Description="" Provenance="东方星莲船" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0120_06" Name="圣白莲 " Description="" Provenance="东方星莲船" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0120_07" Name="封兽鵺" Description="" Provenance="东方星莲船" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0125_01" Name="姬海棠果" Description="" Provenance="东方文花帖DS" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0130_01" Name="幽谷响子" Description="" Provenance="东方神灵庙" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0130_02" Name="宫古芳香" Description="" Provenance="东方神灵庙" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0130_03" Name="霍青娥" Description="" Provenance="东方神灵庙" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0130_04" Name="苏我屠自古" Description="" Provenance="东方神灵庙" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0130_05" Name="物部布都" Description="" Provenance="东方神灵庙" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0130_06" Name="丰聪耳神子" Description="" Provenance="东方神灵庙" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0130_07" Name="二岩猯藏" Description="" Provenance="东方神灵庙" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0135_01" Name="秦心 " Description="" Provenance="东方心绮楼" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0140_01" Name="若鹭姬" Description="" Provenance="东方辉针城" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0140_02" Name="赤蛮奇" Description="" Provenance="东方辉针城" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0140_03" Name="今泉影狼" Description="" Provenance="东方辉针城" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0140_04" Name="九十九弁弁" Description="" Provenance="东方辉针城" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0140_05" Name="九十九八桥" Description="" Provenance="东方辉针城" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0140_06" Name="鬼人正邪" Description="" Provenance="东方辉针城" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0140_07" Name="少名针妙丸" Description="" Provenance="东方辉针城" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0140_08" Name="堀川雷鼓" Description="" Provenance="东方辉针城" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0145_01" Name="宇佐见堇子" Description="" Provenance="东方深秘录" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0150_01" Name="清兰" Description="" Provenance="东方绀珠传" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0150_02" Name="铃瑚 " Description="" Provenance="东方绀珠传" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0150_03" Name="哆来咪·苏伊特" Description="" Provenance="东方绀珠传" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0150_04" Name="稀神探女" Description="" Provenance="东方绀珠传" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0150_05" Name="克劳恩皮丝" Description="" Provenance="东方绀珠传" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0150_06" Name="纯狐 " Description="" Provenance="东方绀珠传" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_0150_07" Name="赫卡提亚·拉碧斯拉祖利" Description="" Provenance="东方绀珠传" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_01" Name="森近霖之助" Description="" Provenance="东方香霖堂" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_02" Name="朱鹭子" Description="" Provenance="东方香霖堂" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_03" Name="桑尼·米尔克" Description="" Provenance="东方三月精" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_04" Name="露娜·切云德 " Description="" Provenance="东方三月精" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_05" Name="斯塔·萨菲雅" Description="" Provenance="东方三月精" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_06" Name="绵月丰姬" Description="" Provenance="东方儚月抄" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_07" Name="绵月依姬" Description="" Provenance="东方儚月抄" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_08" Name="铃仙二号" Description="" Provenance="东方儚月抄" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_09" Name="稗田阿求" Description="" Provenance="东方求闻史纪" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_10" Name="茨木华扇 " Description="" Provenance="东方茨歌仙" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_11" Name="本居小铃 " Description="" Provenance="东方铃奈庵" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_12" Name="宇佐见莲子" Description="" Provenance="音乐CD" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+    <Unit Id="Unit_9000_13" Name="玛艾露贝莉·赫恩" Description="" Provenance="音乐CD" Type="Girl" HitPoint="1" Mobility="1" AttackPower="1" AttackRange="1" Avaliable="true" />
+  </Units>
+  <Skills>
+  </Skills>
+  <SpellEffects>
+    <SpellEffect Id="HP_01" Name= "HitPoint_Current_Increase_Point" Description= "增加当前生命值（点数）" AffectAttribute= "HitPoint"></SpellEffect>
+    <SpellEffect Id="HP_02" Name= "HitPoint_Current_Increase_Percent" Description= "增加当前生命值（百分比）" AffectAttribute= "HitPoint"></SpellEffect>
+    <SpellEffect Id="HP_03" Name= "HitPoint_Current_Decrease_Point" Description= "减少当前生命值（点数）" AffectAttribute= "HitPoint"></SpellEffect>
+    <SpellEffect Id="HP_04" Name= "HitPoint_Current_Decrease_Percent" Description= "减少当前生命值（百分比）" AffectAttribute= "HitPoint"></SpellEffect>
+    <SpellEffect Id="HP_05" Name= "HitPoint_Current_ChangeTo" Description= "改变当前生命值" AffectAttribute= "HitPoint"></SpellEffect>
+    <SpellEffect Id="HP_11" Name= "HitPoint_UpperBound_Increase_Point" Description= "增加当前生命值上限（点数）" AffectAttribute= "HitPoint"></SpellEffect>
+    <SpellEffect Id="HP_12" Name= "HitPoint_UpperBound_Increase_Percent" Description= "增加当前生命值上限（百分比）" AffectAttribute= "HitPoint"></SpellEffect>
+    <SpellEffect Id="HP_13" Name= "HitPoint_UpperBound_Decrease_Point" Description= "减少当前生命值上限（点数）" AffectAttribute= "HitPoint"></SpellEffect>
+    <SpellEffect Id="HP_14" Name= "HitPoint_UpperBound_Decrease_Percent" Description= "减少当前生命值上限（百分比）" AffectAttribute= "HitPoint"></SpellEffect>
+    <SpellEffect Id="HP_15" Name= "HitPoint_UpperBound_ChangeTo" Description= "改变当前生命值上限" AffectAttribute= "HitPoint"></SpellEffect>
+    <SpellEffect Id="AP_01" Name= "AttackPower_Current_Increase_Point" Description= "增加当前攻击力（点数）" AffectAttribute= "AttackPower"></SpellEffect>
+    <SpellEffect Id="AP_02" Name= "AttackPower_Current_Increase_Percent" Description= "增加当前攻击力（百分比）" AffectAttribute= "AttackPower"></SpellEffect>
+    <SpellEffect Id="AP_03" Name= "AttackPower_Current_Decrease_Point" Description= "减少当前攻击力（点数）" AffectAttribute= "AttackPower"></SpellEffect>
+    <SpellEffect Id="AP_04" Name= "AttackPower_Current_Decrease_Percent" Description= "减少当前攻击力（百分比）" AffectAttribute= "AttackPower"></SpellEffect>
+    <SpellEffect Id="AP_05" Name= "AttackPower_Current_ChangeTo" Description= "改变当前攻击力" AffectAttribute= "AttackPower"></SpellEffect>
+    <SpellEffect Id="AP_11" Name= "AttackPower_UpperBound_Increase_Point" Description= "增加当前攻击力上限（点数）" AffectAttribute= "AttackPower"></SpellEffect>
+    <SpellEffect Id="AP_12" Name= "AttackPower_UpperBound_Increase_Percent" Description= "增加当前攻击力上限（百分比）" AffectAttribute= "AttackPower"></SpellEffect>
+    <SpellEffect Id="AP_13" Name= "AttackPower_UpperBound_Decrease_Point" Description= "减少当前攻击力上限（点数）" AffectAttribute= "AttackPower"></SpellEffect>
+    <SpellEffect Id="AP_14" Name= "AttackPower_UpperBound_Decrease_Percent" Description= "减少当前攻击力上限（百分比）" AffectAttribute= "AttackPower"></SpellEffect>
+    <SpellEffect Id="AP_15" Name= "AttackPower_UpperBound_ChangeTo" Description= "改变当前攻击力上限" AffectAttribute= "AttackPower"></SpellEffect>
+    <SpellEffect Id="AR_01" Name= "AttackRange_Current_Increase_Point" Description= "增加当前攻击范围（点数）" AffectAttribute= "AttackRange"></SpellEffect>
+    <SpellEffect Id="AR_02" Name= "AttackRange_Current_Increase_Percent" Description= "增加当前攻击范围（百分比）" AffectAttribute= "AttackRange"></SpellEffect>
+    <SpellEffect Id="AR_03" Name= "AttackRange_Current_Decrease_Point" Description= "减少当前攻击范围（点数）" AffectAttribute= "AttackRange"></SpellEffect>
+    <SpellEffect Id="AR_04" Name= "AttackRange_Current_Decrease_Percent" Description= "减少当前攻击范围（百分比）" AffectAttribute= "AttackRange"></SpellEffect>
+    <SpellEffect Id="AR_05" Name= "AttackRange_Current_ChangeTo" Description= "改变当前攻击范围" AffectAttribute= "AttackRange"></SpellEffect>
+    <SpellEffect Id="AR_11" Name= "AttackRange_UpperBound_Increase_Point" Description= "增加当前攻击范围上限（点数）" AffectAttribute= "AttackRange"></SpellEffect>
+    <SpellEffect Id="AR_12" Name= "AttackRange_UpperBound_Increase_Percent" Description= "增加当前攻击范围上限（百分比）" AffectAttribute= "AttackRange"></SpellEffect>
+    <SpellEffect Id="AR_13" Name= "AttackRange_UpperBound_Decrease_Point" Description= "减少当前攻击范围上限（点数）" AffectAttribute= "AttackRange"></SpellEffect>
+    <SpellEffect Id="AR_14" Name= "AttackRange_UpperBound_Decrease_Percent" Description= "减少当前攻击范围上限（百分比）" AffectAttribute= "AttackRange"></SpellEffect>
+    <SpellEffect Id="AR_15" Name= "AttackRange_UpperBound_ChangeTo" Description= "改变当前攻击范围上限" AffectAttribute= "AttackRange"></SpellEffect>
+    <SpellEffect Id="MV_01" Name= "Mobility_Current_Increase_Point" Description= "增加当前移动力（点数）" AffectAttribute= "Mobility"></SpellEffect>
+    <SpellEffect Id="MV_02" Name= "Mobility_Current_Increase_Percent" Description= "增加当前移动力（百分比）" AffectAttribute= "Mobility"></SpellEffect>
+    <SpellEffect Id="MV_03" Name= "Mobility_Current_Decrease_Point" Description= "减少当前移动力（点数）" AffectAttribute= "Mobility"></SpellEffect>
+    <SpellEffect Id="MV_04" Name= "Mobility_Current_Decrease_Percent" Description= "减少当前移动力（百分比）" AffectAttribute= "Mobility"></SpellEffect>
+    <SpellEffect Id="MV_05" Name= "Mobility_Current_ChangeTo" Description= "改变当前移动力" AffectAttribute= "Mobility"></SpellEffect>
+    <SpellEffect Id="MV_11" Name= "Mobility_UpperBound_Increase_Point" Description= "增加当前移动力上限（点数）" AffectAttribute= "Mobility"></SpellEffect>
+    <SpellEffect Id="MV_12" Name= "Mobility_UpperBound_Increase_Percent" Description= "增加当前移动力上限（百分比）" AffectAttribute= "Mobility"></SpellEffect>
+    <SpellEffect Id="MV_13" Name= "Mobility_UpperBound_Decrease_Point" Description= "减少当前移动力上限（点数）" AffectAttribute= "Mobility"></SpellEffect>
+    <SpellEffect Id="MV_14" Name= "Mobility_UpperBound_Decrease_Percent" Description= "减少当前移动力上限（百分比）" AffectAttribute= "Mobility"></SpellEffect>
+    <SpellEffect Id="MV_15" Name= "Mobility_UpperBound_ChangeTo" Description= "改变当前移动力上限" AffectAttribute= "Mobility"></SpellEffect>
+    <SpellEffect Id="MV_21" Name= "Position_MoveTo" Description= "移动到指定地点" AffectAttribute= "Position"></SpellEffect>
+    <SpellEffect Id="DM_01" Name= "Damage_Increase_Point" Description= "增加伤害（点数）" AffectAttribute= "Damage"></SpellEffect>
+    <SpellEffect Id="DM_02" Name= "Damage_Increase_Percent" Description= "增加伤害（百分比）" AffectAttribute= "Damage"></SpellEffect>
+    <SpellEffect Id="DM_03" Name= "Damage_Decrease_Point" Description= "减少伤害（点数）" AffectAttribute= "Damage"></SpellEffect>
+    <SpellEffect Id="DM_04" Name= "Damage_Decrease_Percent" Description= "减少伤害（百分比）" AffectAttribute= "Damage"></SpellEffect>
+    <SpellEffect Id="DM_05" Name= "Damage_ChangeTo" Description= "改变伤害" AffectAttribute= "Damage"></SpellEffect>
+    <SpellEffect Id="ST_01" Name= "Skill_Active" Description= "施放技能" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_02" Name= "Skill_Attach" Description= "技能附加到单位" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_03" Name= "Skill_Release" Description= "技能从单位移除" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_11" Name= "Imprison_Active" Description= "定身激活" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_12" Name= "Imprison_Release" Description= "定身解除" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_21" Name= "Disarm_Active" Description= "缴械激活" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_22" Name= "Disarm_Release" Description= "缴械解除" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_31" Name= "Slient_Active" Description= "沉默激活" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_32" Name= "Slient_Release" Description= "沉默解除" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_41" Name= "Stun_Active" Description= "眩晕激活" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_42" Name= "Stun_Release" Description= "眩晕解除" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_51" Name= "Immunity_Active" Description= "免疫激活" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_52" Name= "Immunity_Release" Description= "免疫解除" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_61" Name= "Shield_Active" Description= "护盾激活" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_62" Name= "Shield_Release" Description= "护盾解除" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_71" Name= "Hide_Active" Description= "隐蔽激活" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_72" Name= "Hide_Release" Description= "隐蔽解除" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_81" Name= "Invisible_Active" Description= "隐身激活" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="ST_82" Name= "Invisible_Release" Description= "隐身解除" AffectAttribute= "Skill"></SpellEffect>
+    <SpellEffect Id="EN_01" Name= "Summon_Minion" Description= "召唤小兵" AffectAttribute= "Enviroment"></SpellEffect>
+    <SpellEffect Id="EN_02" Name= "Summon_Servant" Description= "召唤从者" AffectAttribute= "Enviroment"></SpellEffect>
+    <SpellEffect Id="EN_03" Name= "Summon_Girl" Description= "召唤少女" AffectAttribute= "Enviroment"></SpellEffect>
+    <SpellEffect Id="EN_04" Name= "Summon_Disappear" Description= "召唤物消失" AffectAttribute= "Enviroment"></SpellEffect>
+    <SpellEffect Id="EN_11" Name= "SummonSpool_Add" Description= "召唤池内单位增加" AffectAttribute= "Enviroment"></SpellEffect>
+    <SpellEffect Id="EN_12" Name= "SummonSpool_Fill" Description= "召唤池单位补满" AffectAttribute= "Enviroment"></SpellEffect>
+    <SpellEffect Id="EN_13" Name= "SummonSpool_Refresh" Description= "召唤池单位刷新并补满" AffectAttribute= "Enviroment"></SpellEffect>
+    <SpellEffect Id="EN_21" Name= "CardSpool_Add" Description= "卡片池卡片增加" AffectAttribute= "Enviroment"></SpellEffect>
+    <SpellEffect Id="EN_22" Name= "CardSpool_Remove" Description= "卡片池卡片移除" AffectAttribute= "Enviroment"></SpellEffect>
+    <SpellEffect Id="OT_01" Name= "Cancel_Move" Description= "取消移动" AffectAttribute= "Other"></SpellEffect>
+    <SpellEffect Id="OT_02" Name= "Cancel_Attack" Description= "取消攻击" AffectAttribute= "Other"></SpellEffect>
+    <SpellEffect Id="OT_03" Name= "Cancel_Skill" Description= "取消技能" AffectAttribute= "Other"></SpellEffect>
+    <SpellEffect Id="OT_04" Name= "Cancel_All" Description= "取消所有行为" AffectAttribute= "Other"></SpellEffect>
+  </SpellEffects>
+</THE_Data>

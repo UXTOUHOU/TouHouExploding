@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace THE_Core
 {
-    public class ChessboardCell : IDProvider.IID
+    public class ChessboardCell : IID
     {
         public int Id { get; set; }//ID
         public Position locate { get; set; }//坐标
@@ -27,14 +27,14 @@ namespace THE_Core
         private Team _owner;
         public Terrain terrainHere { get; set; }//地形
         public State stateHere { get; set; }//地区状态
-        public UnitBase unitHere { get; set; }//在此位置的单位
-        public ChessboardCell(IDProvider.IDList idList, Position _locate)//第一参数为ID提供者，第二参数为坐标
+        public Unit unitHere { get; set; }//在此位置的单位
+        public ChessboardCell(IDList idList, Position _locate)//第一参数为ID提供者，第二参数为坐标
         {
             idList.ApplyID(this);
             locate = _locate;
             specialHere = Special.Common;
         }
-        public bool MoveHere(UnitBase unit)//移动到此格。成功返回真，失败返回假
+        public bool MoveHere(Unit unit)//移动到此格。成功返回真，失败返回假
         {
             if (unitHere != null) return false;
             if (unit.Position != null)

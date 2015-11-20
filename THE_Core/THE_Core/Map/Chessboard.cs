@@ -9,38 +9,38 @@ namespace THE_Core
     public class Chessboard
     {
         public Game GameCore;
-        public ChessboardCell[,] RegionList;//第一个索引值为列(8)，第二个为行(12)
+        public ChessboardCell[,] CellList;//第一个索引值为列(8)，第二个为行(12)
         public Chessboard(Game core, ChessboardCell[,] map)//自动读取一张地图，并将区块注册至区域表
         {
             GameCore = core;
-            RegionList = map;
+            CellList = map;
             for (int x = 0; x < map.GetLength(0); x++)//注册区块
             {
                 for (int y = 0; y < map.GetLength(1); y++)
                 {
-                    GameCore.IDP.RID.SetID(RegionList[x, y]);
+                    GameCore.IDP.RID.SetID(CellList[x, y]);
                 }
             }
         }
         public Chessboard(Game core)//自动生成一张地图 第一个参数为其所在核心，会自动分配地区ID并将区块注册至区域表
         {
             GameCore = core;
-            RegionList = MakeMap();
-            for (int x = 0; x < RegionList.GetLength(0); x++)//注册区块
+            CellList = MakeMap();
+            for (int x = 0; x < CellList.GetLength(0); x++)//注册区块
             {
-                for (int y = 0; y < RegionList.GetLength(1); y++)
+                for (int y = 0; y < CellList.GetLength(1); y++)
                 {
-                    GameCore.IDP.RID.SetID(RegionList[x, y]);
+                    GameCore.IDP.RID.SetID(CellList[x, y]);
                 }
             }
         }
         public ChessboardCell GetRegion(int[] locate)
         {
-            return RegionList[locate[0], locate[1]];
+            return CellList[locate[0], locate[1]];
         }
         private ChessboardCell[,] MakeMap(MapType mapType = MapType.Common)//直接生成地图不注册区域
         {
-            var idList = new IDProvider.IDList("");
+            var idList = new IDList("");
             var temp = new ChessboardCell[8, 12];
             for (int x = 0; x < temp.GetLength(0); x++)//初始化区块
             {
@@ -55,12 +55,12 @@ namespace THE_Core
                 for (int y = 0; y < 2; y++)
                 {
                     temp[x, y].specialHere = ChessboardCell.Special.Birth;
-                    temp[x, y].owner = GameCore.RoomTeam[0];
+                    temp[x, y].owner = GameCore.Teams[0];
                 }
                 for (int y = temp.GetLength(1) - 2; y < temp.GetLength(1); y++)
                 {
                     temp[x, y].specialHere = ChessboardCell.Special.Birth;
-                    temp[x, y].owner = GameCore.RoomTeam[1];
+                    temp[x, y].owner = GameCore.Teams[1];
                 }
             }
             if (temp.GetLength(0) % 2 == 0) //设定基地，自动基地判断大小

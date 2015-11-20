@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace THE_Core
 {
-    public class Player : IDProvider.IID
+    public class Player : IID
     {
         public Game GameCore;
         public int Id { get; set; }
@@ -23,8 +23,8 @@ namespace THE_Core
         public int bDot { get; set; }
         public Action action;
         public List<PolicyCard> policyCard { get; set; }//玩家手中的策略牌
-        public List<UnitBase> unit { get; set; }//玩家场上的单位
-        public List<UnitBase> deadCard { get; set; }//击毁区
+        public List<Unit> unit { get; set; }//玩家场上的单位
+        public List<Unit> deadCard { get; set; }//击毁区
         public enum Type { Player, AI, Watcher, Custom }
         public Player(Team team)
         {
@@ -33,13 +33,13 @@ namespace THE_Core
             team.Add(this);
             action = new Action();
             policyCard = new List<PolicyCard>();
-            unit = new List<UnitBase>();
-            deadCard = new List<UnitBase>();
+            unit = new List<Unit>();
+            deadCard = new List<Unit>();
         }
         public bool Unactivition()
         {
             bool result = false;
-            foreach (UnitBase u in unit)
+            foreach (Unit u in unit)
             {
                 if (u.Unactivition()) result = true;
             }
@@ -49,12 +49,12 @@ namespace THE_Core
         {
             if(bDot<8) bDot = 8;
             action.Reset();
-            foreach(UnitBase u in unit)
+            foreach(Unit u in unit)
             {
                 u.Reset();
             }
         }
-        public UnitBase Call(SummonCard character,int[] locate)
+        public Unit Call(SummonCard character,int[] locate)
         {
             return character.ToBattle(locate, this);
         }

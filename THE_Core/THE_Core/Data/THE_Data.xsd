@@ -51,12 +51,16 @@
       <xs:enumeration value="Mobility"></xs:enumeration>
       <xs:enumeration value="AttackPower"></xs:enumeration>
       <xs:enumeration value="AttackRange"></xs:enumeration>
+      <xs:enumeration value="Position"></xs:enumeration>
+      <xs:enumeration value="Skill"></xs:enumeration>
+      <xs:enumeration value="Damage"></xs:enumeration>
+      <xs:enumeration value="Enviroment"></xs:enumeration>
       <xs:enumeration value="Other"></xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="SpellEffect">
     <xs:sequence>
-      <xs:element name="Variable">
+      <xs:element name="Variable" minOccurs="0" maxOccurs="unbounded">
         <xs:complexType>
           <xs:attribute name="Index" type="xs:int"></xs:attribute>
           <xs:attribute name="Description" type="xs:string"></xs:attribute>
@@ -78,6 +82,7 @@
     <xs:attribute name="Mobility" type="xs:int"></xs:attribute>
     <xs:attribute name="AttackPower" type="xs:int"></xs:attribute>
     <xs:attribute name="AttackRange" type="xs:int"></xs:attribute>
+    <xs:attribute name="Avaliable" type="xs:boolean"></xs:attribute>
   </xs:complexType>
   <xs:complexType name="Skill">
   </xs:complexType>

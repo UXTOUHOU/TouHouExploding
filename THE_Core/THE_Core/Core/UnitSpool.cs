@@ -9,8 +9,8 @@ namespace THE_Core
     public class UnitSpool
     {
         private Game _game;
-        private List<UnitBase> _avaliableUnits;
-        private List<UnitBase> _selectedUnits = new List<UnitBase>();
+        private List<Unit> _avaliableUnits;
+        private List<Unit> _selectedUnits = new List<Unit>();
         private Random _random = new Random();
 
         public int MaxUnit
@@ -49,7 +49,7 @@ namespace THE_Core
 
         #region 静态部分
 
-        public static List<UnitBase> AllUnits = new List<UnitBase>();
+        public static List<Unit> AllUnits = new List<Unit>();
 
         private static void SetAllUnitList()
         {
@@ -57,10 +57,10 @@ namespace THE_Core
             throw new NotImplementedException();
         }
 
-        private static List<UnitBase> GenerateAvaliableUnitList()
+        private static List<Unit> GenerateAvaliableUnitList()
         {
-            List<UnitBase> result = new List<UnitBase>();
-            foreach (UnitBase aUnit in AllUnits)
+            List<Unit> result = new List<Unit>();
+            foreach (Unit aUnit in AllUnits)
             {
                 result.Add(aUnit);
             }

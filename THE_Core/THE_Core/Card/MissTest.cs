@@ -16,7 +16,7 @@ namespace THE_Core
         protected override void SetAttribute()
         {
 
-            unitAttribute = new UnitBase.Attribute()
+            unitAttribute = new Unit.Attribute()
             {
                 name = "测试小妹",
                 description = "说真的，我不认为有人有机会看到这段说明。",

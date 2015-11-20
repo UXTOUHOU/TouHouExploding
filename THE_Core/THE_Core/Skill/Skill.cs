@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace THE_Core
 {
-    public abstract class Skill//:IDProvider.IID
+    public abstract class Skill//:IID
     {
         public string name;
         public string description;
         public UseType useType = UseType.Active;
         public int typeID { get; set; }
-        public UnitBase master { get; set; }//持有该技能的卡牌
-        public Skill(UnitBase unit=null)
+        public Unit master { get; set; }//持有该技能的卡牌
+        public Skill(Unit unit=null)
         {
             master = unit;
             SetAttribute();
         }
         public abstract void SetAttribute();//技能数值的模板，在这里声明新技能的参数
-        public void Register(UnitBase unit)
+        public void Register(Unit unit)
         {
             master = unit;
         }
@@ -64,7 +64,7 @@ namespace THE_Core
 
         private bool haveUsed = false;
         public int cost = 0;//手牌花费的B点
-        public ActiveSkill(UnitBase unit)
+        public ActiveSkill(Unit unit)
             :base(unit)
         {
             useType = UseType.Active;
@@ -110,7 +110,7 @@ namespace THE_Core
     public abstract class PassiveSkill : Skill, NeedRespond//还没完成
     {
         public bool IsForce = true;
-        public PassiveSkill(UnitBase unit)
+        public PassiveSkill(Unit unit)
             :base(unit)
         {
             useType = UseType.Passive;

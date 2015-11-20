@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace THE_Core
 {
-    public class Team : IDProvider.IID
+    public class Team : IID
     {
         public Game GameCore;
         public int Id { get; set; }

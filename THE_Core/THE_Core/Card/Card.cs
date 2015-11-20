@@ -1,7 +1,7 @@
 ﻿
 namespace THE_Core
 {
-    public abstract class Card : IDProvider.IID
+    public abstract class Card : IID
     {
         public Game GameCore;
         public int Id { get; set; }//该卡牌每场自动分配的ID
