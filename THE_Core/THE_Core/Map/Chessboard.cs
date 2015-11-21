@@ -9,8 +9,16 @@ namespace THE_Core
     public class Chessboard
     {
         public Game GameCore;
-        public ChessboardCell[,] CellList;//第一个索引值为列(8)，第二个为行(12)
-        public Chessboard(Game core, ChessboardCell[,] map)//自动读取一张地图，并将区块注册至区域表
+        /// <summary>
+        /// 第一个索引值为列(8)，第二个为行(12)
+        /// </summary>
+        public ChessboardCell[,] CellList;
+        /// <summary>
+        /// 自动读取一张地图，并将区块注册至区域表
+        /// </summary>
+        /// <param name="core"></param>
+        /// <param name="map"></param>
+        public Chessboard(Game core, ChessboardCell[,] map)
         {
             GameCore = core;
             CellList = map;
@@ -22,7 +30,11 @@ namespace THE_Core
                 }
             }
         }
-        public Chessboard(Game core)//自动生成一张地图 第一个参数为其所在核心，会自动分配地区ID并将区块注册至区域表
+        /// <summary>
+        /// 自动生成一张地图 第一个参数为其所在核心，会自动分配地区ID并将区块注册至区域表
+        /// </summary>
+        /// <param name="core"></param>
+        public Chessboard(Game core)//
         {
             GameCore = core;
             CellList = MakeMap();
@@ -38,7 +50,12 @@ namespace THE_Core
         {
             return CellList[locate[0], locate[1]];
         }
-        private ChessboardCell[,] MakeMap(MapType mapType = MapType.Common)//直接生成地图不注册区域
+        /// <summary>
+        /// 直接生成地图不注册区域
+        /// </summary>
+        /// <param name="mapType"></param>
+        /// <returns></returns>
+        private ChessboardCell[,] MakeMap(MapType mapType = MapType.Common)
         {
             var idList = new IDList("");
             var temp = new ChessboardCell[8, 12];
@@ -100,13 +117,34 @@ namespace THE_Core
             public RegionSave[,] map { get; set; }
             public class RegionSave
             {
-                public int id { get; set; }//ID
-                public int[] locate { get; set; }//坐标
-                public ChessboardCell.Special specialHere { get; set; }//地区特别属性
-                public int ownerID { get; set; }//归属
-                public Terrain.Type terrainHere { get; set; }//地形
-                public int stateHereID { get; set; }//地区状态
-                public int unitHereID { get; set; }//在此位置的单位
+                /// <summary>
+                /// ID
+                /// </summary>
+                public int id { get; set; }
+                /// <summary>
+                /// 坐标
+                /// </summary>
+                public int[] locate { get; set; }
+                /// <summary>
+                /// 地区特别属性
+                /// </summary>
+                public ChessboardCell.Special specialHere { get; set; }
+                /// <summary>
+                /// 归属
+                /// </summary>
+                public int ownerID { get; set; }
+                /// <summary>
+                /// 地形
+                /// </summary>
+                public Terrain.Type terrainHere { get; set; }
+                /// <summary>
+                /// 地区状态
+                /// </summary>
+                public int stateHereID { get; set; }
+                /// <summary>
+                /// 在此位置的单位
+                /// </summary>
+                public int unitHereID { get; set; }
             }
             public Chessboard ToMap(Game core)//未完成
             {

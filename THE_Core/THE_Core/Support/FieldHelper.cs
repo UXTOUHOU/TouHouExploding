@@ -3,7 +3,10 @@ using System.IO;
 
 namespace THE_Core.Support
 {
-    public class FileHelper//用于存储
+    /// <summary>
+    /// 用于存储
+    /// </summary>
+    public class FileHelper
     {
         public string Path
         {
@@ -74,7 +77,11 @@ namespace THE_Core.Support
                 return;
             }
         }
-        public string ReadFile()//如果没有此文件返回null
+        /// <summary>
+        /// 如果没有此文件返回null
+        /// </summary>
+        /// <returns></returns>
+        public string ReadFile()
         {
             string result;
             if (IsExist() == false) return null;
@@ -123,7 +130,12 @@ namespace THE_Core.Support
             string json = JsonHelper.GetJson<T>((T)obj);
             WriteFile(json);
         }
-        public T FileToObj<T>()//如果没有此文件返回null
+        /// <summary>
+        /// 如果没有此文件返回null
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T FileToObj<T>()
         {
             T result;
             var json = ReadFile();
@@ -135,7 +147,10 @@ namespace THE_Core.Support
             Path = path;
             return FileToObj<T>();
         }
-        public void Close()//释放文件
+        /// <summary>
+        /// 释放文件
+        /// </summary>
+        public void Close()
         {
             if (sw != null)
             {

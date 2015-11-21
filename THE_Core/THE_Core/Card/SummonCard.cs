@@ -45,8 +45,17 @@ namespace THE_Core
             }
         }
         public Type type { get; set; }
-        public Unit.Attribute unitAttribute { get; set; }//召唤出的角色属性
-        public Unit ToBattle(int[] locate, Player owner)//上战场，把卡片转换为单位。已经召唤过的话会返回空
+        /// <summary>
+        /// 召唤出的角色属性
+        /// </summary>
+        public Unit.Attribute unitAttribute { get; set; }
+        /// <summary>
+        /// 上战场，把卡片转换为单位。已经召唤过的话会返回空
+        /// </summary>
+        /// <param name="locate"></param>
+        /// <param name="owner"></param>
+        /// <returns></returns>
+        public Unit ToBattle(int[] locate, Player owner)
         {
             if (owner.action.HaveCall == true) return null;
             if (!GameCore.Chessboard.CellList[locate[0], locate[1]].owner.Equals(owner.atTeam)) return null;//判断是否有权限
@@ -70,7 +79,10 @@ namespace THE_Core
             if (GameCore.WaitingCharacters.Contains(this))//判断是否处于召唤区
                 GameCore.WaitingCharacters.Remove(this);
         }
-        protected abstract void SetAttribute();//继承类必须实现这个方法，在其中写该角色的数值
+        /// <summary>
+        /// 继承类必须实现这个方法，在其中写该角色的数值
+        /// </summary>
+        protected abstract void SetAttribute();
         public override CardType GetCardType()
         {
             return CardType.SummonCard;

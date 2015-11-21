@@ -21,7 +21,12 @@ namespace THE_Core
         {
             return commond.Length > index;
         }
-        public static string[] Divide(string commond)//用于分隔指令
+        /// <summary>
+        /// 用于分隔指令
+        /// </summary>
+        /// <param name="commond"></param>
+        /// <returns></returns>
+        public static string[] Divide(string commond)
         {
             string[] str = commond.Split(' ');
             return str;

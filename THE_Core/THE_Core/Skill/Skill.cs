@@ -12,13 +12,19 @@ namespace THE_Core
         public string description;
         public UseType useType = UseType.Active;
         public int typeID { get; set; }
-        public Unit master { get; set; }//持有该技能的卡牌
+        /// <summary>
+        /// 持有该技能的卡牌
+        /// </summary>
+        public Unit master { get; set; }
         public Skill(Unit unit=null)
         {
             master = unit;
             SetAttribute();
         }
-        public abstract void SetAttribute();//技能数值的模板，在这里声明新技能的参数
+        /// <summary>
+        /// 技能数值的模板，在这里声明新技能的参数
+        /// </summary>
+        public abstract void SetAttribute();
         public void Register(Unit unit)
         {
             master = unit;
@@ -30,9 +36,19 @@ namespace THE_Core
         {
             return master != null;
         }
-        
-        public abstract bool Fuction(InputUse inputUse = null);//使用时效果的模板
-        public virtual bool Use(InputUse inputUse = null)//使用时调用的方法
+
+        /// <summary>
+        /// 使用时效果的模板
+        /// </summary>
+        /// <param name="inputUse"></param>
+        /// <returns></returns>
+        public abstract bool Fuction(InputUse inputUse = null);
+        /// <summary>
+        /// 使用时调用的方法
+        /// </summary>
+        /// <param name="inputUse"></param>
+        /// <returns></returns>
+        public virtual bool Use(InputUse inputUse = null)
         {
             if (CanUse() == false) return false;
 
@@ -47,7 +63,10 @@ namespace THE_Core
 
         }
 
-        public enum UseType//发动类型
+        /// <summary>
+        /// 发动类型
+        /// </summary>
+        public enum UseType
         {
             Active, Passive
         }
@@ -63,7 +82,10 @@ namespace THE_Core
         public bool needActivation = true;
 
         private bool haveUsed = false;
-        public int cost = 0;//手牌花费的B点
+        /// <summary>
+        /// 手牌花费的B点
+        /// </summary>
+        public int cost = 0;
         public ActiveSkill(Unit unit)
             :base(unit)
         {
@@ -85,7 +107,12 @@ namespace THE_Core
             if (haveUsed == true && onlyOnce == true) return false;
             return true;
         }
-        public override bool Use(InputUse inputUse = null)//使用时调用的方法
+        /// <summary>
+        /// 使用时调用的方法
+        /// </summary>
+        /// <param name="inputUse"></param>
+        /// <returns></returns>
+        public override bool Use(InputUse inputUse = null)
         {
             if (CanUse() == false) return false;
 
@@ -116,7 +143,10 @@ namespace THE_Core
             useType = UseType.Passive;
         }
 
-        public ThingsToAsk thingsToAsk//接口，读取要询问的事件信息，如询问者，询问内容等等，暂无用
+        /// <summary>
+        /// 接口，读取要询问的事件信息，如询问者，询问内容等等，暂无用
+        /// </summary>
+        public ThingsToAsk thingsToAsk
         {
             get
             {

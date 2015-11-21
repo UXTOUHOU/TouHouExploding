@@ -11,7 +11,10 @@ namespace THE_Core
         public Game GameCore;
         public int Id { get; set; }
         public string Name { get; set; }
-        public int blood { get; set; }//基地血量
+        /// <summary>
+        /// 基地血量
+        /// </summary>
+        public int blood { get; set; }
         public List<Player> playerList { get; set; }
         public List<ChessboardCell> OwnRegion { get; set; }
         public List<ChessboardCell> Base
@@ -46,7 +49,11 @@ namespace THE_Core
             blood--;
             GameCore.CheckWin();
         }
-        public bool IsFailed()//检查该队伍是不是全员失败
+        /// <summary>
+        /// 检查该队伍是不是全员失败
+        /// </summary>
+        /// <returns></returns>
+        public bool IsFailed()
         {
             if (blood <= 0) return true;
             foreach (Player p in playerList)

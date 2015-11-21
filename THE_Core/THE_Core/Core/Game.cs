@@ -9,18 +9,33 @@ namespace THE_Core
     public class Game
     {
         //public GameConfig gameConfig { get; set; }//游戏设置
-        Random random = new Random();//全局随机器
-        public IDProvider IDP { get; set; }//ID分配机
-        public NeedRespond needRespond { get; set; }//服务器需要挂起询问的对象
+        /// <summary>
+        /// 全局随机器
+        /// </summary>
+        Random random = new Random();
+        /// <summary>
+        /// ID分配机
+        /// </summary>
+        public IDProvider IDP { get; set; }
+        /// <summary>
+        /// 服务器需要挂起询问的对象
+        /// </summary>
+        public NeedRespond needRespond { get; set; }
         #region 公开对象
+        /// <summary>
+        /// 游戏地图
+        /// </summary>
         public Chessboard Chessboard
         {
             get
             {
                 return _chessboard;
             }
-        }//游戏地图
-        public Process NowProcess //游戏进度
+        }
+        /// <summary>
+        /// 游戏进度
+        /// </summary>
+        public Process NowProcess 
         {
             get
             {
@@ -29,13 +44,16 @@ namespace THE_Core
         }
         private Process nowProcess = Process.RoomPreparing;
 
+        /// <summary>
+        /// 游戏所有的队伍
+        /// </summary>
         public List<Team> Teams
         {
             get
             {
                 return _teams;
             }
-        }//游戏所有的队伍
+        }
         public int TeamCount
         {
             get
@@ -44,13 +62,16 @@ namespace THE_Core
             }
         }
 
+        /// <summary>
+        /// 所有玩家
+        /// </summary>
         public List<Player> Players
         {
             get
             {
                 return _players;
             }
-        }//所有玩家
+        }
         public int PlayerCount
         {
             get
@@ -61,9 +82,18 @@ namespace THE_Core
         public Team NeutralTeam;
         public Player NeutralPlayer;
 
-        public Player CurrentPlayer { get; set; }//当前操作的玩家
-        public List<SummonCard> Characters { get; set; }//赛场召唤区
-        public List<SummonCard> WaitingCharacters { get; set; }//卡池
+        /// <summary>
+        /// 当前操作的玩家
+        /// </summary>
+        public Player CurrentPlayer { get; set; }
+        /// <summary>
+        /// 赛场召唤区
+        /// </summary>
+        public List<SummonCard> Characters { get; set; }
+        /// <summary>
+        /// 卡池
+        /// </summary>
+        public List<SummonCard> WaitingCharacters { get; set; }
         public EndReport GameEndReport
         {
             get
@@ -77,7 +107,10 @@ namespace THE_Core
 
         
         public int Round = 1;
-        public DayNight CurrentDayNight//获取当前的白天/黑夜状态
+        /// <summary>
+        /// 获取当前的白天/黑夜状态
+        /// </summary>
+        public DayNight CurrentDayNight
         {
             get
             {
@@ -219,11 +252,18 @@ namespace THE_Core
             }
             return true;
         }
-        private void GameEnd()//游戏结局执行方法
+        /// <summary>
+        /// 游戏结局执行方法
+        /// </summary>
+        private void GameEnd()
         {
             if (NowProcess == Process.RoomPreparing) return;
             nowProcess = Process.RoomEnding;
         }
+        /// <summary>
+        /// 【未完成】检查是否有人胜利，输出战报信息暂未结束获胜输出null
+        /// </summary>
+        /// <returns></returns>
         public EndReport CheckWin()//未完成，检查是否有人胜利，输出战报信息暂未结束获胜输出null
         {
             if (NowProcess == Process.RoomPreparing) return null;
@@ -291,14 +331,21 @@ namespace THE_Core
             CurrentPlayer.Unactivition();
 
         }
-        private void RoundOver()//所有玩家轮过一次
+        /// <summary>
+        /// 所有玩家轮过一次
+        /// </summary>
+        private void RoundOver()
         {
             Round++;
             CurrentPlayer = Players[0];
 
             RoundStart();
         }
-        private void IncreaseCharacters(int number = 6)//补齐召唤区少女至所需数目
+        /// <summary>
+        /// 补齐召唤区少女至所需数目
+        /// </summary>
+        /// <param name="number"></param>
+        private void IncreaseCharacters(int number = 6)
         {
             while (Characters.Count() < number && WaitingCharacters.Count != 0)
             {
@@ -309,8 +356,11 @@ namespace THE_Core
         }
 
 
-
-        public Process NextStep()//进入下一个过程 返回下一个过程
+        /// <summary>
+        /// 进入下一个过程 返回下一个过程
+        /// </summary>
+        /// <returns></returns>
+        public Process NextStep()
         {
             switch (NowProcess)
             {
@@ -323,7 +373,10 @@ namespace THE_Core
             return NowProcess;
         }
 
-        public class EndReport//输出完结战报
+        /// <summary>
+        /// 输出完结战报
+        /// </summary>
+        public class EndReport
         {
             public Team Winner;
             public State state;

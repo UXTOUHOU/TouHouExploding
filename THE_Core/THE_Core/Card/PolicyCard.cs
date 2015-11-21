@@ -27,9 +27,19 @@ namespace THE_Core
         {
             return CardType.PolicyCard;
         }
-        public abstract bool Fuction(UseInput uInput = null); //策略牌使用时执行的操作
+        /// <summary>
+        /// 策略牌使用时执行的操作
+        /// </summary>
+        /// <param name="uInput"></param>
+        /// <returns></returns>
+        public abstract bool Fuction(UseInput uInput = null); 
 
-        public virtual bool Use(UseInput uInput = null) //任何一个策略牌的使用方法
+        /// <summary>
+        /// 任何一个策略牌的使用方法
+        /// </summary>
+        /// <param name="uInput"></param>
+        /// <returns></returns>
+        public virtual bool Use(UseInput uInput = null) 
         {
             if (Owner.bDot < cost)
             {
@@ -47,7 +57,10 @@ namespace THE_Core
                 return false;
             }
         }
-        public class UseInput//新输入继承此类
+        /// <summary>
+        /// 新输入继承此类
+        /// </summary>
+        public class UseInput
         {
 
         }

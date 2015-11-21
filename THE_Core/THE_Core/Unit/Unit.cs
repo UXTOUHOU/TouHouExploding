@@ -22,17 +22,32 @@ namespace THE_Core
         public Action action { get; set; }
         public State state { get; set; }
 
-        public string UnitBaseId { get; set; }//该单位的种类ID
-        public string Name { get; set; }//不解释
-        public string Description { get; set; }//对该角色的描述
-        public UnitType UnitType { get; set; }//角色类型
+        /// <summary>
+        /// 该单位的种类ID
+        /// </summary>
+        public string UnitBaseId { get; set; }
+        /// <summary>
+        /// 不解释
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// 对该角色的描述
+        /// </summary>
+        public string Description { get; set; }
+        /// <summary>
+        /// 角色类型
+        /// </summary>
+        public UnitType UnitType { get; set; }
 
         public UnitAttribute HitPoint { get; set; }
         public UnitAttribute Mobility { get; set; }
         public UnitAttribute AttackPower { get; set; }
         public UnitAttribute AttackRange { get; set; }
 
-        public List<Skill> skill { get; set; }//单位技能
+        /// <summary>
+        /// 单位技能
+        /// </summary>
+        public List<Skill> skill { get; set; }
 
         public bool IsDead
         {
@@ -71,7 +86,13 @@ namespace THE_Core
                 s.Register(this);
             }
         }
-        public int GetDistance(Unit a, Unit b = null)//计算ab单位的距离，无法计算返回-1
+        /// <summary>
+        /// 计算ab单位的距离，无法计算返回-1
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public int GetDistance(Unit a, Unit b = null)
         {
             if (b == null) b = this;
             if (a.Position == null || b.Position == null) return -1;
@@ -81,7 +102,12 @@ namespace THE_Core
             if (distanceY < 0) distanceY = -distanceY;
             return distanceX + distanceY;
         }
-        public int GetDistance(ChessboardCell r)//计算该单位到某格子的距离，无法计算返回-1
+        /// <summary>
+        /// 计算该单位到某格子的距离，无法计算返回-1
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        public int GetDistance(ChessboardCell r)
         {
             if (this.Position == null) return -1;
             int distanceX = this.Position.locate.X - r.locate.X;
@@ -90,7 +116,11 @@ namespace THE_Core
             if (distanceY < 0) distanceY = -distanceY;
             return distanceX + distanceY;
         }
-        public bool Activition()//激活角色，返回是否成功激活，所有角色中只能同时激活一个
+        /// <summary>
+        /// 激活角色，返回是否成功激活，所有角色中只能同时激活一个
+        /// </summary>
+        /// <returns></returns>
+        public bool Activition()
         {
             if (action.HaveAction == true) return false;
             //foreach (Unit u in Owner.unit)
@@ -103,14 +133,23 @@ namespace THE_Core
             action.IsAction = true;
             return true;
         }
-        public bool Unactivition()//终止某角色的激活，返回原状态是否为激活
+        /// <summary>
+        /// 终止某角色的激活，返回原状态是否为激活
+        /// </summary>
+        /// <returns></returns>
+        public bool Unactivition()
         {
             if (action.IsAction == false) return false;
 
             action.HaveAction = true;
             return true;
         }
-        public bool Attack(Unit target)//攻击指令，如果不能攻击返回假
+        /// <summary>
+        /// 攻击指令，如果不能攻击返回假
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public bool Attack(Unit target)
         {
             if (CanAttack(target) == false) return false;
 
@@ -126,14 +165,24 @@ namespace THE_Core
             target.Hurt(AttackPower.Current);
             return true;
         }
-        public virtual bool CanAttack(Unit target)//检测是否可以攻击某单位，重写这个方法可更改射程判断规则
+        /// <summary>
+        /// 检测是否可以攻击某单位，重写这个方法可更改射程判断规则
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public virtual bool CanAttack(Unit target)//
         {
             if (Owner.bDot <= 1) return false;
             if (action.HaveAction == true) return false;
             if (action.HaveAttack == true) return false;
             return GetDistance(target) <= AttackRange.Current;
         }
-        public virtual bool CanAttack(ChessboardCell region)//检测是否可以攻击某位置，重写这个方法可更改射程判断规则
+        /// <summary>
+        /// 检测是否可以攻击某位置，重写这个方法可更改射程判断规则
+        /// </summary>
+        /// <param name="region"></param>
+        /// <returns></returns>
+        public virtual bool CanAttack(ChessboardCell region)
         {
             if (Owner.bDot <= 1) return false;
             if (action.HaveAction == true) return false;
@@ -170,7 +219,12 @@ namespace THE_Core
         {
             return Move(GameCore.Chessboard.CellList[x, y]);
         }
-        public bool Move(ChessboardCell region)//移动到某个位置，不能移动返回假
+        /// <summary>
+        /// 移动到某个位置，不能移动返回假
+        /// </summary>
+        /// <param name="region"></param>
+        /// <returns></returns>
+        public bool Move(ChessboardCell region)
         {
             if (CanMove(region) == false)
             {
@@ -188,7 +242,12 @@ namespace THE_Core
             Owner.bDot--;
             return region.MoveHere(this);
         }
-        public virtual bool CanMove(ChessboardCell region)//检测是否可以移动到某位置，重写这个方法可更改移动判断规则
+        /// <summary>
+        /// 检测是否可以移动到某位置，重写这个方法可更改移动判断规则
+        /// </summary>
+        /// <param name="region"></param>
+        /// <returns></returns>
+        public virtual bool CanMove(ChessboardCell region)
         {
             if (Owner.bDot <= 1) return false;
             if (action.HaveAction == true) return false;
@@ -197,7 +256,12 @@ namespace THE_Core
             Owner.bDot--;
             return GetDistance(region) <= Mobility.Current;
         }
-        public virtual int Hurt(int blood)//体力流失，返回剩余血量，死亡返回-1
+        /// <summary>
+        /// 体力流失，返回剩余血量，死亡返回-1
+        /// </summary>
+        /// <param name="blood"></param>
+        /// <returns></returns>
+        public virtual int Hurt(int blood)
         {
             HitPoint.Current -= blood;
             if (HitPoint.Current <= 0)
@@ -228,7 +292,10 @@ namespace THE_Core
                 s.Reset();
             }
         }
-        public class Action//记录该单位已经进行过的行动
+        /// <summary>
+        /// 记录该单位已经进行过的行动
+        /// </summary>
+        public class Action
         {
             public bool IsAction = false;
             public bool HaveAction = false;
@@ -242,18 +309,51 @@ namespace THE_Core
                 HaveMove = false;
             }
         }
-        public class Attribute//属性
+        /// <summary>
+        /// 属性
+        /// </summary>
+        public class Attribute
         {
-            public string typeID { get; set; }//该单位的种类ID
-            public string name { get; set; }//不解释
-            public string description { get; set; }//对该角色的描述
-            public UnitType type { get; set; }//角色类型
-            public int blood { get; set; }//血量
-            public int mobility { get; set; }//机动性
-            public int attack { get; set; }//攻击伤害
-            public int range { get; set; }//射程
-            public List<Skill> skill { get; set; }//单位技能
-            public MoveMethous moveMethous;//移动方式
+            /// <summary>
+            /// 该单位的种类ID
+            /// </summary>
+            public string typeID { get; set; }
+            /// <summary>
+            /// 不解释
+            /// </summary>
+            public string name { get; set; }
+            /// <summary>
+            /// 对该角色的描述
+            /// </summary>
+            public string description { get; set; }
+            /// <summary>
+            /// 角色类型
+            /// </summary>
+            public UnitType type { get; set; }
+            /// <summary>
+            /// 血量
+            /// </summary>
+            public int blood { get; set; }
+            /// <summary>
+            /// 机动性
+            /// </summary>
+            public int mobility { get; set; }
+            /// <summary>
+            /// 攻击伤害
+            /// </summary>
+            public int attack { get; set; }
+            /// <summary>
+            /// 射程
+            /// </summary>
+            public int range { get; set; }
+            /// <summary>
+            /// 单位技能
+            /// </summary>
+            public List<Skill> skill { get; set; }
+            /// <summary>
+            /// 移动方式
+            /// </summary>
+            public MoveMethous moveMethous;
             public Attribute()
             {
                 skill = new List<Skill>();
@@ -264,7 +364,10 @@ namespace THE_Core
             }
             public enum MoveMethous { Walk, Fly, Transport }
         }
-        public class State//人物附加状态
+        /// <summary>
+        /// 人物附加状态
+        /// </summary>
+        public class State
         {
 
         }

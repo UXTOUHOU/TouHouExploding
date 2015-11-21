@@ -22,9 +22,18 @@ namespace THE_Core
         public State playerstate { get; set; }
         public int bDot { get; set; }
         public Action action;
-        public List<PolicyCard> policyCard { get; set; }//玩家手中的策略牌
-        public List<Unit> unit { get; set; }//玩家场上的单位
-        public List<Unit> deadCard { get; set; }//击毁区
+        /// <summary>
+        /// 玩家手中的策略牌
+        /// </summary>
+        public List<PolicyCard> policyCard { get; set; }
+        /// <summary>
+        /// 玩家场上的单位
+        /// </summary>
+        public List<Unit> unit { get; set; }
+        /// <summary>
+        /// 击毁区
+        /// </summary>
+        public List<Unit> deadCard { get; set; }
         public enum Type { Player, AI, Watcher, Custom }
         public Player(Team team)
         {

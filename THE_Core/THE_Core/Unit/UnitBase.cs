@@ -81,5 +81,8 @@ namespace THE_Core
             return new UnitBase(unitRow.Id, unitRow.Name, unitRow.Description, unitRow.Provenance, type, unitRow.HitPoint, unitRow.Mobility, unitRow.AttackPower, unitRow.AttackRange, unitRow.Avaliable);
         }
     }
-    public enum UnitType { Minion, Girl, Servant }//Common召唤出的为普通单位，Hero为少女单位，Servent为基本效果产生的单位
+    /// <summary>
+    /// Common召唤出的为普通单位，Hero为少女单位，Servent为基本效果产生的单位
+    /// </summary>
+    public enum UnitType { Minion, Girl, Servant }
 }
