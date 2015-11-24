@@ -314,6 +314,19 @@ namespace THE_Core
         }
 
         #region Delegate & Event
+        public delegate void Unit_Summoned_Handle(object sender);
+        /// <summary>
+        /// Trigger when Unit just summoned
+        /// </summary>
+        public Unit_Summoned_Handle Unit_Summoned;
+
+        public delegate void Unit_Summoning_Handle(object sender);
+        /// <summary>
+        /// Trigger before Unit summoned
+        /// </summary>
+        public Unit_Summoning_Handle Unit_Summoning;
+
+
         public delegate void Unit_Dead_Handle(object sender);
         /// <summary>
         /// Trigger when Unit just dead
@@ -374,6 +387,18 @@ namespace THE_Core
         /// Trigger before Unit damaged (by another Unit)
         /// </summary>
         public Unit_Damaging_Handle Unit_Damaging;
+
+        public delegate void Unit_Master_Changed_Handle(object sender);
+        /// <summary>
+        /// Trigger when Unit is temporary controlled by another player
+        /// </summary>
+        public Unit_Master_Changed_Handle Unit_Master_Changed;
+
+        public delegate void Unit_Owner_Changed_Handle(object sender);
+        /// <summary>
+        /// Trigger when Unit is permanent controlled by another player
+        /// </summary>
+        public Unit_Owner_Changed_Handle Unit_Owner_Changed;
 
         #endregion
     }

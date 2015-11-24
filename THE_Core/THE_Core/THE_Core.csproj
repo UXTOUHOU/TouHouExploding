@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="Card\Card.cs" />
     <Compile Include="Card\HeroCard.cs" />
-    <Compile Include="Card\MissTest.cs" />
     <Compile Include="Card\PolicyCard.cs" />
     <Compile Include="Card\SpellCard.cs" />
     <Compile Include="Card\SummonCard.cs" />
@@ -65,6 +64,7 @@
     <Compile Include="Support\FieldHelper.cs" />
     <Compile Include="Support\IDList.cs" />
     <Compile Include="Support\JSonHelper.cs" />
+    <Compile Include="Unit\UnitActionState.cs" />
     <Compile Include="Unit\UnitGirl.cs" />
     <Compile Include="Unit\UnitMinion.cs" />
     <Compile Include="Unit\UnitServant.cs" />
