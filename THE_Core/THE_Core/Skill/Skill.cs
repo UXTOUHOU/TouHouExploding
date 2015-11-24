@@ -118,9 +118,9 @@ namespace THE_Core
 
             if (needActivation == true)
             {
-                if (master.action.IsAction == false)
+                if (master.ActionState.IsAction == false)
                 {
-                    if (master.Activition() == false)
+                    if (master.Activate() == false)
                         return false;
                 }
             }

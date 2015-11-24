@@ -131,7 +131,7 @@ namespace THE_Core
         private List<Player> _players = new List<Player>();
 
         private Chessboard _chessboard;
-        private UnitSpool _minionSpool;
+        private UnitPool _minionSpool;
 
         private EndReport _endReport;
 
@@ -148,7 +148,7 @@ namespace THE_Core
             InitPlayer();
 
             InitChessboard();
-            InitMinionSpool();
+            InitMinionPool();
         }
 
         /// <summary>
@@ -165,11 +165,11 @@ namespace THE_Core
         /// <summary>
         /// 初始化单位池
         /// </summary>
-        private void InitMinionSpool()
+        private void InitMinionPool()
         {
             if (_minionSpool == null)
             {
-                _minionSpool = new UnitSpool(this);
+                _minionSpool = new UnitPool(this);
             }
         }
 
@@ -219,7 +219,7 @@ namespace THE_Core
 
         private void GameStart()
         {
-            _minionSpool.RefreshSpool();
+            _minionSpool.RefreshPool();
 
             if (WaitingCharacters == null)//如果没有指定卡堆，生成卡堆
             {

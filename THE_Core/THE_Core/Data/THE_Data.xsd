@@ -45,6 +45,13 @@
       <xs:enumeration value="Servant"></xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name="UnitMoveMethod">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Walk"></xs:enumeration>
+      <xs:enumeration value="Fly"></xs:enumeration>
+      <xs:enumeration value="Teleport"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="AttributeType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="HitPoint"></xs:enumeration>
@@ -83,6 +90,7 @@
     <xs:attribute name="AttackPower" type="xs:int"></xs:attribute>
     <xs:attribute name="AttackRange" type="xs:int"></xs:attribute>
     <xs:attribute name="Avaliable" type="xs:boolean"></xs:attribute>
+    <xs:attribute name="MoveMethod" type="UnitMoveMethod"></xs:attribute>
   </xs:complexType>
   <xs:complexType name="Skill">
   </xs:complexType>

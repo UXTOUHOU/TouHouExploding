@@ -8,12 +8,17 @@ namespace THE_Core
 {
     public class Player : IID
     {
-        public Game GameCore;
+        public Game GameCore
+        {
+            get;
+            private set;
+        }
         public int Id { get; set; }
         public string name { get; set; }
         public Type playerType { get; set; }
         public Team atTeam { get; set; }
-        public int blood {
+        public int blood
+        {
             get
             {
                 return atTeam.blood;
@@ -30,11 +35,17 @@ namespace THE_Core
         /// 玩家场上的单位
         /// </summary>
         public List<Unit> unit { get; set; }
+
         /// <summary>
         /// 击毁区
         /// </summary>
-        public List<Unit> deadCard { get; set; }
-        public enum Type { Player, AI, Watcher, Custom }
+        public List<Unit> DeadUnit
+        {
+            get;
+            private set;
+        }
+
+        
         public Player(Team team)
         {
             GameCore = team.GameCore;
@@ -43,27 +54,27 @@ namespace THE_Core
             action = new Action();
             policyCard = new List<PolicyCard>();
             unit = new List<Unit>();
-            deadCard = new List<Unit>();
+            DeadUnit = new List<Unit>();
         }
         public bool Unactivition()
         {
             bool result = false;
             foreach (Unit u in unit)
             {
-                if (u.Unactivition()) result = true;
+                if (u.Deactivate()) result = true;
             }
             return result;
         }
         public void Reset()
         {
-            if(bDot<8) bDot = 8;
+            if (bDot < 8) bDot = 8;
             action.Reset();
-            foreach(Unit u in unit)
+            foreach (Unit u in unit)
             {
                 u.Reset();
             }
         }
-        public Unit Call(SummonCard character,int[] locate)
+        public Unit Call(SummonCard character, int[] locate)
         {
             return character.ToBattle(locate, this);
         }
@@ -75,8 +86,8 @@ namespace THE_Core
         public bool HaveFailed()
         {
             if (action.HaveSurrender == true) return true;
-            if (deadCard.Count >= 6) return true;
-            if(atTeam.blood <= 0) return true;
+            if (DeadUnit.Count >= 6) return true;
+            if (atTeam.blood <= 0) return true;
             return false;
         }
         public void BaseAttack()
@@ -106,5 +117,8 @@ namespace THE_Core
             public List<PolicyCard> policyCard { get; set; }//玩家手中的策略牌
         }
         */
+
     }
+
+    public enum PlayerType { Player, AI, Watcher, Custom }
 }

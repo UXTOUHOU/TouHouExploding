@@ -828,6 +828,8 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         private global::System.Data.DataColumn columnAvaliable;
         
+        private global::System.Data.DataColumn columnMoveMethod;
+        
         private global::System.Data.DataColumn columnUnits_Id;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -945,6 +947,14 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn MoveMethodColumn {
+            get {
+                return this.columnMoveMethod;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public global::System.Data.DataColumn Units_IdColumn {
             get {
                 return this.columnUnits_Id;
@@ -988,7 +998,7 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public UnitRow AddUnitRow(string Id, string Name, string Description, string Provenance, string Type, int HitPoint, int Mobility, int AttackPower, int AttackRange, bool Avaliable, UnitsRow parentUnitsRowByUnits_Unit) {
+        public UnitRow AddUnitRow(string Id, string Name, string Description, string Provenance, string Type, int HitPoint, int Mobility, int AttackPower, int AttackRange, bool Avaliable, string MoveMethod, UnitsRow parentUnitsRowByUnits_Unit) {
             UnitRow rowUnitRow = ((UnitRow)(this.NewRow()));
             object[] columnValuesArray = new object[] {
                     Id,
@@ -1001,9 +1011,10 @@ public partial class THE_Data : global::System.Data.DataSet {
                     AttackPower,
                     AttackRange,
                     Avaliable,
+                    MoveMethod,
                     null};
             if ((parentUnitsRowByUnits_Unit != null)) {
-                columnValuesArray[10] = parentUnitsRowByUnits_Unit[0];
+                columnValuesArray[11] = parentUnitsRowByUnits_Unit[0];
             }
             rowUnitRow.ItemArray = columnValuesArray;
             this.Rows.Add(rowUnitRow);
@@ -1043,6 +1054,7 @@ public partial class THE_Data : global::System.Data.DataSet {
             this.columnAttackPower = base.Columns["AttackPower"];
             this.columnAttackRange = base.Columns["AttackRange"];
             this.columnAvaliable = base.Columns["Avaliable"];
+            this.columnMoveMethod = base.Columns["MoveMethod"];
             this.columnUnits_Id = base.Columns["Units_Id"];
         }
         
@@ -1069,6 +1081,8 @@ public partial class THE_Data : global::System.Data.DataSet {
             base.Columns.Add(this.columnAttackRange);
             this.columnAvaliable = new global::System.Data.DataColumn("Avaliable", typeof(bool), null, global::System.Data.MappingType.Attribute);
             base.Columns.Add(this.columnAvaliable);
+            this.columnMoveMethod = new global::System.Data.DataColumn("MoveMethod", typeof(string), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnMoveMethod);
             this.columnUnits_Id = new global::System.Data.DataColumn("Units_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
             base.Columns.Add(this.columnUnits_Id);
             this.columnId.Namespace = "";
@@ -1081,6 +1095,7 @@ public partial class THE_Data : global::System.Data.DataSet {
             this.columnAttackPower.Namespace = "";
             this.columnAttackRange.Namespace = "";
             this.columnAvaliable.Namespace = "";
+            this.columnMoveMethod.Namespace = "";
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2813,6 +2828,22 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public string MoveMethod {
+            get {
+                try {
+                    return ((string)(this[this.tableUnit.MoveMethodColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'MoveMethod\' in table \'Unit\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableUnit.MoveMethodColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public int Units_Id {
             get {
                 try {
@@ -2956,6 +2987,18 @@ public partial class THE_Data : global::System.Data.DataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public void SetAvaliableNull() {
             this[this.tableUnit.AvaliableColumn] = global::System.Convert.DBNull;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsMoveMethodNull() {
+            return this.IsNull(this.tableUnit.MoveMethodColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetMoveMethodNull() {
+            this[this.tableUnit.MoveMethodColumn] = global::System.Convert.DBNull;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

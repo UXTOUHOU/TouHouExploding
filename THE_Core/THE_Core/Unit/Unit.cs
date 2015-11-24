@@ -19,8 +19,7 @@ namespace THE_Core
         public Player Master;
         public ChessboardCell Position { get; set; }
 
-        public Action action { get; set; }
-        public State state { get; set; }
+        public UnitActionState ActionState { get; set; }
 
         /// <summary>
         /// 该单位的种类ID
@@ -64,28 +63,47 @@ namespace THE_Core
             this.UnitBaseId = unitBase.Id;
             this.UnitType = unitBase.Type;
             this.HitPoint = new UnitHitPoint(unitBase.HitPoint);
-            this.Mobility = new UnitMobility(unitBase.Mobility);
+            this.Mobility = new UnitMobility(unitBase.Mobility, unitBase.MoveMethod);
             this.AttackPower = new UnitAttackPower(unitBase.AttackPower);
             this.AttackRange = new UnitAttackRange(unitBase.AttackRange);
         }
             
 
-        public Unit(UnitBase unitBase, Player owner)
+        protected Unit(UnitBase unitBase, Player owner)
         {
             InitAttribute(unitBase);
             this.GameCore = owner.GameCore;
             this.Team = owner.atTeam;
             this.Owner = owner;
 
-            Owner.unit.Add(this); // TODO : Need to change to Player's function
-            this.GameCore.Chessboard.CellList[buildLocate[0], buildLocate[1]].MoveHere(this);
+            Owner.unit.Add(this); // TODO : Need change to Player's function
+
             this.GameCore.IDP.UID.ApplyID(this);
-            action = new Action();
+            ActionState = new UnitActionState();
             foreach (Skill s in skill)
             {
                 s.Register(this);
             }
         }
+
+        public static Unit FromUnitBase(UnitBase unitBase, Player owner)
+        {
+            switch (unitBase.Type)
+            {
+                case UnitType.Girl:
+                    return new UnitGirl(unitBase, owner);
+                    break;
+                case UnitType.Minion:
+                    return new UnitMinion(unitBase, owner);
+                    break;
+                case UnitType.Servant:
+                    return new UnitServant(unitBase, owner);
+                    break;
+                default:
+                    throw new Exception("Undefined Unit Type");
+            }
+        }
+
         /// <summary>
         /// 计算ab单位的距离，无法计算返回-1
         /// </summary>
@@ -120,9 +138,9 @@ namespace THE_Core
         /// 激活角色，返回是否成功激活，所有角色中只能同时激活一个
         /// </summary>
         /// <returns></returns>
-        public bool Activition()
+        public bool Activate()
         {
-            if (action.HaveAction == true) return false;
+            if (ActionState.HaveAction == true) return false;
             //foreach (Unit u in Owner.unit)
             //{
             //    if (u.action.IsAction == true) return false;
@@ -130,18 +148,18 @@ namespace THE_Core
             //↑改为如有激活，自动沉默
             Owner.Unactivition();
 
-            action.IsAction = true;
+            ActionState.IsAction = true;
             return true;
         }
         /// <summary>
         /// 终止某角色的激活，返回原状态是否为激活
         /// </summary>
         /// <returns></returns>
-        public bool Unactivition()
+        public bool Deactivate()
         {
-            if (action.IsAction == false) return false;
+            if (ActionState.IsAction == false) return false;
 
-            action.HaveAction = true;
+            ActionState.HaveAction = true;
             return true;
         }
         /// <summary>
@@ -153,15 +171,15 @@ namespace THE_Core
         {
             if (CanAttack(target) == false) return false;
 
-            if (action.IsAction == false)//如果没有激活，自动激活
+            if (ActionState.IsAction == false)//如果没有激活，自动激活
             {
-                if (Activition()==false)
+                if (Activate()==false)
                 {
                     return false;
                 }
             }
 
-                action.HaveAttack = true;
+                ActionState.HaveAttack = true;
             target.Hurt(AttackPower.Current);
             return true;
         }
@@ -173,8 +191,8 @@ namespace THE_Core
         public virtual bool CanAttack(Unit target)//
         {
             if (Owner.bDot <= 1) return false;
-            if (action.HaveAction == true) return false;
-            if (action.HaveAttack == true) return false;
+            if (ActionState.HaveAction == true) return false;
+            if (ActionState.HaveAttack == true) return false;
             return GetDistance(target) <= AttackRange.Current;
         }
         /// <summary>
@@ -185,8 +203,8 @@ namespace THE_Core
         public virtual bool CanAttack(ChessboardCell region)
         {
             if (Owner.bDot <= 1) return false;
-            if (action.HaveAction == true) return false;
-            if (action.HaveAttack == true) return false;
+            if (ActionState.HaveAction == true) return false;
+            if (ActionState.HaveAttack == true) return false;
             return GetDistance(region) <= AttackRange.Current;
         }
 
@@ -215,25 +233,25 @@ namespace THE_Core
             }
             return false;
         }
-        public bool Move(int x,int y)
+        public bool MoveTo(int x,int y)
         {
-            return Move(GameCore.Chessboard.CellList[x, y]);
+            return MoveTo(GameCore.Chessboard.CellList[x, y]);
         }
         /// <summary>
         /// 移动到某个位置，不能移动返回假
         /// </summary>
         /// <param name="region"></param>
         /// <returns></returns>
-        public bool Move(ChessboardCell region)
+        public bool MoveTo(ChessboardCell region)
         {
             if (CanMove(region) == false)
             {
                 return false;
             }
 
-            if (action.IsAction == false)//如果没有激活，自动激活
+            if (ActionState.IsAction == false)//如果没有激活，自动激活
             {
-                if (Activition() == false)
+                if (Activate() == false)
                 {
                     return false;
                 }
@@ -250,8 +268,8 @@ namespace THE_Core
         public virtual bool CanMove(ChessboardCell region)
         {
             if (Owner.bDot <= 1) return false;
-            if (action.HaveAction == true) return false;
-            if (action.HaveMove == true) return false;
+            if (ActionState.HaveAction == true) return false;
+            if (ActionState.HaveMove == true) return false;
             if (region.unitHere != null) return false;
             Owner.bDot--;
             return GetDistance(region) <= Mobility.Current;
@@ -273,116 +291,90 @@ namespace THE_Core
         }
         public virtual void Die()
         {
+            if (Unit_Dying != null)
+            {
+                Unit_Dying(this);
+            }
+
             Position.unitHere = null;
             Position = null;
-            //_card.GameCore.IDP.UID.Del(this);
-            //↑单位死亡还是别除名了。。。要是哪天那帮没节操的策划编个复活技能……
-            Owner.unit.Remove(this);
-            if (card.GetCardType() == Card.CardType.Hero)
-            {
-                Owner.deadCard.Add(this);
 
+            if (Unit_Dead != null)
+            {
+                Unit_Dead(this);
             }
         }
         public void Reset()
         {
-            action.Reset();
+            ActionState.Reset();
             foreach (Skill s in skill)
             {
                 s.Reset();
             }
         }
-        /// <summary>
-        /// 记录该单位已经进行过的行动
-        /// </summary>
-        public class Action
-        {
-            public bool IsAction = false;
-            public bool HaveAction = false;
-            public bool HaveAttack = false;
-            public bool HaveMove = false;
-            public void Reset()
-            {
-                IsAction = false;
-                HaveAction = false;
-                HaveAttack = false;
-                HaveMove = false;
-            }
-        }
-        /// <summary>
-        /// 属性
-        /// </summary>
-        public class Attribute
-        {
-            /// <summary>
-            /// 该单位的种类ID
-            /// </summary>
-            public string typeID { get; set; }
-            /// <summary>
-            /// 不解释
-            /// </summary>
-            public string name { get; set; }
-            /// <summary>
-            /// 对该角色的描述
-            /// </summary>
-            public string description { get; set; }
-            /// <summary>
-            /// 角色类型
-            /// </summary>
-            public UnitType type { get; set; }
-            /// <summary>
-            /// 血量
-            /// </summary>
-            public int blood { get; set; }
-            /// <summary>
-            /// 机动性
-            /// </summary>
-            public int mobility { get; set; }
-            /// <summary>
-            /// 攻击伤害
-            /// </summary>
-            public int attack { get; set; }
-            /// <summary>
-            /// 射程
-            /// </summary>
-            public int range { get; set; }
-            /// <summary>
-            /// 单位技能
-            /// </summary>
-            public List<Skill> skill { get; set; }
-            /// <summary>
-            /// 移动方式
-            /// </summary>
-            public MoveMethous moveMethous;
-            public Attribute()
-            {
-                skill = new List<Skill>();
-            }
-            public Attribute Clone()
-            {
-                return (Attribute)this.MemberwiseClone();
-            }
-            public enum MoveMethous { Walk, Fly, Transport }
-        }
-        /// <summary>
-        /// 人物附加状态
-        /// </summary>
-        public class State
-        {
 
-        }
+        #region Delegate & Event
+        public delegate void Unit_Dead_Handle(object sender);
+        /// <summary>
+        /// Trigger when Unit just dead
+        /// </summary>
+        public Unit_Dead_Handle Unit_Dead;
+
+
+        public delegate void Unit_Dying_Handle(object sender);
+        /// <summary>
+        /// Trigger before Unit dead
+        /// </summary>
+        public Unit_Dying_Handle Unit_Dying;
+
+        public delegate void Unit_Moved_Handle(object sender);
+        /// <summary>
+        /// Trigger when Unit just moved
+        /// </summary>
+        public Unit_Moved_Handle Unit_Moved;
+
+        public delegate void Unit_Moving_Handle(object sender);
+        /// <summary>
+        /// Trigger before Unit move
+        /// </summary>
+        public Unit_Moving_Handle Unit_Moving;
+
+        public delegate void Unit_Attacked_Handle(object sender);
+        /// <summary>
+        /// Trigger when Unit just attack (another Unit or Object)
+        /// </summary>
+        public Unit_Attacked_Handle Unit_Attacked;
+
+        public delegate void Unit_Attacking_Handle(object sender);
+        /// <summary>
+        /// Trigger before Unit attack (another Unit or Object)
+        /// </summary>
+        public Unit_Attacking_Handle Unit_Attacking;
+
+        public delegate void Unit_Casted_Skill(object sender);
+        /// <summary>
+        /// Trigger when Unit just casted a skill
+        /// </summary>
+        public Unit_Casted_Skill Unit_Casted;
+
+        public delegate void Unit_Casting_Skill(object sender);
+        /// <summary>
+        /// Trigger before Unit cast skill
+        /// </summary>
+        public Unit_Casting_Skill Unit_Casting;
+
+        public delegate void Unit_Damaged_Handle(object sender);
+        /// <summary>
+        /// Trigger when Unit was just damaged (by another Unit)
+        /// </summary>
+        public Unit_Damaged_Handle Unit_Damaged;
+
+        public delegate void Unit_Damaging_Handle(object sender);
+        /// <summary>
+        /// Trigger before Unit damaged (by another Unit)
+        /// </summary>
+        public Unit_Damaging_Handle Unit_Damaging;
+
+        #endregion
     }
-    //public class HeroUnit : Unit
-    //{
-    //    public HeroUnit(HeroCard heroCard,int[] locate)
-    //        : base(heroCard,locate)
-    //    {
-
-    //    }
-    //    public override void Die()
-    //    {
-
-    //        base.Die();
-    //    }
-    //}
 }

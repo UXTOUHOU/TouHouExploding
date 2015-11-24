@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace THE_Core
 {
-    public class Minion : Unit
+    public class UnitMinion : Unit
     {
-        public Minion(SummonCard transCard, int[] buildLocate, Player owner) : base(transCard, buildLocate, owner)
+        public UnitMinion(UnitBase unitBase, Player owner): base(unitBase, owner)
         {
+
         }
     }
 }

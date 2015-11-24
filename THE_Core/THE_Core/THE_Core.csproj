@@ -51,7 +51,7 @@
     <Compile Include="Card\PolicyCard.cs" />
     <Compile Include="Card\SpellCard.cs" />
     <Compile Include="Card\SummonCard.cs" />
-    <Compile Include="Core\UnitSpool.cs" />
+    <Compile Include="Core\UnitPool.cs" />
     <Compile Include="Data\THE_Data.cs">
       <DependentUpon>THE_Data.xsd</DependentUpon>
     </Compile>
@@ -65,9 +65,9 @@
     <Compile Include="Support\FieldHelper.cs" />
     <Compile Include="Support\IDList.cs" />
     <Compile Include="Support\JSonHelper.cs" />
-    <Compile Include="Unit\Girl.cs" />
-    <Compile Include="Unit\Minion.cs" />
-    <Compile Include="Unit\Servant.cs" />
+    <Compile Include="Unit\UnitGirl.cs" />
+    <Compile Include="Unit\UnitMinion.cs" />
+    <Compile Include="Unit\UnitServant.cs" />
     <Compile Include="Skill\Skill.cs" />
     <Compile Include="Unit\UnitAttribute\UnitAttackPower.cs" />
     <Compile Include="Unit\UnitAttribute\UnitAttackRange.cs" />

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace THE_Core
 {
-    public class Servant : Unit
+    public class UnitGirl : Unit
     {
-        public Servant(SummonCard transCard, int[] buildLocate, Player owner) : base(transCard, buildLocate, owner)
+        public UnitGirl(UnitBase unitBase, Player owner): base(unitBase, owner)
         {
 
         }
