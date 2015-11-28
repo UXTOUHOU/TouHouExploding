@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 using System;
 
 namespace BattleScene
@@ -21,8 +21,10 @@ namespace BattleScene
 		public static GameObject btnAttack = GameObject.Find("Canvas/ButtonAttack");
 		public static GameObject btnSkill = GameObject.Find("Canvas/ButtonSkill");
 
-		public static bool RecordingMovePath { get; set; }
-		public static ArrayList listMovePath = new ArrayList();
+		public static GameObject btnSkill_1 = GameObject.Find("Canvas/OperateButton/ButtonSkill_1");
+		public static GameObject btnSkill_2 = GameObject.Find("Canvas/OperateButton/ButtonSkill_2");
+		public static GameObject btnSkill_3 = GameObject.Find("Canvas/OperateButton/ButtonSkill_3");
+
 
 		public void ShowOperateButton()
 		{
@@ -56,8 +58,30 @@ namespace BattleScene
 		}
 
 		public void ShowSkillButton()
-		{ 
-			
+		{
+			float cellSize = Chessboard.CellSize;
+			//显示按钮
+			btnSkill_1.SetActive(true);
+			btnSkill_2.SetActive(true);
+			btnSkill_3.SetActive(true);
+			//设置按钮是否被禁用
+			if (UnitOnCell.Skill_1 != null)
+				btnSkill_1.GetComponent<Button>().interactable = UnitOnCell.Skill_1.GetUsable();
+			if (UnitOnCell.Skill_2 != null)
+				btnSkill_2.GetComponent<Button>().interactable = UnitOnCell.Skill_2.GetUsable();
+			if (UnitOnCell.Skill_3 != null)
+				btnSkill_3.GetComponent<Button>().interactable = UnitOnCell.Skill_3.GetUsable();
+			//更新按钮位置
+			btnSkill_1.transform.position = Background.transform.position + new Vector3(-cellSize / 1.5F, cellSize / 2F, 0); 
+			btnSkill_2.transform.position = Background.transform.position + new Vector3(0, cellSize / 1.3F, 0);
+			btnSkill_3.transform.position = Background.transform.position + new Vector3(cellSize / 1.5F, cellSize / 2F, 0);
+		}
+
+		public static void HideSkillButton()
+		{
+			btnSkill_1.SetActive(false);
+			btnSkill_2.SetActive(false);
+			btnSkill_3.SetActive(false);
 		}
 
 		public void SetBackgroundColor(Color newColor)
@@ -92,46 +116,8 @@ namespace BattleScene
 			return Background.transform.position;
 		}
 
-		public void RecordMovePath(ChessboardPosition targetPosition)
-		{
-			Debug.Log("Record");
-			if (!RecordingMovePath)
-			{
-				//当移到初始点时开始记录移动路径
-				if (ThisPosition.Distance(targetPosition) == 0)
-				{
-					Chessboard.GetCell(targetPosition).SetBackgroundColor(HighLightMovableColor);
-					RecordingMovePath = true;
-				}
-			}
-			else {
-				if (Chessboard.GetCell(targetPosition).UnitOnCell != null) return;              //格子上已有单位
-				if (listMovePath.Count >= UnitOnCell.UnitAttribute.motility) return;			//超过单位的机动
-				if (listMovePath.Count == 0)
-				{
-					//应与初始点相邻
-					if (ThisPosition.Adjacent(targetPosition))
-					{
-						Chessboard.GetCell(targetPosition).SetBackgroundColor(HighLightMovableColor);
-						listMovePath.Add(targetPosition);
-					}else{
-						return;
-					}
-				}
-				else if (((ChessboardPosition)listMovePath[listMovePath.Count - 1]).Adjacent(targetPosition))
-				{
-					//应与上一个选择的点相邻
-					Chessboard.GetCell(targetPosition).SetBackgroundColor(HighLightMovableColor);
-					listMovePath.Add(targetPosition);
-				}
-			}
-		}
 
-		public static void ClearMovePath()
-		{
-			RecordingMovePath = false;
-			listMovePath.Clear();
-		}
+
 
 		// Use this for initialization
 		void Start()
@@ -163,36 +149,35 @@ namespace BattleScene
 				}
 		}
 
-		public void MoveWithPath()
-		{
-			//if (!RecordingMovePath) return;
-			if (UnitOnCell == null) return;
-			if (BattleProcess.playerState != PlayerState.PS_WaitMoveAnimateEnd)
-				BattleProcess.ChangeState(PlayerState.PS_WaitMoveAnimateEnd);
-			var lastPosition = ((ChessboardPosition)listMovePath[0]);
-			Vector3 targetPosition = lastPosition.GetPosition();
-			UnitOnCell.UnitImage.transform.position = Vector3.MoveTowards(UnitOnCell.UnitImage.transform.position,
-				targetPosition,
-				Chessboard.CellSize / 50F);
-			if (UnitOnCell.UnitImage.transform.position == targetPosition)
-				if (listMovePath.Count == 1)
-				{//移动结束
-					//更新Unit的Cell
-					var targetCell = Chessboard.GetCell(lastPosition);
-					targetCell.SwapUnit(Chessboard.SelectedCell);
-					Chessboard.SelectedCell = targetCell;
+		//public void MoveWithPath()
+		//{
+		//	if (UnitOnCell == null) return;
+		//	if (BattleProcess.playerState != PlayerState.PS_WaitMoveAnimateEnd)
+		//		BattleProcess.ChangeState(PlayerState.PS_WaitMoveAnimateEnd);
+		//	var lastPosition = ListMovePath[0];
+		//	Vector3 targetPosition = lastPosition.GetPosition();
+		//	//移动
+		//	UnitOnCell.UnitImage.transform.position = Vector3.MoveTowards(UnitOnCell.UnitImage.transform.position,
+		//		targetPosition,
+		//		Chessboard.CellSize / 50F);
+		//	if (UnitOnCell.UnitImage.transform.position == targetPosition)
+		//	{//一段移动结束
+		//		ListMovePath.RemoveAt(0);
+		//		if (ListMovePath.Count == 0)
+		//		{//移动结束
+		//			//更新Unit的Cell
+		//			var targetCell = Chessboard.GetCell(lastPosition);
+		//			targetCell.SwapUnit(Chessboard.SelectedCell);
+		//			Chessboard.SelectedCell = targetCell;
 
-					targetCell.UnitOnCell.Movable = false;				//单位不可再次移动
-					listMovePath.Clear();
-					Chessboard.UnitMove = false;
-					BattleProcess.ChangeState(PlayerState.PS_SelectUnitBehavior);
-				}
-				else {
-					listMovePath.RemoveAt(0);
-				}
-		}
+		//			targetCell.UnitOnCell.Movable = false;              //单位不可再次移动
+		//			Chessboard.UnitMove = false;
+		//			BattleProcess.ChangeState(PlayerState.PS_SelectUnitBehavior);
+		//		}
+		//	}
+		//}
 
-		private void SwapUnit(Cell targetCell)
+		public void SwapUnit(Cell targetCell)
 		{
 			Unit temp = targetCell.UnitOnCell;
 			targetCell.UnitOnCell = UnitOnCell;
@@ -203,34 +188,30 @@ namespace BattleScene
 				//更新单位所在的cell
 				targetCell.UnitOnCell.CurrentCell = targetCell;
 				//更新单位的HP和Group位置
-				targetCell.UnitOnCell.UpdateGroupPosition();
-				targetCell.UnitOnCell.UpdateHPPosition();
+				//targetCell.UnitOnCell.UpdateGroupPosition();
+				//targetCell.UnitOnCell.UpdateHPPosition();
+				targetCell.UnitOnCell.UpdatePosition();
 			}
 			if (UnitOnCell != null)
 			{
 				UnitOnCell.CurrentCell = this;
-				UnitOnCell.UpdateGroupPosition();
-				UnitOnCell.UpdateHPPosition();
+				//UnitOnCell.UpdateGroupPosition();
+				//UnitOnCell.UpdateHPPosition();
+				UnitOnCell.UpdatePosition();
 			}
 		}
 
 		//返回召唤是否成功
-		public bool SummomUnit(int unitID, EGroupType group)
+		public bool SummonUnit(int unitID, EGroupType group)
 		{
 			if (UnitOnCell != null) return false;       //格子上已有单位
 
-			UnitOnCell = new Unit(unitID);
+			UnitOnCell = new Unit(unitID, ThisPosition);
 			UnitOnCell.GroupType = group;
 			UnitOnCell.CurrentCell = this;
-			UnitOnCell.UnitImage.transform.SetParent(GameObject.Find("/Canvas/UnitImage").transform);
-			UnitOnCell.UnitImage.transform.localPosition = GetLocalPosition();
-			UnitOnCell.UnitImage.transform.localScale = new Vector3(Chessboard.CellSize / 75, Chessboard.CellSize / 75, 1);
-
-			UnitOnCell.InitUnitGroup();
-			UnitOnCell.InitUnitHP();
-			UnitOnCell.SetGroupVisible(true);
-			UnitOnCell.SetHPVisible(true);
-
+			//UnitOnCell.UnitImage.transform.SetParent(GameObject.Find("/Canvas/UnitImage").transform);
+			//UnitOnCell.UnitImage.transform.localPosition = GetLocalPosition();
+			//UnitOnCell.UnitImage.transform.localScale = new Vector3(Chessboard.CellSize / 75, Chessboard.CellSize / 75, 1);
 			return true;
 		}
 

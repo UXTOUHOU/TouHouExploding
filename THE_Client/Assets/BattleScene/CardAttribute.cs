@@ -15,7 +15,7 @@ namespace BattleScene
 		public CardAttribute()
 		{
 			//Test
-			ID = 0;
+			ID = 1;
 			hp = 10;
 			attack = 3;
 			motility = 3;
@@ -26,6 +26,7 @@ namespace BattleScene
 
 		public CardAttribute(int cardID)
 		{
+			//从文件中读取
 			throw new System.NotImplementedException();
 		}
 	}

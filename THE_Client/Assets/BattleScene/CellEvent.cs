@@ -11,22 +11,22 @@ namespace BattleScene
 		public void OnLeftButtonDown()
 		{
 			if (!Input.GetMouseButtonDown(0)) return;										//按下的是右键
-			switch(BattleProcess.playerState)
+			switch(BattleProcess.currentState)
 			{
-			case PlayerState.PS_WaitingOperate:
+			case PlayerState.WaitingOperate:
 				if (ThisCell.UnitOnCell == null ||											//格子上没有单位
-					ThisCell.UnitOnCell.GroupType != EGroupType.GT_Yourself) return;   //非己方单位
-				BattleProcess.ChangeState(PlayerState.PS_SelectUnitBehavior);
+					ThisCell.UnitOnCell.GroupType != EGroupType.GT_Yourself) return;		//非己方单位
+				BattleProcess.ChangeState(PlayerState.SelectUnitBehavior);
 				ThisCell.ShowOperateButton();
 				ThisCell.SetBackgroundColor(Cell.SelectedColor);
 				Chessboard.SelectedCell = ThisCell;
 				break;
-			case PlayerState.PS_SelectMovePosition:
-				if (Cell.RecordingMovePath == false) return;
-				if (Cell.listMovePath.Count != 0)
+			case PlayerState.SelectMovePosition:
+				if (Chessboard.RecordingMovePath == false) return;
+				if (Chessboard.ListMovePath.Count != 0)
 					Chessboard.UnitMove = true;
 				break;
-			case PlayerState.PS_SelectAttackTarget:
+			case PlayerState.SelectAttackTarget:
 				if (ThisCell == null ||																	
 						ThisCell == Chessboard.SelectedCell ||											//选择了自身
 						ThisCell.UnitOnCell == null ||													//格子上没有单位
@@ -40,14 +40,22 @@ namespace BattleScene
 				//计算伤害等
 				ThisCell.UnitOnCell.HP -= Chessboard.SelectedCell.UnitOnCell.UnitAttribute.attack;
 				Chessboard.SelectedCell.UnitOnCell.Attackable = false;
-				BattleProcess.ChangeState(PlayerState.PS_SelectUnitBehavior);
+				BattleProcess.ChangeState(PlayerState.SelectUnitBehavior);
 				break;
-			case PlayerState.PS_SelectSummonPosition:
+			case PlayerState.SelectSummonPosition:
 				if (!ThisCell.IsCanSummonPlace()) break;
-				if (ThisCell.SummomUnit(1 /*Test 应解析成unitID*/, EGroupType.GT_Yourself))
+				if (ThisCell.SummonUnit(1 /*Test 应解析成unitID*/, EGroupType.GT_Yourself))
 				{
 					Deck.RemoveDeckCard(Chessboard.SelectedCard);
-					BattleProcess.ChangeState(PlayerState.PS_WaitingOperate);
+					BattleProcess.ChangeState(PlayerState.WaitingOperate);
+				}
+				break;
+			case PlayerState.RunningSkill:
+				if (SkillOperate.WaitSelectCell)
+				{
+					SkillOperate.CellSkillTargetMutex.WaitOne();
+					SkillOperate.CellSkillTarget = ThisCell;
+					SkillOperate.CellSkillTargetMutex.ReleaseMutex();
 				}
 				break;
 			default:
@@ -58,13 +66,13 @@ namespace BattleScene
 
 		public void OnMouseEnter()
 		{
-			switch (BattleProcess.playerState)
+			switch (BattleProcess.currentState)
 			{
-			case PlayerState.PS_WaitingOperate:
+			case PlayerState.WaitingOperate:
 				ThisCell.SetBackgroundColor(Cell.SelectedColor);
 				break;
-			case PlayerState.PS_SelectMovePosition:
-				Chessboard.SelectedCell.RecordMovePath(ThisCell.ThisPosition);
+			case PlayerState.SelectMovePosition:
+				Chessboard.RecordMovePath(ThisCell.ThisPosition);
 				break;
 			default:
 				break;
@@ -73,9 +81,9 @@ namespace BattleScene
 
 		public void OnMouseLeave()
 		{
-			switch (BattleProcess.playerState)
+			switch (BattleProcess.currentState)
 			{
-			case PlayerState.PS_WaitingOperate:
+			case PlayerState.WaitingOperate:
 				Chessboard.ClearBackground();
 				break;
 			default:

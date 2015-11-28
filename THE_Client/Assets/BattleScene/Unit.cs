@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
 
@@ -13,16 +13,19 @@ namespace BattleScene
 
 	public class Unit
 	{
-		public GameObject UnitImage;
 		public Cell CurrentCell;
 		public CardAttribute UnitAttribute;
 
-		private GameObject textHP;
 		private EGroupType groupType;
-		private GameObject imageGroup;
 
 		public bool Movable = true;
 		public bool Attackable = true;
+
+		public Skill Skill_1;
+		public Skill Skill_2;
+		public Skill Skill_3;
+
+		private UnitUI unitSprite;
 
 		public int HP
 		{
@@ -34,12 +37,8 @@ namespace BattleScene
 			set
 			{
 				UnitAttribute.hp = value;
-				if(textHP != null)
-					textHP.GetComponent<Text>().text = UnitAttribute.hp.ToString();
 				if (value <= 0)
-				{
-					RemoveUnit();
-				}
+					UnitDeath();
 			}
 		}
 
@@ -52,168 +51,49 @@ namespace BattleScene
 
 			set
 			{
+				if(groupType != value)
+					UnitUIManager.GroupChanged = true;
 				groupType = value;
-				if (imageGroup != null)
-					imageGroup.GetComponent<Image>().sprite = CreateGroupSprite(groupType);
 			}
 		}
 
-		public Unit(int unitID)
+		public Unit(int unitID, ChessboardPosition targetPosition)
 		{
-			UnitImage = new GameObject();
-			UnitImage.AddComponent<Image>();
-			UnitImage.GetComponent<Image>().sprite = CreateUnitSprite(unitID);
+			CurrentCell = Chessboard.GetCell(targetPosition);
 
-			//事件穿透
-			UnitImage.AddComponent<RayIgnore>();
+			Skill_1 = null;
+			Skill_2 = null;
+			Skill_3 = null;
+
+			switch (unitID)
+			{
+			case 1:
+				Skill_1 = new Skill_1_1(this);
+				break;
+			}
+
 			//Test
 			UnitAttribute = new CardAttribute();
 			//
+			unitSprite = new UnitUI(this, targetPosition);
+			////事件穿透
+			//UnitImage.AddComponent<RayIgnore>();
 		}
 
-		private Sprite CreateUnitSprite(int unitID)
-		{
-			Texture2D cardTexture = Resources.Load<Texture2D>("Units/Unit_" + unitID);
-			Sprite unitSprite = Sprite.Create(cardTexture, new Rect(0, 0, cardTexture.width, cardTexture.height), new Vector2(0.5f, 0.5f));
-			return unitSprite;
-		}
 
-		public void InitUnitGroup()
-		{
-			if (imageGroup == null)
-			{
-				imageGroup = new GameObject("UnitGroup");
-				imageGroup.transform.SetParent(GameObject.Find("/Canvas/UnitGroup").transform);
-				imageGroup.AddComponent<RectTransform>().pivot = new Vector2(1, 1);
-				imageGroup.AddComponent<RayIgnore>();
-				//读取阵营标志的图片
-				Sprite groupSprite = CreateGroupSprite(groupType);
-
-				imageGroup.transform.localScale = new Vector3(Chessboard.CellSize / groupSprite.texture.width / 64,
-					Chessboard.CellSize / groupSprite.texture.width / 64,
-					1);
-				imageGroup.AddComponent<Image>().sprite = groupSprite;
-
-				UpdateGroupPosition();
-			}
-		}
-
-		public void UpdateGroupPosition()
-		{
-			Vector3 cellPosition = CurrentCell.GetLocalPosition();
-			imageGroup.transform.localPosition = new Vector3(Chessboard.CellSize / 2 + cellPosition.x, 
-					Chessboard.CellSize / 2 + cellPosition.y, 
-					0);
-		}
-
-		public void SetGroupVisible(bool visible)
-		{
-			imageGroup.SetActive(visible);
-		}
-
-		public void InitUnitHP()
-		{
-			if (textHP == null)
-			{
-				textHP = GameObject.Instantiate(GameObject.Find("UnitHPPrefab"));
-				textHP.transform.SetParent(GameObject.Find("/Canvas/UnitHP").transform);
-				textHP.GetComponent<RectTransform>().pivot = new Vector2(0, 1);
-				textHP.GetComponent<Text>().text = HP.ToString();
-				UpdateHPPosition();
-			}
-		}
-
-		public void UpdateHPPosition()
-		{
-			Vector3 cellPosition = CurrentCell.GetLocalPosition();
-			textHP.transform.localPosition = new Vector3(-Chessboard.CellSize / 2 + cellPosition.x, 
-					Chessboard.CellSize / 2 + cellPosition.y, 
-					0);
-		}
-
-		public void SetHPVisible(bool visible)
-		{
-			textHP.SetActive(visible);
-		}
-
-		////显示阵营标志
-		//public void ShowUnitGroup()
-		//{
-		//	if (imageGroup == null)
-		//	{
-		//		imageGroup = new GameObject("UnitGroup");
-		//		imageGroup.transform.SetParent(GameObject.Find("/Canvas").transform);
-		//		imageGroup.AddComponent<RectTransform>().pivot = new Vector2(1, 1);
-		//		imageGroup.AddComponent<RayIgnore>();
-		//		//读取阵营标志的图片
-		//		Sprite groupSprite = CreateGroupSprite(groupType);
-
-		//		imageGroup.transform.localScale = new Vector3(Chessboard.CellSize / groupSprite.texture.width / 64, 
-		//			Chessboard.CellSize / groupSprite.texture.width / 64, 
-		//			1);
-		//		imageGroup.AddComponent<Image>().sprite = groupSprite;
-		//	}
-		//	else
-		//	{
-		//		imageGroup.SetActive(true);
-		//	}
-		//	//更新位置
-		//	Vector3 cellPosition = CurrentCell.GetLocalPosition();
-		//	imageGroup.transform.localPosition = new Vector3(Chessboard.CellSize / 2 + cellPosition.x, Chessboard.CellSize / 2 + cellPosition.y, 0);
-		//}
-
-		private Sprite CreateGroupSprite(EGroupType type)
-		{
-			Texture2D groupTexture;
-			if (type == EGroupType.GT_Yourself)
-				groupTexture = Resources.Load<Texture2D>("Images/GroupBlue");
-			else// if (groupType == EGroupType.GT_Enemy)
-				groupTexture = Resources.Load<Texture2D>("Images/GroupRed");
-			Sprite groupSprite = Sprite.Create(groupTexture,
-				new Rect(0, 0, groupTexture.width, groupTexture.height),
-				new Vector2(0.5F, 0.5F));
-			return groupSprite;
-		}
-
-		//public void HideUnitGroup()
-		//{
-		//	imageGroup.SetActive(false);
-		//}
-
-		////显示HP
-		//public void ShowUnitHP()
-		//{
-		//	if (textHP == null)
-		//	{
-		//		textHP = GameObject.Instantiate(GameObject.Find("UnitHPPrefab"));
-		//		textHP.transform.SetParent(GameObject.Find("/Canvas").transform);
-		//		textHP.GetComponent<RectTransform>().pivot = new Vector2(0, 1);
-		//		textHP.GetComponent<Text>().text = HP.ToString();
-		//	}
-		//	else
-		//	{
-		//		textHP.SetActive(true);
-		//	}
-		//	//更新位置
-		//	Vector3 cellPosition = CurrentCell.GetLocalPosition();
-		//	textHP.transform.localPosition = new Vector3(-Chessboard.CellSize / 2 + cellPosition.x, Chessboard.CellSize / 2 + cellPosition.y, 0);
-		//}
-
-		////隐藏HP
-		//public void HideUnitHP()
-		//{
-		//	textHP.SetActive(false);
-		//}
-
-		public void RemoveUnit()
+		public void UnitDeath()
 		{
 			if (CurrentCell != null)
 				CurrentCell.UnitOnCell = null;
-			GameObject.Destroy(UnitImage);
-			GameObject.Destroy(textHP);
-			GameObject.Destroy(imageGroup);
-			
+
+			unitSprite.RemoveUnitSprite();
 			//删除技能产生的效果
+		}
+
+		public void NormalHurt(int damage)
+		{
+			HP -= damage;
+			UnitUIManager.HPChanged = true;
 		}
 
 		// Use this for initialization
@@ -226,6 +106,38 @@ namespace BattleScene
 		void Update()
 		{
 
+		}
+
+		public void UpdatePosition()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void MoveWithPath(List<ChessboardPosition> ListMovePath)
+		{
+			if (BattleProcess.currentState != PlayerState.WaitMoveAnimateEnd)
+				BattleProcess.ChangeState(PlayerState.WaitMoveAnimateEnd);
+			var lastPosition = ListMovePath[0];
+			Vector3 targetPosition = lastPosition.GetPosition();
+			//移动
+			unitSprite.UnitImage.transform.position = Vector3.MoveTowards(unitSprite.UnitImage.transform.position,
+				targetPosition,
+				Chessboard.CellSize / 50F);
+			if (unitSprite.UnitImage.transform.position == targetPosition)
+			{//一段移动结束
+				ListMovePath.RemoveAt(0);
+				if (ListMovePath.Count == 0)
+				{//移动结束
+				 //更新Unit的Cell
+					var targetCell = Chessboard.GetCell(lastPosition);
+					targetCell.SwapUnit(Chessboard.SelectedCell);
+					Chessboard.SelectedCell = targetCell;
+
+					targetCell.UnitOnCell.Movable = false;              //单位不可再次移动
+					Chessboard.UnitMove = false;
+					BattleProcess.ChangeState(PlayerState.SelectUnitBehavior);
+				}
+			}
 		}
 	}
 }

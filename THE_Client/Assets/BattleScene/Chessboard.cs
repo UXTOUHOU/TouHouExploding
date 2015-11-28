@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 using System;
 
 namespace BattleScene
@@ -41,6 +41,7 @@ namespace BattleScene
 	{
 		public GameObject ChessboardRect;
 		public GameObject ChessboardCellPrefab;
+		public GameObject ChessboardDialog;
 		public GameObject CanvasObject;
 		public GameObject Background;
 
@@ -49,7 +50,10 @@ namespace BattleScene
 		public static Cell SelectedCell;
 		public static GameObject SelectedCard;
 		public static float CellSize;
-	
+
+		public static bool RecordingMovePath;
+		public static List<ChessboardPosition> ListMovePath;
+
 		private static Chessboard singleton = null;
 		private Cell[,] cell = new Cell[12, 8];
 		public const int ChessboardMaxX = 12;
@@ -106,9 +110,9 @@ namespace BattleScene
 					if (y == 0)
 					{
 						if ((x + y) % 2 == 0)
-							item.SummomUnit(1, EGroupType.GT_Yourself);
+							item.SummonUnit(1, EGroupType.GT_Yourself);
 						else
-							item.SummomUnit(1, EGroupType.GT_Enemy);
+							item.SummonUnit(1, EGroupType.GT_Enemy);
 					}
 				}
 			//
@@ -124,26 +128,83 @@ namespace BattleScene
 		}
 
 		// Update is called once per frame
-		void Update () {
+		void Update ()
+		{
 			if (UnitMove)
+				SelectedCell.UnitOnCell.MoveWithPath(ListMovePath);
+		}
+
+		//记录selected cell的移动路径
+		public static void RecordMovePath(ChessboardPosition targetPosition)
+		{
+			Debug.Log("Record");
+			if (!RecordingMovePath)
 			{
-				SelectedCell.MoveWithPath();
+				//当移到初始点时开始记录移动路径
+				if (SelectedCell.ThisPosition.Distance(targetPosition) == 0)
+				{
+					GetCell(targetPosition).SetBackgroundColor(Cell.HighLightMovableColor);
+					RecordingMovePath = true;
+				}
+			}
+			else
+			{
+				if (GetCell(targetPosition).UnitOnCell != null) return;              //格子上已有单位
+				if (ListMovePath.Count >= SelectedCell.UnitOnCell.UnitAttribute.motility) return;            //超过单位的机动
+				if (ListMovePath.Count == 0)
+				{
+					//应与初始点相邻
+					if (SelectedCell.ThisPosition.Adjacent(targetPosition))
+					{
+						GetCell(targetPosition).SetBackgroundColor(Cell.HighLightMovableColor);
+						ListMovePath.Add(targetPosition);
+					}else{
+						return;
+					}
+				}else if (ListMovePath[ListMovePath.Count - 1].Adjacent(targetPosition)){
+					//应与上一个选择的点相邻
+					Chessboard.GetCell(targetPosition).SetBackgroundColor(Cell.HighLightMovableColor);
+					ListMovePath.Add(targetPosition);
+				}
 			}
 		}
 
-		public static void SetAllUnitAttributeVisible(bool visible)
+		public static void ClearMovePath()
 		{
-			for (int x = 0; x < ChessboardMaxX; ++x)
-				for (int y = 0; y < ChessboardMaxY; ++y)
-				{
-					var item = singleton.cell[x, y];
+			RecordingMovePath = false;
+			ListMovePath.Clear();
+		}
 
-					if (item.UnitOnCell != null)
-					{
-						item.UnitOnCell.SetGroupVisible(visible);
-						item.UnitOnCell.SetHPVisible(visible);
-					}
-				}
+		public static void SetDialogString(string message)
+		{
+			var dialog = Chessboard.GetInstance().ChessboardDialog;
+			dialog.transform.Find("Text").GetComponent<Text>().text = message;
+		}
+
+		//实际是修改了DialogObject的Active属性
+		public static void SetChessboardDialogVisible(bool visible)
+		{
+			Chessboard.GetInstance().ChessboardDialog.SetActive(visible);
+		}
+
+		public static void SetSkillRange(int range)
+		{
+			throw new NotImplementedException();
+		}
+
+		public static void SetSkillRangeVisible(bool visible)
+		{
+			throw new NotImplementedException();
+		}
+
+		public static void SetSkillTargetRange(int range)
+		{
+			throw new NotImplementedException();
+		}
+
+		public static void SetSkillTargetRangeVisible(int visible)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
