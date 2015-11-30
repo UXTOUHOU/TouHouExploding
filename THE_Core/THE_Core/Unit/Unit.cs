@@ -25,14 +25,17 @@ namespace THE_Core
         /// 该单位的种类ID
         /// </summary>
         public string UnitBaseId { get; set; }
+
         /// <summary>
-        /// 不解释
+        /// 单位名称
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
-        /// 对该角色的描述
+        /// 对该单位的描述
         /// </summary>
         public string Description { get; set; }
+
         /// <summary>
         /// 角色类型
         /// </summary>

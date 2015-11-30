@@ -189,5 +189,21 @@ namespace THE_Core
     {
 
     }
+
     
+    public enum SkillSelectTarget
+    {
+        None = 0,
+        Player = 1,
+        Unit = 2,
+        Position = 3
+    }
+
+    [Flags]
+    public enum SkillEffectTarget
+    {
+        Friend = 0x01,
+        Enemy = 0x02,
+        Neutral = 0x04
+    }
 }

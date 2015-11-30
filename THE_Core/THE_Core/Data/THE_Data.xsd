@@ -22,7 +22,7 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Skill" type="Skill" minOccurs="0" maxOccurs="unbounded">
-                
+
               </xs:element>
             </xs:sequence>
           </xs:complexType>
@@ -93,5 +93,32 @@
     <xs:attribute name="MoveMethod" type="UnitMoveMethod"></xs:attribute>
   </xs:complexType>
   <xs:complexType name="Skill">
+    <xs:attribute name="Id" type="xs:string"></xs:attribute>
+    <xs:attribute name="Name" type="xs:string"></xs:attribute>
+    <xs:attribute name="Description" type="xs:string"></xs:attribute>
+    <xs:attribute name="SelectTargetType" type="SkillSelectTargetType"></xs:attribute>
+    <xs:attribute name="Cost" type="xs:int"></xs:attribute>
+    <xs:attribute name="EffectTargetType" type="SkillEffectTargetType"></xs:attribute>
   </xs:complexType>
+  <xs:simpleType name="SkillSelectTargetType">
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="0"></xs:enumeration><!--None-->
+      <xs:enumeration value="1"></xs:enumeration><!--Player-->
+      <xs:enumeration value="2"></xs:enumeration><!--Unit-->
+      <xs:enumeration value="3"></xs:enumeration><!--Position-->
+      <xs:enumeration value="4"></xs:enumeration><!--Self-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SkillEffectTargetType">
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="0"></xs:enumeration><!--None-->
+      <xs:enumeration value="1"></xs:enumeration><!--Friend-->
+      <xs:enumeration value="2"></xs:enumeration><!--Enemy-->
+      <xs:enumeration value="3"></xs:enumeration><!--Non-Neutral-->
+      <xs:enumeration value="4"></xs:enumeration><!--Neutral-->
+      <xs:enumeration value="5"></xs:enumeration><!--Non-Enemy-->
+      <xs:enumeration value="6"></xs:enumeration><!--Non-Friend-->
+      <xs:enumeration value="7"></xs:enumeration><!--All-->
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>
