@@ -27,10 +27,10 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SpellEffects">
+        <xs:element name="SpellEffectBases">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="SpellEffect" type="SpellEffect" minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="SpellEffectBase" type="SpellEffectBase" minOccurs="0" maxOccurs="unbounded">
               </xs:element>
             </xs:sequence>
           </xs:complexType>
@@ -38,7 +38,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:simpleType name="UnitType">
+  <xs:simpleType name="UnitCellType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Girl"></xs:enumeration>
       <xs:enumeration value="Minion"></xs:enumeration>
@@ -52,7 +52,7 @@
       <xs:enumeration value="Teleport"></xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name="AttributeType">
+  <xs:simpleType name="AttributeCellType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="HitPoint"></xs:enumeration>
       <xs:enumeration value="Mobility"></xs:enumeration>
@@ -65,7 +65,7 @@
       <xs:enumeration value="Other"></xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name="SpellEffect">
+  <xs:complexType name="SpellEffectBase">
     <xs:sequence>
       <xs:element name="Variable" minOccurs="0" maxOccurs="unbounded">
         <xs:complexType>
@@ -79,12 +79,23 @@
     <xs:attribute name="Description" type="xs:string"></xs:attribute>
     <xs:attribute name="AffectAttribute" type="AttributeType"></xs:attribute>
   </xs:complexType>
+  <xs:complexType name="SpellEffect">
+    <xs:sequence>
+      <xs:element name="VariableValue" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="Index"></xs:attribute>
+          <xs:attribute name="Value" type="xs:decimal"></xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="SpellEffectBaseId" type="xs:string"></xs:attribute>
+  </xs:complexType>
   <xs:complexType name="Unit">
     <xs:attribute name="Id" type="xs:string"></xs:attribute>
     <xs:attribute name="Name" type="xs:string"></xs:attribute>
     <xs:attribute name="Description" type="xs:string"></xs:attribute>
     <xs:attribute name="Provenance" type="xs:string"></xs:attribute>
-    <xs:attribute name="Type" type="UnitType"></xs:attribute>
+    <xs:attribute name="Type" type="UnitCellType"></xs:attribute>
     <xs:attribute name="HitPoint" type="xs:int"></xs:attribute>
     <xs:attribute name="Mobility" type="xs:int"></xs:attribute>
     <xs:attribute name="AttackPower" type="xs:int"></xs:attribute>
@@ -93,14 +104,17 @@
     <xs:attribute name="MoveMethod" type="UnitMoveMethod"></xs:attribute>
   </xs:complexType>
   <xs:complexType name="Skill">
+    <xs:sequence>
+      <xs:element name="SpellEffect" type="SpellEffect"></xs:element>
+    </xs:sequence>
     <xs:attribute name="Id" type="xs:string"></xs:attribute>
     <xs:attribute name="Name" type="xs:string"></xs:attribute>
     <xs:attribute name="Description" type="xs:string"></xs:attribute>
-    <xs:attribute name="SelectTargetType" type="SkillSelectTargetType"></xs:attribute>
+    <xs:attribute name="SelectTargetType" type="SkillSelectTargetCellType"></xs:attribute>
     <xs:attribute name="Cost" type="xs:int"></xs:attribute>
-    <xs:attribute name="EffectTargetType" type="SkillEffectTargetType"></xs:attribute>
+    <xs:attribute name="EffectTargetType" type="SkillEffectTargetCellType"></xs:attribute>
   </xs:complexType>
-  <xs:simpleType name="SkillSelectTargetType">
+  <xs:simpleType name="SkillSelectTargetCellType">
     <xs:restriction base="xs:int">
       <xs:enumeration value="0"></xs:enumeration><!--None-->
       <xs:enumeration value="1"></xs:enumeration><!--Player-->
@@ -109,7 +123,7 @@
       <xs:enumeration value="4"></xs:enumeration><!--Self-->
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name="SkillEffectTargetType">
+  <xs:simpleType name="SkillEffectTargetCellType">
     <xs:restriction base="xs:int">
       <xs:enumeration value="0"></xs:enumeration><!--None-->
       <xs:enumeration value="1"></xs:enumeration><!--Friend-->

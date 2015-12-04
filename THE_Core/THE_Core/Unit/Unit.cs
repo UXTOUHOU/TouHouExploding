@@ -89,6 +89,25 @@ namespace THE_Core
             }
         }
 
+        public void SummonToLocation(ChessboardCell cbCell)
+        {
+            if (Unit_Summoning != null)
+            {
+                Unit_Summoning(this);
+            }
+
+            bool result = cbCell.PlaceUnit(this);
+            if (!result)
+            {
+                throw new Exception("Summon failed. Location is not avaliable for this unit.");
+            }
+
+            if (Unit_Summoned != null)
+            {
+                Unit_Summoned(this);
+            }
+        }
+
         public static Unit FromUnitBase(UnitBase unitBase, Player owner)
         {
             switch (unitBase.Type)
@@ -117,8 +136,8 @@ namespace THE_Core
         {
             if (b == null) b = this;
             if (a.Position == null || b.Position == null) return -1;
-            int distanceX = a.Position.locate.X - b.Position.locate.X;
-            int distanceY = a.Position.locate.Y - b.Position.locate.Y;
+            int distanceX = a.Position.Location.X - b.Position.Location.X;
+            int distanceY = a.Position.Location.Y - b.Position.Location.Y;
             if (distanceX < 0) distanceX = -distanceX;
             if (distanceY < 0) distanceY = -distanceY;
             return distanceX + distanceY;
@@ -131,8 +150,8 @@ namespace THE_Core
         public int GetDistance(ChessboardCell r)
         {
             if (this.Position == null) return -1;
-            int distanceX = this.Position.locate.X - r.locate.X;
-            int distanceY = this.Position.locate.Y - r.locate.Y;
+            int distanceX = this.Position.Location.X - r.Location.X;
+            int distanceY = this.Position.Location.Y - r.Location.Y;
             if (distanceX < 0) distanceX = -distanceX;
             if (distanceY < 0) distanceY = -distanceY;
             return distanceX + distanceY;
@@ -261,7 +280,7 @@ namespace THE_Core
             }
 
             Owner.bDot--;
-            return region.MoveHere(this);
+            return region.PlaceUnit(this);
         }
         /// <summary>
         /// 检测是否可以移动到某位置，重写这个方法可更改移动判断规则
@@ -273,7 +292,7 @@ namespace THE_Core
             if (Owner.bDot <= 1) return false;
             if (ActionState.HaveAction == true) return false;
             if (ActionState.HaveMove == true) return false;
-            if (region.unitHere != null) return false;
+            if (region.Unit != null) return false;
             Owner.bDot--;
             return GetDistance(region) <= Mobility.Current;
         }
@@ -299,7 +318,7 @@ namespace THE_Core
                 Unit_Dying(this);
             }
 
-            Position.unitHere = null;
+            Position.Unit = null;
             Position = null;
 
             if (Unit_Dead != null)

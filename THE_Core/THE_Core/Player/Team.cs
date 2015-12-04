@@ -24,7 +24,7 @@ namespace THE_Core
                 List<ChessboardCell> R = new List<ChessboardCell>();
                 foreach(ChessboardCell r in OwnRegion)
                 {
-                    if (r.specialHere == ChessboardCell.Special.Base) R.Add(r);
+                    if (r.CellType == ChessboardCell.ChessboardCellType.Base) R.Add(r);
                 }
                 return R;
             }

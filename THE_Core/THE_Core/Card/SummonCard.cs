@@ -58,8 +58,8 @@ namespace THE_Core
         public Unit ToBattle(int[] locate, Player owner)
         {
             if (owner.action.HaveCall == true) return null;
-            if (!GameCore.Chessboard.CellList[locate[0], locate[1]].owner.Equals(owner.atTeam)) return null;//判断是否有权限
-            if (GameCore.Chessboard.GetRegion(locate).unitHere != null) return null;
+            if (!GameCore.Chessboard.CellList[locate[0], locate[1]].Owner.Equals(owner.atTeam)) return null;//判断是否有权限
+            if (GameCore.Chessboard.GetRegion(locate).Unit != null) return null;
             owner.action.HaveCall = true;
             Unit x = new Unit(this, locate, owner);
             return x;

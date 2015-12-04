@@ -232,17 +232,6 @@ namespace THE_Core
 
             List<SummonCard> addList = new List<SummonCard>
             {
-                new MissTest(this),
-                new MissTest(this),
-                new MissTest(this),
-                new MissTest(this),
-                new MissTest(this),
-                new MissTest(this),
-                new MissTest(this),
-                new MissTest(this),
-                new MissTest(this),
-                new MissTest(this),
-                new MissTest(this)
             };
 
             WaitingCharacters = new List<SummonCard>();
@@ -303,7 +292,6 @@ namespace THE_Core
         }
         private void Starting()
         {
-            IncreaseCharacters();//补充召唤区
             if (CurrentPlayer == null) CurrentPlayer = Players[0];//判断是不是第一轮
             else
             {
@@ -341,20 +329,6 @@ namespace THE_Core
 
             RoundStart();
         }
-        /// <summary>
-        /// 补齐召唤区少女至所需数目
-        /// </summary>
-        /// <param name="number"></param>
-        private void IncreaseCharacters(int number = 6)
-        {
-            while (Characters.Count() < number && WaitingCharacters.Count != 0)
-            {
-                SummonCard toAdd = WaitingCharacters[random.Next(WaitingCharacters.Count)];
-                Characters.Add(toAdd);
-                WaitingCharacters.Remove(toAdd);
-            }
-        }
-
 
         /// <summary>
         /// 进入下一个过程 返回下一个过程

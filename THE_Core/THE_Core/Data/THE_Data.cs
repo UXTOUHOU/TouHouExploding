@@ -32,9 +32,13 @@ public partial class THE_Data : global::System.Data.DataSet {
     
     private SkillDataTable tableSkill;
     
-    private SpellEffectsDataTable tableSpellEffects;
-    
     private SpellEffectDataTable tableSpellEffect;
+    
+    private VariableValueDataTable tableVariableValue;
+    
+    private SpellEffectBasesDataTable tableSpellEffectBases;
+    
+    private SpellEffectBaseDataTable tableSpellEffectBase;
     
     private VariableDataTable tableVariable;
     
@@ -42,9 +46,13 @@ public partial class THE_Data : global::System.Data.DataSet {
     
     private global::System.Data.DataRelation relationSkills_Skill;
     
-    private global::System.Data.DataRelation relationSpellEffects_SpellEffect;
+    private global::System.Data.DataRelation relationSkill_SpellEffect;
     
-    private global::System.Data.DataRelation relationSpellEffect_Variable;
+    private global::System.Data.DataRelation relationSpellEffect_VariableValue;
+    
+    private global::System.Data.DataRelation relationSpellEffectBases_SpellEffectBase;
+    
+    private global::System.Data.DataRelation relationSpellEffectBase_Variable;
     
     private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
     
@@ -86,11 +94,17 @@ public partial class THE_Data : global::System.Data.DataSet {
             if ((ds.Tables["Skill"] != null)) {
                 base.Tables.Add(new SkillDataTable(ds.Tables["Skill"]));
             }
-            if ((ds.Tables["SpellEffects"] != null)) {
-                base.Tables.Add(new SpellEffectsDataTable(ds.Tables["SpellEffects"]));
-            }
             if ((ds.Tables["SpellEffect"] != null)) {
                 base.Tables.Add(new SpellEffectDataTable(ds.Tables["SpellEffect"]));
+            }
+            if ((ds.Tables["VariableValue"] != null)) {
+                base.Tables.Add(new VariableValueDataTable(ds.Tables["VariableValue"]));
+            }
+            if ((ds.Tables["SpellEffectBases"] != null)) {
+                base.Tables.Add(new SpellEffectBasesDataTable(ds.Tables["SpellEffectBases"]));
+            }
+            if ((ds.Tables["SpellEffectBase"] != null)) {
+                base.Tables.Add(new SpellEffectBaseDataTable(ds.Tables["SpellEffectBase"]));
             }
             if ((ds.Tables["Variable"] != null)) {
                 base.Tables.Add(new VariableDataTable(ds.Tables["Variable"]));
@@ -157,9 +171,9 @@ public partial class THE_Data : global::System.Data.DataSet {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
     [global::System.ComponentModel.Browsable(false)]
     [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-    public SpellEffectsDataTable SpellEffects {
+    public SpellEffectDataTable SpellEffect {
         get {
-            return this.tableSpellEffects;
+            return this.tableSpellEffect;
         }
     }
     
@@ -167,9 +181,29 @@ public partial class THE_Data : global::System.Data.DataSet {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
     [global::System.ComponentModel.Browsable(false)]
     [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-    public SpellEffectDataTable SpellEffect {
+    public VariableValueDataTable VariableValue {
         get {
-            return this.tableSpellEffect;
+            return this.tableVariableValue;
+        }
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+    [global::System.ComponentModel.Browsable(false)]
+    [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+    public SpellEffectBasesDataTable SpellEffectBases {
+        get {
+            return this.tableSpellEffectBases;
+        }
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+    [global::System.ComponentModel.Browsable(false)]
+    [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+    public SpellEffectBaseDataTable SpellEffectBase {
+        get {
+            return this.tableSpellEffectBase;
         }
     }
     
@@ -262,11 +296,17 @@ public partial class THE_Data : global::System.Data.DataSet {
             if ((ds.Tables["Skill"] != null)) {
                 base.Tables.Add(new SkillDataTable(ds.Tables["Skill"]));
             }
-            if ((ds.Tables["SpellEffects"] != null)) {
-                base.Tables.Add(new SpellEffectsDataTable(ds.Tables["SpellEffects"]));
-            }
             if ((ds.Tables["SpellEffect"] != null)) {
                 base.Tables.Add(new SpellEffectDataTable(ds.Tables["SpellEffect"]));
+            }
+            if ((ds.Tables["VariableValue"] != null)) {
+                base.Tables.Add(new VariableValueDataTable(ds.Tables["VariableValue"]));
+            }
+            if ((ds.Tables["SpellEffectBases"] != null)) {
+                base.Tables.Add(new SpellEffectBasesDataTable(ds.Tables["SpellEffectBases"]));
+            }
+            if ((ds.Tables["SpellEffectBase"] != null)) {
+                base.Tables.Add(new SpellEffectBaseDataTable(ds.Tables["SpellEffectBase"]));
             }
             if ((ds.Tables["Variable"] != null)) {
                 base.Tables.Add(new VariableDataTable(ds.Tables["Variable"]));
@@ -328,16 +368,28 @@ public partial class THE_Data : global::System.Data.DataSet {
                 this.tableSkill.InitVars();
             }
         }
-        this.tableSpellEffects = ((SpellEffectsDataTable)(base.Tables["SpellEffects"]));
-        if ((initTable == true)) {
-            if ((this.tableSpellEffects != null)) {
-                this.tableSpellEffects.InitVars();
-            }
-        }
         this.tableSpellEffect = ((SpellEffectDataTable)(base.Tables["SpellEffect"]));
         if ((initTable == true)) {
             if ((this.tableSpellEffect != null)) {
                 this.tableSpellEffect.InitVars();
+            }
+        }
+        this.tableVariableValue = ((VariableValueDataTable)(base.Tables["VariableValue"]));
+        if ((initTable == true)) {
+            if ((this.tableVariableValue != null)) {
+                this.tableVariableValue.InitVars();
+            }
+        }
+        this.tableSpellEffectBases = ((SpellEffectBasesDataTable)(base.Tables["SpellEffectBases"]));
+        if ((initTable == true)) {
+            if ((this.tableSpellEffectBases != null)) {
+                this.tableSpellEffectBases.InitVars();
+            }
+        }
+        this.tableSpellEffectBase = ((SpellEffectBaseDataTable)(base.Tables["SpellEffectBase"]));
+        if ((initTable == true)) {
+            if ((this.tableSpellEffectBase != null)) {
+                this.tableSpellEffectBase.InitVars();
             }
         }
         this.tableVariable = ((VariableDataTable)(base.Tables["Variable"]));
@@ -348,8 +400,10 @@ public partial class THE_Data : global::System.Data.DataSet {
         }
         this.relationUnits_Unit = this.Relations["Units_Unit"];
         this.relationSkills_Skill = this.Relations["Skills_Skill"];
-        this.relationSpellEffects_SpellEffect = this.Relations["SpellEffects_SpellEffect"];
-        this.relationSpellEffect_Variable = this.Relations["SpellEffect_Variable"];
+        this.relationSkill_SpellEffect = this.Relations["Skill_SpellEffect"];
+        this.relationSpellEffect_VariableValue = this.Relations["SpellEffect_VariableValue"];
+        this.relationSpellEffectBases_SpellEffectBase = this.Relations["SpellEffectBases_SpellEffectBase"];
+        this.relationSpellEffectBase_Variable = this.Relations["SpellEffectBase_Variable"];
     }
     
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -368,10 +422,14 @@ public partial class THE_Data : global::System.Data.DataSet {
         base.Tables.Add(this.tableSkills);
         this.tableSkill = new SkillDataTable();
         base.Tables.Add(this.tableSkill);
-        this.tableSpellEffects = new SpellEffectsDataTable();
-        base.Tables.Add(this.tableSpellEffects);
         this.tableSpellEffect = new SpellEffectDataTable();
         base.Tables.Add(this.tableSpellEffect);
+        this.tableVariableValue = new VariableValueDataTable();
+        base.Tables.Add(this.tableVariableValue);
+        this.tableSpellEffectBases = new SpellEffectBasesDataTable();
+        base.Tables.Add(this.tableSpellEffectBases);
+        this.tableSpellEffectBase = new SpellEffectBaseDataTable();
+        base.Tables.Add(this.tableSpellEffectBase);
         this.tableVariable = new VariableDataTable();
         base.Tables.Add(this.tableVariable);
         global::System.Data.ForeignKeyConstraint fkc;
@@ -389,16 +447,30 @@ public partial class THE_Data : global::System.Data.DataSet {
         fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
         fkc.DeleteRule = global::System.Data.Rule.Cascade;
         fkc.UpdateRule = global::System.Data.Rule.Cascade;
-        fkc = new global::System.Data.ForeignKeyConstraint("SpellEffects_SpellEffect", new global::System.Data.DataColumn[] {
-                    this.tableSpellEffects.SpellEffects_IdColumn}, new global::System.Data.DataColumn[] {
-                    this.tableSpellEffect.SpellEffects_IdColumn});
+        fkc = new global::System.Data.ForeignKeyConstraint("Skill_SpellEffect", new global::System.Data.DataColumn[] {
+                    this.tableSkill.Skill_IdColumn}, new global::System.Data.DataColumn[] {
+                    this.tableSpellEffect.Skill_IdColumn});
         this.tableSpellEffect.Constraints.Add(fkc);
         fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
         fkc.DeleteRule = global::System.Data.Rule.Cascade;
         fkc.UpdateRule = global::System.Data.Rule.Cascade;
-        fkc = new global::System.Data.ForeignKeyConstraint("SpellEffect_Variable", new global::System.Data.DataColumn[] {
+        fkc = new global::System.Data.ForeignKeyConstraint("SpellEffect_VariableValue", new global::System.Data.DataColumn[] {
                     this.tableSpellEffect.SpellEffect_IdColumn}, new global::System.Data.DataColumn[] {
-                    this.tableVariable.SpellEffect_IdColumn});
+                    this.tableVariableValue.SpellEffect_IdColumn});
+        this.tableVariableValue.Constraints.Add(fkc);
+        fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+        fkc.DeleteRule = global::System.Data.Rule.Cascade;
+        fkc.UpdateRule = global::System.Data.Rule.Cascade;
+        fkc = new global::System.Data.ForeignKeyConstraint("SpellEffectBases_SpellEffectBase", new global::System.Data.DataColumn[] {
+                    this.tableSpellEffectBases.SpellEffectBases_IdColumn}, new global::System.Data.DataColumn[] {
+                    this.tableSpellEffectBase.SpellEffectBases_IdColumn});
+        this.tableSpellEffectBase.Constraints.Add(fkc);
+        fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+        fkc.DeleteRule = global::System.Data.Rule.Cascade;
+        fkc.UpdateRule = global::System.Data.Rule.Cascade;
+        fkc = new global::System.Data.ForeignKeyConstraint("SpellEffectBase_Variable", new global::System.Data.DataColumn[] {
+                    this.tableSpellEffectBase.SpellEffectBase_IdColumn}, new global::System.Data.DataColumn[] {
+                    this.tableVariable.SpellEffectBase_IdColumn});
         this.tableVariable.Constraints.Add(fkc);
         fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
         fkc.DeleteRule = global::System.Data.Rule.Cascade;
@@ -413,16 +485,26 @@ public partial class THE_Data : global::System.Data.DataSet {
                     this.tableSkill.Skills_IdColumn}, false);
         this.relationSkills_Skill.Nested = true;
         this.Relations.Add(this.relationSkills_Skill);
-        this.relationSpellEffects_SpellEffect = new global::System.Data.DataRelation("SpellEffects_SpellEffect", new global::System.Data.DataColumn[] {
-                    this.tableSpellEffects.SpellEffects_IdColumn}, new global::System.Data.DataColumn[] {
-                    this.tableSpellEffect.SpellEffects_IdColumn}, false);
-        this.relationSpellEffects_SpellEffect.Nested = true;
-        this.Relations.Add(this.relationSpellEffects_SpellEffect);
-        this.relationSpellEffect_Variable = new global::System.Data.DataRelation("SpellEffect_Variable", new global::System.Data.DataColumn[] {
+        this.relationSkill_SpellEffect = new global::System.Data.DataRelation("Skill_SpellEffect", new global::System.Data.DataColumn[] {
+                    this.tableSkill.Skill_IdColumn}, new global::System.Data.DataColumn[] {
+                    this.tableSpellEffect.Skill_IdColumn}, false);
+        this.relationSkill_SpellEffect.Nested = true;
+        this.Relations.Add(this.relationSkill_SpellEffect);
+        this.relationSpellEffect_VariableValue = new global::System.Data.DataRelation("SpellEffect_VariableValue", new global::System.Data.DataColumn[] {
                     this.tableSpellEffect.SpellEffect_IdColumn}, new global::System.Data.DataColumn[] {
-                    this.tableVariable.SpellEffect_IdColumn}, false);
-        this.relationSpellEffect_Variable.Nested = true;
-        this.Relations.Add(this.relationSpellEffect_Variable);
+                    this.tableVariableValue.SpellEffect_IdColumn}, false);
+        this.relationSpellEffect_VariableValue.Nested = true;
+        this.Relations.Add(this.relationSpellEffect_VariableValue);
+        this.relationSpellEffectBases_SpellEffectBase = new global::System.Data.DataRelation("SpellEffectBases_SpellEffectBase", new global::System.Data.DataColumn[] {
+                    this.tableSpellEffectBases.SpellEffectBases_IdColumn}, new global::System.Data.DataColumn[] {
+                    this.tableSpellEffectBase.SpellEffectBases_IdColumn}, false);
+        this.relationSpellEffectBases_SpellEffectBase.Nested = true;
+        this.Relations.Add(this.relationSpellEffectBases_SpellEffectBase);
+        this.relationSpellEffectBase_Variable = new global::System.Data.DataRelation("SpellEffectBase_Variable", new global::System.Data.DataColumn[] {
+                    this.tableSpellEffectBase.SpellEffectBase_IdColumn}, new global::System.Data.DataColumn[] {
+                    this.tableVariable.SpellEffectBase_IdColumn}, false);
+        this.relationSpellEffectBase_Variable.Nested = true;
+        this.Relations.Add(this.relationSpellEffectBase_Variable);
     }
     
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -451,13 +533,25 @@ public partial class THE_Data : global::System.Data.DataSet {
     
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-    private bool ShouldSerializeSpellEffects() {
+    private bool ShouldSerializeSpellEffect() {
         return false;
     }
     
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-    private bool ShouldSerializeSpellEffect() {
+    private bool ShouldSerializeVariableValue() {
+        return false;
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+    private bool ShouldSerializeSpellEffectBases() {
+        return false;
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+    private bool ShouldSerializeSpellEffectBase() {
         return false;
     }
     
@@ -535,10 +629,16 @@ public partial class THE_Data : global::System.Data.DataSet {
     public delegate void SkillRowChangeEventHandler(object sender, SkillRowChangeEvent e);
     
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-    public delegate void SpellEffectsRowChangeEventHandler(object sender, SpellEffectsRowChangeEvent e);
+    public delegate void SpellEffectRowChangeEventHandler(object sender, SpellEffectRowChangeEvent e);
     
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-    public delegate void SpellEffectRowChangeEventHandler(object sender, SpellEffectRowChangeEvent e);
+    public delegate void VariableValueRowChangeEventHandler(object sender, VariableValueRowChangeEvent e);
+    
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+    public delegate void SpellEffectBasesRowChangeEventHandler(object sender, SpellEffectBasesRowChangeEvent e);
+    
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+    public delegate void SpellEffectBaseRowChangeEventHandler(object sender, SpellEffectBaseRowChangeEvent e);
     
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
     public delegate void VariableRowChangeEventHandler(object sender, VariableRowChangeEvent e);
@@ -1487,6 +1587,20 @@ public partial class THE_Data : global::System.Data.DataSet {
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class SkillDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
         
+        private global::System.Data.DataColumn columnId;
+        
+        private global::System.Data.DataColumn columnName;
+        
+        private global::System.Data.DataColumn columnDescription;
+        
+        private global::System.Data.DataColumn columnSelectTargetType;
+        
+        private global::System.Data.DataColumn columnCost;
+        
+        private global::System.Data.DataColumn columnEffectTargetType;
+        
+        private global::System.Data.DataColumn columnSkill_Id;
+        
         private global::System.Data.DataColumn columnSkills_Id;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1520,6 +1634,62 @@ public partial class THE_Data : global::System.Data.DataSet {
         protected SkillDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context) {
             this.InitVars();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn IdColumn {
+            get {
+                return this.columnId;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn NameColumn {
+            get {
+                return this.columnName;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn DescriptionColumn {
+            get {
+                return this.columnDescription;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn SelectTargetTypeColumn {
+            get {
+                return this.columnSelectTargetType;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn CostColumn {
+            get {
+                return this.columnCost;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn EffectTargetTypeColumn {
+            get {
+                return this.columnEffectTargetType;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn Skill_IdColumn {
+            get {
+                return this.columnSkill_Id;
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1567,12 +1737,19 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SkillRow AddSkillRow(SkillsRow parentSkillsRowBySkills_Skill) {
+        public SkillRow AddSkillRow(string Id, string Name, string Description, int SelectTargetType, int Cost, int EffectTargetType, SkillsRow parentSkillsRowBySkills_Skill) {
             SkillRow rowSkillRow = ((SkillRow)(this.NewRow()));
             object[] columnValuesArray = new object[] {
+                    Id,
+                    Name,
+                    Description,
+                    SelectTargetType,
+                    Cost,
+                    EffectTargetType,
+                    null,
                     null};
             if ((parentSkillsRowBySkills_Skill != null)) {
-                columnValuesArray[0] = parentSkillsRowBySkills_Skill[0];
+                columnValuesArray[7] = parentSkillsRowBySkills_Skill[0];
             }
             rowSkillRow.ItemArray = columnValuesArray;
             this.Rows.Add(rowSkillRow);
@@ -1602,14 +1779,46 @@ public partial class THE_Data : global::System.Data.DataSet {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars() {
+            this.columnId = base.Columns["Id"];
+            this.columnName = base.Columns["Name"];
+            this.columnDescription = base.Columns["Description"];
+            this.columnSelectTargetType = base.Columns["SelectTargetType"];
+            this.columnCost = base.Columns["Cost"];
+            this.columnEffectTargetType = base.Columns["EffectTargetType"];
+            this.columnSkill_Id = base.Columns["Skill_Id"];
             this.columnSkills_Id = base.Columns["Skills_Id"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
+            this.columnId = new global::System.Data.DataColumn("Id", typeof(string), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnId);
+            this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnName);
+            this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnDescription);
+            this.columnSelectTargetType = new global::System.Data.DataColumn("SelectTargetType", typeof(int), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnSelectTargetType);
+            this.columnCost = new global::System.Data.DataColumn("Cost", typeof(int), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnCost);
+            this.columnEffectTargetType = new global::System.Data.DataColumn("EffectTargetType", typeof(int), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnEffectTargetType);
+            this.columnSkill_Id = new global::System.Data.DataColumn("Skill_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+            base.Columns.Add(this.columnSkill_Id);
             this.columnSkills_Id = new global::System.Data.DataColumn("Skills_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
             base.Columns.Add(this.columnSkills_Id);
+            this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                            this.columnSkill_Id}, true));
+            this.columnId.Namespace = "";
+            this.columnName.Namespace = "";
+            this.columnDescription.Namespace = "";
+            this.columnSelectTargetType.Namespace = "";
+            this.columnCost.Namespace = "";
+            this.columnEffectTargetType.Namespace = "";
+            this.columnSkill_Id.AutoIncrement = true;
+            this.columnSkill_Id.AllowDBNull = false;
+            this.columnSkill_Id.Unique = true;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1741,277 +1950,13 @@ public partial class THE_Data : global::System.Data.DataSet {
     ///</summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-    public partial class SpellEffectsDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
-        
-        private global::System.Data.DataColumn columnSpellEffects_Id;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SpellEffectsDataTable() {
-            this.TableName = "SpellEffects";
-            this.BeginInit();
-            this.InitClass();
-            this.EndInit();
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal SpellEffectsDataTable(global::System.Data.DataTable table) {
-            this.TableName = table.TableName;
-            if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                this.CaseSensitive = table.CaseSensitive;
-            }
-            if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                this.Locale = table.Locale;
-            }
-            if ((table.Namespace != table.DataSet.Namespace)) {
-                this.Namespace = table.Namespace;
-            }
-            this.Prefix = table.Prefix;
-            this.MinimumCapacity = table.MinimumCapacity;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected SpellEffectsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                base(info, context) {
-            this.InitVars();
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public global::System.Data.DataColumn SpellEffects_IdColumn {
-            get {
-                return this.columnSpellEffects_Id;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        public int Count {
-            get {
-                return this.Rows.Count;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SpellEffectsRow this[int index] {
-            get {
-                return ((SpellEffectsRow)(this.Rows[index]));
-            }
-        }
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public event SpellEffectsRowChangeEventHandler SpellEffectsRowChanging;
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public event SpellEffectsRowChangeEventHandler SpellEffectsRowChanged;
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public event SpellEffectsRowChangeEventHandler SpellEffectsRowDeleting;
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public event SpellEffectsRowChangeEventHandler SpellEffectsRowDeleted;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public void AddSpellEffectsRow(SpellEffectsRow row) {
-            this.Rows.Add(row);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SpellEffectsRow AddSpellEffectsRow() {
-            SpellEffectsRow rowSpellEffectsRow = ((SpellEffectsRow)(this.NewRow()));
-            object[] columnValuesArray = new object[] {
-                    null};
-            rowSpellEffectsRow.ItemArray = columnValuesArray;
-            this.Rows.Add(rowSpellEffectsRow);
-            return rowSpellEffectsRow;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual global::System.Collections.IEnumerator GetEnumerator() {
-            return this.Rows.GetEnumerator();
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public override global::System.Data.DataTable Clone() {
-            SpellEffectsDataTable cln = ((SpellEffectsDataTable)(base.Clone()));
-            cln.InitVars();
-            return cln;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override global::System.Data.DataTable CreateInstance() {
-            return new SpellEffectsDataTable();
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal void InitVars() {
-            this.columnSpellEffects_Id = base.Columns["SpellEffects_Id"];
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitClass() {
-            this.columnSpellEffects_Id = new global::System.Data.DataColumn("SpellEffects_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
-            base.Columns.Add(this.columnSpellEffects_Id);
-            this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                            this.columnSpellEffects_Id}, true));
-            this.columnSpellEffects_Id.AutoIncrement = true;
-            this.columnSpellEffects_Id.AllowDBNull = false;
-            this.columnSpellEffects_Id.Unique = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SpellEffectsRow NewSpellEffectsRow() {
-            return ((SpellEffectsRow)(this.NewRow()));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-            return new SpellEffectsRow(builder);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override global::System.Type GetRowType() {
-            return typeof(SpellEffectsRow);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-            base.OnRowChanged(e);
-            if ((this.SpellEffectsRowChanged != null)) {
-                this.SpellEffectsRowChanged(this, new SpellEffectsRowChangeEvent(((SpellEffectsRow)(e.Row)), e.Action));
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-            base.OnRowChanging(e);
-            if ((this.SpellEffectsRowChanging != null)) {
-                this.SpellEffectsRowChanging(this, new SpellEffectsRowChangeEvent(((SpellEffectsRow)(e.Row)), e.Action));
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-            base.OnRowDeleted(e);
-            if ((this.SpellEffectsRowDeleted != null)) {
-                this.SpellEffectsRowDeleted(this, new SpellEffectsRowChangeEvent(((SpellEffectsRow)(e.Row)), e.Action));
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-            base.OnRowDeleting(e);
-            if ((this.SpellEffectsRowDeleting != null)) {
-                this.SpellEffectsRowDeleting(this, new SpellEffectsRowChangeEvent(((SpellEffectsRow)(e.Row)), e.Action));
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public void RemoveSpellEffectsRow(SpellEffectsRow row) {
-            this.Rows.Remove(row);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-            global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-            THE_Data ds = new THE_Data();
-            global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-            any1.MinOccurs = new decimal(0);
-            any1.MaxOccurs = decimal.MaxValue;
-            any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-            sequence.Items.Add(any1);
-            global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-            any2.MinOccurs = new decimal(1);
-            any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-            sequence.Items.Add(any2);
-            global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-            attribute1.Name = "namespace";
-            attribute1.FixedValue = ds.Namespace;
-            type.Attributes.Add(attribute1);
-            global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-            attribute2.Name = "tableTypeName";
-            attribute2.FixedValue = "SpellEffectsDataTable";
-            type.Attributes.Add(attribute2);
-            type.Particle = sequence;
-            global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-            if (xs.Contains(dsSchema.TargetNamespace)) {
-                global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                try {
-                    global::System.Xml.Schema.XmlSchema schema = null;
-                    dsSchema.Write(s1);
-                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                        schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                        s2.SetLength(0);
-                        schema.Write(s2);
-                        if ((s1.Length == s2.Length)) {
-                            s1.Position = 0;
-                            s2.Position = 0;
-                            for (; ((s1.Position != s1.Length) 
-                                        && (s1.ReadByte() == s2.ReadByte())); ) {
-                                ;
-                            }
-                            if ((s1.Position == s1.Length)) {
-                                return type;
-                            }
-                        }
-                    }
-                }
-                finally {
-                    if ((s1 != null)) {
-                        s1.Close();
-                    }
-                    if ((s2 != null)) {
-                        s2.Close();
-                    }
-                }
-            }
-            xs.Add(dsSchema);
-            return type;
-        }
-    }
-    
-    /// <summary>
-    ///Represents the strongly named DataTable class.
-    ///</summary>
-    [global::System.Serializable()]
-    [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class SpellEffectDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
         
-        private global::System.Data.DataColumn columnId;
-        
-        private global::System.Data.DataColumn columnName;
-        
-        private global::System.Data.DataColumn columnDescription;
-        
-        private global::System.Data.DataColumn columnAffectAttribute;
+        private global::System.Data.DataColumn columnSpellEffectBaseId;
         
         private global::System.Data.DataColumn columnSpellEffect_Id;
         
-        private global::System.Data.DataColumn columnSpellEffects_Id;
+        private global::System.Data.DataColumn columnSkill_Id;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2048,33 +1993,9 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public global::System.Data.DataColumn IdColumn {
+        public global::System.Data.DataColumn SpellEffectBaseIdColumn {
             get {
-                return this.columnId;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public global::System.Data.DataColumn NameColumn {
-            get {
-                return this.columnName;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public global::System.Data.DataColumn DescriptionColumn {
-            get {
-                return this.columnDescription;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public global::System.Data.DataColumn AffectAttributeColumn {
-            get {
-                return this.columnAffectAttribute;
+                return this.columnSpellEffectBaseId;
             }
         }
         
@@ -2088,9 +2009,9 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public global::System.Data.DataColumn SpellEffects_IdColumn {
+        public global::System.Data.DataColumn Skill_IdColumn {
             get {
-                return this.columnSpellEffects_Id;
+                return this.columnSkill_Id;
             }
         }
         
@@ -2131,17 +2052,14 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SpellEffectRow AddSpellEffectRow(string Id, string Name, string Description, string AffectAttribute, SpellEffectsRow parentSpellEffectsRowBySpellEffects_SpellEffect) {
+        public SpellEffectRow AddSpellEffectRow(string SpellEffectBaseId, SkillRow parentSkillRowBySkill_SpellEffect) {
             SpellEffectRow rowSpellEffectRow = ((SpellEffectRow)(this.NewRow()));
             object[] columnValuesArray = new object[] {
-                    Id,
-                    Name,
-                    Description,
-                    AffectAttribute,
+                    SpellEffectBaseId,
                     null,
                     null};
-            if ((parentSpellEffectsRowBySpellEffects_SpellEffect != null)) {
-                columnValuesArray[5] = parentSpellEffectsRowBySpellEffects_SpellEffect[0];
+            if ((parentSkillRowBySkill_SpellEffect != null)) {
+                columnValuesArray[2] = parentSkillRowBySkill_SpellEffect[6];
             }
             rowSpellEffectRow.ItemArray = columnValuesArray;
             this.Rows.Add(rowSpellEffectRow);
@@ -2171,35 +2089,23 @@ public partial class THE_Data : global::System.Data.DataSet {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars() {
-            this.columnId = base.Columns["Id"];
-            this.columnName = base.Columns["Name"];
-            this.columnDescription = base.Columns["Description"];
-            this.columnAffectAttribute = base.Columns["AffectAttribute"];
+            this.columnSpellEffectBaseId = base.Columns["SpellEffectBaseId"];
             this.columnSpellEffect_Id = base.Columns["SpellEffect_Id"];
-            this.columnSpellEffects_Id = base.Columns["SpellEffects_Id"];
+            this.columnSkill_Id = base.Columns["Skill_Id"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.columnId = new global::System.Data.DataColumn("Id", typeof(string), null, global::System.Data.MappingType.Attribute);
-            base.Columns.Add(this.columnId);
-            this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Attribute);
-            base.Columns.Add(this.columnName);
-            this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Attribute);
-            base.Columns.Add(this.columnDescription);
-            this.columnAffectAttribute = new global::System.Data.DataColumn("AffectAttribute", typeof(string), null, global::System.Data.MappingType.Attribute);
-            base.Columns.Add(this.columnAffectAttribute);
+            this.columnSpellEffectBaseId = new global::System.Data.DataColumn("SpellEffectBaseId", typeof(string), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnSpellEffectBaseId);
             this.columnSpellEffect_Id = new global::System.Data.DataColumn("SpellEffect_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
             base.Columns.Add(this.columnSpellEffect_Id);
-            this.columnSpellEffects_Id = new global::System.Data.DataColumn("SpellEffects_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
-            base.Columns.Add(this.columnSpellEffects_Id);
+            this.columnSkill_Id = new global::System.Data.DataColumn("Skill_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+            base.Columns.Add(this.columnSkill_Id);
             this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                             this.columnSpellEffect_Id}, true));
-            this.columnId.Namespace = "";
-            this.columnName.Namespace = "";
-            this.columnDescription.Namespace = "";
-            this.columnAffectAttribute.Namespace = "";
+            this.columnSpellEffectBaseId.Namespace = "";
             this.columnSpellEffect_Id.AutoIncrement = true;
             this.columnSpellEffect_Id.AllowDBNull = false;
             this.columnSpellEffect_Id.Unique = true;
@@ -2334,13 +2240,892 @@ public partial class THE_Data : global::System.Data.DataSet {
     ///</summary>
     [global::System.Serializable()]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+    public partial class VariableValueDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        
+        private global::System.Data.DataColumn columnIndex;
+        
+        private global::System.Data.DataColumn columnValue;
+        
+        private global::System.Data.DataColumn columnSpellEffect_Id;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public VariableValueDataTable() {
+            this.TableName = "VariableValue";
+            this.BeginInit();
+            this.InitClass();
+            this.EndInit();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal VariableValueDataTable(global::System.Data.DataTable table) {
+            this.TableName = table.TableName;
+            if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                this.CaseSensitive = table.CaseSensitive;
+            }
+            if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                this.Locale = table.Locale;
+            }
+            if ((table.Namespace != table.DataSet.Namespace)) {
+                this.Namespace = table.Namespace;
+            }
+            this.Prefix = table.Prefix;
+            this.MinimumCapacity = table.MinimumCapacity;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected VariableValueDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                base(info, context) {
+            this.InitVars();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn IndexColumn {
+            get {
+                return this.columnIndex;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn ValueColumn {
+            get {
+                return this.columnValue;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn SpellEffect_IdColumn {
+            get {
+                return this.columnSpellEffect_Id;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        public int Count {
+            get {
+                return this.Rows.Count;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public VariableValueRow this[int index] {
+            get {
+                return ((VariableValueRow)(this.Rows[index]));
+            }
+        }
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event VariableValueRowChangeEventHandler VariableValueRowChanging;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event VariableValueRowChangeEventHandler VariableValueRowChanged;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event VariableValueRowChangeEventHandler VariableValueRowDeleting;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event VariableValueRowChangeEventHandler VariableValueRowDeleted;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void AddVariableValueRow(VariableValueRow row) {
+            this.Rows.Add(row);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public VariableValueRow AddVariableValueRow(string Index, decimal Value, SpellEffectRow parentSpellEffectRowBySpellEffect_VariableValue) {
+            VariableValueRow rowVariableValueRow = ((VariableValueRow)(this.NewRow()));
+            object[] columnValuesArray = new object[] {
+                    Index,
+                    Value,
+                    null};
+            if ((parentSpellEffectRowBySpellEffect_VariableValue != null)) {
+                columnValuesArray[2] = parentSpellEffectRowBySpellEffect_VariableValue[1];
+            }
+            rowVariableValueRow.ItemArray = columnValuesArray;
+            this.Rows.Add(rowVariableValueRow);
+            return rowVariableValueRow;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public virtual global::System.Collections.IEnumerator GetEnumerator() {
+            return this.Rows.GetEnumerator();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public override global::System.Data.DataTable Clone() {
+            VariableValueDataTable cln = ((VariableValueDataTable)(base.Clone()));
+            cln.InitVars();
+            return cln;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override global::System.Data.DataTable CreateInstance() {
+            return new VariableValueDataTable();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal void InitVars() {
+            this.columnIndex = base.Columns["Index"];
+            this.columnValue = base.Columns["Value"];
+            this.columnSpellEffect_Id = base.Columns["SpellEffect_Id"];
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitClass() {
+            this.columnIndex = new global::System.Data.DataColumn("Index", typeof(string), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnIndex);
+            this.columnValue = new global::System.Data.DataColumn("Value", typeof(decimal), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnValue);
+            this.columnSpellEffect_Id = new global::System.Data.DataColumn("SpellEffect_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+            base.Columns.Add(this.columnSpellEffect_Id);
+            this.columnIndex.Namespace = "";
+            this.columnValue.Namespace = "";
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public VariableValueRow NewVariableValueRow() {
+            return ((VariableValueRow)(this.NewRow()));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            return new VariableValueRow(builder);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override global::System.Type GetRowType() {
+            return typeof(VariableValueRow);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowChanged(e);
+            if ((this.VariableValueRowChanged != null)) {
+                this.VariableValueRowChanged(this, new VariableValueRowChangeEvent(((VariableValueRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowChanging(e);
+            if ((this.VariableValueRowChanging != null)) {
+                this.VariableValueRowChanging(this, new VariableValueRowChangeEvent(((VariableValueRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowDeleted(e);
+            if ((this.VariableValueRowDeleted != null)) {
+                this.VariableValueRowDeleted(this, new VariableValueRowChangeEvent(((VariableValueRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowDeleting(e);
+            if ((this.VariableValueRowDeleting != null)) {
+                this.VariableValueRowDeleting(this, new VariableValueRowChangeEvent(((VariableValueRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void RemoveVariableValueRow(VariableValueRow row) {
+            this.Rows.Remove(row);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+            global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+            THE_Data ds = new THE_Data();
+            global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+            any1.MinOccurs = new decimal(0);
+            any1.MaxOccurs = decimal.MaxValue;
+            any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+            sequence.Items.Add(any1);
+            global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+            any2.MinOccurs = new decimal(1);
+            any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+            sequence.Items.Add(any2);
+            global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+            attribute1.Name = "namespace";
+            attribute1.FixedValue = ds.Namespace;
+            type.Attributes.Add(attribute1);
+            global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+            attribute2.Name = "tableTypeName";
+            attribute2.FixedValue = "VariableValueDataTable";
+            type.Attributes.Add(attribute2);
+            type.Particle = sequence;
+            global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+            if (xs.Contains(dsSchema.TargetNamespace)) {
+                global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                try {
+                    global::System.Xml.Schema.XmlSchema schema = null;
+                    dsSchema.Write(s1);
+                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                        s2.SetLength(0);
+                        schema.Write(s2);
+                        if ((s1.Length == s2.Length)) {
+                            s1.Position = 0;
+                            s2.Position = 0;
+                            for (; ((s1.Position != s1.Length) 
+                                        && (s1.ReadByte() == s2.ReadByte())); ) {
+                                ;
+                            }
+                            if ((s1.Position == s1.Length)) {
+                                return type;
+                            }
+                        }
+                    }
+                }
+                finally {
+                    if ((s1 != null)) {
+                        s1.Close();
+                    }
+                    if ((s2 != null)) {
+                        s2.Close();
+                    }
+                }
+            }
+            xs.Add(dsSchema);
+            return type;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the strongly named DataTable class.
+    ///</summary>
+    [global::System.Serializable()]
+    [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+    public partial class SpellEffectBasesDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        
+        private global::System.Data.DataColumn columnSpellEffectBases_Id;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBasesDataTable() {
+            this.TableName = "SpellEffectBases";
+            this.BeginInit();
+            this.InitClass();
+            this.EndInit();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal SpellEffectBasesDataTable(global::System.Data.DataTable table) {
+            this.TableName = table.TableName;
+            if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                this.CaseSensitive = table.CaseSensitive;
+            }
+            if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                this.Locale = table.Locale;
+            }
+            if ((table.Namespace != table.DataSet.Namespace)) {
+                this.Namespace = table.Namespace;
+            }
+            this.Prefix = table.Prefix;
+            this.MinimumCapacity = table.MinimumCapacity;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected SpellEffectBasesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                base(info, context) {
+            this.InitVars();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn SpellEffectBases_IdColumn {
+            get {
+                return this.columnSpellEffectBases_Id;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        public int Count {
+            get {
+                return this.Rows.Count;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBasesRow this[int index] {
+            get {
+                return ((SpellEffectBasesRow)(this.Rows[index]));
+            }
+        }
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event SpellEffectBasesRowChangeEventHandler SpellEffectBasesRowChanging;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event SpellEffectBasesRowChangeEventHandler SpellEffectBasesRowChanged;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event SpellEffectBasesRowChangeEventHandler SpellEffectBasesRowDeleting;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event SpellEffectBasesRowChangeEventHandler SpellEffectBasesRowDeleted;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void AddSpellEffectBasesRow(SpellEffectBasesRow row) {
+            this.Rows.Add(row);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBasesRow AddSpellEffectBasesRow() {
+            SpellEffectBasesRow rowSpellEffectBasesRow = ((SpellEffectBasesRow)(this.NewRow()));
+            object[] columnValuesArray = new object[] {
+                    null};
+            rowSpellEffectBasesRow.ItemArray = columnValuesArray;
+            this.Rows.Add(rowSpellEffectBasesRow);
+            return rowSpellEffectBasesRow;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public virtual global::System.Collections.IEnumerator GetEnumerator() {
+            return this.Rows.GetEnumerator();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public override global::System.Data.DataTable Clone() {
+            SpellEffectBasesDataTable cln = ((SpellEffectBasesDataTable)(base.Clone()));
+            cln.InitVars();
+            return cln;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override global::System.Data.DataTable CreateInstance() {
+            return new SpellEffectBasesDataTable();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal void InitVars() {
+            this.columnSpellEffectBases_Id = base.Columns["SpellEffectBases_Id"];
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitClass() {
+            this.columnSpellEffectBases_Id = new global::System.Data.DataColumn("SpellEffectBases_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+            base.Columns.Add(this.columnSpellEffectBases_Id);
+            this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                            this.columnSpellEffectBases_Id}, true));
+            this.columnSpellEffectBases_Id.AutoIncrement = true;
+            this.columnSpellEffectBases_Id.AllowDBNull = false;
+            this.columnSpellEffectBases_Id.Unique = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBasesRow NewSpellEffectBasesRow() {
+            return ((SpellEffectBasesRow)(this.NewRow()));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            return new SpellEffectBasesRow(builder);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override global::System.Type GetRowType() {
+            return typeof(SpellEffectBasesRow);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowChanged(e);
+            if ((this.SpellEffectBasesRowChanged != null)) {
+                this.SpellEffectBasesRowChanged(this, new SpellEffectBasesRowChangeEvent(((SpellEffectBasesRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowChanging(e);
+            if ((this.SpellEffectBasesRowChanging != null)) {
+                this.SpellEffectBasesRowChanging(this, new SpellEffectBasesRowChangeEvent(((SpellEffectBasesRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowDeleted(e);
+            if ((this.SpellEffectBasesRowDeleted != null)) {
+                this.SpellEffectBasesRowDeleted(this, new SpellEffectBasesRowChangeEvent(((SpellEffectBasesRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowDeleting(e);
+            if ((this.SpellEffectBasesRowDeleting != null)) {
+                this.SpellEffectBasesRowDeleting(this, new SpellEffectBasesRowChangeEvent(((SpellEffectBasesRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void RemoveSpellEffectBasesRow(SpellEffectBasesRow row) {
+            this.Rows.Remove(row);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+            global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+            THE_Data ds = new THE_Data();
+            global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+            any1.MinOccurs = new decimal(0);
+            any1.MaxOccurs = decimal.MaxValue;
+            any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+            sequence.Items.Add(any1);
+            global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+            any2.MinOccurs = new decimal(1);
+            any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+            sequence.Items.Add(any2);
+            global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+            attribute1.Name = "namespace";
+            attribute1.FixedValue = ds.Namespace;
+            type.Attributes.Add(attribute1);
+            global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+            attribute2.Name = "tableTypeName";
+            attribute2.FixedValue = "SpellEffectBasesDataTable";
+            type.Attributes.Add(attribute2);
+            type.Particle = sequence;
+            global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+            if (xs.Contains(dsSchema.TargetNamespace)) {
+                global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                try {
+                    global::System.Xml.Schema.XmlSchema schema = null;
+                    dsSchema.Write(s1);
+                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                        s2.SetLength(0);
+                        schema.Write(s2);
+                        if ((s1.Length == s2.Length)) {
+                            s1.Position = 0;
+                            s2.Position = 0;
+                            for (; ((s1.Position != s1.Length) 
+                                        && (s1.ReadByte() == s2.ReadByte())); ) {
+                                ;
+                            }
+                            if ((s1.Position == s1.Length)) {
+                                return type;
+                            }
+                        }
+                    }
+                }
+                finally {
+                    if ((s1 != null)) {
+                        s1.Close();
+                    }
+                    if ((s2 != null)) {
+                        s2.Close();
+                    }
+                }
+            }
+            xs.Add(dsSchema);
+            return type;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the strongly named DataTable class.
+    ///</summary>
+    [global::System.Serializable()]
+    [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+    public partial class SpellEffectBaseDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        
+        private global::System.Data.DataColumn columnId;
+        
+        private global::System.Data.DataColumn columnName;
+        
+        private global::System.Data.DataColumn columnDescription;
+        
+        private global::System.Data.DataColumn columnAffectAttribute;
+        
+        private global::System.Data.DataColumn columnSpellEffectBase_Id;
+        
+        private global::System.Data.DataColumn columnSpellEffectBases_Id;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBaseDataTable() {
+            this.TableName = "SpellEffectBase";
+            this.BeginInit();
+            this.InitClass();
+            this.EndInit();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal SpellEffectBaseDataTable(global::System.Data.DataTable table) {
+            this.TableName = table.TableName;
+            if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                this.CaseSensitive = table.CaseSensitive;
+            }
+            if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                this.Locale = table.Locale;
+            }
+            if ((table.Namespace != table.DataSet.Namespace)) {
+                this.Namespace = table.Namespace;
+            }
+            this.Prefix = table.Prefix;
+            this.MinimumCapacity = table.MinimumCapacity;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected SpellEffectBaseDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                base(info, context) {
+            this.InitVars();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn IdColumn {
+            get {
+                return this.columnId;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn NameColumn {
+            get {
+                return this.columnName;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn DescriptionColumn {
+            get {
+                return this.columnDescription;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn AffectAttributeColumn {
+            get {
+                return this.columnAffectAttribute;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn SpellEffectBase_IdColumn {
+            get {
+                return this.columnSpellEffectBase_Id;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataColumn SpellEffectBases_IdColumn {
+            get {
+                return this.columnSpellEffectBases_Id;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        public int Count {
+            get {
+                return this.Rows.Count;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBaseRow this[int index] {
+            get {
+                return ((SpellEffectBaseRow)(this.Rows[index]));
+            }
+        }
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event SpellEffectBaseRowChangeEventHandler SpellEffectBaseRowChanging;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event SpellEffectBaseRowChangeEventHandler SpellEffectBaseRowChanged;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event SpellEffectBaseRowChangeEventHandler SpellEffectBaseRowDeleting;
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public event SpellEffectBaseRowChangeEventHandler SpellEffectBaseRowDeleted;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void AddSpellEffectBaseRow(SpellEffectBaseRow row) {
+            this.Rows.Add(row);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBaseRow AddSpellEffectBaseRow(string Id, string Name, string Description, string AffectAttribute, SpellEffectBasesRow parentSpellEffectBasesRowBySpellEffectBases_SpellEffectBase) {
+            SpellEffectBaseRow rowSpellEffectBaseRow = ((SpellEffectBaseRow)(this.NewRow()));
+            object[] columnValuesArray = new object[] {
+                    Id,
+                    Name,
+                    Description,
+                    AffectAttribute,
+                    null,
+                    null};
+            if ((parentSpellEffectBasesRowBySpellEffectBases_SpellEffectBase != null)) {
+                columnValuesArray[5] = parentSpellEffectBasesRowBySpellEffectBases_SpellEffectBase[0];
+            }
+            rowSpellEffectBaseRow.ItemArray = columnValuesArray;
+            this.Rows.Add(rowSpellEffectBaseRow);
+            return rowSpellEffectBaseRow;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public virtual global::System.Collections.IEnumerator GetEnumerator() {
+            return this.Rows.GetEnumerator();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public override global::System.Data.DataTable Clone() {
+            SpellEffectBaseDataTable cln = ((SpellEffectBaseDataTable)(base.Clone()));
+            cln.InitVars();
+            return cln;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override global::System.Data.DataTable CreateInstance() {
+            return new SpellEffectBaseDataTable();
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal void InitVars() {
+            this.columnId = base.Columns["Id"];
+            this.columnName = base.Columns["Name"];
+            this.columnDescription = base.Columns["Description"];
+            this.columnAffectAttribute = base.Columns["AffectAttribute"];
+            this.columnSpellEffectBase_Id = base.Columns["SpellEffectBase_Id"];
+            this.columnSpellEffectBases_Id = base.Columns["SpellEffectBases_Id"];
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitClass() {
+            this.columnId = new global::System.Data.DataColumn("Id", typeof(string), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnId);
+            this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnName);
+            this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnDescription);
+            this.columnAffectAttribute = new global::System.Data.DataColumn("AffectAttribute", typeof(string), null, global::System.Data.MappingType.Attribute);
+            base.Columns.Add(this.columnAffectAttribute);
+            this.columnSpellEffectBase_Id = new global::System.Data.DataColumn("SpellEffectBase_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+            base.Columns.Add(this.columnSpellEffectBase_Id);
+            this.columnSpellEffectBases_Id = new global::System.Data.DataColumn("SpellEffectBases_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+            base.Columns.Add(this.columnSpellEffectBases_Id);
+            this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                            this.columnSpellEffectBase_Id}, true));
+            this.columnId.Namespace = "";
+            this.columnName.Namespace = "";
+            this.columnDescription.Namespace = "";
+            this.columnAffectAttribute.Namespace = "";
+            this.columnSpellEffectBase_Id.AutoIncrement = true;
+            this.columnSpellEffectBase_Id.AllowDBNull = false;
+            this.columnSpellEffectBase_Id.Unique = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBaseRow NewSpellEffectBaseRow() {
+            return ((SpellEffectBaseRow)(this.NewRow()));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            return new SpellEffectBaseRow(builder);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override global::System.Type GetRowType() {
+            return typeof(SpellEffectBaseRow);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowChanged(e);
+            if ((this.SpellEffectBaseRowChanged != null)) {
+                this.SpellEffectBaseRowChanged(this, new SpellEffectBaseRowChangeEvent(((SpellEffectBaseRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowChanging(e);
+            if ((this.SpellEffectBaseRowChanging != null)) {
+                this.SpellEffectBaseRowChanging(this, new SpellEffectBaseRowChangeEvent(((SpellEffectBaseRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowDeleted(e);
+            if ((this.SpellEffectBaseRowDeleted != null)) {
+                this.SpellEffectBaseRowDeleted(this, new SpellEffectBaseRowChangeEvent(((SpellEffectBaseRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            base.OnRowDeleting(e);
+            if ((this.SpellEffectBaseRowDeleting != null)) {
+                this.SpellEffectBaseRowDeleting(this, new SpellEffectBaseRowChangeEvent(((SpellEffectBaseRow)(e.Row)), e.Action));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void RemoveSpellEffectBaseRow(SpellEffectBaseRow row) {
+            this.Rows.Remove(row);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+            global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+            global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+            THE_Data ds = new THE_Data();
+            global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+            any1.MinOccurs = new decimal(0);
+            any1.MaxOccurs = decimal.MaxValue;
+            any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+            sequence.Items.Add(any1);
+            global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+            any2.MinOccurs = new decimal(1);
+            any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+            sequence.Items.Add(any2);
+            global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+            attribute1.Name = "namespace";
+            attribute1.FixedValue = ds.Namespace;
+            type.Attributes.Add(attribute1);
+            global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+            attribute2.Name = "tableTypeName";
+            attribute2.FixedValue = "SpellEffectBaseDataTable";
+            type.Attributes.Add(attribute2);
+            type.Particle = sequence;
+            global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+            if (xs.Contains(dsSchema.TargetNamespace)) {
+                global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                try {
+                    global::System.Xml.Schema.XmlSchema schema = null;
+                    dsSchema.Write(s1);
+                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                        s2.SetLength(0);
+                        schema.Write(s2);
+                        if ((s1.Length == s2.Length)) {
+                            s1.Position = 0;
+                            s2.Position = 0;
+                            for (; ((s1.Position != s1.Length) 
+                                        && (s1.ReadByte() == s2.ReadByte())); ) {
+                                ;
+                            }
+                            if ((s1.Position == s1.Length)) {
+                                return type;
+                            }
+                        }
+                    }
+                }
+                finally {
+                    if ((s1 != null)) {
+                        s1.Close();
+                    }
+                    if ((s2 != null)) {
+                        s2.Close();
+                    }
+                }
+            }
+            xs.Add(dsSchema);
+            return type;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the strongly named DataTable class.
+    ///</summary>
+    [global::System.Serializable()]
+    [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
     public partial class VariableDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
         
         private global::System.Data.DataColumn columnIndex;
         
         private global::System.Data.DataColumn columnDescription;
         
-        private global::System.Data.DataColumn columnSpellEffect_Id;
+        private global::System.Data.DataColumn columnSpellEffectBase_Id;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2393,9 +3178,9 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public global::System.Data.DataColumn SpellEffect_IdColumn {
+        public global::System.Data.DataColumn SpellEffectBase_IdColumn {
             get {
-                return this.columnSpellEffect_Id;
+                return this.columnSpellEffectBase_Id;
             }
         }
         
@@ -2436,14 +3221,14 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public VariableRow AddVariableRow(int Index, string Description, SpellEffectRow parentSpellEffectRowBySpellEffect_Variable) {
+        public VariableRow AddVariableRow(int Index, string Description, SpellEffectBaseRow parentSpellEffectBaseRowBySpellEffectBase_Variable) {
             VariableRow rowVariableRow = ((VariableRow)(this.NewRow()));
             object[] columnValuesArray = new object[] {
                     Index,
                     Description,
                     null};
-            if ((parentSpellEffectRowBySpellEffect_Variable != null)) {
-                columnValuesArray[2] = parentSpellEffectRowBySpellEffect_Variable[4];
+            if ((parentSpellEffectBaseRowBySpellEffectBase_Variable != null)) {
+                columnValuesArray[2] = parentSpellEffectBaseRowBySpellEffectBase_Variable[4];
             }
             rowVariableRow.ItemArray = columnValuesArray;
             this.Rows.Add(rowVariableRow);
@@ -2475,7 +3260,7 @@ public partial class THE_Data : global::System.Data.DataSet {
         internal void InitVars() {
             this.columnIndex = base.Columns["Index"];
             this.columnDescription = base.Columns["Description"];
-            this.columnSpellEffect_Id = base.Columns["SpellEffect_Id"];
+            this.columnSpellEffectBase_Id = base.Columns["SpellEffectBase_Id"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2485,8 +3270,8 @@ public partial class THE_Data : global::System.Data.DataSet {
             base.Columns.Add(this.columnIndex);
             this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Attribute);
             base.Columns.Add(this.columnDescription);
-            this.columnSpellEffect_Id = new global::System.Data.DataColumn("SpellEffect_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
-            base.Columns.Add(this.columnSpellEffect_Id);
+            this.columnSpellEffectBase_Id = new global::System.Data.DataColumn("SpellEffectBase_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+            base.Columns.Add(this.columnSpellEffectBase_Id);
             this.columnIndex.Namespace = "";
             this.columnDescription.Namespace = "";
         }
@@ -3067,6 +3852,113 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public string Id {
+            get {
+                try {
+                    return ((string)(this[this.tableSkill.IdColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'Id\' in table \'Skill\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableSkill.IdColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public string Name {
+            get {
+                try {
+                    return ((string)(this[this.tableSkill.NameColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'Name\' in table \'Skill\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableSkill.NameColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public string Description {
+            get {
+                try {
+                    return ((string)(this[this.tableSkill.DescriptionColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'Skill\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableSkill.DescriptionColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public int SelectTargetType {
+            get {
+                try {
+                    return ((int)(this[this.tableSkill.SelectTargetTypeColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'SelectTargetType\' in table \'Skill\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableSkill.SelectTargetTypeColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public int Cost {
+            get {
+                try {
+                    return ((int)(this[this.tableSkill.CostColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'Cost\' in table \'Skill\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableSkill.CostColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public int EffectTargetType {
+            get {
+                try {
+                    return ((int)(this[this.tableSkill.EffectTargetTypeColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'EffectTargetType\' in table \'Skill\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableSkill.EffectTargetTypeColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public int Skill_Id {
+            get {
+                return ((int)(this[this.tableSkill.Skill_IdColumn]));
+            }
+            set {
+                this[this.tableSkill.Skill_IdColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public int Skills_Id {
             get {
                 try {
@@ -3094,6 +3986,78 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsIdNull() {
+            return this.IsNull(this.tableSkill.IdColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetIdNull() {
+            this[this.tableSkill.IdColumn] = global::System.Convert.DBNull;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsNameNull() {
+            return this.IsNull(this.tableSkill.NameColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetNameNull() {
+            this[this.tableSkill.NameColumn] = global::System.Convert.DBNull;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsDescriptionNull() {
+            return this.IsNull(this.tableSkill.DescriptionColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetDescriptionNull() {
+            this[this.tableSkill.DescriptionColumn] = global::System.Convert.DBNull;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsSelectTargetTypeNull() {
+            return this.IsNull(this.tableSkill.SelectTargetTypeColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetSelectTargetTypeNull() {
+            this[this.tableSkill.SelectTargetTypeColumn] = global::System.Convert.DBNull;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsCostNull() {
+            return this.IsNull(this.tableSkill.CostColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetCostNull() {
+            this[this.tableSkill.CostColumn] = global::System.Convert.DBNull;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsEffectTargetTypeNull() {
+            return this.IsNull(this.tableSkill.EffectTargetTypeColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetEffectTargetTypeNull() {
+            this[this.tableSkill.EffectTargetTypeColumn] = global::System.Convert.DBNull;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public bool IsSkills_IdNull() {
             return this.IsNull(this.tableSkill.Skills_IdColumn);
         }
@@ -3103,41 +4067,15 @@ public partial class THE_Data : global::System.Data.DataSet {
         public void SetSkills_IdNull() {
             this[this.tableSkill.Skills_IdColumn] = global::System.Convert.DBNull;
         }
-    }
-    
-    /// <summary>
-    ///Represents strongly named DataRow class.
-    ///</summary>
-    public partial class SpellEffectsRow : global::System.Data.DataRow {
-        
-        private SpellEffectsDataTable tableSpellEffects;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal SpellEffectsRow(global::System.Data.DataRowBuilder rb) : 
-                base(rb) {
-            this.tableSpellEffects = ((SpellEffectsDataTable)(this.Table));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public int SpellEffects_Id {
-            get {
-                return ((int)(this[this.tableSpellEffects.SpellEffects_IdColumn]));
-            }
-            set {
-                this[this.tableSpellEffects.SpellEffects_IdColumn] = value;
-            }
-        }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public SpellEffectRow[] GetSpellEffectRows() {
-            if ((this.Table.ChildRelations["SpellEffects_SpellEffect"] == null)) {
+            if ((this.Table.ChildRelations["Skill_SpellEffect"] == null)) {
                 return new SpellEffectRow[0];
             }
             else {
-                return ((SpellEffectRow[])(base.GetChildRows(this.Table.ChildRelations["SpellEffects_SpellEffect"])));
+                return ((SpellEffectRow[])(base.GetChildRows(this.Table.ChildRelations["Skill_SpellEffect"])));
             }
         }
     }
@@ -3158,65 +4096,17 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public string Id {
+        public string SpellEffectBaseId {
             get {
                 try {
-                    return ((string)(this[this.tableSpellEffect.IdColumn]));
+                    return ((string)(this[this.tableSpellEffect.SpellEffectBaseIdColumn]));
                 }
                 catch (global::System.InvalidCastException e) {
-                    throw new global::System.Data.StrongTypingException("The value for column \'Id\' in table \'SpellEffect\' is DBNull.", e);
+                    throw new global::System.Data.StrongTypingException("The value for column \'SpellEffectBaseId\' in table \'SpellEffect\' is DBNull.", e);
                 }
             }
             set {
-                this[this.tableSpellEffect.IdColumn] = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public string Name {
-            get {
-                try {
-                    return ((string)(this[this.tableSpellEffect.NameColumn]));
-                }
-                catch (global::System.InvalidCastException e) {
-                    throw new global::System.Data.StrongTypingException("The value for column \'Name\' in table \'SpellEffect\' is DBNull.", e);
-                }
-            }
-            set {
-                this[this.tableSpellEffect.NameColumn] = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public string Description {
-            get {
-                try {
-                    return ((string)(this[this.tableSpellEffect.DescriptionColumn]));
-                }
-                catch (global::System.InvalidCastException e) {
-                    throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'SpellEffect\' is DBNull.", e);
-                }
-            }
-            set {
-                this[this.tableSpellEffect.DescriptionColumn] = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public string AffectAttribute {
-            get {
-                try {
-                    return ((string)(this[this.tableSpellEffect.AffectAttributeColumn]));
-                }
-                catch (global::System.InvalidCastException e) {
-                    throw new global::System.Data.StrongTypingException("The value for column \'AffectAttribute\' in table \'SpellEffect\' is DBNull.", e);
-                }
-            }
-            set {
-                this[this.tableSpellEffect.AffectAttributeColumn] = value;
+                this[this.tableSpellEffect.SpellEffectBaseIdColumn] = value;
             }
         }
         
@@ -3233,99 +4123,398 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public int SpellEffects_Id {
+        public int Skill_Id {
             get {
                 try {
-                    return ((int)(this[this.tableSpellEffect.SpellEffects_IdColumn]));
+                    return ((int)(this[this.tableSpellEffect.Skill_IdColumn]));
                 }
                 catch (global::System.InvalidCastException e) {
-                    throw new global::System.Data.StrongTypingException("The value for column \'SpellEffects_Id\' in table \'SpellEffect\' is DBNull.", e);
+                    throw new global::System.Data.StrongTypingException("The value for column \'Skill_Id\' in table \'SpellEffect\' is DBNull.", e);
                 }
             }
             set {
-                this[this.tableSpellEffect.SpellEffects_IdColumn] = value;
+                this[this.tableSpellEffect.Skill_IdColumn] = value;
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SpellEffectsRow SpellEffectsRow {
+        public SkillRow SkillRow {
             get {
-                return ((SpellEffectsRow)(this.GetParentRow(this.Table.ParentRelations["SpellEffects_SpellEffect"])));
+                return ((SkillRow)(this.GetParentRow(this.Table.ParentRelations["Skill_SpellEffect"])));
             }
             set {
-                this.SetParentRow(value, this.Table.ParentRelations["SpellEffects_SpellEffect"]);
+                this.SetParentRow(value, this.Table.ParentRelations["Skill_SpellEffect"]);
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsSpellEffectBaseIdNull() {
+            return this.IsNull(this.tableSpellEffect.SpellEffectBaseIdColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetSpellEffectBaseIdNull() {
+            this[this.tableSpellEffect.SpellEffectBaseIdColumn] = global::System.Convert.DBNull;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsSkill_IdNull() {
+            return this.IsNull(this.tableSpellEffect.Skill_IdColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetSkill_IdNull() {
+            this[this.tableSpellEffect.Skill_IdColumn] = global::System.Convert.DBNull;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public VariableValueRow[] GetVariableValueRows() {
+            if ((this.Table.ChildRelations["SpellEffect_VariableValue"] == null)) {
+                return new VariableValueRow[0];
+            }
+            else {
+                return ((VariableValueRow[])(base.GetChildRows(this.Table.ChildRelations["SpellEffect_VariableValue"])));
+            }
+        }
+    }
+    
+    /// <summary>
+    ///Represents strongly named DataRow class.
+    ///</summary>
+    public partial class VariableValueRow : global::System.Data.DataRow {
+        
+        private VariableValueDataTable tableVariableValue;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal VariableValueRow(global::System.Data.DataRowBuilder rb) : 
+                base(rb) {
+            this.tableVariableValue = ((VariableValueDataTable)(this.Table));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public string Index {
+            get {
+                try {
+                    return ((string)(this[this.tableVariableValue.IndexColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'Index\' in table \'VariableValue\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableVariableValue.IndexColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public decimal Value {
+            get {
+                try {
+                    return ((decimal)(this[this.tableVariableValue.ValueColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'Value\' in table \'VariableValue\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableVariableValue.ValueColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public int SpellEffect_Id {
+            get {
+                try {
+                    return ((int)(this[this.tableVariableValue.SpellEffect_IdColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'SpellEffect_Id\' in table \'VariableValue\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableVariableValue.SpellEffect_IdColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectRow SpellEffectRow {
+            get {
+                return ((SpellEffectRow)(this.GetParentRow(this.Table.ParentRelations["SpellEffect_VariableValue"])));
+            }
+            set {
+                this.SetParentRow(value, this.Table.ParentRelations["SpellEffect_VariableValue"]);
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsIndexNull() {
+            return this.IsNull(this.tableVariableValue.IndexColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetIndexNull() {
+            this[this.tableVariableValue.IndexColumn] = global::System.Convert.DBNull;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsValueNull() {
+            return this.IsNull(this.tableVariableValue.ValueColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetValueNull() {
+            this[this.tableVariableValue.ValueColumn] = global::System.Convert.DBNull;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool IsSpellEffect_IdNull() {
+            return this.IsNull(this.tableVariableValue.SpellEffect_IdColumn);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public void SetSpellEffect_IdNull() {
+            this[this.tableVariableValue.SpellEffect_IdColumn] = global::System.Convert.DBNull;
+        }
+    }
+    
+    /// <summary>
+    ///Represents strongly named DataRow class.
+    ///</summary>
+    public partial class SpellEffectBasesRow : global::System.Data.DataRow {
+        
+        private SpellEffectBasesDataTable tableSpellEffectBases;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal SpellEffectBasesRow(global::System.Data.DataRowBuilder rb) : 
+                base(rb) {
+            this.tableSpellEffectBases = ((SpellEffectBasesDataTable)(this.Table));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public int SpellEffectBases_Id {
+            get {
+                return ((int)(this[this.tableSpellEffectBases.SpellEffectBases_IdColumn]));
+            }
+            set {
+                this[this.tableSpellEffectBases.SpellEffectBases_IdColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBaseRow[] GetSpellEffectBaseRows() {
+            if ((this.Table.ChildRelations["SpellEffectBases_SpellEffectBase"] == null)) {
+                return new SpellEffectBaseRow[0];
+            }
+            else {
+                return ((SpellEffectBaseRow[])(base.GetChildRows(this.Table.ChildRelations["SpellEffectBases_SpellEffectBase"])));
+            }
+        }
+    }
+    
+    /// <summary>
+    ///Represents strongly named DataRow class.
+    ///</summary>
+    public partial class SpellEffectBaseRow : global::System.Data.DataRow {
+        
+        private SpellEffectBaseDataTable tableSpellEffectBase;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal SpellEffectBaseRow(global::System.Data.DataRowBuilder rb) : 
+                base(rb) {
+            this.tableSpellEffectBase = ((SpellEffectBaseDataTable)(this.Table));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public string Id {
+            get {
+                try {
+                    return ((string)(this[this.tableSpellEffectBase.IdColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'Id\' in table \'SpellEffectBase\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableSpellEffectBase.IdColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public string Name {
+            get {
+                try {
+                    return ((string)(this[this.tableSpellEffectBase.NameColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'Name\' in table \'SpellEffectBase\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableSpellEffectBase.NameColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public string Description {
+            get {
+                try {
+                    return ((string)(this[this.tableSpellEffectBase.DescriptionColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'SpellEffectBase\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableSpellEffectBase.DescriptionColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public string AffectAttribute {
+            get {
+                try {
+                    return ((string)(this[this.tableSpellEffectBase.AffectAttributeColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'AffectAttribute\' in table \'SpellEffectBase\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableSpellEffectBase.AffectAttributeColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public int SpellEffectBase_Id {
+            get {
+                return ((int)(this[this.tableSpellEffectBase.SpellEffectBase_IdColumn]));
+            }
+            set {
+                this[this.tableSpellEffectBase.SpellEffectBase_IdColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public int SpellEffectBases_Id {
+            get {
+                try {
+                    return ((int)(this[this.tableSpellEffectBase.SpellEffectBases_IdColumn]));
+                }
+                catch (global::System.InvalidCastException e) {
+                    throw new global::System.Data.StrongTypingException("The value for column \'SpellEffectBases_Id\' in table \'SpellEffectBase\' is DBNull.", e);
+                }
+            }
+            set {
+                this[this.tableSpellEffectBase.SpellEffectBases_IdColumn] = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBasesRow SpellEffectBasesRow {
+            get {
+                return ((SpellEffectBasesRow)(this.GetParentRow(this.Table.ParentRelations["SpellEffectBases_SpellEffectBase"])));
+            }
+            set {
+                this.SetParentRow(value, this.Table.ParentRelations["SpellEffectBases_SpellEffectBase"]);
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public bool IsIdNull() {
-            return this.IsNull(this.tableSpellEffect.IdColumn);
+            return this.IsNull(this.tableSpellEffectBase.IdColumn);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public void SetIdNull() {
-            this[this.tableSpellEffect.IdColumn] = global::System.Convert.DBNull;
+            this[this.tableSpellEffectBase.IdColumn] = global::System.Convert.DBNull;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public bool IsNameNull() {
-            return this.IsNull(this.tableSpellEffect.NameColumn);
+            return this.IsNull(this.tableSpellEffectBase.NameColumn);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public void SetNameNull() {
-            this[this.tableSpellEffect.NameColumn] = global::System.Convert.DBNull;
+            this[this.tableSpellEffectBase.NameColumn] = global::System.Convert.DBNull;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public bool IsDescriptionNull() {
-            return this.IsNull(this.tableSpellEffect.DescriptionColumn);
+            return this.IsNull(this.tableSpellEffectBase.DescriptionColumn);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public void SetDescriptionNull() {
-            this[this.tableSpellEffect.DescriptionColumn] = global::System.Convert.DBNull;
+            this[this.tableSpellEffectBase.DescriptionColumn] = global::System.Convert.DBNull;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public bool IsAffectAttributeNull() {
-            return this.IsNull(this.tableSpellEffect.AffectAttributeColumn);
+            return this.IsNull(this.tableSpellEffectBase.AffectAttributeColumn);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public void SetAffectAttributeNull() {
-            this[this.tableSpellEffect.AffectAttributeColumn] = global::System.Convert.DBNull;
+            this[this.tableSpellEffectBase.AffectAttributeColumn] = global::System.Convert.DBNull;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public bool IsSpellEffects_IdNull() {
-            return this.IsNull(this.tableSpellEffect.SpellEffects_IdColumn);
+        public bool IsSpellEffectBases_IdNull() {
+            return this.IsNull(this.tableSpellEffectBase.SpellEffectBases_IdColumn);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public void SetSpellEffects_IdNull() {
-            this[this.tableSpellEffect.SpellEffects_IdColumn] = global::System.Convert.DBNull;
+        public void SetSpellEffectBases_IdNull() {
+            this[this.tableSpellEffectBase.SpellEffectBases_IdColumn] = global::System.Convert.DBNull;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public VariableRow[] GetVariableRows() {
-            if ((this.Table.ChildRelations["SpellEffect_Variable"] == null)) {
+            if ((this.Table.ChildRelations["SpellEffectBase_Variable"] == null)) {
                 return new VariableRow[0];
             }
             else {
-                return ((VariableRow[])(base.GetChildRows(this.Table.ChildRelations["SpellEffect_Variable"])));
+                return ((VariableRow[])(base.GetChildRows(this.Table.ChildRelations["SpellEffectBase_Variable"])));
             }
         }
     }
@@ -3378,28 +4567,28 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public int SpellEffect_Id {
+        public int SpellEffectBase_Id {
             get {
                 try {
-                    return ((int)(this[this.tableVariable.SpellEffect_IdColumn]));
+                    return ((int)(this[this.tableVariable.SpellEffectBase_IdColumn]));
                 }
                 catch (global::System.InvalidCastException e) {
-                    throw new global::System.Data.StrongTypingException("The value for column \'SpellEffect_Id\' in table \'Variable\' is DBNull.", e);
+                    throw new global::System.Data.StrongTypingException("The value for column \'SpellEffectBase_Id\' in table \'Variable\' is DBNull.", e);
                 }
             }
             set {
-                this[this.tableVariable.SpellEffect_IdColumn] = value;
+                this[this.tableVariable.SpellEffectBase_IdColumn] = value;
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SpellEffectRow SpellEffectRow {
+        public SpellEffectBaseRow SpellEffectBaseRow {
             get {
-                return ((SpellEffectRow)(this.GetParentRow(this.Table.ParentRelations["SpellEffect_Variable"])));
+                return ((SpellEffectBaseRow)(this.GetParentRow(this.Table.ParentRelations["SpellEffectBase_Variable"])));
             }
             set {
-                this.SetParentRow(value, this.Table.ParentRelations["SpellEffect_Variable"]);
+                this.SetParentRow(value, this.Table.ParentRelations["SpellEffectBase_Variable"]);
             }
         }
         
@@ -3429,14 +4618,14 @@ public partial class THE_Data : global::System.Data.DataSet {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public bool IsSpellEffect_IdNull() {
-            return this.IsNull(this.tableVariable.SpellEffect_IdColumn);
+        public bool IsSpellEffectBase_IdNull() {
+            return this.IsNull(this.tableVariable.SpellEffectBase_IdColumn);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public void SetSpellEffect_IdNull() {
-            this[this.tableVariable.SpellEffect_IdColumn] = global::System.Convert.DBNull;
+        public void SetSpellEffectBase_IdNull() {
+            this[this.tableVariable.SpellEffectBase_IdColumn] = global::System.Convert.DBNull;
         }
     }
     
@@ -3580,22 +4769,22 @@ public partial class THE_Data : global::System.Data.DataSet {
     ///Row event argument class
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-    public class SpellEffectsRowChangeEvent : global::System.EventArgs {
+    public class SpellEffectRowChangeEvent : global::System.EventArgs {
         
-        private SpellEffectsRow eventRow;
+        private SpellEffectRow eventRow;
         
         private global::System.Data.DataRowAction eventAction;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SpellEffectsRowChangeEvent(SpellEffectsRow row, global::System.Data.DataRowAction action) {
+        public SpellEffectRowChangeEvent(SpellEffectRow row, global::System.Data.DataRowAction action) {
             this.eventRow = row;
             this.eventAction = action;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SpellEffectsRow Row {
+        public SpellEffectRow Row {
             get {
                 return this.eventRow;
             }
@@ -3614,22 +4803,90 @@ public partial class THE_Data : global::System.Data.DataSet {
     ///Row event argument class
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-    public class SpellEffectRowChangeEvent : global::System.EventArgs {
+    public class VariableValueRowChangeEvent : global::System.EventArgs {
         
-        private SpellEffectRow eventRow;
+        private VariableValueRow eventRow;
         
         private global::System.Data.DataRowAction eventAction;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SpellEffectRowChangeEvent(SpellEffectRow row, global::System.Data.DataRowAction action) {
+        public VariableValueRowChangeEvent(VariableValueRow row, global::System.Data.DataRowAction action) {
             this.eventRow = row;
             this.eventAction = action;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public SpellEffectRow Row {
+        public VariableValueRow Row {
+            get {
+                return this.eventRow;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataRowAction Action {
+            get {
+                return this.eventAction;
+            }
+        }
+    }
+    
+    /// <summary>
+    ///Row event argument class
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+    public class SpellEffectBasesRowChangeEvent : global::System.EventArgs {
+        
+        private SpellEffectBasesRow eventRow;
+        
+        private global::System.Data.DataRowAction eventAction;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBasesRowChangeEvent(SpellEffectBasesRow row, global::System.Data.DataRowAction action) {
+            this.eventRow = row;
+            this.eventAction = action;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBasesRow Row {
+            get {
+                return this.eventRow;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public global::System.Data.DataRowAction Action {
+            get {
+                return this.eventAction;
+            }
+        }
+    }
+    
+    /// <summary>
+    ///Row event argument class
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+    public class SpellEffectBaseRowChangeEvent : global::System.EventArgs {
+        
+        private SpellEffectBaseRow eventRow;
+        
+        private global::System.Data.DataRowAction eventAction;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBaseRowChangeEvent(SpellEffectBaseRow row, global::System.Data.DataRowAction action) {
+            this.eventRow = row;
+            this.eventAction = action;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public SpellEffectBaseRow Row {
             get {
                 return this.eventRow;
             }

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Card\Card.cs" />
+    <Compile Include="Skill\SpellEffect\CardPoolSpellEffect.cs" />
     <Compile Include="Card\HeroCard.cs" />
     <Compile Include="Card\PolicyCard.cs" />
     <Compile Include="Card\SpellCard.cs" />
@@ -59,7 +60,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Skill\SpellEffect.cs" />
+    <Compile Include="Skill\SpellEffectBase.cs" />
+    <Compile Include="Skill\SpellEffect\AttributeSpellEffect.cs" />
+    <Compile Include="Skill\SpellEffect\SkillSpellEffect.cs" />
+    <Compile Include="Skill\SpellEffect\SpellEffect.cs" />
+    <Compile Include="Skill\SpellEffect\UnitPoolSpellEffect.cs" />
+    <Compile Include="Skill\SpellEffect\SummonSpellEffect.cs" />
     <Compile Include="Support\CommonHelper.cs" />
     <Compile Include="Support\FieldHelper.cs" />
     <Compile Include="Support\IDList.cs" />

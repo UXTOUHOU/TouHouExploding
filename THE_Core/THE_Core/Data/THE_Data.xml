@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <THE_Data xmlns="http://tempuri.org/THE_Data.xsd">
   <Units>
     <Unit Id="Unit_0000_01" Name="毛玉" Description="这个人很懒，暂时没有简介" Provenance="杂鱼" Type="Girl" HitPoint="1" Mobility="1" MoveMethod="Walk" AttackPower="1" AttackRange="1" />
@@ -110,163 +110,471 @@
     <Unit Id="Unit_9000_13" Name="玛艾露贝莉·赫恩" Description="这个人很懒，暂时没有简介" Provenance="音乐CD" Type="Girl" HitPoint="1" Mobility="1" MoveMethod="Walk" AttackPower="1" AttackRange="1" />
   </Units>
   <Skills>
-    <Skill Id="TS_01_0001" Name="测试_增加当前生命值（点数）" Description="增加当前生命值（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_01_0002" Name="测试_增加当前生命值（百分比）" Description="增加当前生命值（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_01_0003" Name="测试_减少当前生命值（点数）" Description="减少当前生命值（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_01_0004" Name="测试_减少当前生命值（百分比）" Description="减少当前生命值（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_01_0005" Name="测试_改变当前生命值" Description="改变当前生命值" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_01_0011" Name="测试_增加当前生命值上限（点数）" Description="增加当前生命值上限（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_01_0012" Name="测试_增加当前生命值上限（百分比）" Description="增加当前生命值上限（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_01_0013" Name="测试_减少当前生命值上限（点数）" Description="减少当前生命值上限（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_01_0014" Name="测试_减少当前生命值上限（百分比）" Description="减少当前生命值上限（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_01_0015" Name="测试_改变当前生命值上限" Description="改变当前生命值上限" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_02_0001" Name="测试_增加当前攻击力（点数）" Description="增加当前攻击力（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_02_0002" Name="测试_增加当前攻击力（百分比）" Description="增加当前攻击力（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_02_0003" Name="测试_减少当前攻击力（点数）" Description="减少当前攻击力（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_02_0004" Name="测试_减少当前攻击力（百分比）" Description="减少当前攻击力（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_02_0005" Name="测试_改变当前攻击力" Description="改变当前攻击力" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_02_0011" Name="测试_增加当前攻击力上限（点数）" Description="增加当前攻击力上限（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_02_0012" Name="测试_增加当前攻击力上限（百分比）" Description="增加当前攻击力上限（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_02_0013" Name="测试_减少当前攻击力上限（点数）" Description="减少当前攻击力上限（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_02_0014" Name="测试_减少当前攻击力上限（百分比）" Description="减少当前攻击力上限（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_02_0015" Name="测试_改变当前攻击力上限" Description="改变当前攻击力上限" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_03_0001" Name="测试_增加当前攻击范围（点数）" Description="增加当前攻击范围（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_03_0002" Name="测试_增加当前攻击范围（百分比）" Description="增加当前攻击范围（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_03_0003" Name="测试_减少当前攻击范围（点数）" Description="减少当前攻击范围（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_03_0004" Name="测试_减少当前攻击范围（百分比）" Description="减少当前攻击范围（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_03_0005" Name="测试_改变当前攻击范围" Description="改变当前攻击范围" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_03_0011" Name="测试_增加当前攻击范围上限（点数）" Description="增加当前攻击范围上限（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_03_0012" Name="测试_增加当前攻击范围上限（百分比）" Description="增加当前攻击范围上限（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_03_0013" Name="测试_减少当前攻击范围上限（点数）" Description="减少当前攻击范围上限（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_03_0014" Name="测试_减少当前攻击范围上限（百分比）" Description="减少当前攻击范围上限（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_03_0015" Name="测试_改变当前攻击范围上限" Description="改变当前攻击范围上限" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_04_0001" Name="测试_增加当前移动力（点数）" Description="增加当前移动力（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_04_0002" Name="测试_增加当前移动力（百分比）" Description="增加当前移动力（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_04_0003" Name="测试_减少当前移动力（点数）" Description="减少当前移动力（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_04_0004" Name="测试_减少当前移动力（百分比）" Description="减少当前移动力（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_04_0005" Name="测试_改变当前移动力" Description="改变当前移动力" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_04_0011" Name="测试_增加当前移动力上限（点数）" Description="增加当前移动力上限（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_04_0012" Name="测试_增加当前移动力上限（百分比）" Description="增加当前移动力上限（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_04_0013" Name="测试_减少当前移动力上限（点数）" Description="减少当前移动力上限（点数）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_04_0014" Name="测试_减少当前移动力上限（百分比）" Description="减少当前移动力上限（百分比）" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_04_0015" Name="测试_改变当前移动力上限" Description="改变当前移动力上限" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_04_0021" Name="测试_移动到指定地点" Description="移动到指定地点" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_05_0001" Name="测试_增加伤害（点数）" Description="增加伤害（点数）" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_05_0002" Name="测试_增加伤害（百分比）" Description="增加伤害（百分比）" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_05_0003" Name="测试_减少伤害（点数）" Description="减少伤害（点数）" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_05_0004" Name="测试_减少伤害（百分比）" Description="减少伤害（百分比）" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_05_0005" Name="测试_改变伤害" Description="改变伤害" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0001" Name="测试_施放技能" Description="施放技能" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0002" Name="测试_技能附加到单位" Description="技能附加到单位" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0003" Name="测试_技能从单位移除" Description="技能从单位移除" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0011" Name="测试_定身激活" Description="定身激活" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0012" Name="测试_定身解除" Description="定身解除" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0021" Name="测试_缴械激活" Description="缴械激活" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0022" Name="测试_缴械解除" Description="缴械解除" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0031" Name="测试_沉默激活" Description="沉默激活" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0032" Name="测试_沉默解除" Description="沉默解除" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0041" Name="测试_眩晕激活" Description="眩晕激活" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0042" Name="测试_眩晕解除" Description="眩晕解除" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0051" Name="测试_免疫激活" Description="免疫激活" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0052" Name="测试_免疫解除" Description="免疫解除" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0061" Name="测试_护盾激活" Description="护盾激活" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0062" Name="测试_护盾解除" Description="护盾解除" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0071" Name="测试_隐蔽激活" Description="隐蔽激活" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0072" Name="测试_隐蔽解除" Description="隐蔽解除" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0081" Name="测试_隐身激活" Description="隐身激活" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_06_0082" Name="测试_隐身解除" Description="隐身解除" SelectTargetType="4" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_07_0001" Name="测试_召唤小兵" Description="召唤小兵" SelectTargetType="3" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_07_0002" Name="测试_召唤从者" Description="召唤从者" SelectTargetType="3" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_07_0003" Name="测试_召唤少女" Description="召唤少女" SelectTargetType="3" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_07_0004" Name="测试_召唤物消失" Description="召唤物消失" SelectTargetType="2" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_07_0011" Name="测试_召唤池内单位增加" Description="召唤池内单位增加" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_07_0012" Name="测试_召唤池单位补满" Description="召唤池单位补满" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_07_0013" Name="测试_召唤池单位刷新并补满" Description="召唤池单位刷新并补满" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_07_0021" Name="测试_卡片池卡片增加" Description="卡片池卡片增加" SelectTargetType="1" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_07_0022" Name="测试_卡片池卡片移除" Description="卡片池卡片移除" SelectTargetType="1" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_08_0001" Name="测试_取消移动" Description="取消移动" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_08_0002" Name="测试_取消攻击" Description="取消攻击" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_08_0003" Name="测试_取消技能" Description="取消技能" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
-    <Skill Id="TS_08_0004" Name="测试_取消所有行为" Description="取消所有行为" SelectTargetType="0" Cost="1" EffectTargetType="7"></Skill>
+    <Skill Id="TS_01_0001" Name="测试_增加当前生命值（点数）" Description="增加当前生命值（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="HP_01">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_01_0002" Name="测试_增加当前生命值（百分比）" Description="增加当前生命值（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="HP_02">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_01_0003" Name="测试_减少当前生命值（点数）" Description="减少当前生命值（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="HP_03">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_01_0004" Name="测试_减少当前生命值（百分比）" Description="减少当前生命值（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="HP_04">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_01_0005" Name="测试_改变当前生命值" Description="改变当前生命值" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="HP_05">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_01_0011" Name="测试_增加当前生命值上限（点数）" Description="增加当前生命值上限（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="HP_11">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_01_0012" Name="测试_增加当前生命值上限（百分比）" Description="增加当前生命值上限（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="HP_12">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_01_0013" Name="测试_减少当前生命值上限（点数）" Description="减少当前生命值上限（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="HP_13">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_01_0014" Name="测试_减少当前生命值上限（百分比）" Description="减少当前生命值上限（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="HP_14">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_01_0015" Name="测试_改变当前生命值上限" Description="改变当前生命值上限" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="HP_15">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_02_0001" Name="测试_增加当前攻击力（点数）" Description="增加当前攻击力（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AP_01">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_02_0002" Name="测试_增加当前攻击力（百分比）" Description="增加当前攻击力（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AP_02">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_02_0003" Name="测试_减少当前攻击力（点数）" Description="减少当前攻击力（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AP_03">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_02_0004" Name="测试_减少当前攻击力（百分比）" Description="减少当前攻击力（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AP_04">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_02_0005" Name="测试_改变当前攻击力" Description="改变当前攻击力" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AP_05">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_02_0011" Name="测试_增加当前攻击力上限（点数）" Description="增加当前攻击力上限（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AP_11">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_02_0012" Name="测试_增加当前攻击力上限（百分比）" Description="增加当前攻击力上限（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AP_12">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_02_0013" Name="测试_减少当前攻击力上限（点数）" Description="减少当前攻击力上限（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AP_13">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_02_0014" Name="测试_减少当前攻击力上限（百分比）" Description="减少当前攻击力上限（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AP_14">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_02_0015" Name="测试_改变当前攻击力上限" Description="改变当前攻击力上限" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AP_15">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_03_0001" Name="测试_增加当前攻击范围（点数）" Description="增加当前攻击范围（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AR_01">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_03_0002" Name="测试_增加当前攻击范围（百分比）" Description="增加当前攻击范围（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AR_02">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_03_0003" Name="测试_减少当前攻击范围（点数）" Description="减少当前攻击范围（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AR_03">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_03_0004" Name="测试_减少当前攻击范围（百分比）" Description="减少当前攻击范围（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AR_04">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_03_0005" Name="测试_改变当前攻击范围" Description="改变当前攻击范围" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AR_05">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_03_0011" Name="测试_增加当前攻击范围上限（点数）" Description="增加当前攻击范围上限（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AR_11">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_03_0012" Name="测试_增加当前攻击范围上限（百分比）" Description="增加当前攻击范围上限（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AR_12">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_03_0013" Name="测试_减少当前攻击范围上限（点数）" Description="减少当前攻击范围上限（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AR_13">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_03_0014" Name="测试_减少当前攻击范围上限（百分比）" Description="减少当前攻击范围上限（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AR_14">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_03_0015" Name="测试_改变当前攻击范围上限" Description="改变当前攻击范围上限" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="AR_15">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_04_0001" Name="测试_增加当前移动力（点数）" Description="增加当前移动力（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="MV_01">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_04_0002" Name="测试_增加当前移动力（百分比）" Description="增加当前移动力（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="MV_02">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_04_0003" Name="测试_减少当前移动力（点数）" Description="减少当前移动力（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="MV_03">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_04_0004" Name="测试_减少当前移动力（百分比）" Description="减少当前移动力（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="MV_04">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_04_0005" Name="测试_改变当前移动力" Description="改变当前移动力" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="MV_05">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_04_0011" Name="测试_增加当前移动力上限（点数）" Description="增加当前移动力上限（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="MV_11">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_04_0012" Name="测试_增加当前移动力上限（百分比）" Description="增加当前移动力上限（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="MV_12">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_04_0013" Name="测试_减少当前移动力上限（点数）" Description="减少当前移动力上限（点数）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="MV_13">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_04_0014" Name="测试_减少当前移动力上限（百分比）" Description="减少当前移动力上限（百分比）" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="MV_14">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_04_0015" Name="测试_改变当前移动力上限" Description="改变当前移动力上限" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="MV_15">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_04_0021" Name="测试_移动到指定地点" Description="移动到指定地点" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="MV_21">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_05_0001" Name="测试_增加伤害（点数）" Description="增加伤害（点数）" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="DM_01">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_05_0002" Name="测试_增加伤害（百分比）" Description="增加伤害（百分比）" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="DM_02">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_05_0003" Name="测试_减少伤害（点数）" Description="减少伤害（点数）" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="DM_03">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_05_0004" Name="测试_减少伤害（百分比）" Description="减少伤害（百分比）" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="DM_04">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_05_0005" Name="测试_改变伤害" Description="改变伤害" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="DM_05">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0001" Name="测试_施放技能" Description="施放技能" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_01">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0002" Name="测试_技能附加到单位" Description="技能附加到单位" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_02">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0003" Name="测试_技能从单位移除" Description="技能从单位移除" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_03">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0011" Name="测试_定身激活" Description="定身激活" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_11">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0012" Name="测试_定身解除" Description="定身解除" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_12">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0021" Name="测试_缴械激活" Description="缴械激活" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_21">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0022" Name="测试_缴械解除" Description="缴械解除" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_22">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0031" Name="测试_沉默激活" Description="沉默激活" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_31">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0032" Name="测试_沉默解除" Description="沉默解除" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_32">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0041" Name="测试_眩晕激活" Description="眩晕激活" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_41">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0042" Name="测试_眩晕解除" Description="眩晕解除" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_42">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0051" Name="测试_免疫激活" Description="免疫激活" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_51">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0052" Name="测试_免疫解除" Description="免疫解除" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_52">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0061" Name="测试_护盾激活" Description="护盾激活" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_61">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0062" Name="测试_护盾解除" Description="护盾解除" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_62">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0071" Name="测试_隐蔽激活" Description="隐蔽激活" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_71">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0072" Name="测试_隐蔽解除" Description="隐蔽解除" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_72">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0081" Name="测试_隐身激活" Description="隐身激活" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_81">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_06_0082" Name="测试_隐身解除" Description="隐身解除" SelectTargetType="4" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="ST_82">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_07_0001" Name="测试_召唤小兵" Description="召唤小兵" SelectTargetType="3" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="EN_01">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_07_0002" Name="测试_召唤从者" Description="召唤从者" SelectTargetType="3" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="EN_02">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_07_0003" Name="测试_召唤少女" Description="召唤少女" SelectTargetType="3" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="EN_03">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_07_0004" Name="测试_召唤物消失" Description="召唤物消失" SelectTargetType="2" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="EN_04">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_07_0011" Name="测试_召唤池内单位增加" Description="召唤池内单位增加" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="EN_11">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_07_0012" Name="测试_召唤池单位补满" Description="召唤池单位补满" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="EN_12">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_07_0013" Name="测试_召唤池单位刷新并补满" Description="召唤池单位刷新并补满" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="EN_13">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_07_0021" Name="测试_卡片池卡片增加" Description="卡片池卡片增加" SelectTargetType="1" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="EN_21">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_07_0022" Name="测试_卡片池卡片移除" Description="卡片池卡片移除" SelectTargetType="1" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="EN_22">
+        <VariableValue Index="1" Value="1"/>
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_08_0001" Name="测试_取消移动" Description="取消移动" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="OT_01">
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_08_0002" Name="测试_取消攻击" Description="取消攻击" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="OT_02">
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_08_0003" Name="测试_取消技能" Description="取消技能" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="OT_03">
+      </SpellEffect>
+    </Skill>
+    <Skill Id="TS_08_0004" Name="测试_取消所有行为" Description="取消所有行为" SelectTargetType="0" Cost="0" EffectTargetCellType="7">
+      <SpellEffect SpellEffectBaseId="OT_04">
+      </SpellEffect>
+    </Skill>
   </Skills>
-  <SpellEffects>
-    <SpellEffect Id="HP_01" Name= "HitPoint_Current_Increase_Point" Description= "增加当前生命值（点数）" AffectAttribute= "HitPoint"></SpellEffect>
-    <SpellEffect Id="HP_02" Name= "HitPoint_Current_Increase_Percent" Description= "增加当前生命值（百分比）" AffectAttribute= "HitPoint"></SpellEffect>
-    <SpellEffect Id="HP_03" Name= "HitPoint_Current_Decrease_Point" Description= "减少当前生命值（点数）" AffectAttribute= "HitPoint"></SpellEffect>
-    <SpellEffect Id="HP_04" Name= "HitPoint_Current_Decrease_Percent" Description= "减少当前生命值（百分比）" AffectAttribute= "HitPoint"></SpellEffect>
-    <SpellEffect Id="HP_05" Name= "HitPoint_Current_ChangeTo" Description= "改变当前生命值" AffectAttribute= "HitPoint"></SpellEffect>
-    <SpellEffect Id="HP_11" Name= "HitPoint_UpperBound_Increase_Point" Description= "增加当前生命值上限（点数）" AffectAttribute= "HitPoint"></SpellEffect>
-    <SpellEffect Id="HP_12" Name= "HitPoint_UpperBound_Increase_Percent" Description= "增加当前生命值上限（百分比）" AffectAttribute= "HitPoint"></SpellEffect>
-    <SpellEffect Id="HP_13" Name= "HitPoint_UpperBound_Decrease_Point" Description= "减少当前生命值上限（点数）" AffectAttribute= "HitPoint"></SpellEffect>
-    <SpellEffect Id="HP_14" Name= "HitPoint_UpperBound_Decrease_Percent" Description= "减少当前生命值上限（百分比）" AffectAttribute= "HitPoint"></SpellEffect>
-    <SpellEffect Id="HP_15" Name= "HitPoint_UpperBound_ChangeTo" Description= "改变当前生命值上限" AffectAttribute= "HitPoint"></SpellEffect>
-    <SpellEffect Id="AP_01" Name= "AttackPower_Current_Increase_Point" Description= "增加当前攻击力（点数）" AffectAttribute= "AttackPower"></SpellEffect>
-    <SpellEffect Id="AP_02" Name= "AttackPower_Current_Increase_Percent" Description= "增加当前攻击力（百分比）" AffectAttribute= "AttackPower"></SpellEffect>
-    <SpellEffect Id="AP_03" Name= "AttackPower_Current_Decrease_Point" Description= "减少当前攻击力（点数）" AffectAttribute= "AttackPower"></SpellEffect>
-    <SpellEffect Id="AP_04" Name= "AttackPower_Current_Decrease_Percent" Description= "减少当前攻击力（百分比）" AffectAttribute= "AttackPower"></SpellEffect>
-    <SpellEffect Id="AP_05" Name= "AttackPower_Current_ChangeTo" Description= "改变当前攻击力" AffectAttribute= "AttackPower"></SpellEffect>
-    <SpellEffect Id="AP_11" Name= "AttackPower_UpperBound_Increase_Point" Description= "增加当前攻击力上限（点数）" AffectAttribute= "AttackPower"></SpellEffect>
-    <SpellEffect Id="AP_12" Name= "AttackPower_UpperBound_Increase_Percent" Description= "增加当前攻击力上限（百分比）" AffectAttribute= "AttackPower"></SpellEffect>
-    <SpellEffect Id="AP_13" Name= "AttackPower_UpperBound_Decrease_Point" Description= "减少当前攻击力上限（点数）" AffectAttribute= "AttackPower"></SpellEffect>
-    <SpellEffect Id="AP_14" Name= "AttackPower_UpperBound_Decrease_Percent" Description= "减少当前攻击力上限（百分比）" AffectAttribute= "AttackPower"></SpellEffect>
-    <SpellEffect Id="AP_15" Name= "AttackPower_UpperBound_ChangeTo" Description= "改变当前攻击力上限" AffectAttribute= "AttackPower"></SpellEffect>
-    <SpellEffect Id="AR_01" Name= "AttackRange_Current_Increase_Point" Description= "增加当前攻击范围（点数）" AffectAttribute= "AttackRange"></SpellEffect>
-    <SpellEffect Id="AR_02" Name= "AttackRange_Current_Increase_Percent" Description= "增加当前攻击范围（百分比）" AffectAttribute= "AttackRange"></SpellEffect>
-    <SpellEffect Id="AR_03" Name= "AttackRange_Current_Decrease_Point" Description= "减少当前攻击范围（点数）" AffectAttribute= "AttackRange"></SpellEffect>
-    <SpellEffect Id="AR_04" Name= "AttackRange_Current_Decrease_Percent" Description= "减少当前攻击范围（百分比）" AffectAttribute= "AttackRange"></SpellEffect>
-    <SpellEffect Id="AR_05" Name= "AttackRange_Current_ChangeTo" Description= "改变当前攻击范围" AffectAttribute= "AttackRange"></SpellEffect>
-    <SpellEffect Id="AR_11" Name= "AttackRange_UpperBound_Increase_Point" Description= "增加当前攻击范围上限（点数）" AffectAttribute= "AttackRange"></SpellEffect>
-    <SpellEffect Id="AR_12" Name= "AttackRange_UpperBound_Increase_Percent" Description= "增加当前攻击范围上限（百分比）" AffectAttribute= "AttackRange"></SpellEffect>
-    <SpellEffect Id="AR_13" Name= "AttackRange_UpperBound_Decrease_Point" Description= "减少当前攻击范围上限（点数）" AffectAttribute= "AttackRange"></SpellEffect>
-    <SpellEffect Id="AR_14" Name= "AttackRange_UpperBound_Decrease_Percent" Description= "减少当前攻击范围上限（百分比）" AffectAttribute= "AttackRange"></SpellEffect>
-    <SpellEffect Id="AR_15" Name= "AttackRange_UpperBound_ChangeTo" Description= "改变当前攻击范围上限" AffectAttribute= "AttackRange"></SpellEffect>
-    <SpellEffect Id="MV_01" Name= "Mobility_Current_Increase_Point" Description= "增加当前移动力（点数）" AffectAttribute= "Mobility"></SpellEffect>
-    <SpellEffect Id="MV_02" Name= "Mobility_Current_Increase_Percent" Description= "增加当前移动力（百分比）" AffectAttribute= "Mobility"></SpellEffect>
-    <SpellEffect Id="MV_03" Name= "Mobility_Current_Decrease_Point" Description= "减少当前移动力（点数）" AffectAttribute= "Mobility"></SpellEffect>
-    <SpellEffect Id="MV_04" Name= "Mobility_Current_Decrease_Percent" Description= "减少当前移动力（百分比）" AffectAttribute= "Mobility"></SpellEffect>
-    <SpellEffect Id="MV_05" Name= "Mobility_Current_ChangeTo" Description= "改变当前移动力" AffectAttribute= "Mobility"></SpellEffect>
-    <SpellEffect Id="MV_11" Name= "Mobility_UpperBound_Increase_Point" Description= "增加当前移动力上限（点数）" AffectAttribute= "Mobility"></SpellEffect>
-    <SpellEffect Id="MV_12" Name= "Mobility_UpperBound_Increase_Percent" Description= "增加当前移动力上限（百分比）" AffectAttribute= "Mobility"></SpellEffect>
-    <SpellEffect Id="MV_13" Name= "Mobility_UpperBound_Decrease_Point" Description= "减少当前移动力上限（点数）" AffectAttribute= "Mobility"></SpellEffect>
-    <SpellEffect Id="MV_14" Name= "Mobility_UpperBound_Decrease_Percent" Description= "减少当前移动力上限（百分比）" AffectAttribute= "Mobility"></SpellEffect>
-    <SpellEffect Id="MV_15" Name= "Mobility_UpperBound_ChangeTo" Description= "改变当前移动力上限" AffectAttribute= "Mobility"></SpellEffect>
-    <SpellEffect Id="MV_21" Name= "Position_MoveTo" Description= "移动到指定地点" AffectAttribute= "Position"></SpellEffect>
-    <SpellEffect Id="DM_01" Name= "Damage_Increase_Point" Description= "增加伤害（点数）" AffectAttribute= "Damage"></SpellEffect>
-    <SpellEffect Id="DM_02" Name= "Damage_Increase_Percent" Description= "增加伤害（百分比）" AffectAttribute= "Damage"></SpellEffect>
-    <SpellEffect Id="DM_03" Name= "Damage_Decrease_Point" Description= "减少伤害（点数）" AffectAttribute= "Damage"></SpellEffect>
-    <SpellEffect Id="DM_04" Name= "Damage_Decrease_Percent" Description= "减少伤害（百分比）" AffectAttribute= "Damage"></SpellEffect>
-    <SpellEffect Id="DM_05" Name= "Damage_ChangeTo" Description= "改变伤害" AffectAttribute= "Damage"></SpellEffect>
-    <SpellEffect Id="ST_01" Name= "Skill_Active" Description= "施放技能" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_02" Name= "Skill_Attach" Description= "技能附加到单位" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_03" Name= "Skill_Release" Description= "技能从单位移除" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_11" Name= "Imprison_Active" Description= "定身激活" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_12" Name= "Imprison_Release" Description= "定身解除" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_21" Name= "Disarm_Active" Description= "缴械激活" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_22" Name= "Disarm_Release" Description= "缴械解除" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_31" Name= "Slient_Active" Description= "沉默激活" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_32" Name= "Slient_Release" Description= "沉默解除" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_41" Name= "Stun_Active" Description= "眩晕激活" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_42" Name= "Stun_Release" Description= "眩晕解除" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_51" Name= "Immunity_Active" Description= "免疫激活" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_52" Name= "Immunity_Release" Description= "免疫解除" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_61" Name= "Shield_Active" Description= "护盾激活" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_62" Name= "Shield_Release" Description= "护盾解除" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_71" Name= "Hide_Active" Description= "隐蔽激活" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_72" Name= "Hide_Release" Description= "隐蔽解除" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_81" Name= "Invisible_Active" Description= "隐身激活" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="ST_82" Name= "Invisible_Release" Description= "隐身解除" AffectAttribute= "Skill"></SpellEffect>
-    <SpellEffect Id="EN_01" Name= "Summon_Minion" Description= "召唤小兵" AffectAttribute= "Enviroment"></SpellEffect>
-    <SpellEffect Id="EN_02" Name= "Summon_Servant" Description= "召唤从者" AffectAttribute= "Enviroment"></SpellEffect>
-    <SpellEffect Id="EN_03" Name= "Summon_Girl" Description= "召唤少女" AffectAttribute= "Enviroment"></SpellEffect>
-    <SpellEffect Id="EN_04" Name= "Summon_Disappear" Description= "召唤物消失" AffectAttribute= "Enviroment"></SpellEffect>
-    <SpellEffect Id="EN_11" Name= "SummonSpool_Add" Description= "召唤池内单位增加" AffectAttribute= "Enviroment"></SpellEffect>
-    <SpellEffect Id="EN_12" Name= "SummonSpool_Fill" Description= "召唤池单位补满" AffectAttribute= "Enviroment"></SpellEffect>
-    <SpellEffect Id="EN_13" Name= "SummonSpool_Refresh" Description= "召唤池单位刷新并补满" AffectAttribute= "Enviroment"></SpellEffect>
-    <SpellEffect Id="EN_21" Name= "CardSpool_Add" Description= "卡片池卡片增加" AffectAttribute= "Enviroment"></SpellEffect>
-    <SpellEffect Id="EN_22" Name= "CardSpool_Remove" Description= "卡片池卡片移除" AffectAttribute= "Enviroment"></SpellEffect>
-    <SpellEffect Id="OT_01" Name= "Cancel_Move" Description= "取消移动" AffectAttribute= "Other"></SpellEffect>
-    <SpellEffect Id="OT_02" Name= "Cancel_Attack" Description= "取消攻击" AffectAttribute= "Other"></SpellEffect>
-    <SpellEffect Id="OT_03" Name= "Cancel_Skill" Description= "取消技能" AffectAttribute= "Other"></SpellEffect>
-    <SpellEffect Id="OT_04" Name= "Cancel_All" Description= "取消所有行为" AffectAttribute= "Other"></SpellEffect>
-  </SpellEffects>
+  <SpellEffectBases>
+    <SpellEffectBase Id="HP_01" Name= "HitPoint_Current_Increase_Point" Description= "增加当前生命值（点数）" AffectAttribute= "HitPoint"></SpellEffectBase>
+    <SpellEffectBase Id="HP_02" Name= "HitPoint_Current_Increase_Percent" Description= "增加当前生命值（百分比）" AffectAttribute= "HitPoint"></SpellEffectBase>
+    <SpellEffectBase Id="HP_03" Name= "HitPoint_Current_Decrease_Point" Description= "减少当前生命值（点数）" AffectAttribute= "HitPoint"></SpellEffectBase>
+    <SpellEffectBase Id="HP_04" Name= "HitPoint_Current_Decrease_Percent" Description= "减少当前生命值（百分比）" AffectAttribute= "HitPoint"></SpellEffectBase>
+    <SpellEffectBase Id="HP_05" Name= "HitPoint_Current_ChangeTo" Description= "改变当前生命值" AffectAttribute= "HitPoint"></SpellEffectBase>
+    <SpellEffectBase Id="HP_11" Name= "HitPoint_UpperBound_Increase_Point" Description= "增加当前生命值上限（点数）" AffectAttribute= "HitPoint"></SpellEffectBase>
+    <SpellEffectBase Id="HP_12" Name= "HitPoint_UpperBound_Increase_Percent" Description= "增加当前生命值上限（百分比）" AffectAttribute= "HitPoint"></SpellEffectBase>
+    <SpellEffectBase Id="HP_13" Name= "HitPoint_UpperBound_Decrease_Point" Description= "减少当前生命值上限（点数）" AffectAttribute= "HitPoint"></SpellEffectBase>
+    <SpellEffectBase Id="HP_14" Name= "HitPoint_UpperBound_Decrease_Percent" Description= "减少当前生命值上限（百分比）" AffectAttribute= "HitPoint"></SpellEffectBase>
+    <SpellEffectBase Id="HP_15" Name= "HitPoint_UpperBound_ChangeTo" Description= "改变当前生命值上限" AffectAttribute= "HitPoint"></SpellEffectBase>
+    <SpellEffectBase Id="AP_01" Name= "AttackPower_Current_Increase_Point" Description= "增加当前攻击力（点数）" AffectAttribute= "AttackPower"></SpellEffectBase>
+    <SpellEffectBase Id="AP_02" Name= "AttackPower_Current_Increase_Percent" Description= "增加当前攻击力（百分比）" AffectAttribute= "AttackPower"></SpellEffectBase>
+    <SpellEffectBase Id="AP_03" Name= "AttackPower_Current_Decrease_Point" Description= "减少当前攻击力（点数）" AffectAttribute= "AttackPower"></SpellEffectBase>
+    <SpellEffectBase Id="AP_04" Name= "AttackPower_Current_Decrease_Percent" Description= "减少当前攻击力（百分比）" AffectAttribute= "AttackPower"></SpellEffectBase>
+    <SpellEffectBase Id="AP_05" Name= "AttackPower_Current_ChangeTo" Description= "改变当前攻击力" AffectAttribute= "AttackPower"></SpellEffectBase>
+    <SpellEffectBase Id="AP_11" Name= "AttackPower_UpperBound_Increase_Point" Description= "增加当前攻击力上限（点数）" AffectAttribute= "AttackPower"></SpellEffectBase>
+    <SpellEffectBase Id="AP_12" Name= "AttackPower_UpperBound_Increase_Percent" Description= "增加当前攻击力上限（百分比）" AffectAttribute= "AttackPower"></SpellEffectBase>
+    <SpellEffectBase Id="AP_13" Name= "AttackPower_UpperBound_Decrease_Point" Description= "减少当前攻击力上限（点数）" AffectAttribute= "AttackPower"></SpellEffectBase>
+    <SpellEffectBase Id="AP_14" Name= "AttackPower_UpperBound_Decrease_Percent" Description= "减少当前攻击力上限（百分比）" AffectAttribute= "AttackPower"></SpellEffectBase>
+    <SpellEffectBase Id="AP_15" Name= "AttackPower_UpperBound_ChangeTo" Description= "改变当前攻击力上限" AffectAttribute= "AttackPower"></SpellEffectBase>
+    <SpellEffectBase Id="AR_01" Name= "AttackRange_Current_Increase_Point" Description= "增加当前攻击范围（点数）" AffectAttribute= "AttackRange"></SpellEffectBase>
+    <SpellEffectBase Id="AR_02" Name= "AttackRange_Current_Increase_Percent" Description= "增加当前攻击范围（百分比）" AffectAttribute= "AttackRange"></SpellEffectBase>
+    <SpellEffectBase Id="AR_03" Name= "AttackRange_Current_Decrease_Point" Description= "减少当前攻击范围（点数）" AffectAttribute= "AttackRange"></SpellEffectBase>
+    <SpellEffectBase Id="AR_04" Name= "AttackRange_Current_Decrease_Percent" Description= "减少当前攻击范围（百分比）" AffectAttribute= "AttackRange"></SpellEffectBase>
+    <SpellEffectBase Id="AR_05" Name= "AttackRange_Current_ChangeTo" Description= "改变当前攻击范围" AffectAttribute= "AttackRange"></SpellEffectBase>
+    <SpellEffectBase Id="AR_11" Name= "AttackRange_UpperBound_Increase_Point" Description= "增加当前攻击范围上限（点数）" AffectAttribute= "AttackRange"></SpellEffectBase>
+    <SpellEffectBase Id="AR_12" Name= "AttackRange_UpperBound_Increase_Percent" Description= "增加当前攻击范围上限（百分比）" AffectAttribute= "AttackRange"></SpellEffectBase>
+    <SpellEffectBase Id="AR_13" Name= "AttackRange_UpperBound_Decrease_Point" Description= "减少当前攻击范围上限（点数）" AffectAttribute= "AttackRange"></SpellEffectBase>
+    <SpellEffectBase Id="AR_14" Name= "AttackRange_UpperBound_Decrease_Percent" Description= "减少当前攻击范围上限（百分比）" AffectAttribute= "AttackRange"></SpellEffectBase>
+    <SpellEffectBase Id="AR_15" Name= "AttackRange_UpperBound_ChangeTo" Description= "改变当前攻击范围上限" AffectAttribute= "AttackRange"></SpellEffectBase>
+    <SpellEffectBase Id="MV_01" Name= "Mobility_Current_Increase_Point" Description= "增加当前移动力（点数）" AffectAttribute= "Mobility"></SpellEffectBase>
+    <SpellEffectBase Id="MV_02" Name= "Mobility_Current_Increase_Percent" Description= "增加当前移动力（百分比）" AffectAttribute= "Mobility"></SpellEffectBase>
+    <SpellEffectBase Id="MV_03" Name= "Mobility_Current_Decrease_Point" Description= "减少当前移动力（点数）" AffectAttribute= "Mobility"></SpellEffectBase>
+    <SpellEffectBase Id="MV_04" Name= "Mobility_Current_Decrease_Percent" Description= "减少当前移动力（百分比）" AffectAttribute= "Mobility"></SpellEffectBase>
+    <SpellEffectBase Id="MV_05" Name= "Mobility_Current_ChangeTo" Description= "改变当前移动力" AffectAttribute= "Mobility"></SpellEffectBase>
+    <SpellEffectBase Id="MV_11" Name= "Mobility_UpperBound_Increase_Point" Description= "增加当前移动力上限（点数）" AffectAttribute= "Mobility"></SpellEffectBase>
+    <SpellEffectBase Id="MV_12" Name= "Mobility_UpperBound_Increase_Percent" Description= "增加当前移动力上限（百分比）" AffectAttribute= "Mobility"></SpellEffectBase>
+    <SpellEffectBase Id="MV_13" Name= "Mobility_UpperBound_Decrease_Point" Description= "减少当前移动力上限（点数）" AffectAttribute= "Mobility"></SpellEffectBase>
+    <SpellEffectBase Id="MV_14" Name= "Mobility_UpperBound_Decrease_Percent" Description= "减少当前移动力上限（百分比）" AffectAttribute= "Mobility"></SpellEffectBase>
+    <SpellEffectBase Id="MV_15" Name= "Mobility_UpperBound_ChangeTo" Description= "改变当前移动力上限" AffectAttribute= "Mobility"></SpellEffectBase>
+    <SpellEffectBase Id="MV_21" Name= "Position_MoveTo" Description= "移动到指定地点" AffectAttribute= "Position"></SpellEffectBase>
+    <SpellEffectBase Id="DM_01" Name= "Damage_Increase_Point" Description= "增加伤害（点数）" AffectAttribute= "Damage"></SpellEffectBase>
+    <SpellEffectBase Id="DM_02" Name= "Damage_Increase_Percent" Description= "增加伤害（百分比）" AffectAttribute= "Damage"></SpellEffectBase>
+    <SpellEffectBase Id="DM_03" Name= "Damage_Decrease_Point" Description= "减少伤害（点数）" AffectAttribute= "Damage"></SpellEffectBase>
+    <SpellEffectBase Id="DM_04" Name= "Damage_Decrease_Percent" Description= "减少伤害（百分比）" AffectAttribute= "Damage"></SpellEffectBase>
+    <SpellEffectBase Id="DM_05" Name= "Damage_ChangeTo" Description= "改变伤害" AffectAttribute= "Damage"></SpellEffectBase>
+    <SpellEffectBase Id="ST_01" Name= "Skill_Active" Description= "施放技能" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_02" Name= "Skill_Attach" Description= "技能附加到单位" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_03" Name= "Skill_Release" Description= "技能从单位移除" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_11" Name= "Imprison_Active" Description= "定身激活" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_12" Name= "Imprison_Release" Description= "定身解除" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_21" Name= "Disarm_Active" Description= "缴械激活" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_22" Name= "Disarm_Release" Description= "缴械解除" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_31" Name= "Slient_Active" Description= "沉默激活" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_32" Name= "Slient_Release" Description= "沉默解除" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_41" Name= "Stun_Active" Description= "眩晕激活" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_42" Name= "Stun_Release" Description= "眩晕解除" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_51" Name= "Immunity_Active" Description= "免疫激活" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_52" Name= "Immunity_Release" Description= "免疫解除" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_61" Name= "Shield_Active" Description= "护盾激活" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_62" Name= "Shield_Release" Description= "护盾解除" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_71" Name= "Hide_Active" Description= "隐蔽激活" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_72" Name= "Hide_Release" Description= "隐蔽解除" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_81" Name= "Invisible_Active" Description= "隐身激活" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="ST_82" Name= "Invisible_Release" Description= "隐身解除" AffectAttribute= "Skill"></SpellEffectBase>
+    <SpellEffectBase Id="EN_01" Name= "Summon_Minion" Description= "召唤小兵" AffectAttribute= "Enviroment"></SpellEffectBase>
+    <SpellEffectBase Id="EN_02" Name= "Summon_Servant" Description= "召唤从者" AffectAttribute= "Enviroment"></SpellEffectBase>
+    <SpellEffectBase Id="EN_03" Name= "Summon_Girl" Description= "召唤少女" AffectAttribute= "Enviroment"></SpellEffectBase>
+    <SpellEffectBase Id="EN_04" Name= "Summon_Disappear" Description= "召唤物消失" AffectAttribute= "Enviroment"></SpellEffectBase>
+    <SpellEffectBase Id="EN_11" Name= "SummonPool_Add" Description= "召唤池内单位增加" AffectAttribute= "Enviroment"></SpellEffectBase>
+    <SpellEffectBase Id="EN_12" Name= "SummonPool_Fill" Description= "召唤池单位补满" AffectAttribute= "Enviroment"></SpellEffectBase>
+    <SpellEffectBase Id="EN_13" Name= "SummonPool_Refresh" Description= "召唤池单位刷新并补满" AffectAttribute= "Enviroment"></SpellEffectBase>
+    <SpellEffectBase Id="EN_21" Name= "CardPool_Add" Description= "卡片池卡片增加" AffectAttribute= "Enviroment"></SpellEffectBase>
+    <SpellEffectBase Id="EN_22" Name= "CardPool_Remove" Description= "卡片池卡片移除" AffectAttribute= "Enviroment"></SpellEffectBase>
+    <SpellEffectBase Id="OT_01" Name= "Cancel_Move" Description= "取消移动" AffectAttribute= "Other"></SpellEffectBase>
+    <SpellEffectBase Id="OT_02" Name= "Cancel_Attack" Description= "取消攻击" AffectAttribute= "Other"></SpellEffectBase>
+    <SpellEffectBase Id="OT_03" Name= "Cancel_Skill" Description= "取消技能" AffectAttribute= "Other"></SpellEffectBase>
+    <SpellEffectBase Id="OT_04" Name= "Cancel_All" Description= "取消所有行为" AffectAttribute= "Other"></SpellEffectBase>
+  </SpellEffectBases>
 </THE_Data>

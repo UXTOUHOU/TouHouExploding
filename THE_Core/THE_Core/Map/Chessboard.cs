@@ -71,13 +71,13 @@ namespace THE_Core
             {
                 for (int y = 0; y < 2; y++)
                 {
-                    temp[x, y].specialHere = ChessboardCell.Special.Birth;
-                    temp[x, y].owner = GameCore.Teams[0];
+                    temp[x, y].CellType = ChessboardCellType.Birth;
+                    temp[x, y].Owner = GameCore.Teams[0];
                 }
                 for (int y = temp.GetLength(1) - 2; y < temp.GetLength(1); y++)
                 {
-                    temp[x, y].specialHere = ChessboardCell.Special.Birth;
-                    temp[x, y].owner = GameCore.Teams[1];
+                    temp[x, y].CellType = ChessboardCellType.Birth;
+                    temp[x, y].Owner = GameCore.Teams[1];
                 }
             }
             if (temp.GetLength(0) % 2 == 0) //设定基地，自动基地判断大小
@@ -86,11 +86,11 @@ namespace THE_Core
                 {
                     for (int y = 0; y <= 0; y++)
                     {
-                        temp[x, y].specialHere = ChessboardCell.Special.Base;
+                        temp[x, y].CellType = ChessboardCellType.Base;
                     }
                     for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(1) - 1; y++)
                     {
-                        temp[x, y].specialHere = ChessboardCell.Special.Base;
+                        temp[x, y].CellType = ChessboardCellType.Base;
                     }
                 }
             }
@@ -100,11 +100,11 @@ namespace THE_Core
                 {
                     for (int y = 0; y <= 0; y++)
                     {
-                        temp[x, y].specialHere = ChessboardCell.Special.Base;
+                        temp[x, y].CellType = ChessboardCellType.Base;
                     }
                     for (int y = temp.GetLength(1) - 1; y <= temp.GetLength(1) - 1; y++)
                     {
-                        temp[x, y].specialHere = ChessboardCell.Special.Base;
+                        temp[x, y].CellType = ChessboardCellType.Base;
                     }
                 }
             }
@@ -128,7 +128,7 @@ namespace THE_Core
                 /// <summary>
                 /// 地区特别属性
                 /// </summary>
-                public ChessboardCell.Special specialHere { get; set; }
+                public ChessboardCellType CellTypeHere { get; set; }
                 /// <summary>
                 /// 归属
                 /// </summary>
@@ -136,7 +136,7 @@ namespace THE_Core
                 /// <summary>
                 /// 地形
                 /// </summary>
-                public Terrain.Type terrainHere { get; set; }
+                public ChessboardCellTerrainType.Type terrainHere { get; set; }
                 /// <summary>
                 /// 地区状态
                 /// </summary>

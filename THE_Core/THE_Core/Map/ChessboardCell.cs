@@ -15,15 +15,15 @@ namespace THE_Core
         /// <summary>
         /// 坐标
         /// </summary>
-        public Position locate { get; set; }
+        public Position Location { get; set; }
         /// <summary>
         /// 地区特别属性
         /// </summary>
-        public Special specialHere { get; set; }
+        public ChessboardCellType CellType { get; set; }
         /// <summary>
         /// 归属
         /// </summary>
-        public Team owner
+        public Team Owner
         {
             get
             {
@@ -34,60 +34,90 @@ namespace THE_Core
                 _owner = value;
                 value.OwnRegion.Add(this);
             }
-            }
+        }
         //GameCore.RoomTeam[1].OwnRegion.Add(temp[x, y]);
         private Team _owner;
         /// <summary>
         /// 地形
         /// </summary>
-        public Terrain terrainHere { get; set; }
+        public ChessboardCellTerrainType TerrainType { get; set; }
+
         /// <summary>
         /// 地区状态
         /// </summary>
-        public State stateHere { get; set; }
+        public ChessboardCellState CellState { get; set; }
+
         /// <summary>
         /// 在此位置的单位
         /// </summary>
-        public Unit unitHere { get; set; }
+        public Unit Unit { get; set; }
+        public bool HasUnit
+        {
+            get
+            {
+                return (this.Unit != null);
+            }
+        }
+
+
         /// <summary>
         /// 第一参数为ID提供者，第二参数为坐标
         /// </summary>
         /// <param name="idList"></param>
-        /// <param name="_locate"></param>
-        public ChessboardCell(IDList idList, Position _locate)
+        /// <param name="location"></param>
+        public ChessboardCell(IDList idList, Position location)
         {
             idList.ApplyID(this);
-            locate = _locate;
-            specialHere = Special.Common;
+            Location = location;
+            CellType = ChessboardCellType.Common;
         }
+
         /// <summary>
-        /// 移动到此格。
+        /// 放置单位到此格。
         /// </summary>
         /// <param name="unit"></param>
         /// <returns>成功返回真，失败返回假</returns>
-        public bool MoveHere(Unit unit)
+        public bool PlaceUnit(Unit unit)
         {
-            if (unitHere != null) return false;
+            if (Unit != null) return false;
             if (unit.Position != null)
             {
-                unit.Position.unitHere = null;
+                unit.Position.Unit = null;
             }
-            unitHere = unit;
+            Unit = unit;
             unit.Position = this;
             return true;
         }
-        /// <summary>
-        /// 一般/基地/召唤地/自定义
-        /// </summary>
-        public enum Special { Common, Base, Birth, Custom }
+    }
 
-        public class State
+    /// <summary>
+    /// 一般/基地/召唤地/自定义
+    /// </summary>
+    public enum ChessboardCellType
+    {
+        Common, Base, Birth, Custom 
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ChessboardCellState
+    {
+        public string name;
+
+        public enum Type
         {
-            public string name;
-            public enum Type { None, Custom }
+            None,
+            Burn,
+            Frozen,
+            Flood,
+            Poison,
+            Mist,
+            Custom 
         }
     }
-    public class Terrain
+
+    public class ChessboardCellTerrainType
     {
         public string name;
         public enum Type { Plain, Hill, River, Sea, Custom }

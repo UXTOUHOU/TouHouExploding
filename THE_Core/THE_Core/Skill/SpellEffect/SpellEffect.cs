@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace THE_Core
 {
-    public class SpellEffect
+    public abstract class SpellEffect
     {
-        public int Id;
-        public string Name;
-        public string Description;
-        public Variable[] Variables;
+        public abstract void Spell();
     }
 }
