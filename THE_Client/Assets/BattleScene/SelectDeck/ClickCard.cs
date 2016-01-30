@@ -5,7 +5,7 @@ public class ClickCard : MonoBehaviour {
 	public GameObject ClickedCard;
 	private SelectDeck deckManager;
 
-	//标记点击的卡片在哪个panel中
+	// 标记点击的卡片在哪个panel中
 	public enum CardPanel
 	{
 		DeckCard,
@@ -22,7 +22,7 @@ public class ClickCard : MonoBehaviour {
 
 	private int ParsePanelCardID()
 	{
-		//name: Panel_Card_XXX
+		// parent Panel的名字格式为"Panel_Card_XXX"
 		int cardID = int.Parse(ClickedCard.transform.parent.name.Substring(11));
 		return cardID;
 	}
@@ -34,12 +34,14 @@ public class ClickCard : MonoBehaviour {
 		deckManager.AddDeckCard(cardID);
 	}
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		deckManager = GameObject.Find("/Main Camera").transform.GetComponent<SelectDeck>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{ 
 	
 	}
 }

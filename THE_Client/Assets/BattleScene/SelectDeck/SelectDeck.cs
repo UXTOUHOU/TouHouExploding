@@ -45,19 +45,12 @@ public class SelectDeck : MonoBehaviour {
 			mapDeckCard.Add(cardID, 1);
 			GameObject newCell = Instantiate(deckListPrefab.transform.FindChild("Panel").gameObject);
 			newCell.name = "Panel_Card_" + cardID;
-			newCell.transform.FindChild("Card").GetComponent<Image>().sprite = CreateCardSprite(cardID);
+			newCell.transform.FindChild("Card").GetComponent<Image>().sprite = DataManager.CreateCardSprite(cardID);
 			newCell.transform.SetParent(deckListInner.transform);
 		}
 		return true;
 	}
-	public static Sprite CreateCardSprite(int cardID)
-	{
-		Texture2D cardTexture = Resources.Load<Texture2D>("Cards/Card_" + cardID.ToString().PadLeft(4, '0'));	//读取卡片texture
-		Sprite cardSprite = Sprite.Create(cardTexture, 
-			new Rect(0, 0, cardTexture.width, cardTexture.height), 
-			new Vector2(0.5f, 0.5f));
-		return cardSprite;
-	}
+
 	public bool RemoveDeckCard(int cardID)
 	{
 		if (deckCount <= 0)

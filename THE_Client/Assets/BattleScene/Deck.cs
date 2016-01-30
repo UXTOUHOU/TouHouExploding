@@ -18,13 +18,14 @@ public class Deck : MonoBehaviour
 	private const float cardWidth = 420F, cardHeight = 590F;
 
 	private ArrayList deckCard = new ArrayList();
+
 	public static void AddDeckCard(int cardID)
 	{
 		Deck deck = singleton;
 		GameObject card = Instantiate(deck.cardPrefab.transform.FindChild("Card").gameObject);
-		card.name = "Card_" + cardID.ToString().PadLeft(4, '0');									//Set name "Card_XXXX"
+		card.name = "Card_" + cardID.ToString().PadLeft(4, '0');
 		card.transform.SetParent(deck.canvas.transform);										
-		card.GetComponent<Image>().sprite = SelectDeck.CreateCardSprite(cardID);				
+		card.GetComponent<Image>().sprite = DataManager.CreateCardSprite(cardID);				
 		SetCardSize(card, deck.deckCardWidth, deck.deckCardHeight);								
 		deck.deckCard.Add(card);
 		deck.SortDeckCard();
@@ -35,7 +36,7 @@ public class Deck : MonoBehaviour
 		Deck deck = singleton;
 
 		int i = deck.deckCard.IndexOf(card);
-		if (i == -1) return;						//没有匹配的卡片
+		if (i == -1) return;						// 没有匹配的卡片
 		deck.deckCard.RemoveAt(i);
 		Destroy(card);
 		deck.SortDeckCard();
@@ -46,7 +47,7 @@ public class Deck : MonoBehaviour
 		rectTransform.sizeDelta = new Vector2(width, height);
 	}
 
-	//改变手牌数目之后重新排列卡片位置
+	// 改变手牌数目之后重新排列卡片位置
 	private void SortDeckCard()
 	{
 		int cardNum = deckCard.Count;
@@ -62,14 +63,14 @@ public class Deck : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		//初始化参数
+		// 初始化参数
 		singleton = this;
 
 		var anchor = deckRect.GetComponent<RectTransform>();
 		deckCardHeight = (anchor.anchorMax.y - anchor.anchorMin.y) * Screen.height;
 		deckCardWidth = deckCardHeight * cardWidth / cardHeight;
 
-		//Test 加入手牌
+		// Test 加入手牌
 		AddDeckCard(6);
 		AddDeckCard(11);
 		AddDeckCard(13);

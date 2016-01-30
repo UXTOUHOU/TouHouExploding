@@ -6,8 +6,8 @@ namespace BattleScene
 {
 	public class UnitUI
 	{
+		private Unit unit;				// UI所属的单位
 		public GameObject UnitImage;
-		private Unit unit;
 		private GameObject textHP;
 		private GameObject imageGroup;
 
@@ -20,7 +20,7 @@ namespace BattleScene
 				InitUnitGroupImage();
 				InitUnitHPText();
 
-				UnitUIManager.AddUnitSprite(this);
+				UnitManager.AddUnitSprite(this);
 			}
 		}
 
@@ -31,15 +31,8 @@ namespace BattleScene
 			Vector3 cellPosition = unit.CurrentCell.GetLocalPosition();
 			UnitImage.transform.localPosition = cellPosition;
 			UnitImage.transform.localScale = new Vector3(Chessboard.CellSize / 75, Chessboard.CellSize / 75, 1);
-			UnitImage.AddComponent<Image>().sprite = CreateUnitSprite(unit.UnitAttribute.ID);
+			UnitImage.AddComponent<Image>().sprite = DataManager.CreateUnitSprite(unit.UnitAttribute.ID);
 			UnitImage.AddComponent<RayIgnore>();
-		}
-
-		private Sprite CreateUnitSprite(int unitID)
-		{
-			Texture2D cardTexture = Resources.Load<Texture2D>("Units/Unit_" + unitID);
-			Sprite unitSprite = Sprite.Create(cardTexture, new Rect(0, 0, cardTexture.width, cardTexture.height), new Vector2(0.5f, 0.5f));
-			return unitSprite;
 		}
 
 		private void InitUnitGroupImage()
@@ -50,8 +43,8 @@ namespace BattleScene
 				imageGroup.transform.SetParent(GameObject.Find("/Canvas/UnitGroup").transform);
 				imageGroup.AddComponent<RectTransform>().pivot = new Vector2(1, 1);
 				imageGroup.AddComponent<RayIgnore>();
-				//读取阵营标志的图片
-				Sprite groupSprite = CreateGroupSprite(unit.GroupType);
+				// 读取阵营标志的图片
+				Sprite groupSprite = DataManager.CreateGroupSprite(unit.GroupType);
 
 				imageGroup.transform.localScale = new Vector3(Chessboard.CellSize / groupSprite.texture.width / 64,
 					Chessboard.CellSize / groupSprite.texture.width / 64,
@@ -61,7 +54,11 @@ namespace BattleScene
 				UpdateGroupPosition();
 			}
 		}
-		private void UpdateGroupPosition()
+
+		/// <summary>
+		/// 根据CurrentCell的位置更新阵营图标的位置
+		/// </summary>
+		public void UpdateGroupPosition()
 		{
 			Vector3 cellPosition = unit.CurrentCell.GetLocalPosition();
 			imageGroup.transform.localPosition = new Vector3(Chessboard.CellSize / 2 + cellPosition.x,
@@ -71,10 +68,13 @@ namespace BattleScene
 
 		public void UpdateGroup()
 		{
-			imageGroup.GetComponent<Image>().sprite = CreateGroupSprite(unit.GroupType);
+			imageGroup.GetComponent<Image>().sprite = DataManager.CreateGroupSprite(unit.GroupType);
 		}
 
-		public void UpdateTextHP()
+		/// <summary>
+		/// 更新unit左上显示HP的数字
+		/// </summary>
+		public void UpdateHP()
 		{
 			textHP.GetComponent<Text>().text = unit.HP.ToString();
 		}
@@ -96,7 +96,7 @@ namespace BattleScene
 			}
 		}
 
-		private void UpdateHPPosition()
+		public void UpdateHPPosition()
 		{
 			Vector3 cellPosition = unit.CurrentCell.GetLocalPosition();
 			textHP.transform.localPosition = new Vector3(-Chessboard.CellSize / 2 + cellPosition.x,
@@ -107,19 +107,6 @@ namespace BattleScene
 		public void SetHPVisible(bool visible)
 		{
 			textHP.SetActive(visible);
-		}
-
-		private Sprite CreateGroupSprite(EGroupType type)
-		{
-			Texture2D groupTexture;
-			if (type == EGroupType.GT_Yourself)
-				groupTexture = Resources.Load<Texture2D>("Images/GroupBlue");
-			else// if (groupType == EGroupType.GT_Enemy)
-				groupTexture = Resources.Load<Texture2D>("Images/GroupRed");
-			Sprite groupSprite = Sprite.Create(groupTexture,
-				new Rect(0, 0, groupTexture.width, groupTexture.height),
-				new Vector2(0.5F, 0.5F));
-			return groupSprite;
 		}
 
 		public void RemoveUnitSprite()

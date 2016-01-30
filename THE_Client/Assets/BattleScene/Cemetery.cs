@@ -29,7 +29,7 @@ namespace BattleScene
 			GameObject card = Instantiate(cemetery.cemeteryCardPrefab.transform.FindChild("Card").gameObject);
 			card.name = "Card_" + cardID.ToString().PadLeft(4, '0');                                    //Set name "Card_XXXX"
 			card.transform.SetParent(CemeteryRect.transform);
-			card.GetComponent<Image>().sprite = SelectDeck.CreateCardSprite(cardID);
+			card.GetComponent<Image>().sprite = DataManager.CreateCardSprite(cardID);
 			Deck.SetCardSize(card, cemetery.cemeteryCardWidth, cemetery.cemeteryCardHeight);
 			cemetery.cemeteryCard.Add(card);
 			cemetery.SortCemeteryCard();

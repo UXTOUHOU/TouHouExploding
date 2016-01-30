@@ -10,7 +10,7 @@ namespace BattleScene
 		public GameObject Obj;
 		public GameObject Background;
 		public Unit UnitOnCell;
-		public ChessboardPosition ThisPosition;
+		public ChessboardPosition Position;
 
 		public static Color SelectedColor = new Color(10F / 255, 23F / 255, 96F / 255);
 		public static Color MovableColor = new Color(70F / 255, 112F / 255, 70F / 255);
@@ -66,11 +66,11 @@ namespace BattleScene
 			btnSkill_3.SetActive(true);
 			//设置按钮是否被禁用
 			if (UnitOnCell.Skill_1 != null)
-				btnSkill_1.GetComponent<Button>().interactable = UnitOnCell.Skill_1.GetUsable();
+				btnSkill_1.GetComponent<Button>().interactable = UnitOnCell.Skill_1.IsUsable();
 			if (UnitOnCell.Skill_2 != null)
-				btnSkill_2.GetComponent<Button>().interactable = UnitOnCell.Skill_2.GetUsable();
+				btnSkill_2.GetComponent<Button>().interactable = UnitOnCell.Skill_2.IsUsable();
 			if (UnitOnCell.Skill_3 != null)
-				btnSkill_3.GetComponent<Button>().interactable = UnitOnCell.Skill_3.GetUsable();
+				btnSkill_3.GetComponent<Button>().interactable = UnitOnCell.Skill_3.IsUsable();
 			//更新按钮位置
 			btnSkill_1.transform.position = Background.transform.position + new Vector3(-cellSize / 1.5F, cellSize / 2F, 0); 
 			btnSkill_2.transform.position = Background.transform.position + new Vector3(0, cellSize / 1.3F, 0);
@@ -92,15 +92,15 @@ namespace BattleScene
 		public void ShowMovableRange()
 		{
 			var attribute = UnitOnCell.UnitAttribute;
-			for (int x = Math.Max(0, ThisPosition.x - attribute.motility);
-				x <= Math.Min(Chessboard.ChessboardMaxX, ThisPosition.x + attribute.motility);
+			for (int x = Math.Max(0, Position.x - attribute.motility);
+				x <= Math.Min(Chessboard.ChessboardMaxX - 1, Position.x + attribute.motility);
 				++x)
-				for (int y = Math.Max(0, ThisPosition.y - attribute.motility);
-					y <= Math.Min(Chessboard.ChessboardMaxY, ThisPosition.y + attribute.motility);
+				for (int y = Math.Max(0, Position.y - attribute.motility);
+					y <= Math.Min(Chessboard.ChessboardMaxY - 1, Position.y + attribute.motility);
 					++y)
 				{
 					var itPosition = new ChessboardPosition(x, y);
-					int distance = ThisPosition.Distance(itPosition);
+					int distance = Position.Distance(itPosition);
 					if (distance <= attribute.motility)
 						Chessboard.GetCell(itPosition).SetBackgroundColor(MovableColor);
 				}
@@ -115,9 +115,6 @@ namespace BattleScene
 		{
 			return Background.transform.position;
 		}
-
-
-
 
 		// Use this for initialization
 		void Start()
@@ -134,48 +131,20 @@ namespace BattleScene
 		public void ShowAttackableRange()
 		{
 			var attribute = UnitOnCell.UnitAttribute;
-			for (int x = Math.Max(0,ThisPosition.x - attribute.maxAtkRange); 
-				x <= Math.Min(Chessboard.ChessboardMaxX, ThisPosition.x + attribute.maxAtkRange);
+			for (int x = Math.Max(0,Position.x - attribute.maxAtkRange); 
+				x <= Math.Min(Chessboard.ChessboardMaxX, Position.x + attribute.maxAtkRange);
 				++x)
-				for (int y = Math.Max(0, ThisPosition.y - attribute.maxAtkRange);
-					y <= Math.Min(Chessboard.ChessboardMaxY, ThisPosition.y + attribute.maxAtkRange);
+				for (int y = Math.Max(0, Position.y - attribute.maxAtkRange);
+					y <= Math.Min(Chessboard.ChessboardMaxY, Position.y + attribute.maxAtkRange);
 					++y)
 				{
 					var itPosition = new ChessboardPosition(x, y);
-					int distance = ThisPosition.Distance(itPosition);
+					int distance = Position.Distance(itPosition);
 					if (attribute.minAtkRange <= distance &&
 						distance <= attribute.maxAtkRange)
 						Chessboard.GetCell(itPosition).SetBackgroundColor(AttackableColor);
 				}
 		}
-
-		//public void MoveWithPath()
-		//{
-		//	if (UnitOnCell == null) return;
-		//	if (BattleProcess.playerState != PlayerState.PS_WaitMoveAnimateEnd)
-		//		BattleProcess.ChangeState(PlayerState.PS_WaitMoveAnimateEnd);
-		//	var lastPosition = ListMovePath[0];
-		//	Vector3 targetPosition = lastPosition.GetPosition();
-		//	//移动
-		//	UnitOnCell.UnitImage.transform.position = Vector3.MoveTowards(UnitOnCell.UnitImage.transform.position,
-		//		targetPosition,
-		//		Chessboard.CellSize / 50F);
-		//	if (UnitOnCell.UnitImage.transform.position == targetPosition)
-		//	{//一段移动结束
-		//		ListMovePath.RemoveAt(0);
-		//		if (ListMovePath.Count == 0)
-		//		{//移动结束
-		//			//更新Unit的Cell
-		//			var targetCell = Chessboard.GetCell(lastPosition);
-		//			targetCell.SwapUnit(Chessboard.SelectedCell);
-		//			Chessboard.SelectedCell = targetCell;
-
-		//			targetCell.UnitOnCell.Movable = false;              //单位不可再次移动
-		//			Chessboard.UnitMove = false;
-		//			BattleProcess.ChangeState(PlayerState.PS_SelectUnitBehavior);
-		//		}
-		//	}
-		//}
 
 		public void SwapUnit(Cell targetCell)
 		{
@@ -188,38 +157,33 @@ namespace BattleScene
 				//更新单位所在的cell
 				targetCell.UnitOnCell.CurrentCell = targetCell;
 				//更新单位的HP和Group位置
-				//targetCell.UnitOnCell.UpdateGroupPosition();
-				//targetCell.UnitOnCell.UpdateHPPosition();
-				targetCell.UnitOnCell.UpdatePosition();
+				targetCell.UnitOnCell.UpdateAttributePosition();
 			}
 			if (UnitOnCell != null)
 			{
 				UnitOnCell.CurrentCell = this;
-				//UnitOnCell.UpdateGroupPosition();
-				//UnitOnCell.UpdateHPPosition();
-				UnitOnCell.UpdatePosition();
+				this.UnitOnCell.UpdateAttributePosition();
 			}
 		}
 
-		//返回召唤是否成功
-		public bool SummonUnit(int unitID, EGroupType group)
-		{
-			if (UnitOnCell != null) return false;       //格子上已有单位
+		/// <summary>
+		/// 返回召唤是否成功
+		/// </summary>
+		/// <param name="unitID"></param>
+		/// <param name="group"></param>
+		/// <returns></returns>
 
-			UnitOnCell = new Unit(unitID, ThisPosition);
-			UnitOnCell.GroupType = group;
-			UnitOnCell.CurrentCell = this;
-			//UnitOnCell.UnitImage.transform.SetParent(GameObject.Find("/Canvas/UnitImage").transform);
-			//UnitOnCell.UnitImage.transform.localPosition = GetLocalPosition();
-			//UnitOnCell.UnitImage.transform.localScale = new Vector3(Chessboard.CellSize / 75, Chessboard.CellSize / 75, 1);
-			return true;
-		}
 
+		/// <summary>
+		/// 这个格子是否可以召唤。任何可以召唤的格子
+		/// </summary>
+		/// <returns></returns>
 		public bool IsCanSummonPlace()
 		{
-			if (ThisPosition.x == 0)	//棋盘最左边的一列
+			if (UnitOnCell != null)						// 格子上已有单位
+				return false;
+			else
 				return true;
-			return false;
 		}
 	}
 }

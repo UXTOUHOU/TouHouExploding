@@ -13,7 +13,7 @@ namespace BattleScene
 
 			Chessboard.SelectedCard = card;
 			BattleProcess.ChangeState(PlayerState.SelectSummonPosition);
-	        //Test
+	        // Test
 			//Deck.RemoveDeckCard(card);
 			//
 		}

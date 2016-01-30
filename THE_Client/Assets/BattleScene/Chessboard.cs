@@ -15,13 +15,21 @@ namespace BattleScene
 			y = new_y;
 		}
 
-		//检测两个位置是否相邻
+		/// <summary>
+		/// 检测两个位置是否相邻
+		/// </summary>
+		/// <param name="position"></param>
+		/// <returns></returns>
 		public bool Adjacent(ChessboardPosition position)
 		{
 			return Math.Abs(position.x - x) + Math.Abs(position.y - y) == 1;
 		}
 
-		//返回两个位置相距的步数
+		/// <summary>
+		/// 计算两个位置的距离
+		/// </summary>
+		/// <param name="position"></param>
+		/// <returns></returns>
 		public int Distance(ChessboardPosition position)
 		{
 			return Math.Abs(x - position.x) + Math.Abs(y - position.y);
@@ -43,21 +51,24 @@ namespace BattleScene
 		public GameObject ChessboardCellPrefab;
 		public GameObject ChessboardDialog;
 		public GameObject CanvasObject;
-		public GameObject Background;
+		public GameObject Background;				// Background所在的Panel
 
-		public static bool UnitMove = false;
+		public static bool UnitMove = false;		// 是否有单位正在移动
 
 		public static Cell SelectedCell;
 		public static GameObject SelectedCard;
 		public static float CellSize;
 
 		public static bool RecordingMovePath;
-		public static List<ChessboardPosition> ListMovePath;
+		public static List<ChessboardPosition> ListMovePath = new List<ChessboardPosition>();
 
 		private static Chessboard singleton = null;
-		private Cell[,] cell = new Cell[12, 8];
+		private Cell[,] cellArray = new Cell[12, 8];
 		public const int ChessboardMaxX = 12;
 		public const int ChessboardMaxY = 8;
+
+		public const int BlueSideSummonColumn = 0;						// 蓝色方可以召唤的列
+		public const int RedSideSummonColumn = ChessboardMaxX - 1;      // 红色方可以召唤的列
 
 		public static Chessboard GetInstance()
 		{
@@ -66,16 +77,28 @@ namespace BattleScene
 			return singleton;
 		}
 
-		//得到x，y坐标表示的cell。左下角为0，0。
+		/// <summary>
+		/// 得到x，y坐标表示的cell
+		/// </summary>
+		/// <param name="position">左下角为(0, 0)</param>
+		/// <returns></returns>
 		public static Cell GetCell(ChessboardPosition position)
 		{
-			return GetInstance().cell[position.x, position.y];
+			try
+			{
+				return GetInstance().cellArray[position.x, position.y];
+			}
+			catch (Exception) {
+				return null;
+			}
 		}
 
-		//将每个格子的背景设为黑色
+		/// <summary>
+		/// 将每个格子的背景设为黑色
+		/// </summary>
 		public static void ClearBackground()
 		{
-			foreach (var it in singleton.cell)
+			foreach (var it in singleton.cellArray)
 				it.SetBackgroundColor(Color.black);
 		}
 
@@ -92,33 +115,36 @@ namespace BattleScene
 			for (int x = 0; x < ChessboardMaxX; ++x)
 				for (int y = 0; y < ChessboardMaxY; ++y)
 				{
-					cell[x, y] = new Cell();
+					cellArray[x, y] = new Cell();
 					//每个格子的背景
-					var item = cell[x, y];
-					item.ThisPosition = new ChessboardPosition(x, y);
-					item.Background = Instantiate(ChessboardCellPrefab.transform.FindChild("Background").gameObject);
-					item.Background.name = x + " " + y;
-					item.Background.transform.SetParent(Background.transform);
-					item.Background.transform.localPosition = GetCellPosition(new ChessboardPosition(x, y));
-					item.Background.transform.localScale = new Vector3(CellSize / 75, CellSize / 75, 1);
+					Cell cell = cellArray[x, y];
+					cell.Position = new ChessboardPosition(x, y);
+					cell.Background = Instantiate(ChessboardCellPrefab.transform.FindChild("Background").gameObject);
+					cell.Background.name = x + " " + y;
+					cell.Background.transform.SetParent(Background.transform);
+					cell.Background.transform.localPosition = GetCellPosition(new ChessboardPosition(x, y));
+					cell.Background.transform.localScale = new Vector3(CellSize / 75, CellSize / 75, 1);
 				}
 			//在最下面的一行放上单位
 			for (int x = 0; x < ChessboardMaxX; ++x)
 				for (int y = 0; y < ChessboardMaxY; ++y)
 				{
-					var item = cell[x, y];
+					var cell = cellArray[x, y];
 					if (y == 0)
 					{
 						if ((x + y) % 2 == 0)
-							item.SummonUnit(1, EGroupType.GT_Yourself);
+							SkillOperate.SummonUnit(cell, 1, EGroupType.BlueSide);
 						else
-							item.SummonUnit(1, EGroupType.GT_Enemy);
+							SkillOperate.SummonUnit(cell, 1, EGroupType.RedSide);
 					}
 				}
 			//
 		}
 
-		//左下为起点
+		/// <summary>
+		/// </summary>
+		/// <param name="position">左下为(0, 0)</param>
+		/// <returns></returns>
 		private Vector2 GetCellPosition(ChessboardPosition position)
 		{
 			const float pivot = 0.5F;
@@ -134,14 +160,17 @@ namespace BattleScene
 				SelectedCell.UnitOnCell.MoveWithPath(ListMovePath);
 		}
 
-		//记录selected cell的移动路径
+		/// <summary>
+		/// 记录selected cell的移动路径
+		/// </summary>
+		/// <param name="targetPosition"></param>
 		public static void RecordMovePath(ChessboardPosition targetPosition)
 		{
 			Debug.Log("Record");
 			if (!RecordingMovePath)
 			{
 				//当移到初始点时开始记录移动路径
-				if (SelectedCell.ThisPosition.Distance(targetPosition) == 0)
+				if (SelectedCell.Position.Distance(targetPosition) == 0)
 				{
 					GetCell(targetPosition).SetBackgroundColor(Cell.HighLightMovableColor);
 					RecordingMovePath = true;
@@ -154,7 +183,7 @@ namespace BattleScene
 				if (ListMovePath.Count == 0)
 				{
 					//应与初始点相邻
-					if (SelectedCell.ThisPosition.Adjacent(targetPosition))
+					if (SelectedCell.Position.Adjacent(targetPosition))
 					{
 						GetCell(targetPosition).SetBackgroundColor(Cell.HighLightMovableColor);
 						ListMovePath.Add(targetPosition);
@@ -181,7 +210,10 @@ namespace BattleScene
 			dialog.transform.Find("Text").GetComponent<Text>().text = message;
 		}
 
-		//实际是修改了DialogObject的Active属性
+		/// <summary>
+		/// 显示或隐藏对话框。实际是修改了DialogObject的Active属性
+		/// </summary>
+		/// <param name="visible"></param>
 		public static void SetChessboardDialogVisible(bool visible)
 		{
 			Chessboard.GetInstance().ChessboardDialog.SetActive(visible);
@@ -205,6 +237,22 @@ namespace BattleScene
 		public static void SetSkillTargetRangeVisible(int visible)
 		{
 			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// 显示范围，根据传入的函数判断格子是否需要改变颜色
+		/// </summary>
+		/// <param name="isChangeColor"></param>
+		/// <param name="color"></param>
+		public static void SetBackgroundColor(Func<Cell, bool> isChangeColor, Color color)
+		{
+			for (int x = 0; x < ChessboardMaxX; ++x)
+				for (int y = 0; y < ChessboardMaxY; ++y)
+				{
+					var cell = GetCell(new ChessboardPosition(x, y));
+					if (isChangeColor(cell))
+						cell.SetBackgroundColor(color);
+				}
 		}
 	}
 }
