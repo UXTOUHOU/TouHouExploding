@@ -7,8 +7,8 @@ public class DebugConsole : MonoBehaviour
 
     public string Content = "这里是控制台";
     public string Input = "";
-    public int WindowWidth = 300;
-    public int WindowHeight = 180;
+    public int WindowWidth = 600;
+    public int WindowHeight = 500;
     public string LastException = "";
     public bool Visible = true;
     private Rect windowRect0;
