@@ -5,6 +5,8 @@ public class GameHallButton : MonoBehaviour
 
 	public void OnButtonCreateGame()
 	{
+        THEServerManager.getInstance().startServer();
+        THEClientManager.getInstance().connectServer("192.168.1.100",8201);
 	}
 	public void OnButtonAddRoom()
 	{
