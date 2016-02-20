@@ -167,6 +167,7 @@ namespace BattleScene
 		public static void RecordMovePath(ChessboardPosition targetPosition)
 		{
 			Debug.Log("Record");
+            int index;
 			if (!RecordingMovePath)
 			{
 				//当移到初始点时开始记录移动路径
@@ -179,7 +180,8 @@ namespace BattleScene
 			else
 			{
 				if (GetCell(targetPosition).UnitOnCell != null) return;              //格子上已有单位
-				if (ListMovePath.Count >= SelectedCell.UnitOnCell.UnitAttribute.motility) return;            //超过单位的机动
+                index = ListMovePath.IndexOf(targetPosition);
+				if (ListMovePath.Count >= SelectedCell.UnitOnCell.UnitAttribute.motility && index == -1) return;            //超过单位的机动
 				if (ListMovePath.Count == 0)
 				{
 					//应与初始点相邻
@@ -190,11 +192,26 @@ namespace BattleScene
 					}else{
 						return;
 					}
-				}else if (ListMovePath[ListMovePath.Count - 1].Adjacent(targetPosition)){
+				}
+                else if ( index  == -1 && ListMovePath[ListMovePath.Count - 1].Adjacent(targetPosition))
+                {
 					//应与上一个选择的点相邻
 					Chessboard.GetCell(targetPosition).SetBackgroundColor(Cell.HighLightMovableColor);
 					ListMovePath.Add(targetPosition);
 				}
+                else if ( (index = ListMovePath.IndexOf(targetPosition)) != -1)
+                {
+                    ChessboardPosition lastPos = ListMovePath[ListMovePath.Count - 1];
+                    if (lastPos.x != targetPosition.x || lastPos.y != targetPosition.y)
+                    {
+                        for (int i=index+1;i<ListMovePath.Count;)
+                        {
+                            lastPos = ListMovePath[i];
+                            ListMovePath.RemoveAt(index);
+                            Chessboard.GetCell(lastPos).SetBackgroundColor(Cell.MovableColor);
+                        }
+                    }
+                }
 			}
 		}
 

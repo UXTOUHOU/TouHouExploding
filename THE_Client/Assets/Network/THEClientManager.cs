@@ -26,7 +26,11 @@ public class THEClientManager
     public bool connectServer(string serverIP,int port)
     {
         return this._client.Connect(serverIP, port);
-        Debug.Log("fuck");
+    }
+
+    public bool sendCommand(string command)
+    {
+        return this._client.Send(command);
     }
 
     public void log(System.Object sender, GetNoticeEventArgs e)

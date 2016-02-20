@@ -19,7 +19,7 @@ public class THEServerManager
 
     public THEServerManager()
     {
-        this._server = new THEServer("192.168.1.100",8201);
+        this._server = new THEServer("10.0.1.179",8201);
         this._server.getNoticeEvent += this.log;
     }
 
