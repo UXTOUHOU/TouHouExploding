@@ -110,7 +110,7 @@ namespace BattleScene
 			Vector2 chessboardSize = new Vector2(Screen.width *(anchor.anchorMax.x - anchor.anchorMin.x),
 				Screen.height * (anchor.anchorMax.y - anchor.anchorMin.y));
 			CellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY);
-
+            BattleSceneMain.getInstance().chessboard = this;
 			//Test
 			for (int x = 0; x < ChessboardMaxX; ++x)
 				for (int y = 0; y < ChessboardMaxY; ++y)
@@ -124,6 +124,7 @@ namespace BattleScene
 					cell.Background.transform.SetParent(Background.transform);
 					cell.Background.transform.localPosition = GetCellPosition(new ChessboardPosition(x, y));
 					cell.Background.transform.localScale = new Vector3(CellSize / 75, CellSize / 75, 1);
+                    
 				}
 			//在最下面的一行放上单位
 			for (int x = 0; x < ChessboardMaxX; ++x)
