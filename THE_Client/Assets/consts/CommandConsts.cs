@@ -10,10 +10,11 @@
 using System;
 public class CommandConsts
 {
-	public const int CommandConsts_CreateCharacters = 30001;
-	public const int CommandConsts_TransformCharacters= 30002;
-	/**更新成员列表*/
-	public const int CommandConsts_UpdateMemberList = 30003;
+	public const int CommandConsts_OnCellEnter = 30001;
+	public const int CommandConsts_OnCellExit= 30002;
+    public const int CommandConsts_OnCellClick = 30003;
+    /**更新成员列表*/
+    public const int CommandConsts_UpdateMemberList = 30003;
 
 	/**激活操作控制器*/
 	public const int CommandConsts_ActiveOperationController = 20001;

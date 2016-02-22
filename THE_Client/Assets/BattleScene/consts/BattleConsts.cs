@@ -8,5 +8,9 @@
     /// 空闲状态，等待玩家自己操作
     /// </summary>
     public const int BattleState_Idle = 1;
+
+    public const int MapMaxRow = 12;
+
+    public const int MapMaxCol = 8;
 }
 

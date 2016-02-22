@@ -13,6 +13,7 @@ public class InitGameState : IState
 
     public void onStateEnter()
     {
+        BattleSceneMain.getInstance().chessboard.init();
     }
 
     public void onStateExit()

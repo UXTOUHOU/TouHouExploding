@@ -66,7 +66,7 @@ public class ResourceManager {
 		Debug.Log ("cache bundle complete " + bundleId);
 	}
 
-	/**public IEnumerator cacheAssetBundles(List<string> names)
+	/*public IEnumerator cacheAssetBundles(List<string> names)
 	{
 
 	}*/
