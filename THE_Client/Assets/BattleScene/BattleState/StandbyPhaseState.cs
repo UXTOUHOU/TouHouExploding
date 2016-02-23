@@ -4,24 +4,25 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class InitGameState : IState
+public class StandbyPhaseState : IState
 {
-    public InitGameState()
+    public StandbyPhaseState()
     {
 
     }
 
     public void onStateEnter()
     {
-        BattleSceneMain.getInstance().chessboard.init();
+        
     }
 
     public void onStateExit()
     {
+
     }
 
     public void update()
     {
-        BattleStateManager.getInstance().setState(BattleConsts.BattleState_TurnStartPhase);
+        BattleStateManager.getInstance().setState(BattleConsts.BattleState_MainPhase);
     }
 }

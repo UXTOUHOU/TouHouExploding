@@ -43,6 +43,9 @@ public class BattleStateManager : IFSM
     {
         this._states = new Dictionary<int, IState>();
         this._states.Add(BattleConsts.BattleState_InitGame, new InitGameState());
+        this._states.Add(BattleConsts.BattleState_TurnStartPhase, new TurnStartPhaseState());
+        this._states.Add(BattleConsts.BattleState_StandbyPhase, new StandbyPhaseState());
+        this._states.Add(BattleConsts.BattleState_MainPhase, new MainPhaseState());
     }
 
     public void setState(int stateId)

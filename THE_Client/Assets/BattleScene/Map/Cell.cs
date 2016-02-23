@@ -8,6 +8,17 @@ public class Cell : MonoBehaviour
     public GameObject Obj;
     public GameObject Background;
     public Unit UnitOnCell;
+    private ChessboardPosition _location;
+    public ChessboardPosition location
+    {
+        get { return this._location; }
+        set
+        {
+            this._location = value;
+            // 暂用，之后废置
+            this.Position = this._location;
+        }
+    }
     public ChessboardPosition Position;
 
     public static Color SelectedColor = new Color(10F / 255, 23F / 255, 96F / 255);
@@ -15,15 +26,17 @@ public class Cell : MonoBehaviour
     public static Color AttackableColor = new Color(149F / 255, 70F / 255, 70F / 255);
     public static Color HighLightMovableColor = new Color(100F / 255, 142F / 255, 100F / 255);
 
-    public static GameObject btnMove = GameObject.Find("Canvas/ButtonMove");
-    public static GameObject btnAttack = GameObject.Find("Canvas/ButtonAttack");
-    public static GameObject btnSkill = GameObject.Find("Canvas/ButtonSkill");
+    public static GameObject btnMove;
+    public static GameObject btnAttack;
+    public static GameObject btnSkill;
 
-    public static GameObject btnSkill_1 = GameObject.Find("Canvas/OperateButton/ButtonSkill_1");
-    public static GameObject btnSkill_2 = GameObject.Find("Canvas/OperateButton/ButtonSkill_2");
-    public static GameObject btnSkill_3 = GameObject.Find("Canvas/OperateButton/ButtonSkill_3");
+    public static GameObject btnSkill_1;
+    public static GameObject btnSkill_2;
+    public static GameObject btnSkill_3;
 
-    private int _row;
+    private Image _bgImg;
+
+    /*private int _row;
     public int row
     {
         get { return this._row; }
@@ -35,8 +48,6 @@ public class Cell : MonoBehaviour
         get { return this._col; }
     }
 
-    private Image _bg;
-
     /// <summary>
     /// 设置单元格的位置
     /// </summary>
@@ -46,7 +57,7 @@ public class Cell : MonoBehaviour
     {
         this._row = row;
         this._col = col;
-    }
+    }*/
 
     public void addListener()
     {
@@ -64,17 +75,17 @@ public class Cell : MonoBehaviour
 
     public void cellClickHandler(GameObject cell)
     {
-        CommandManager.getInstance().runCommand(CommandConsts.CommandConsts_OnCellClick, this._row, this._col);
+        //CommandManager.getInstance().runCommand(CommandConsts.CommandConsts_OnCellClick, this._row, this._col);
     }
 
     public void cellEnterHandler(GameObject cell)
     {
-        CommandManager.getInstance().runCommand(CommandConsts.CommandConsts_OnCellEnter, this._row, this._col);
+        //CommandManager.getInstance().runCommand(CommandConsts.CommandConsts_OnCellEnter, this._row, this._col);
     }
 
     public void cellExitHandler(GameObject cell)
     {
-        CommandManager.getInstance().runCommand(CommandConsts.CommandConsts_OnCellExit, this._row, this._col);
+        //CommandManager.getInstance().runCommand(CommandConsts.CommandConsts_OnCellExit, this._row, this._col);
     }
 
 
@@ -138,7 +149,7 @@ public class Cell : MonoBehaviour
 
     public void SetBackgroundColor(Color newColor)
     {
-        Background.GetComponent<Image>().color = newColor;
+        this._bgImg.color = newColor;
     }
 
     public void ShowMovableRange()
@@ -160,18 +171,32 @@ public class Cell : MonoBehaviour
 
     public Vector3 GetLocalPosition()
     {
-        return Background.transform.localPosition;
+        return this.transform.localPosition;
     }
 
     public Vector3 GetPosition()
     {
-        return Background.transform.position;
+        return this.transform.position;
+    }
+
+    void Awake()
+    {
+        if (btnMove == null)
+        {
+            btnMove = GameObject.Find("Canvas/ButtonMove");
+            btnAttack = GameObject.Find("Canvas/ButtonAttack");
+            btnSkill = GameObject.Find("Canvas/ButtonSkill");
+
+            btnSkill_1 = GameObject.Find("Canvas/OperateButton/ButtonSkill_1");
+            btnSkill_2 = GameObject.Find("Canvas/OperateButton/ButtonSkill_2");
+            btnSkill_3 = GameObject.Find("Canvas/OperateButton/ButtonSkill_3");
+        }
     }
 
     // Use this for initialization
     void Start()
     {
-        this._bg = this.transform.FindChild("Background").GetComponent<Image>();
+        this._bgImg = this.transform.FindChild("Background").GetComponent<Image>();
     }
 
     // Update is called once per frame

@@ -3,46 +3,6 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 
-public class ChessboardPosition
-{
-    public int x;
-    public int y;
-    public ChessboardPosition(int new_x, int new_y)
-    {
-        x = new_x;
-        y = new_y;
-    }
-
-    /// <summary>
-    /// 检测两个位置是否相邻
-    /// </summary>
-    /// <param name="position"></param>
-    /// <returns></returns>
-    public bool Adjacent(ChessboardPosition position)
-    {
-        return Math.Abs(position.x - x) + Math.Abs(position.y - y) == 1;
-    }
-
-    /// <summary>
-    /// 计算两个位置的距离
-    /// </summary>
-    /// <param name="position"></param>
-    /// <returns></returns>
-    public int Distance(ChessboardPosition position)
-    {
-        return Math.Abs(x - position.x) + Math.Abs(y - position.y);
-    }
-
-    public Vector3 GetLocalPosition()
-    {
-        return Chessboard.GetCell(this).GetLocalPosition();
-    }
-
-    public Vector3 GetPosition()
-    {
-        return Chessboard.GetCell(this).GetPosition();
-    }
-}
 public class Chessboard : MonoBehaviour
 {
     public GameObject ChessboardRect;
@@ -70,8 +30,6 @@ public class Chessboard : MonoBehaviour
 
     public static Chessboard GetInstance()
     {
-        if (singleton == null)
-            singleton = new Chessboard();
         return singleton;
     }
 
@@ -118,25 +76,38 @@ public class Chessboard : MonoBehaviour
         Vector2 chessboardSize = new Vector2(Screen.width * (anchor.anchorMax.x - anchor.anchorMin.x),
             Screen.height * (anchor.anchorMax.y - anchor.anchorMin.y));
         CellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY);
+        BattleConfig.CellStartX = anchor.localPosition.x;
+        BattleConfig.CellStartY = anchor.localPosition.y;
+        BattleConfig.CellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY);
+        BattleConfig.Scale = BattleConfig.CellSize / BattleConsts.DefaultCellSize;
+        GameObject cellGo;
+        Cell cell;
         for (int x = 0; x < ChessboardMaxX; ++x)
         {
             for (int y = 0; y < ChessboardMaxY; ++y)
             {
-                cellArray[x, y] = new Cell();
+                cellGo = Instantiate(Resources.Load("Prefabs/ChessboardCellPrefab")) as GameObject;
+                cell = cellGo.GetComponent<Cell>();
+                cellArray[x, y] = cell;
+                cell.transform.SetParent(Background.transform);
+                cell.location = new ChessboardPosition(x, y);
                 //每个格子的背景
-                Cell cell = cellArray[x, y];
-                cell.Position = new ChessboardPosition(x, y);
-                cell.Background = Instantiate(ChessboardCellPrefab.transform.FindChild("Background").gameObject);
-                cell.Background.name = x + " " + y;
-                cell.Background.transform.SetParent(Background.transform);
-                cell.Background.transform.localPosition = GetCellPosition(new ChessboardPosition(x, y));
-                cell.Background.transform.localScale = new Vector3(CellSize / 75, CellSize / 75, 1);
+                //cell.Position = new ChessboardPosition(x, y);
+                //cell.Background = Instantiate(ChessboardCellPrefab.transform.FindChild("Background").gameObject);
+                //cell.Background.name = x + " " + y;
+                //cell.Background.transform.SetParent(Background.transform);
+                cell.transform.localPosition = GetCellPosition(new ChessboardPosition(x, y));
+                cell.transform.localScale = new Vector3(CellSize / 75, CellSize / 75, 1);
             }
         }
+        this.addClickEventHandler(this.testCell);
+        this.addEnterEventHandler(this.onCellEnterHandler);
+        this.addExitEventHandler(this.onCellExitHandler);
+
         for (int x = 0; x < ChessboardMaxX; ++x)
             for (int y = 0; y < ChessboardMaxY; ++y)
             {
-                var cell = cellArray[x, y];
+                cell = cellArray[x, y];
                 if (y == 0)
                 {
                     if ((x + y) % 2 == 0)
@@ -145,6 +116,66 @@ public class Chessboard : MonoBehaviour
                         SkillOperate.SummonUnit(cell, 1, EGroupType.RedSide);
                 }
             }
+    }
+
+    public void addClickEventHandler(UIEventListener.UIEventHandler eventHandler)
+    {
+        int i, j;
+        int rowLimit = BattleConsts.MapMaxRow;
+        int colLimit = BattleConsts.MapMaxCol;
+        for (i = 0; i < rowLimit; i++)
+        {
+            for (j = 0; j < colLimit; j++)
+            {
+                UIEventListener.Get(cellArray[j, i].gameObject).onClick += eventHandler;
+            }
+        }
+    }
+
+    public void addEnterEventHandler(UIEventListener.UIEventHandler eventHandler)
+    {
+        int i, j;
+        int rowLimit = BattleConsts.MapMaxRow;
+        int colLimit = BattleConsts.MapMaxCol;
+        for (i = 0; i < rowLimit; i++)
+        {
+            for (j = 0; j < colLimit; j++)
+            {
+                UIEventListener.Get(cellArray[j, i].gameObject).onEnter += eventHandler;
+            }
+        }
+    }
+
+    public void addExitEventHandler(UIEventListener.UIEventHandler eventHandler)
+    {
+        int i, j;
+        int rowLimit = BattleConsts.MapMaxRow;
+        int colLimit = BattleConsts.MapMaxCol;
+        for (i = 0; i < rowLimit; i++)
+        {
+            for (j = 0; j < colLimit; j++)
+            {
+                UIEventListener.Get(cellArray[j, i].gameObject).onExit += eventHandler;
+            }
+        }
+    }
+
+    public void testCell(GameObject go)
+    {
+        Cell cell = go.GetComponent<Cell>();
+        Debug.Log(cell.location.y + " " + cell.location.x);
+    }
+
+    public void onCellEnterHandler(GameObject go)
+    {
+        Cell cell = go.GetComponent<Cell>();
+        cell.SetBackgroundColor(Cell.SelectedColor);
+    }
+
+    public void onCellExitHandler(GameObject go)
+    {
+        Cell cell = go.GetComponent<Cell>();
+        cell.SetBackgroundColor(Color.black);
     }
 
     /// <summary>
