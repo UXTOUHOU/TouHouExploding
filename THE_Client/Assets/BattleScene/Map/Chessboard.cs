@@ -28,6 +28,13 @@ public class Chessboard : MonoBehaviour
     public const int BlueSideSummonColumn = 0;                      // 蓝色方可以召唤的列
     public const int RedSideSummonColumn = ChessboardMaxX - 1;      // 红色方可以召唤的列
 
+    private RectTransform _rectTrans;
+    private GameObject _bgLayer;
+    /// <summary>
+    /// 记录BattleField里对应的层
+    /// </summary>
+    private Dictionary<int, GameObject> _layersMap;
+
     public static Chessboard GetInstance()
     {
         return singleton;
@@ -72,14 +79,18 @@ public class Chessboard : MonoBehaviour
     /// </summary>
     public void init()
     {
-        RectTransform anchor = ChessboardRect.GetComponent<RectTransform>();
-        Vector2 chessboardSize = new Vector2(Screen.width * (anchor.anchorMax.x - anchor.anchorMin.x),
-            Screen.height * (anchor.anchorMax.y - anchor.anchorMin.y));
+        this._rectTrans = this.GetComponent<RectTransform>();
+        this._bgLayer = this.transform.FindChild("BgLayer").gameObject;
+        //RectTransform anchor = ChessboardRect.GetComponent<RectTransform>();
+        Vector2 chessboardSize = new Vector2(Screen.width * (this._rectTrans.anchorMax.x - this._rectTrans.anchorMin.x),
+            Screen.height * (this._rectTrans.anchorMax.y - this._rectTrans.anchorMin.y));
         CellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY);
-        BattleGlobal.CellStartX = anchor.localPosition.x;
-        BattleGlobal.CellStartY = anchor.localPosition.y;
-        BattleGlobal.CellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY);
-        BattleGlobal.Scale = BattleGlobal.CellSize / BattleConsts.DefaultCellSize;
+        BattleGlobal.CellStartX = 0;
+        BattleGlobal.CellStartY = 0;
+        float cellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY); ;
+        //BattleGlobal.CellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY);
+        BattleGlobal.Scale = cellSize / BattleConsts.DefaultCellSize;
+        this._bgLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
         GameObject cellGo;
         Cell cell;
         for (int x = 0; x < ChessboardMaxX; ++x)
@@ -89,15 +100,16 @@ public class Chessboard : MonoBehaviour
                 cellGo = Instantiate(Resources.Load("Prefabs/ChessboardCellPrefab")) as GameObject;
                 cell = cellGo.GetComponent<Cell>();
                 cellArray[x, y] = cell;
-                cell.transform.SetParent(Background.transform);
+                cell.transform.SetParent(this._bgLayer.transform);
+                cell.transform.localScale = Vector3.one;
                 cell.location = new ChessboardPosition(x, y);
                 //每个格子的背景
                 //cell.Position = new ChessboardPosition(x, y);
                 //cell.Background = Instantiate(ChessboardCellPrefab.transform.FindChild("Background").gameObject);
                 //cell.Background.name = x + " " + y;
                 //cell.Background.transform.SetParent(Background.transform);
-                cell.transform.localPosition = GetCellPosition(new ChessboardPosition(x, y));
-                cell.transform.localScale = new Vector3(CellSize / 75, CellSize / 75, 1);
+                cell.transform.localPosition = BattleUtils.getCellPosByLocation(cell.location.y, cell.location.x);
+                //cell.transform.localScale = new Vector3(CellSize / 75, CellSize / 75, 1);
             }
         }
         this.addClickEventHandler(this.testCell);
@@ -176,6 +188,11 @@ public class Chessboard : MonoBehaviour
     {
         Cell cell = go.GetComponent<Cell>();
         cell.SetBackgroundColor(Color.black);
+    }
+
+    public void addChildOnBgLayer(GameObject child,int row,int col)
+    {
+
     }
 
     /// <summary>

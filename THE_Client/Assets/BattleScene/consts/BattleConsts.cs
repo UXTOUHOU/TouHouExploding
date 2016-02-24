@@ -29,5 +29,10 @@
     /// 单元格默认尺寸
     /// </summary>
     public const int DefaultCellSize = 75;
+
+    public const int BattleFieldLayer_Bg = 1;
+    public const int BattleFieldLayer_Unit = 2;
+    public const int BattleFieldLayer_Effect = 3;
+    public const int BattleFieldLayer_Terrain = 4;
 }
 

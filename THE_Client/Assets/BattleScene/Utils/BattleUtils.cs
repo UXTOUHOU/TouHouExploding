@@ -14,12 +14,12 @@ public class BattleUtils
 {
     public static float getCellPosXByCol(int col)
     {
-        return BattleGlobal.CellStartX + (0.5f + col) * BattleGlobal.CellSize;
+        return BattleGlobal.CellStartX + (0.5f + col) * BattleConsts.DefaultCellSize;
     }
 
     public static float getCellPosYByRow(int row)
     {
-        return BattleGlobal.CellStartY + (0.5f + row) * BattleGlobal.CellSize;
+        return BattleGlobal.CellStartY + (0.5f + row) * BattleConsts.DefaultCellSize;
     }
 
     public static Vector3 getCellPosByLocation(int row, int col)
