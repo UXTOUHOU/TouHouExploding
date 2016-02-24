@@ -76,10 +76,10 @@ public class Chessboard : MonoBehaviour
         Vector2 chessboardSize = new Vector2(Screen.width * (anchor.anchorMax.x - anchor.anchorMin.x),
             Screen.height * (anchor.anchorMax.y - anchor.anchorMin.y));
         CellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY);
-        BattleConfig.CellStartX = anchor.localPosition.x;
-        BattleConfig.CellStartY = anchor.localPosition.y;
-        BattleConfig.CellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY);
-        BattleConfig.Scale = BattleConfig.CellSize / BattleConsts.DefaultCellSize;
+        BattleGlobal.CellStartX = anchor.localPosition.x;
+        BattleGlobal.CellStartY = anchor.localPosition.y;
+        BattleGlobal.CellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY);
+        BattleGlobal.Scale = BattleGlobal.CellSize / BattleConsts.DefaultCellSize;
         GameObject cellGo;
         Cell cell;
         for (int x = 0; x < ChessboardMaxX; ++x)

@@ -7,23 +7,24 @@ using UnityEngine;
 /// <summary>
 /// 回合开始阶段
 /// </summary>
-public class TurnStartPhaseState : IState
+public class TurnStartPhaseState : BattleStateBase
 {
-    public TurnStartPhaseState()
+    public TurnStartPhaseState(IFSM fsm)
+        :base(fsm)
     {
 
     }
 
-    public void onStateEnter()
+    public override void onStateEnter()
     {
         //BattleSceneMain.getInstance().chessboard.init();
     }
 
-    public void onStateExit()
+    public override void onStateExit()
     {
     }
 
-    public void update()
+    public override void update()
     {
         BattleStateManager.getInstance().setState(BattleConsts.BattleState_StandbyPhase);
     }

@@ -78,7 +78,9 @@ public class ResourceManager {
 
 	public GameObject loadPrefab(string prefabName)
 	{
-		Dictionary<string,Object> dic;
+        // todo:暂用，以后统一修改
+        return GameObject.Instantiate(Resources.Load(prefabName)) as GameObject;
+		/*Dictionary<string,Object> dic;
 		if ( this._dicAsset.TryGetValue(prefabName,out dic) )
 		{
 			Object instance;
@@ -87,7 +89,7 @@ public class ResourceManager {
 				return (GameObject)instance;
 			}
 		}
-		return null;
+		return null;*/
 	}
 
 	public Object getRes(string assetBundleName,string resId)

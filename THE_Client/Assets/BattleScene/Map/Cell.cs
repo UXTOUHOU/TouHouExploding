@@ -102,9 +102,9 @@ public class Cell : MonoBehaviour
         Debug.Log("Attackable" + UnitOnCell.Attackable);
         btnAttack.GetComponent<Button>().interactable = UnitOnCell.Attackable;
         //更新按钮位置
-        btnMove.transform.position = Background.transform.position + new Vector3(0, cellSize / 1.3F, 0);
-        btnAttack.transform.position = Background.transform.position + new Vector3(-cellSize / 1.5F, cellSize / 2F, 0);
-        btnSkill.transform.position = Background.transform.position + new Vector3(cellSize / 1.5F, cellSize / 2F, 0);
+        btnMove.transform.position = this._bgImg.transform.position + new Vector3(0, cellSize / 1.3F, 0);
+        btnAttack.transform.position = this._bgImg.transform.position + new Vector3(-cellSize / 1.5F, cellSize / 2F, 0);
+        btnSkill.transform.position = this._bgImg.transform.position + new Vector3(cellSize / 1.5F, cellSize / 2F, 0);
         //将按钮设为在所有Object之上
         GameObject canvas = btnMove.transform.parent.gameObject;
         int childCount = canvas.transform.childCount;

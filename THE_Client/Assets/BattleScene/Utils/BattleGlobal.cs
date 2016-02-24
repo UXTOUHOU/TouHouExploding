@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-class BattleConfig
+class BattleGlobal
 {
     /// <summary>
     /// 地形格左下角X坐标
@@ -20,5 +20,9 @@ class BattleConfig
     public static float CellSize;
 
     public static float Scale = 1;
+    /// <summary>
+    /// 当前选中的格子
+    /// </summary>
+    public static Cell SelectCell;
 }
 

@@ -17,6 +17,11 @@
     /// </summary>
     public const int BattleState_MainPhase = 4;
 
+    /// <summary>
+    /// 单元格操作-空闲
+    /// </summary>
+    public const int CellOp_Idle = 1;
+
     public const int MapMaxRow = 8;
 
     public const int MapMaxCol = 12;

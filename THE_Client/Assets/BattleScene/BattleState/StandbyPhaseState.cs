@@ -4,24 +4,25 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class StandbyPhaseState : IState
+public class StandbyPhaseState : BattleStateBase
 {
-    public StandbyPhaseState()
+    public StandbyPhaseState(IFSM fsm)
+        :base(fsm)
     {
 
     }
 
-    public void onStateEnter()
+    public override void onStateEnter()
     {
         
     }
 
-    public void onStateExit()
+    public override void onStateExit()
     {
 
     }
 
-    public void update()
+    public override void update()
     {
         BattleStateManager.getInstance().setState(BattleConsts.BattleState_MainPhase);
     }

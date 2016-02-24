@@ -4,25 +4,28 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MainPhaseState : IState
+public class MainPhaseState : BattleStateBase
 {
-    public MainPhaseState()
+    public MainPhaseState(IFSM fsm)
+        :base(fsm)
     {
 
     }
 
-    public void onStateEnter()
+    public override void onStateEnter()
     {
         //添加点击事件
         BattleSceneMain.getInstance().chessboard.addClickEventHandler(this.cellClickEventHandler);
+
+        OperationManager.getInstance().setOperation(BattleConsts.CellOp_Idle);
     }
 
-    public void onStateExit()
+    public override void onStateExit()
     {
 
     }
 
-    public void update()
+    public override void update()
     {
 
     }

@@ -4,23 +4,26 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class InitGameState : IState
+public class InitGameState : BattleStateBase
 {
-    public InitGameState()
+    public InitGameState(IFSM fsm)
+        :base(fsm)
     {
 
     }
 
-    public void onStateEnter()
+    public override void onStateEnter()
     {
         BattleSceneMain.getInstance().chessboard.init();
+        OperationManager.getInstance().init();
+        PopUpManager.getInstance().init();
     }
 
-    public void onStateExit()
+    public override void onStateExit()
     {
     }
 
-    public void update()
+    public override void update()
     {
         BattleStateManager.getInstance().setState(BattleConsts.BattleState_TurnStartPhase);
     }

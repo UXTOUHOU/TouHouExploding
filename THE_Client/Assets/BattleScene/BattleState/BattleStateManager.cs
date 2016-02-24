@@ -20,7 +20,7 @@ public class BattleStateManager : IFSM
     /// <summary>
     /// 状态集合
     /// </summary>
-    private Dictionary<int, IState> _states;
+    private Dictionary<int, BattleStateBase> _states;
     /// <summary>
     /// 当前状态
     /// </summary>
@@ -32,7 +32,7 @@ public class BattleStateManager : IFSM
     /// <summary>
     /// 当前正在运行的状态
     /// </summary>
-    private IState _curState;
+    private BattleStateBase _curState;
 
     public BattleStateManager()
     {
@@ -41,11 +41,11 @@ public class BattleStateManager : IFSM
 
     public void initStates()
     {
-        this._states = new Dictionary<int, IState>();
-        this._states.Add(BattleConsts.BattleState_InitGame, new InitGameState());
-        this._states.Add(BattleConsts.BattleState_TurnStartPhase, new TurnStartPhaseState());
-        this._states.Add(BattleConsts.BattleState_StandbyPhase, new StandbyPhaseState());
-        this._states.Add(BattleConsts.BattleState_MainPhase, new MainPhaseState());
+        this._states = new Dictionary<int, BattleStateBase>();
+        this._states.Add(BattleConsts.BattleState_InitGame, new InitGameState(this));
+        this._states.Add(BattleConsts.BattleState_TurnStartPhase, new TurnStartPhaseState(this));
+        this._states.Add(BattleConsts.BattleState_StandbyPhase, new StandbyPhaseState(this));
+        this._states.Add(BattleConsts.BattleState_MainPhase, new MainPhaseState(this));
     }
 
     public void setState(int stateId)
