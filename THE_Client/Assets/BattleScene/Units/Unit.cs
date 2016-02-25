@@ -47,6 +47,7 @@ public class Unit
     private List<UnitState> listState = new List<UnitState>();      // 单位当前的状态列表
     private EGroupType groupType;           // 单位阵营
     private UnitUI unitSprite;              // 单位的UI
+    private GameObject _unitGo;
 
     public int HP
     {
@@ -97,7 +98,9 @@ public class Unit
         // Test
         UnitAttribute = new CardAttribute();
         //
-        unitSprite = new UnitUI(this, targetPosition);
+        this._unitGo = ResourceManager.getInstance().loadPrefab("Prefabs/UnitPrefab");
+        BattleSceneMain.getInstance().chessboard.addChildOnLayer(this._unitGo, BattleConsts.BattleFieldLayer_Unit, targetPosition.y, targetPosition.x);
+        //unitSprite = new UnitUI(this, targetPosition);
         UnitManager.UnitList.Add(this);
     }
 

@@ -30,6 +30,7 @@ public class Chessboard : MonoBehaviour
 
     private RectTransform _rectTrans;
     private GameObject _bgLayer;
+    private GameObject _unitLayer;
     private GameObject _uiLayer;
 
     /// <summary>
@@ -145,13 +146,16 @@ public class Chessboard : MonoBehaviour
     {
         // 获取层
         this._bgLayer = this.transform.FindChild("BgLayer").gameObject;
+        this._unitLayer = this.transform.FindChild("UnitLayer").gameObject;
         this._uiLayer = this.transform.FindChild("UILayer").gameObject;
         // 设置全局缩放
         this._bgLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
+        this._unitLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
         this._uiLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
         // 添加到Map
         this._layersMap = new Dictionary<int, GameObject>();
         this._layersMap.Add(BattleConsts.BattleFieldLayer_Bg, this._bgLayer);
+        this._layersMap.Add(BattleConsts.BattleFieldLayer_Unit, this._unitLayer);
         this._layersMap.Add(BattleConsts.BattleFieldLayer_UI, this._uiLayer);
     }
 
