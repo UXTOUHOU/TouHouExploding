@@ -12,7 +12,7 @@ public class BaseViewController : MonoBehaviour
 
     public virtual void onPopUp(object[] args)
     {
-        PopUpManager.getInstance().addPopUp(this._windowName);
+        PopUpManager.getInstance().addPopUp(this._windowName,"");
     }
 
     public virtual void onClose()

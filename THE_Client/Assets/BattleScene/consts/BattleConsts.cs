@@ -18,6 +18,20 @@
     public const int BattleState_MainPhase = 4;
 
     /// <summary>
+    /// 主要阶段的子状态-空闲
+    /// </summary>
+    public const int MainPhaseSubState_Idle = 1;
+    /// <summary>
+    /// 主要阶段的子状态-选择单位行动
+    /// </summary>
+    public const int MainPhaseSubState_SelectUnitAction = 2;
+    /// <summary>
+    /// 主要阶段的子状态-选择单位技能
+    /// </summary>
+    public const int MainPhaseSubState_SelectUnitSkill = 3;
+    public const int MianPhaseSubState_SelectMovePath = 4;
+
+    /// <summary>
     /// 单元格操作-空闲
     /// </summary>
     public const int CellOp_Idle = 1;
@@ -34,5 +48,12 @@
     public const int BattleFieldLayer_Unit = 2;
     public const int BattleFieldLayer_Effect = 3;
     public const int BattleFieldLayer_Terrain = 4;
+    public const int BattleFieldLayer_UI = 5;
+
+    /// <summary>
+    /// 当单元格被选中时
+    /// </summary>
+    public const int CMD_OnCellSelected = 40000;
+    public const int CMD_SelectCard = 40001;
 }
 

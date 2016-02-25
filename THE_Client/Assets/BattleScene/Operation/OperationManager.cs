@@ -44,7 +44,7 @@ public class OperationManager : ICommand
         Cell cell = go.GetComponent<Cell>();
         if (this._curOp != null && cell != null)
         {
-            this._curOp.onCellEnterHandler(cell);
+            this._curOp.onCellEnter(cell);
         }
     }
 
@@ -53,7 +53,7 @@ public class OperationManager : ICommand
         Cell cell = go.GetComponent<Cell>();
         if (this._curOp != null && cell != null)
         {
-            this._curOp.onCellExitHandler(cell);
+            this._curOp.onCellExit(cell);
         }
     }
 
@@ -62,7 +62,16 @@ public class OperationManager : ICommand
         Cell cell = go.GetComponent<Cell>();
         if (this._curOp != null && cell != null)
         {
-            this._curOp.onCellClickHandler(cell);
+            this._curOp.onCellClick(cell);
+        }
+    }
+
+    public void clearOperationState()
+    {
+        if (this._curOp != null)
+        {
+            this._curOp.clear();
+            this._curOp = null;
         }
     }
 

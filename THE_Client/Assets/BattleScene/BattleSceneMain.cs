@@ -36,5 +36,10 @@ public class BattleSceneMain : MonoBehaviour
 	void Update () 
     {
         BattleStateManager.getInstance().update();
+        // 全局监听右键点击
+        /*if (Input.GetMouseButton(1))
+        {
+            OperationManager.getInstance().onRightClick();
+        }*/
 	}
 }

@@ -101,6 +101,8 @@ public class Unit
         UnitManager.UnitList.Add(this);
     }
 
+
+
     /// <summary>
     /// 给单位添加一个状态
     /// </summary>

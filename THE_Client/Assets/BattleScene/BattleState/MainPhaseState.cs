@@ -4,20 +4,25 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MainPhaseState : BattleStateBase
+public class MainPhaseState : BattleStateBase ,IFSM
 {
+    private Dictionary<int, IState> _subStates;
+
+    private int _curStateId;
+
+    private int _nextStateId;
+
+    private IState _curState;
+
     public MainPhaseState(IFSM fsm)
         :base(fsm)
     {
-
+        this.initStates();
     }
 
     public override void onStateEnter()
     {
-        //添加点击事件
-        BattleSceneMain.getInstance().chessboard.addClickEventHandler(this.cellClickEventHandler);
-
-        OperationManager.getInstance().setOperation(BattleConsts.CellOp_Idle);
+        this.setState(BattleConsts.MainPhaseSubState_Idle);
     }
 
     public override void onStateExit()
@@ -27,11 +32,35 @@ public class MainPhaseState : BattleStateBase
 
     public override void update()
     {
-
+        if (this._curStateId != this._nextStateId)
+        {
+            Debug.Log("MainPhase : cur state " + this._curStateId + "  ----> next state " + this._nextStateId);
+            if (this._curState != null)
+            {
+                this._curState.onStateExit();
+            }
+            this._subStates.TryGetValue(this._nextStateId, out this._curState);
+            this._curStateId = this._nextStateId;
+            if (this._curState != null)
+            {
+                this._curState.onStateEnter();
+            }
+        }
+        if (this._curState != null)
+        {
+            this._curState.update();
+        }
     }
 
-    public void cellClickEventHandler(GameObject go)
+    public void initStates()
     {
-        Cell cell = go.GetComponent<Cell>();
+        this._subStates = new Dictionary<int, IState>();
+        this._subStates.Add(BattleConsts.MainPhaseSubState_Idle, new MainPhaseIdleState(this));
+        this._subStates.Add(BattleConsts.MainPhaseSubState_SelectUnitAction, new MainPhaseSelectUnitActionState(this));
+    }
+
+    public void setState(int stateId)
+    {
+        this._nextStateId = stateId;
     }
 }

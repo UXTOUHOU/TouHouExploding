@@ -5,21 +5,25 @@ public class CellOperationIdle : ICellOperation
     {
     }
 
-    public void onCellClickHandler(Cell cell)
+    public void onCellClick(Cell cell)
     {
-        BattleGlobal.SelectCell = cell;
-        CommandManager.getInstance().runCommand(CommandConsts.CommandConsts_PopUpWindow, WindowName.UnitOperationView);
+        BattleGlobal.SelectedCell = cell;
+        CommandManager.getInstance().runCommand(BattleConsts.CMD_OnCellSelected);
         //cell.ShowOperateButton();
         //cell.SetBackgroundColor(Cell.SelectedColor);
         Chessboard.SelectedCell = cell;
     }
 
-    public void onCellEnterHandler(Cell cell)
+    public void onCellEnter(Cell cell)
     {
     }
 
-    public void onCellExitHandler(Cell cell)
+    public void onCellExit(Cell cell)
     {
 
+    }
+
+    public void clear()
+    {
     }
 }

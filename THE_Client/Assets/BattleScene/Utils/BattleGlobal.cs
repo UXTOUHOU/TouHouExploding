@@ -23,6 +23,6 @@ class BattleGlobal
     /// <summary>
     /// 当前选中的格子
     /// </summary>
-    public static Cell SelectCell;
+    public static Cell SelectedCell;
 }
 

@@ -12,6 +12,7 @@ public class UIEventListener : UnityEngine.EventSystems.EventTrigger
     public UIEventHandler onUp;
     public UIEventHandler onSelect;
     public UIEventHandler onUpdateSelect;
+    public UIEventHandler onMove;
 
     public static UIEventListener Get(GameObject go)
     {
@@ -22,6 +23,7 @@ public class UIEventListener : UnityEngine.EventSystems.EventTrigger
 
     public override void OnPointerClick(PointerEventData eventData)
     {
+        if ( eventData.button != PointerEventData.InputButton.Left ) return;
         if (onClick != null) onClick(gameObject);
     }
 
@@ -48,5 +50,10 @@ public class UIEventListener : UnityEngine.EventSystems.EventTrigger
     public override void OnSelect(BaseEventData eventData)
     {
         if (onSelect != null) onSelect(gameObject);
+    }
+
+    public override void OnMove(AxisEventData eventData)
+    {
+        if (onMove != null) onMove(gameObject);
     }
 }

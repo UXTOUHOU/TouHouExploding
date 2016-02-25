@@ -59,7 +59,7 @@ public class PopUpManager : ICommand
 		window.SetActive (false);
 	}
 
-	public void addPopUp(string windowName)
+	public void addPopUp(string windowName,string parentName)
 	{
 		GameObject window = null;
 		/*if (this._popUpMap.ContainsKey (windowName)) 
@@ -145,7 +145,7 @@ public class PopUpManager : ICommand
 			{
 				//window = GameObject.Instantiate(prefab) as GameObject;
 				window = prefab;
-                window.transform.SetParent(this._containerCanvas.transform);
+                //window.transform.SetParent(this._containerCanvas.transform);
 				//window.transform.parent = this._uiRoot.transform;
 				//window.transform.localPosition = Vector3.zero;
 				//window.transform.localRotation = Quaternion.identity;
@@ -161,4 +161,3 @@ public class PopUpManager : ICommand
 		}
 	}
 }
-

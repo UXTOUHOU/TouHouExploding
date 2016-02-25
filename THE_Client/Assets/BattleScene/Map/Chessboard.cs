@@ -30,6 +30,8 @@ public class Chessboard : MonoBehaviour
 
     private RectTransform _rectTrans;
     private GameObject _bgLayer;
+    private GameObject _uiLayer;
+
     /// <summary>
     /// 记录BattleField里对应的层
     /// </summary>
@@ -80,7 +82,6 @@ public class Chessboard : MonoBehaviour
     public void init()
     {
         this._rectTrans = this.GetComponent<RectTransform>();
-        this._bgLayer = this.transform.FindChild("BgLayer").gameObject;
         //RectTransform anchor = ChessboardRect.GetComponent<RectTransform>();
         Vector2 chessboardSize = new Vector2(Screen.width * (this._rectTrans.anchorMax.x - this._rectTrans.anchorMin.x),
             Screen.height * (this._rectTrans.anchorMax.y - this._rectTrans.anchorMin.y));
@@ -90,7 +91,7 @@ public class Chessboard : MonoBehaviour
         float cellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY); ;
         //BattleGlobal.CellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY);
         BattleGlobal.Scale = cellSize / BattleConsts.DefaultCellSize;
-        this._bgLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
+        this.initLayers();
         GameObject cellGo;
         Cell cell;
         for (int x = 0; x < ChessboardMaxX; ++x)
@@ -128,6 +129,30 @@ public class Chessboard : MonoBehaviour
                         SkillOperate.SummonUnit(cell, 1, EGroupType.RedSide);
                 }
             }
+    }
+
+    public void testMove(GameObject go)
+    {
+        Vector3 vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log(this.transform.InverseTransformPoint(vec));
+        //this.transform.InverseTransformVector
+    }
+
+    /// <summary>
+    /// 初始化BattleField上的层
+    /// </summary>
+    private void initLayers()
+    {
+        // 获取层
+        this._bgLayer = this.transform.FindChild("BgLayer").gameObject;
+        this._uiLayer = this.transform.FindChild("UILayer").gameObject;
+        // 设置全局缩放
+        this._bgLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
+        this._uiLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
+        // 添加到Map
+        this._layersMap = new Dictionary<int, GameObject>();
+        this._layersMap.Add(BattleConsts.BattleFieldLayer_Bg, this._bgLayer);
+        this._layersMap.Add(BattleConsts.BattleFieldLayer_UI, this._uiLayer);
     }
 
     public void addClickEventHandler(UIEventListener.UIEventHandler eventHandler)
@@ -190,9 +215,41 @@ public class Chessboard : MonoBehaviour
         cell.SetBackgroundColor(Color.black);
     }
 
-    public void addChildOnBgLayer(GameObject child,int row,int col)
+    /// <summary>
+    /// 添加对象到指定层
+    /// </summary>
+    /// <param name="child"></param>
+    /// <param name="layerIndex"></param>
+    public void addChildOnLayer(GameObject child, int layerIndex)
     {
+        GameObject layer;
+        if (this._layersMap.TryGetValue(layerIndex, out layer))
+        {
+            Vector3 tmpScale = child.transform.localScale;
+            child.transform.SetParent(layer.transform);
+            child.transform.localScale = tmpScale;
+            child.transform.SetAsLastSibling();
+        }
+    }
 
+    /// <summary>
+    /// 添加对象到指定层的对应行列位置
+    /// </summary>
+    /// <param name="child">对象</param>
+    /// <param name="layerIndex">层的索引</param>
+    /// <param name="row">行</param>
+    /// <param name="col">列</param>
+    public void addChildOnLayer(GameObject child,int layerIndex,int row,int col)
+    {
+        GameObject layer;
+        if (this._layersMap.TryGetValue(layerIndex, out layer))
+        {
+            Vector3 tmpScale = child.transform.localScale;
+            child.transform.SetParent(layer.transform);
+            child.transform.localScale = tmpScale;
+            child.transform.SetAsLastSibling();
+            child.transform.localPosition = BattleUtils.getCellPosByLocation(row, col);
+        }
     }
 
     /// <summary>

@@ -9,6 +9,23 @@ public class CardAttribute
     public int attack;          // 攻击力
     public int minAtkRange;     // 攻击范围最小值
     public int maxAtkRange;     // 攻击范围最大值
+    /// <summary>
+    /// 基础机动
+    /// </summary>
+    public int motilityBase;
+    /// <summary>
+    /// 额外机动
+    /// </summary>
+    public int motilityExtra;
+    /// <summary>
+    /// 总机动的额外百分比
+    /// </summary>
+    public float motilityTotalPercent;
+    public int motilityCurrent
+    {
+        get { return Mathf.FloorToInt(motilityTotalPercent*(this.motilityBase + this.motilityExtra)); }
+    }
+    
 
     public CardAttribute()
     {

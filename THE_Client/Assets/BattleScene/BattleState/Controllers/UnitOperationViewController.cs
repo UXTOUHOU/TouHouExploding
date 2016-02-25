@@ -14,18 +14,18 @@ public class UnitOperationViewController : BaseViewController
 
     public override void onPopUp(object[] args)
     {
-        base.onPopUp(args);
         // 设置位置
-        Cell cell = BattleGlobal.SelectCell;
-        this.transform.localPosition = BattleUtils.getCellPosByLocation(cell.location.y, cell.location.x);
-        // 添加事件监听
+        Cell cell = BattleGlobal.SelectedCell;
+        // 添加到UILayer
+        BattleSceneMain.getInstance().chessboard.addChildOnLayer(this.gameObject, BattleConsts.BattleFieldLayer_UI, cell.location.y, cell.location.x);
+        this.gameObject.SetActive(true);
     }
 
     public void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            CommandManager.getInstance().runCommand(CommandConsts.CommandConsts_RemoveWindow, this._windowName);
+            this.gameObject.SetActive(false);
         }
     }
 }

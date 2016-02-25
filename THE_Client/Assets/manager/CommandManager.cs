@@ -95,7 +95,7 @@ public class CommandManager
 			}
 			if ( i!= len )
 			{
-				list.RemoveRange(i,len);
+				list.RemoveRange(i,len-1);
 			}
 		}
 	}
