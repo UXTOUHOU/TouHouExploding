@@ -39,7 +39,6 @@ public class Unit
     public bool Movable = true;             // 是否可以进行移动操作
     public bool Attackable = true;          // 是否可以进行攻击操作
 
-
     public Skill Skill_1;
     public Skill Skill_2;
     public Skill Skill_3;
@@ -48,6 +47,9 @@ public class Unit
     private EGroupType groupType;           // 单位阵营
     private UnitUI unitSprite;              // 单位的UI
     private GameObject _unitGo;
+    private Image _unitSp;
+    private Image _groupSp;
+    private Text _hpText;
 
     public int HP
     {
@@ -98,10 +100,21 @@ public class Unit
         // Test
         UnitAttribute = new CardAttribute();
         //
-        this._unitGo = ResourceManager.getInstance().loadPrefab("Prefabs/UnitPrefab");
+        this.createUnitPrefab();
         BattleSceneMain.getInstance().chessboard.addChildOnLayer(this._unitGo, BattleConsts.BattleFieldLayer_Unit, targetPosition.y, targetPosition.x);
-        //unitSprite = new UnitUI(this, targetPosition);
+        unitSprite = new UnitUI(this, targetPosition);
         UnitManager.UnitList.Add(this);
+    }
+
+    private void createUnitPrefab()
+    {
+        this._unitGo = ResourceManager.getInstance().loadPrefab("Prefabs/UnitPrefab");
+        this._unitSp = this._unitGo.transform.FindChild("UnitImage").GetComponent<Image>();
+        this._groupSp = this._unitGo.transform.FindChild("GroupImage").GetComponent<Image>();
+        this._hpText = this._unitGo.transform.FindChild("HpText").GetComponent<Text>();
+        // 设置对应的缩放
+        this._groupSp.GetComponent<RectTransform>().localScale = new Vector3(1f / BattleGlobal.Scale, 1f / BattleGlobal.Scale, 1);
+        this._hpText.GetComponent<RectTransform>().localScale = new Vector3(1f / BattleGlobal.Scale, 1f / BattleGlobal.Scale, 1);
     }
 
 
