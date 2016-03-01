@@ -26,7 +26,7 @@ public class UnitUI
     {
         UnitImage = new GameObject();
         UnitImage.transform.SetParent(GameObject.Find("/Canvas/UnitImage").transform);
-        Vector3 cellPosition = unit.CurrentCell.GetLocalPosition();
+        Vector3 cellPosition = unit.curCell.GetLocalPosition();
         UnitImage.transform.localPosition = cellPosition;
         UnitImage.transform.localScale = new Vector3(Chessboard.CellSize / 75, Chessboard.CellSize / 75, 1);
         UnitImage.AddComponent<Image>().sprite = DataManager.CreateUnitSprite(unit.UnitAttribute.ID);
@@ -58,7 +58,7 @@ public class UnitUI
     /// </summary>
     public void UpdateGroupPosition()
     {
-        Vector3 cellPosition = unit.CurrentCell.GetLocalPosition();
+        Vector3 cellPosition = unit.curCell.GetLocalPosition();
         imageGroup.transform.localPosition = new Vector3(Chessboard.CellSize / 2 + cellPosition.x,
                 Chessboard.CellSize / 2 + cellPosition.y,
                 0);
@@ -96,7 +96,7 @@ public class UnitUI
 
     public void UpdateHPPosition()
     {
-        Vector3 cellPosition = unit.CurrentCell.GetLocalPosition();
+        Vector3 cellPosition = unit.curCell.GetLocalPosition();
         textHP.transform.localPosition = new Vector3(-Chessboard.CellSize / 2 + cellPosition.x,
                 Chessboard.CellSize / 2 + cellPosition.y,
                 0);

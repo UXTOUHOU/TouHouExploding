@@ -21,6 +21,7 @@ public class Cell : MonoBehaviour
     }
     public ChessboardPosition Position;
 
+    public static Color DefaultColor = new Color(0F, 0F, 0F);
     public static Color SelectedColor = new Color(10F / 255, 23F / 255, 96F / 255);
     public static Color MovableColor = new Color(70F / 255, 112F / 255, 70F / 255);
     public static Color AttackableColor = new Color(149F / 255, 70F / 255, 70F / 255);
@@ -35,6 +36,7 @@ public class Cell : MonoBehaviour
     public static GameObject btnSkill_3;
 
     private Image _bgImg;
+    private Image _rangeImg;
 
     /*private int _row;
     public int row
@@ -152,6 +154,16 @@ public class Cell : MonoBehaviour
         this._bgImg.color = newColor;
     }
 
+    public void activeRangeImg(bool active)
+    {
+        this._rangeImg.gameObject.SetActive(active);
+    }
+
+    public void setRangeColor(Color newColor)
+    {
+        this._rangeImg.color = newColor;
+    }
+
     public void ShowMovableRange()
     {
         var attribute = UnitOnCell.UnitAttribute;
@@ -197,6 +209,7 @@ public class Cell : MonoBehaviour
     void Start()
     {
         this._bgImg = this.transform.FindChild("Background").GetComponent<Image>();
+        this._rangeImg = this.transform.FindChild("Range").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -232,13 +245,13 @@ public class Cell : MonoBehaviour
         if (targetCell.UnitOnCell != null)
         {
             //更新单位所在的cell
-            targetCell.UnitOnCell.CurrentCell = targetCell;
+            targetCell.UnitOnCell.curCell = targetCell;
             //更新单位的HP和Group位置
             targetCell.UnitOnCell.UpdateAttributePosition();
         }
         if (UnitOnCell != null)
         {
-            UnitOnCell.CurrentCell = this;
+            UnitOnCell.curCell = this;
             this.UnitOnCell.UpdateAttributePosition();
         }
     }

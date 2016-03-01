@@ -43,4 +43,10 @@ public class ChessboardPosition
     {
         return Chessboard.GetCell(this).GetPosition();
     }
+
+    /*public override bool Equals(object obj)
+    {
+        ChessboardPosition pos = (ChessboardPosition)obj;
+        return this.x == pos.x && this.y == pos.y;
+    }*/
 }

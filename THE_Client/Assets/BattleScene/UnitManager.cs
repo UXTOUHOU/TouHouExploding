@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public class UnitManager : MonoBehaviour
+public class UnitManager
 {
     /// <summary>
     /// 保存所有Unit的UI对象
@@ -20,10 +20,37 @@ public class UnitManager : MonoBehaviour
     public static bool GroupChanged = false;
     public static bool CellChanged = false;
 
-    // Use this for initialization
-    void Start()
-    {
+    private static UnitManager _instance;
 
+    public static UnitManager getInatance()
+    {
+        if ( _instance == null )
+        {
+            _instance = new UnitManager();
+        }
+        return _instance;
+    }
+
+    private List<Unit> _unitList;
+
+    public void init()
+    {
+        this._unitList = new List<Unit>();
+    }
+
+    public void registerUnit(Unit unit)
+    {
+        this._unitList.Add(unit);
+    }
+    
+    public void update()
+    {
+        int i, len;
+        len = this._unitList.Count;
+        for (i=0;i< len;i++)
+        {
+            this._unitList[i].update();
+        }
     }
 
     // Update is called once per frame

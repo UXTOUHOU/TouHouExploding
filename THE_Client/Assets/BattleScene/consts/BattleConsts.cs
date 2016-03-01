@@ -29,7 +29,14 @@
     /// 主要阶段的子状态-选择单位技能
     /// </summary>
     public const int MainPhaseSubState_SelectUnitSkill = 3;
-    public const int MianPhaseSubState_SelectMovePath = 4;
+    /// <summary>
+    /// 主要阶段的子状态-选择单位移动路径
+    /// </summary>
+    public const int MainPhaseSubState_SelectMovePath = 4;
+    /// <summary>
+    /// 主要阶段的子状态-单位移动
+    /// </summary>
+    public const int MainPhaseSubState_MoveUnit = 5;
 
     /// <summary>
     /// 单元格操作-空闲
@@ -43,6 +50,10 @@
     /// 单元格默认尺寸
     /// </summary>
     public const int DefaultCellSize = 75;
+    /// <summary>
+    /// 默认单位移动每格的时间
+    /// </summary>
+    public const float DefaultMoveTimePerCell = 0.5f;
 
     public const int BattleFieldLayer_Bg = 1;
     public const int BattleFieldLayer_Unit = 2;
@@ -55,5 +66,13 @@
     /// </summary>
     public const int CMD_OnCellSelected = 40000;
     public const int CMD_SelectCard = 40001;
+    /// <summary>
+    /// 单位移动中路过单元格
+    /// </summary>
+    public const int CMD_UnitStepOnCell = 40002;
+    /// <summary>
+    /// 单位最终移动完成
+    /// </summary>
+    public const int CMD_UnitMoveComplete = 40003;
 }
 

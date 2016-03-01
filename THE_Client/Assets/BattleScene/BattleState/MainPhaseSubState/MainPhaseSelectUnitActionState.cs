@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-class MainPhaseSelectUnitActionState : IState, ICommand
+class MainPhaseSelectUnitActionState : IState
 {
     private IFSM _fsm;
 
@@ -40,14 +40,13 @@ class MainPhaseSelectUnitActionState : IState, ICommand
             this.init();
         }
         this.showUnitActionView();
-        OperationManager.getInstance().setOperation(BattleConsts.CellOp_Idle);
-        CommandManager.getInstance().addCommand(BattleConsts.CMD_OnCellSelected, this);
+        BattleGlobal.Core.chessboard.addClickEventHandler(this.onCellClick);
     }
 
     public void onStateExit()
     {
         this.removeUnitActionView();
-        CommandManager.getInstance().removeCommand(BattleConsts.CMD_OnCellSelected, this);
+        BattleGlobal.Core.chessboard.removeClickEventHandler(this.onCellClick);
     }
 
     public void update()
@@ -55,6 +54,19 @@ class MainPhaseSelectUnitActionState : IState, ICommand
         if (Input.GetMouseButton(1))
         {
             this._fsm.setState(BattleConsts.MainPhaseSubState_Idle);
+        }
+    }
+
+    private void onCellClick(GameObject go)
+    {
+        Cell cell = go.GetComponent<Cell>();
+        if (cell != null)
+        {
+            BattleGlobal.SelectedCell = cell;
+            if (cell.UnitOnCell != null)
+            {
+                this._fsm.setState(BattleConsts.MainPhaseSubState_SelectUnitAction);
+            }
         }
     }
 
@@ -95,7 +107,7 @@ class MainPhaseSelectUnitActionState : IState, ICommand
 
     private void btnMoveClickHander(GameObject go)
     {
-
+        this._fsm.setState(BattleConsts.MainPhaseSubState_SelectMovePath);
     }
 
     private void btnAttackClickHander(GameObject go)

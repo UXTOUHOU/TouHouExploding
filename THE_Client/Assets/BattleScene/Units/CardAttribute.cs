@@ -23,7 +23,7 @@ public class CardAttribute
     public float motilityTotalPercent;
     public int motilityCurrent
     {
-        get { return Mathf.FloorToInt(motilityTotalPercent*(this.motilityBase + this.motilityExtra)); }
+        get { return Mathf.FloorToInt((1+motilityTotalPercent)*(this.motilityBase + this.motilityExtra)); }
     }
     
 
@@ -37,6 +37,7 @@ public class CardAttribute
         minAtkRange = 0;
         maxAtkRange = 3;
         //
+        this.motilityBase = 3;
     }
 
     public CardAttribute(int cardID)

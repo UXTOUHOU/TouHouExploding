@@ -20,15 +20,26 @@ public class BattleSceneMain : MonoBehaviour
         get { return this._chessboard; }
         set { this._chessboard = value; }
     }
+    /// <summary>
+    /// 游戏是否已经开始
+    /// </summary>
+    private bool _isGameStarted;
+
+    public void startGame()
+    {
+        this._isGameStarted = true;
+    }
 
     void Awake()
     {
         _instance = this;
+        BattleGlobal.Core = this;
     }
 
 	// Use this for initialization
 	void Start () 
     {
+        this._isGameStarted = false;
         BattleStateManager.getInstance().setState(BattleConsts.BattleState_InitGame);
 	}
 	
@@ -36,10 +47,9 @@ public class BattleSceneMain : MonoBehaviour
 	void Update () 
     {
         BattleStateManager.getInstance().update();
-        // 全局监听右键点击
-        /*if (Input.GetMouseButton(1))
+        if ( this._isGameStarted )
         {
-            OperationManager.getInstance().onRightClick();
-        }*/
+            UnitManager.getInatance().update();
+        }
 	}
 }

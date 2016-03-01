@@ -57,6 +57,8 @@ public class MainPhaseState : BattleStateBase ,IFSM
         this._subStates = new Dictionary<int, IState>();
         this._subStates.Add(BattleConsts.MainPhaseSubState_Idle, new MainPhaseIdleState(this));
         this._subStates.Add(BattleConsts.MainPhaseSubState_SelectUnitAction, new MainPhaseSelectUnitActionState(this));
+        this._subStates.Add(BattleConsts.MainPhaseSubState_SelectMovePath, new MainPhaseSelectMovePathState(this));
+        this._subStates.Add(BattleConsts.MainPhaseSubState_MoveUnit, new MainPhaseMoveUnitState(this));
     }
 
     public void setState(int stateId)

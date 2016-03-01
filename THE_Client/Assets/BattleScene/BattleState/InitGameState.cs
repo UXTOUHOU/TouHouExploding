@@ -14,13 +14,15 @@ public class InitGameState : BattleStateBase
 
     public override void onStateEnter()
     {
-        BattleSceneMain.getInstance().chessboard.init();
+        UnitManager.getInatance().init();
+        BattleGlobal.Core.chessboard.init();
         OperationManager.getInstance().init();
         PopUpManager.getInstance().init();
     }
 
     public override void onStateExit()
     {
+        BattleGlobal.Core.startGame();
     }
 
     public override void update()

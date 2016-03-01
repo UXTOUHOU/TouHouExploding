@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MainPhaseIdleState : IState , ICommand
+public class MainPhaseIdleState : IState
 {
     private IFSM _fsm;
 
@@ -15,13 +15,12 @@ public class MainPhaseIdleState : IState , ICommand
 
     public void onStateEnter()
     {
-        OperationManager.getInstance().setOperation(BattleConsts.CellOp_Idle);
-        CommandManager.getInstance().addCommand(BattleConsts.CMD_OnCellSelected, this);
+        BattleGlobal.Core.chessboard.addClickEventHandler(this.onCellClick);
     }
 
     public void onStateExit()
     {
-        CommandManager.getInstance().removeCommand(BattleConsts.CMD_OnCellSelected, this);
+        BattleGlobal.Core.chessboard.removeClickEventHandler(this.onCellClick);
     }
 
     public void update()
@@ -29,15 +28,16 @@ public class MainPhaseIdleState : IState , ICommand
         
     }
 
-    public void recvCommand(int cmd, params object[] args)
+    private void onCellClick(GameObject go)
     {
-        switch (cmd)
+        Cell cell = go.GetComponent<Cell>();
+        if ( cell != null )
         {
-            case BattleConsts.CMD_OnCellSelected:
+            BattleGlobal.SelectedCell = cell;
+            if ( cell.UnitOnCell != null )
+            {
                 this._fsm.setState(BattleConsts.MainPhaseSubState_SelectUnitAction);
-                break;
-            default:
-                break;
+            }
         }
     }
 }

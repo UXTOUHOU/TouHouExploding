@@ -33,6 +33,20 @@ public class Chessboard : MonoBehaviour
     private GameObject _unitLayer;
     private GameObject _uiLayer;
 
+    private int[] _moveRange;
+    private int[] _movePaths;
+    /// <summary>
+    /// 当前是否正在显示移动范围
+    /// </summary>
+    private bool _isShowingMoveRange;
+    /// <summary>
+    /// 当前是否正在显示移动范围
+    /// </summary>
+    public bool isShowingMoveRange
+    {
+        get { return this._isShowingMoveRange;  }
+    }
+
     /// <summary>
     /// 记录BattleField里对应的层
     /// </summary>
@@ -201,19 +215,61 @@ public class Chessboard : MonoBehaviour
         }
     }
 
-    public void testCell(GameObject go)
+    public void removeClickEventHandler(UIEventListener.UIEventHandler eventHandler)
+    {
+        int i, j;
+        int rowLimit = BattleConsts.MapMaxRow;
+        int colLimit = BattleConsts.MapMaxCol;
+        for (i = 0; i < rowLimit; i++)
+        {
+            for (j = 0; j < colLimit; j++)
+            {
+                UIEventListener.Get(cellArray[j, i].gameObject).onClick -= eventHandler;
+            }
+        }
+    }
+
+    public void removeEnterEventHandler(UIEventListener.UIEventHandler eventHandler)
+    {
+        int i, j;
+        int rowLimit = BattleConsts.MapMaxRow;
+        int colLimit = BattleConsts.MapMaxCol;
+        for (i = 0; i < rowLimit; i++)
+        {
+            for (j = 0; j < colLimit; j++)
+            {
+                UIEventListener.Get(cellArray[j, i].gameObject).onEnter -= eventHandler;
+            }
+        }
+    }
+
+    public void removeExitEventHandler(UIEventListener.UIEventHandler eventHandler)
+    {
+        int i, j;
+        int rowLimit = BattleConsts.MapMaxRow;
+        int colLimit = BattleConsts.MapMaxCol;
+        for (i = 0; i < rowLimit; i++)
+        {
+            for (j = 0; j < colLimit; j++)
+            {
+                UIEventListener.Get(cellArray[j, i].gameObject).onExit -= eventHandler;
+            }
+        }
+    }
+
+    private void testCell(GameObject go)
     {
         Cell cell = go.GetComponent<Cell>();
         Debug.Log(cell.location.y + " " + cell.location.x);
     }
 
-    public void onCellEnterHandler(GameObject go)
+    private void onCellEnterHandler(GameObject go)
     {
         Cell cell = go.GetComponent<Cell>();
         cell.SetBackgroundColor(Cell.SelectedColor);
     }
 
-    public void onCellExitHandler(GameObject go)
+    private void onCellExitHandler(GameObject go)
     {
         Cell cell = go.GetComponent<Cell>();
         cell.SetBackgroundColor(Color.black);
@@ -253,6 +309,109 @@ public class Chessboard : MonoBehaviour
             child.transform.localScale = tmpScale;
             child.transform.SetAsLastSibling();
             child.transform.localPosition = BattleUtils.getCellPosByLocation(row, col);
+        }
+    }
+    /// <summary>
+    /// 根据行列拿到对应的单元格
+    /// </summary>
+    /// <param name="row">行</param>
+    /// <param name="col">列</param>
+    /// <returns></returns>
+    public Cell getCellByPos(int row,int col)
+    {
+        if ( row >= BattleConsts.MapMaxRow || row < 0 || col >= BattleConsts.MapMaxCol || col < 0 )
+        {
+            return null;
+        }
+        return this.cellArray[col, row];
+    }
+    /// <summary>
+    /// 根据位置拿到对应的单元格
+    /// </summary>
+    /// <param name="pos">一维数组的对应位置下标</param>
+    /// <returns></returns>
+    public Cell getCellByPos(int pos)
+    {
+        return getCellByPos(pos / BattleConsts.MapMaxCol, pos % BattleConsts.MapMaxCol);
+    }
+
+    /// <summary>
+    /// 显示移动范围
+    /// </summary>
+    /// <param name="isShow">是否显示，为false表示取消</param>
+    /// <param name="range">移动范围的一维数组</param>
+    public void showAvailableMoveRange(bool isShow,int[] range=null)
+    {
+        int tmpRow, tmpCol,i,j;
+        Cell cell;
+        int rowLimit = BattleConsts.MapMaxRow;
+        int colLimit = BattleConsts.MapMaxCol;
+        // 判断是否需要显示移动范围
+        for (i = 0; i < rowLimit; i++)
+        {
+            for (j = 0; j < colLimit; j++)
+            {
+                cell = cellArray[j, i];
+                cell.setRangeColor(Cell.DefaultColor);
+                cell.activeRangeImg(isShow);
+            }
+        }
+        this._isShowingMoveRange = isShow;
+        if ( !isShow )
+        {
+            this._movePaths = null;
+            this._moveRange = null;
+            return;
+        }
+        int len = range.Length;
+        this._moveRange = range;
+        for (i=0;i< len;i++)
+        {
+            if ( this._moveRange[i] >= 0 )
+            {
+                tmpRow = i / colLimit;
+                tmpCol = i % colLimit;
+                cell = this.cellArray[tmpCol, tmpRow];
+                cell.setRangeColor(Cell.MovableColor);
+            }
+        }
+    }
+
+    public void showMovePath(int[] paths)
+    {
+        if ( !this._isShowingMoveRange )
+        {
+            return;
+        }
+        int colLimit = BattleConsts.MapMaxCol;
+        int tmpRow, tmpCol,len,posIndex,i;
+        Cell cell;
+        // 还原之前的颜色
+        if ( this._movePaths != null )
+        {
+            len = this._movePaths.Length;
+            for (i=0;i< len;i++)
+            {
+                posIndex = this._movePaths[i];
+                tmpRow = posIndex / colLimit;
+                tmpCol = posIndex % colLimit;
+                cell = this.cellArray[tmpCol, tmpRow];
+                cell.setRangeColor(Cell.MovableColor);
+            }
+        }
+        // 高亮选中的路径
+        this._movePaths = paths;
+        if (this._movePaths != null)
+        {
+            len = this._movePaths.Length;
+            for (i = 0; i < len; i++)
+            {
+                posIndex = this._movePaths[i];
+                tmpRow = posIndex / colLimit;
+                tmpCol = posIndex % colLimit;
+                cell = this.cellArray[tmpCol, tmpRow];
+                cell.setRangeColor(Cell.HighLightMovableColor);
+            }
         }
     }
 

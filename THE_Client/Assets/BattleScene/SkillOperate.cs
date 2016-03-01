@@ -43,7 +43,7 @@ public class SkillOperate
         do
         {
             unit = SelectUnit();
-        } while (!(unit.CurrentCell.Position.Distance(central.Position) <= distance));
+        } while (!(unit.curCell.Position.Distance(central.Position) <= distance));
         Chessboard.ClearBackground();
         return unit;
     }
@@ -130,7 +130,7 @@ public class SkillOperate
     public static void ForEachUnitOnChessboard(Skill skill)
     {
         foreach (var unit in UnitManager.UnitList)
-            skill.SkillEffect(unit.CurrentCell);
+            skill.SkillEffect(unit.curCell);
     }
 
     /// <summary>
@@ -146,7 +146,7 @@ public class SkillOperate
         Unit newUnit = new Unit(unitID, cell.Position);
         cell.UnitOnCell = newUnit;
         cell.UnitOnCell.GroupType = group;
-        cell.UnitOnCell.CurrentCell = cell;
+        cell.UnitOnCell.curCell = cell;
         // AfterSummonUnit事件
         foreach (var skill in afterUnitSummon)
             skill.SkillEffect(cell);
