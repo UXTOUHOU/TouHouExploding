@@ -11,7 +11,17 @@ using System;
 
 public class WindowName
 {
+    public const string BATTLE_SCENE_CANVAS = "BattleSceneCanvas";
+    public const string BATTLE_SCENE_VIEW = "BattleSceneView";
+    public const string UILAYER = "UILayer";
+    /// <summary>
+    /// 单位操作视图
+    /// </summary>
     public const string UnitOperationView = "UnitOperationView";
+    /// <summary>
+    /// 单位池视图
+    /// </summary>
+    public const string UNIT_POOL_VIEW = "UnitPoolView";
 
     public const string QuestPanelView = "QuestPanelView";
 

@@ -30,7 +30,7 @@ public class UnitState
     }
 }
 
-public class Unit
+public class Unit : IID,IBattleFieldLocation,ILuaUserData
 {
     private Cell _curCell;                // 单位所在的cell
     public Cell curCell
@@ -67,11 +67,30 @@ public class Unit
     public int row
     {
         get {  return this._row; }
+        set { this._row = value; }
     }
     private int _col;
     public int col
     {
         get { return this._col; }
+        set { this._col = value; }
+    }
+
+    /// <summary>
+    /// 当前最大生命值
+    /// </summary>
+    private int _maxHp;
+    public int maxHp
+    {
+        get { return this._maxHp; }
+    }
+    /// <summary>
+    /// 当前生命值
+    /// </summary>
+    private int _curHp;
+    public int curHp
+    {
+        get { return this._curHp; }
     }
 
     public int HP
@@ -104,6 +123,40 @@ public class Unit
         }
     }
 
+    private int _id;
+    public int id
+    {
+        get
+        {
+            return this._id;
+        }
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 拥有者
+    /// </summary>
+    private int _ownerId;
+    public int ownerId
+    {
+        get { return this._ownerId; }
+    }
+    /// <summary>
+    /// 控制者
+    /// </summary>
+    private int _controllerId;
+    public int controllerId
+    {
+        get { return this._controllerId; }
+    }
+
+    private int _ref;
+
+    private List<BuffDataDriven> _buffList;
+
     //以下是每帧执行相关
     /// <summary>
     /// 当前是否正在移动
@@ -120,6 +173,27 @@ public class Unit
     private Vector3 _movingSpeed;
     private float _movingSpeedX;
     private float _movingSpeedY;
+    /// <summary>
+    /// 更新视图标识
+    /// </summary>
+    private bool _updateViewFlag;
+
+    /// <summary>
+    /// 当前攻击次数
+    /// </summary>
+    private int _curAttackCount;
+    /// <summary>
+    /// 每回合最大可攻击次数
+    /// </summary>
+    private int _maxAttackCount;
+    /// <summary>
+    /// 每回合可额外攻击的次数
+    /// </summary>
+    private int _extraAttackCount;
+
+    private int _curCounterAttackCount;
+    private int _maxCounterAttackCount;
+    private int _extraCounterAttackCount;
 
     public Unit(int unitID, ChessboardPosition targetPosition)
     {
@@ -139,16 +213,42 @@ public class Unit
 
         // Test
         UnitAttribute = new CardAttribute();
+        this._curHp = UnitAttribute.hp;
+        this._maxHp = UnitAttribute.hp;
         //
         this.createUnitPrefab();
-        BattleSceneMain.getInstance().chessboard.addChildOnLayer(this._unitGo, BattleConsts.BattleFieldLayer_Unit, targetPosition.y, targetPosition.x);
+        BattleGlobal.Core.chessboard.addChildOnLayer(this._unitGo, BattleConsts.BattleFieldLayer_Unit, targetPosition.y, targetPosition.x);
         //unitSprite = new UnitUI(this, targetPosition);
+        this._id = IDProvider.getInstance().applyUnitId(this);
         UnitManager.getInatance().registerUnit(this);
+        this._buffList = new List<BuffDataDriven>();
+        InterpreterManager.getInstance().registerLightUserData(this);
+        this.setUpdateViewFlag(true);
+        // 生成技能
+        // test
+        if ( a == 0 )
+        {
+            InterpreterManager.getInstance().initSkill("skill1", this);
+            a = 1;
+        }
+        this.initAttributes();
     }
+
+    private void initAttributes()
+    {
+        this._curAttackCount = 0;
+        this._curCounterAttackCount = 0;
+        this._maxAttackCount = 1;
+        this._maxCounterAttackCount = 1;
+        this._extraAttackCount = 0;
+        this._extraCounterAttackCount = 0;
+    }
+
+    static int a = 0;
 
     private void createUnitPrefab()
     {
-        this._unitGo = ResourceManager.getInstance().loadPrefab("Prefabs/UnitPrefab");
+        this._unitGo = ResourceManager.getInstance().createNewInstanceByPrefabName("UnitPrefab");
         this._unitSp = this._unitGo.transform.FindChild("UnitImage").GetComponent<Image>();
         this._groupSp = this._unitGo.transform.FindChild("GroupImage").GetComponent<Image>();
         this._hpText = this._unitGo.transform.FindChild("HpText").GetComponent<Text>();
@@ -179,8 +279,8 @@ public class Unit
         // 当前位置花费步数为0
         this._moveRange[stack[0]] = 0;
         Cell cell;
-        int[,] offsets = new int[4,2] { {0,-1 }, {0,1}, {-1,0 }, {1,0 } };
-        Chessboard battleField = BattleSceneMain.getInstance().chessboard;
+        int[,] offsets = new int[4,2] { {0,-1}, {0,1}, {-1,0}, {1,0} };
+        Chessboard battleField = BattleGlobal.Core.chessboard;
         while ( index < stackLen )
         {
             if (this._moveRange[stack[index]] >= this.UnitAttribute.motilityCurrent )
@@ -203,6 +303,179 @@ public class Unit
             index++;
         }
         return (int[])(this._moveRange.Clone());
+    }
+
+    /// <summary>
+    /// 应用效果
+    /// </summary>
+    /// <param name="props"></param>
+    /// <returns></returns>
+    public IBattleProperties applyEffects(IBattleProperties props)
+    {
+        int len = this._buffList.Count;
+        BuffDataDriven buff;
+        for (int i=0;i< len;i++)
+        {
+            buff = this._buffList[i];
+            //if ( buff.canTrigger(props.getCode()) )
+            //{
+            //    buff.applyTo(props);
+            //}
+        }
+        return props;
+    }
+
+    public void getBuffEffectsByCode(int code,List<ISkillEffect> effects)
+    {
+        int len = this._buffList.Count;
+        BuffDataDriven buff;
+        for (int i = 0; i < len; i++)
+        {
+            buff = this._buffList[i];
+            buff.getEffectsByCode(code, effects);
+        }
+    }
+
+    #region 生命值相关
+    public void hurt(HurtVO vo)
+    {
+        int totalDamage = vo.phycicsDamage + vo.spellDamage + vo.hpRemoval;
+        Debug.Log("unit in position(" + this._row + "," + this._col + ") curHp=" + this._curHp + " hurt,damage is " + totalDamage);
+        if ( this._curHp <= totalDamage )
+        {
+            // 判断是否有死亡前触发的effect
+            // 触发单位死亡事件
+        }
+        else
+        {
+            this._curHp -= totalDamage;
+            // 更新UI
+            this._updateViewFlag = true;
+            // 触发受伤事件
+            EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.CODE_TAKE_DAMAGE);
+            evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_ATTACKER, vo.attacker);
+            evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_VICTIM, vo.victim);
+            evtVO.setProperty(BattleConsts.PROPERTY_CALC_PHYSICAL_DAMAGE, vo.phycicsDamage);
+            evtVO.setProperty(BattleConsts.PROPERTY_CALC_SPELL_DAMAGE, vo.spellDamage);
+            evtVO.setProperty(BattleConsts.PROPERTY_CALC_HP_REMOVAL, vo.hpRemoval);
+            evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_REASON, vo.damageReason);
+            BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.CODE_TAKE_DAMAGE, evtVO);
+            ProcessManager.getInstance().raiseEvent(evt);
+        }
+    }
+
+    public void recover(int recoverValue)
+    {
+
+    }
+    #endregion
+
+    #region 控制权相关
+    public void setOwner(int playerId)
+    {
+        this._ownerId = playerId;
+    }
+
+    public void setController(int playerId)
+    {
+        this._controllerId = playerId;
+        this.setUpdateViewFlag(true);
+    }
+
+    public void changeController(int playerId)
+    {
+        if ( this._controllerId != playerId )
+        {
+            this._controllerId = playerId;
+            this.setUpdateViewFlag(true);
+            // 触发控制权变更事件
+
+        }
+    }
+    #endregion
+
+    #region 位移相关
+    /// <summary>
+    /// 改变单位位置
+    /// </summary>
+    /// <param name="offsetRow">行偏移量</param>
+    /// <param name="offsetCol">列偏移量</param>
+    /// <returns></returns>
+    public int translate(int offsetRow,int offsetCol)
+    {
+        int targetRow = this._row + offsetRow;
+        int targetCol = this._col + offsetCol;
+        Cell targetCell = BattleGlobal.Core.chessboard.getCellByPos(targetRow, targetCol);
+        if ( targetCell.UnitOnCell != null )
+        {
+            Debug.LogError("Unit translate fail!There is unit on targetCell!");
+            return BattleConsts.UNIT_ACTION_FAIL;
+        }
+        this.curCell = targetCell;
+        return BattleConsts.UNIT_ACTION_SUCCESS;
+    }
+    #endregion
+
+    #region 攻击、反击相关
+    /// <summary>
+    /// 是否可以执行攻击指令
+    /// </summary>
+    /// <returns></returns>
+    public bool canAttack()
+    {
+        if ( this._curAttackCount < this._maxAttackCount + this._extraAttackCount )
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// 是否可以执行反击指令
+    /// </summary>
+    /// <returns></returns>
+    public bool canCounterAttack()
+    {
+        if (this._curCounterAttackCount < this._maxCounterAttackCount + this._extraCounterAttackCount)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public int doAttack()
+    {
+        this._curAttackCount++;
+        return BattleConsts.UNIT_ACTION_SUCCESS;
+    }
+
+    public int doCounterAttack()
+    {
+        this._curCounterAttackCount++;
+        return BattleConsts.UNIT_ACTION_SUCCESS;
+    }
+    #endregion
+
+    private void updateView()
+    {
+        this._hpText.text = this._curHp.ToString();
+        // todo :暂用
+        this._groupSp.sprite = Resources.Load<Sprite>(BattleSceneUtils.getPlayerGroupTextureName(this._controllerId));
+    }
+
+    public void addBuff(BuffDataDriven buff)
+    {
+        // todo : 暂时不加判断
+        this._buffList.Add(buff);
+    }
+
+    public void reset(int resetType)
+    {
+        if ( resetType == BattleConsts.RESET_TYPE_SELF_TURN_END )
+        {
+            this._curAttackCount = 0;
+            this._curCounterAttackCount = 0;
+        }
     }
 
 
@@ -276,6 +549,11 @@ public class Unit
         {
             this.move();
         }
+        if ( this._updateViewFlag )
+        {
+            this._updateViewFlag = false;
+            this.updateView();
+        }
     }
 
     public void startMoving(int[] movingPath)
@@ -314,8 +592,8 @@ public class Unit
         this._movingTime = 0;
         this._movingTotalTime = BattleConsts.DefaultMoveTimePerCell;
         // 计算速度
-        this._movingSpeedX = (BattleUtils.getCellPosXByCol(targetCell.location.x) - BattleUtils.getCellPosXByCol(curCell.location.x)) / this._movingTotalTime;
-        this._movingSpeedY = (BattleUtils.getCellPosYByRow(targetCell.location.y) - BattleUtils.getCellPosYByRow(curCell.location.y)) / this._movingTotalTime;
+        this._movingSpeedX = (BattleSceneUtils.getCellPosXByCol(targetCell.location.x) - BattleSceneUtils.getCellPosXByCol(curCell.location.x)) / this._movingTotalTime;
+        this._movingSpeedY = (BattleSceneUtils.getCellPosYByRow(targetCell.location.y) - BattleSceneUtils.getCellPosYByRow(curCell.location.y)) / this._movingTotalTime;
         //Debug.Log("SpeedX = " + this._movingSpeedX + "  SpeedY = " + this._movingSpeedY);
         this._movingSpeed = new Vector3(this._movingSpeedX, this._movingSpeedY, 0);
         this._isMoving = true;
@@ -349,6 +627,13 @@ public class Unit
             this._unitGo.transform.localPosition = this._unitGo.transform.localPosition + dTranslation;
         }
     }
+
+    public void setUpdateViewFlag(bool value)
+    {
+        this._updateViewFlag = value;
+    }
+
+    //public void applyToBuff
 
     /// <summary>
     /// 单位所属的格子变更时，更新阵营和HP标志的位置
@@ -390,4 +675,22 @@ public class Unit
     {
         return this._curCell.Position.Distance(unit.curCell.Position);
     }
+
+    public void setRef(int value)
+    {
+        this._ref = value;
+    }
+
+    public int getRef()
+    {
+        return this._ref;
+    }
+
+    public delegate void OnUnitAttackAnnounceHandler(IBattleProperties props);
+    /// <summary>
+    /// 攻击宣言前触发
+    /// </summary>
+    public OnUnitAttackAnnounceHandler OnUnitAttackAnnounce;
+
+
 }

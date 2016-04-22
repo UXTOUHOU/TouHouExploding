@@ -17,7 +17,7 @@ public class TurnStartPhaseState : BattleStateBase
 
     public override void onStateEnter()
     {
-        //BattleSceneMain.getInstance().chessboard.init();
+        BattleGlobal.Core.getPlayer(BattleGlobal.MyPlayerId).resetBPoint();
     }
 
     public override void onStateExit()

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
 class BattleGlobal
 {
-    public static BattleSceneMain Core;
+    public static BattleCore Core;
     /// <summary>
     /// 地形格左下角X坐标
     /// </summary>
@@ -35,6 +34,14 @@ class BattleGlobal
     /// 移动路径
     /// </summary>
     public static int[] MovePaths;
+    /// <summary>
+    /// 己方的玩家id
+    /// </summary>
+    public static int MyPlayerId = 0;
+    /// <summary>
+    /// 当前用到的属性数据对象
+    /// </summary>
+    public static IBattleProperties ContextBattleProperties;
     #endregion
 }
 

@@ -59,6 +59,9 @@ public class MainPhaseState : BattleStateBase ,IFSM
         this._subStates.Add(BattleConsts.MainPhaseSubState_SelectUnitAction, new MainPhaseSelectUnitActionState(this));
         this._subStates.Add(BattleConsts.MainPhaseSubState_SelectMovePath, new MainPhaseSelectMovePathState(this));
         this._subStates.Add(BattleConsts.MainPhaseSubState_MoveUnit, new MainPhaseMoveUnitState(this));
+        this._subStates.Add(BattleConsts.MainPhaseSubState_SelectAttackTarget, new MainPhaseSelectAttackTargetState(this));
+        this._subStates.Add(BattleConsts.MainPhaseSubState_UnitAttack, new MainPhaseUnitAttackState(this));
+        this._subStates.Add(BattleConsts.MainPhaseSubState_CounterAttack, new MainPhaseCounterAttackState(this));
     }
 
     public void setState(int stateId)

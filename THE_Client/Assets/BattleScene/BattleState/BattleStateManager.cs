@@ -41,6 +41,7 @@ public class BattleStateManager : IFSM
 
     public void initStates()
     {
+        this._curStateId = 0;
         this._states = new Dictionary<int, BattleStateBase>();
         this._states.Add(BattleConsts.BattleState_InitGame, new InitGameState(this));
         this._states.Add(BattleConsts.BattleState_TurnStartPhase, new TurnStartPhaseState(this));

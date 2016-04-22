@@ -1,6 +1,8 @@
-local lib = require "TestLuaLib.cs";
+pachouli = {};
+lib = require "TestLuaLib.cs";
 
 local tmp1 = 1;
+sumList = {1,2,3,4,5};
 
 local function testCallLua()
 print("testCallLua success!"..tmp1);
@@ -27,8 +29,8 @@ local function testTable(tableArg)
 	return sum;
 end
 
-local function testLuaCall()
-	local arrayList = {};
+function pachouli.testLuaCall()
+    local arrayList = {};
 	for i=1,100 do
 		arrayList[i] = i;
 	end
@@ -43,11 +45,20 @@ local function outputTable(tableArg)
 	end
 end
 
+local function generateList()
+	local arrayList = {};
+	for i=1,100 do
+		arrayList[i] = i;
+	end
+	arrayList.n = 100;
+	return arrayList;
+end
+
 return 
 {
     testCallLua = testCallLua,
     testCallLuaWithArgs = testCallLuaWithArgs,
 	testTable = testTable,
-	testLuaCall = testLuaCall,
+	testLuaCall = pachouli.testLuaCall,
 	outputTable = outputTable,
 }

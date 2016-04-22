@@ -25,7 +25,31 @@ public class CardAttribute
     {
         get { return Mathf.FloorToInt((1+motilityTotalPercent)*(this.motilityBase + this.motilityExtra)); }
     }
-    
+
+    public int minAttackRangeBase;
+    public int minAttackRangeExtra;
+    public int minAttackRangeCurrent
+    {
+        get { return this.minAttackRangeBase + this.minAttackRangeExtra; }
+    }
+    public int maxAttackRangeBase;
+    public int maxAttackRangeExtra;
+    public int maxAttackRangeCurrent
+    {
+        get { return this.maxAttackRangeBase + this.maxAttackRangeExtra; }
+    }
+
+    /// <summary>
+    /// 配置的最大生命值
+    /// </summary>
+    private int _defaultMaxHp;
+    /// <summary>
+    /// 配置的最大生命值
+    /// </summary>
+    public int DefaultMaxHp
+    {
+        get { return this._defaultMaxHp; }
+    }
 
     public CardAttribute()
     {
@@ -37,7 +61,12 @@ public class CardAttribute
         minAtkRange = 0;
         maxAtkRange = 3;
         //
+        this._defaultMaxHp = 10;
         this.motilityBase = 3;
+        this.minAttackRangeBase = 0;
+        this.maxAttackRangeBase = 3;
+        this.minAttackRangeExtra = 0;
+        this.maxAttackRangeExtra = 0;
     }
 
     public CardAttribute(int cardID)

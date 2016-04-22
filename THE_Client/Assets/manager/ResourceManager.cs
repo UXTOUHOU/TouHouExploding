@@ -92,6 +92,12 @@ public class ResourceManager {
 		return null;*/
 	}
 
+    public GameObject createNewInstanceByPrefabName(string prefabName)
+    {
+        // todo:暂用，以后统一修改
+        return GameObject.Instantiate(Resources.Load("Prefabs/" + prefabName)) as GameObject;
+    }
+
 	public Object getRes(string assetBundleName,string resId)
 	{
 		Dictionary<string,Object> dic;

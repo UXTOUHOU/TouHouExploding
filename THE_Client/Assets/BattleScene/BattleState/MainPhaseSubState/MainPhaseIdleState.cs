@@ -36,6 +36,8 @@ public class MainPhaseIdleState : IState
             BattleGlobal.SelectedCell = cell;
             if ( cell.UnitOnCell != null )
             {
+                BattleInfo info = BattleGlobal.Core.battleInfo;
+                info.unitSelected = cell.UnitOnCell;
                 this._fsm.setState(BattleConsts.MainPhaseSubState_SelectUnitAction);
             }
         }

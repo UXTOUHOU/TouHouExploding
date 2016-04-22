@@ -45,6 +45,9 @@ public class PopUpManager : ICommand
 		this._controllerMap = new Dictionary<string, BaseViewController> ();
 		// 初始化uiRoot
 		this._containerCanvas = GameObject.Find ("Canvas");
+        this._windowMap.Add(WindowName.BATTLE_SCENE_CANVAS, this._containerCanvas);
+        GameObject uiLayer = this._containerCanvas.transform.FindChild("UILayer").gameObject;
+        this._windowMap.Add(WindowName.UILAYER, uiLayer);
 		//Global.NGUIRoot = this._uiRoot;
 		// 消息
 		CommandManager.getInstance ().addCommand (CommandConsts.CommandConsts_PopUpWindow, this);
@@ -62,6 +65,7 @@ public class PopUpManager : ICommand
 	public void addPopUp(string windowName,string parentName)
 	{
 		GameObject window = null;
+        GameObject parent = null;
 		/*if (this._popUpMap.ContainsKey (windowName)) 
 		{
 			return;
@@ -69,7 +73,14 @@ public class PopUpManager : ICommand
 		if (this._windowMap.ContainsKey (windowName)) 
 		{
 			window = this._windowMap [windowName];
-			window.SetActive (true);
+            if (this._windowMap.TryGetValue(parentName, out parent))
+            {
+                window.transform.SetParent(parent.transform);
+                window.transform.localPosition = Vector3.zero;
+                window.transform.localScale = Vector3.one;
+                window.transform.localRotation = Quaternion.identity;
+            }
+            window.SetActive (true);
             window.transform.SetAsLastSibling();
 			this._popUpMap.Add (windowName, window);
 		}
@@ -128,7 +139,6 @@ public class PopUpManager : ICommand
 		{
 			return;
 		}
-		GameObject window;
 		BaseViewController controller;
 		if (this._windowMap.ContainsKey (windowName))
 		{
@@ -140,11 +150,10 @@ public class PopUpManager : ICommand
 		else 
 		{
 			//GameObject prefab = Resources.Load("Prefabs/" + windowName,typeof(GameObject)) as GameObject;
-            GameObject prefab = ResourceManager.getInstance().loadPrefab("Prefabs/" + windowName);
-			if ( prefab != null )
+            GameObject window = ResourceManager.getInstance().createNewInstanceByPrefabName(windowName);
+			if (window != null )
 			{
 				//window = GameObject.Instantiate(prefab) as GameObject;
-				window = prefab;
                 //window.transform.SetParent(this._containerCanvas.transform);
 				//window.transform.parent = this._uiRoot.transform;
 				//window.transform.localPosition = Vector3.zero;

@@ -30,12 +30,19 @@ public class UnitManager
         }
         return _instance;
     }
-
+    /// <summary>
+    /// 当前所有的unit对象
+    /// </summary>
     private List<Unit> _unitList;
+    /// <summary>
+    /// 单位的配置
+    /// </summary>
+    private Dictionary<string, IParser> _unitCfgMap;
 
     public void init()
     {
         this._unitList = new List<Unit>();
+        this._unitCfgMap = DataManager.getInstance().getDatasByName("Units") as Dictionary<string, IParser>;
     }
 
     public void registerUnit(Unit unit)
@@ -51,6 +58,44 @@ public class UnitManager
         {
             this._unitList[i].update();
         }
+    }
+
+    /// <summary>
+    /// 根据id获取单位
+    /// </summary>
+    /// <param name="id">单位id</param>
+    /// <returns></returns>
+    public Unit getUnitById(int id)
+    {
+        int i, len;
+        Unit unit = null;
+        len = this._unitList.Count;
+        for (i = 0; i < len; i++)
+        {
+            if ( this._unitList[i].id == id )
+            {
+                unit = this._unitList[i];
+                break;
+            }
+            unit = this._unitList[i];
+        }
+        return unit;
+    }
+
+    /// <summary>
+    /// 根据配置id获得单位配置
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public UnitCfg getUnitCfgBySysId(string id)
+    {
+        IParser parser;
+        UnitCfg cfg = null;
+        if ( this._unitCfgMap.TryGetValue(id,out parser) )
+        {
+            cfg = parser as UnitCfg;
+        }
+        return cfg;
     }
 
     // Update is called once per frame

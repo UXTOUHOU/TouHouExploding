@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UniLua;
+using System.Threading;
 
 class MainPhaseSelectUnitActionState : IState
 {
@@ -19,6 +20,8 @@ class MainPhaseSelectUnitActionState : IState
 
     private bool _isPopUp;
 
+    private Unit _curUnit;
+
     public MainPhaseSelectUnitActionState(IFSM fsm)
     {
         this._fsm = fsm;
@@ -28,7 +31,7 @@ class MainPhaseSelectUnitActionState : IState
 
     private void init()
     {
-        this._unitActionView = ResourceManager.getInstance().loadPrefab("Prefabs/UnitActionView");
+        this._unitActionView = ResourceManager.getInstance().createNewInstanceByPrefabName("UnitActionView");
         this._btnMove = this._unitActionView.transform.FindChild("ButtonMove").gameObject;
         this._btnAttack = this._unitActionView.transform.FindChild("ButtonAttack").gameObject;
         this._btnSkill = this._unitActionView.transform.FindChild("ButtonSkill").gameObject;
@@ -40,6 +43,7 @@ class MainPhaseSelectUnitActionState : IState
         {
             this.init();
         }
+        this._curUnit = BattleGlobal.Core.battleInfo.unitSelected;
         this.showUnitActionView();
         BattleGlobal.Core.chessboard.addClickEventHandler(this.onCellClick);
     }
@@ -66,27 +70,15 @@ class MainPhaseSelectUnitActionState : IState
             BattleGlobal.SelectedCell = cell;
             if (cell.UnitOnCell != null)
             {
-                this._fsm.setState(BattleConsts.MainPhaseSubState_SelectUnitAction);
-            }
-        }
-    }
-
-    public void recvCommand(int cmd, params object[] args)
-    {
-        switch (cmd)
-        {
-            case BattleConsts.CMD_OnCellSelected:
                 this.showUnitActionView();
-                break;
-            default:
-                break;
+            }
         }
     }
 
     private void showUnitActionView()
     {
         Cell cell = BattleGlobal.SelectedCell;
-        BattleSceneMain.getInstance().chessboard.addChildOnLayer(this._unitActionView, BattleConsts.BattleFieldLayer_UI, cell.location.y, cell.location.x);
+        BattleGlobal.Core.chessboard.addChildOnLayer(this._unitActionView, BattleConsts.BattleFieldLayer_UI, cell.location.y, cell.location.x);
         if (!this._isPopUp)
         {
             this._unitActionView.SetActive(true);
@@ -113,6 +105,15 @@ class MainPhaseSelectUnitActionState : IState
 
     private void btnAttackClickHander(GameObject go)
     {
+        // 检测攻击的cost
+        //if ( BattleManager.getInstance().checkBPointCostByAttack(BattleGlobal.MyPlayerId,this._curUnit.id,1) )
+        //{
+        //    this._fsm.setState(BattleConsts.MainPhaseSubState_SelectUnitAction);
+        //}
+        if ( this._curUnit.canAttack() )
+        {
+            this._fsm.setState(BattleConsts.MainPhaseSubState_SelectAttackTarget);
+        }
     }
 
     private string LuaScriptFile = "character/pachouli.lua";
@@ -151,6 +152,7 @@ class MainPhaseSelectUnitActionState : IState
             this._testLuaCall = this.StoreMethod("testLuaCall");
             this._outputTable = this.StoreMethod("outputTable");
             this._luaState.Pop(2);
+            this._luaState.L_DoFile("character/pachouli2.lua");
         }
 
         DateTime beforeDT,afterDt;
@@ -198,7 +200,20 @@ class MainPhaseSelectUnitActionState : IState
         //afterDt = System.DateTime.Now;
         //Debug.Log("run time : " + afterDt.Subtract(beforeDT).TotalMilliseconds);
 
+        new Thread(new ThreadStart(testThread)).Start();
         // 测试Lua调用C#库
+        //beforeDT = System.DateTime.Now;
+        //this._luaState.RawGetI(LuaDef.LUA_REGISTRYINDEX, this._testLuaCall);
+        //this._luaState.PCall(0, 1, 0);
+        //afterDt = System.DateTime.Now;
+        //ts = afterDt.Subtract(beforeDT);
+        //Debug.Log("run time : " + ts.TotalMilliseconds);
+    }
+
+    private void testThread()
+    {
+        DateTime beforeDT, afterDt;
+        TimeSpan ts;
         beforeDT = System.DateTime.Now;
         this._luaState.RawGetI(LuaDef.LUA_REGISTRYINDEX, this._testLuaCall);
         this._luaState.PCall(0, 1, 0);
