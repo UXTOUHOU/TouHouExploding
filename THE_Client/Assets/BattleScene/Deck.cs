@@ -71,9 +71,9 @@ public class Deck : MonoBehaviour
 		deckCardWidth = deckCardHeight * cardWidth / cardHeight;
 
 		// Test 加入手牌
-		AddDeckCard(6);
-		AddDeckCard(11);
-		AddDeckCard(13);
+		//AddDeckCard(6);
+		//AddDeckCard(11);
+		//AddDeckCard(13);
 		//
 	}
 	
