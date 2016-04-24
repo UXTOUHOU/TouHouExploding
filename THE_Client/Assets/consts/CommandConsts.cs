@@ -22,9 +22,9 @@ public class CommandConsts
 	public const int CommandConsts_EnterArea = 20002;
 	public const int CommandConsts_ExitArea = 20003;
 
-	public const int CommandConsts_PopUpWindow = 10000;
-	public const int CommandConsts_RemoveWindow = 10001;
-	public const int CommandConsts_DestroyWindow = 10002;
+	public const int PopUpWindow = 10000;
+	public const int RemoveWindow = 10001;
+	public const int DestroyWindow = 10002;
 
 	public const int CommandConsts_UpdateLoadingProgress = 10011;
 	public const int CommandConsts_UpdateLoadingBundleProgress = 10012;

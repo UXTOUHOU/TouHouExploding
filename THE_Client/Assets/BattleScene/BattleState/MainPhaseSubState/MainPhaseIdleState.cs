@@ -4,26 +4,33 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MainPhaseIdleState : IState
+public class MainPhaseIdleState : BattleStateBase
 {
-    private IFSM _fsm;
 
     public MainPhaseIdleState(IFSM fsm)
+        :base(fsm)
     {
-        this._fsm = fsm;
+
     }
 
-    public void onStateEnter()
+    public override void onStateEnter()
     {
+        BattleInfo info = BattleGlobal.Core.battleInfo;
+        if ( BattleGlobal.Core.getPlayer(BattleGlobal.MyPlayerId).curSummoningCount < BattleConsts.DEFAULT_MAX_SUMMONING_COUNT_PER_TURN )
+        {
+            info.isSummoningOpAvailabel = true;
+        }
         BattleGlobal.Core.chessboard.addClickEventHandler(this.onCellClick);
     }
 
-    public void onStateExit()
+    public override void onStateExit()
     {
+        BattleInfo info = BattleGlobal.Core.battleInfo;
+        info.isSummoningOpAvailabel = false;
         BattleGlobal.Core.chessboard.removeClickEventHandler(this.onCellClick);
     }
 
-    public void update()
+    public override void update()
     {
         
     }

@@ -450,7 +450,6 @@ public class Chessboard : MonoBehaviour
     /// <param name="maxDis"></param>
     public void showRangeByManhattanDis(int centerRow, int centerCol, int minDis,int maxDis)
     {
-        this.activeRangeShow(true);
         int tmpDis,tmpRow, tmpCol, i, j;
         int rowLimit = BattleConsts.MapMaxRow;
         int colLimit = BattleConsts.MapMaxCol;
@@ -492,7 +491,6 @@ public class Chessboard : MonoBehaviour
 
     public void showRangeByLineDis(int centerRow, int centerCol,int minDis,int maxDis,int lineFlag)
     {
-        this.activeRangeShow(true);
         int tmpRow, tmpCol, i, j;
         int rowLimit = BattleConsts.MapMaxRow;
         int colLimit = BattleConsts.MapMaxCol;
@@ -543,6 +541,7 @@ public class Chessboard : MonoBehaviour
 
     public void showRangeByRangeList(int[] rangeList)
     {
+        this.activeRangeShow(true);
         int tmpRow, tmpCol, i, j;
         Cell cell;
         int rowLimit = BattleConsts.MapMaxRow;

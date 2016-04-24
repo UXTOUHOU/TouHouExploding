@@ -16,39 +16,46 @@
     /// 主要阶段，等待玩家自己操作
     /// </summary>
     public const int BattleState_MainPhase = 4;
-
     /// <summary>
     /// 主要阶段的子状态-空闲
     /// </summary>
-    public const int MainPhaseSubState_Idle = 1;
+    public const int MainPhaseSubState_Idle = 4;
     /// <summary>
     /// 主要阶段的子状态-选择单位行动
     /// </summary>
-    public const int MainPhaseSubState_SelectUnitAction = 2;
+    public const int MainPhaseSubState_SelectUnitAction = 5;
     /// <summary>
     /// 主要阶段的子状态-选择单位技能
     /// </summary>
-    public const int MainPhaseSubState_SelectUnitSkill = 3;
+    public const int MainPhaseSubState_SelectUnitSkill = 6;
     /// <summary>
     /// 主要阶段的子状态-选择单位移动路径
     /// </summary>
-    public const int MainPhaseSubState_SelectMovePath = 4;
+    public const int MainPhaseSubState_SelectMovePath = 7;
     /// <summary>
     /// 主要阶段的子状态-单位移动
     /// </summary>
-    public const int MainPhaseSubState_MoveUnit = 5;
+    public const int MainPhaseSubState_MoveUnit = 8;
     /// <summary>
     /// 主要阶段的子状态-选择攻击目标
     /// </summary>
-    public const int MainPhaseSubState_SelectAttackTarget = 6;
+    public const int MainPhaseSubState_SelectAttackTarget = 9;
     /// <summary>
     /// 主要阶段的子状态-单位攻击
     /// </summary>
-    public const int MainPhaseSubState_UnitAttack = 7;
+    public const int MainPhaseSubState_UnitAttack = 10;
     /// <summary>
     /// 主要阶段的子状态-反击
     /// </summary>
-    public const int MainPhaseSubState_CounterAttack = 8;
+    public const int MainPhaseSubState_CounterAttack = 11;
+    /// <summary>
+    /// 召唤单位（选择位置）
+    /// </summary>
+    public const int MainPhaseSubState_SummoningUnit = 12;
+    /// <summary>
+    /// 处理事件-结果的状态
+    /// </summary>
+    public const int BattleState_Processing = 13;
 
     /// <summary>
     /// 单元格操作-空闲
@@ -135,6 +142,10 @@
     public const int PROPERTY_TRANSLATE_TARGET_COL = 3131;
     public const int PROPERTY_TRANSLATE_PATH = 3140;
 
+    public const int PROPERTY_SUMMONING_UNIT = 3200;
+    public const int PROPERTY_SUMMONING_POS = 3201;
+    public const int PROPERTY_SUMMONING_REASON = 3202;
+
     public const int CODE_CHECK_BPOINT_COST_BY_ATTACK = 1;
     public const int CODE_SELECT_ATTACK_TARGET = 2;
     public const int CODE_PRE_DAMAGE = 3;
@@ -161,6 +172,10 @@
     /// 执行反击前
     /// </summary>
     public const int CODE_PRE_COUNTER_ATTACK = 11;
+    /// <summary>
+    /// 召唤单位成功时
+    /// </summary>
+    public const int CODE_SUMMON_UNIT_SUCCESS = 12;
 
     public const int DAMAGE_REASON_ATTACK = 1;
     public const int DAMAGE_REASON_COUNTER_ATTACK = 2;
@@ -198,7 +213,11 @@
     /// <summary>
     /// 默认B点
     /// </summary>
-    public const int DefaultBPoint = 8;
+    public const int DEFAULT_BPOINT = 8;
+    /// <summary>
+    /// 默认每回合可以使用的召唤次数
+    /// </summary>
+    public const int DEFAULT_MAX_SUMMONING_COUNT_PER_TURN = 1;
 
     public const int PROCESSOR_PROCESSING = 1;
     public const int PROCESSOR_IDLE = 0;
@@ -222,5 +241,7 @@
     /// 单位池最大单位数量
     /// </summary>
     public const int MAX_UNIT_POOL_COUNT = 6;
+
+    public static int[][] DEFAULT_SUMMONING_UNIT_POS = new int[2][]{ new int[]{0,12,24,36,48,60,72,84},new int[]{11,23,35,47,59,71,83,95} };
 }
 

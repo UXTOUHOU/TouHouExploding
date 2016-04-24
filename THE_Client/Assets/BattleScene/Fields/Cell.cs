@@ -38,6 +38,14 @@ public class Cell : MonoBehaviour
     private Image _bgImg;
     private Image _rangeImg;
 
+    /// <summary>
+    /// 一维数组中的位置索引
+    /// </summary>
+    public int posIndex
+    {
+        get { return this._location.y * BattleConsts.MapMaxCol + this._location.x; }
+    }
+
     /*private int _row;
     public int row
     {

@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MainPhaseSelectMovePathState : IState, ICommand
+public class MainPhaseSelectMovePathState : BattleStateBase, ICommand
 {
-    private IFSM _fsm;
-
     private Cell _selectedCell;
     private Unit _selectedUnit;
     private int[] _moveRange;
@@ -20,12 +18,12 @@ public class MainPhaseSelectMovePathState : IState, ICommand
     private int _pathCount;
 
     public MainPhaseSelectMovePathState(IFSM fsm)
+        :base(fsm)
     {
-        this._fsm = fsm;
         this._pathList = new List<Cell>();
     }
 
-    public void onStateEnter()
+    public override void onStateEnter()
     {
         this._selectedCell = BattleGlobal.SelectedCell;
         this._selectedUnit = this._selectedCell.UnitOnCell;
@@ -37,7 +35,7 @@ public class MainPhaseSelectMovePathState : IState, ICommand
         //CommandManager.getInstance().addCommand(BattleConsts.CMD_OnCellSelected, this);
     }
 
-    public void onStateExit()
+    public override void onStateExit()
     {
         this._selectedCell = null;
         this._selectedUnit = null;
@@ -49,7 +47,7 @@ public class MainPhaseSelectMovePathState : IState, ICommand
         //CommandManager.getInstance().removeCommand(BattleConsts.CMD_OnCellSelected, this);
     }
 
-    public void update()
+    public override void update()
     {
         // 点击了右键，则表示取消当前操作
         if ( Input.GetMouseButtonUp(1) )

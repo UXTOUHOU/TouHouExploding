@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using System.Collections.Generic;
 
 // todo: 改成get方法
 public class UnitCfg : IParser
@@ -23,9 +24,13 @@ public class UnitCfg : IParser
     /// 人物的资源名称
     /// </summary>
     public string characterTexture;
+    public string[] skillIds;
 
     public void parse(XmlElement xmlElement)
     {
+        string tmpStr;
+        string[] tmpStrs;
+        int i;
         this.id = xmlElement.GetAttribute("Id");
         this.name = xmlElement.GetAttribute("Name");
         this.description = xmlElement.GetAttribute("Description");
@@ -46,10 +51,26 @@ public class UnitCfg : IParser
             this.minAttackRange = int.Parse(rangeList[0]);
             this.maxAttackRange = int.Parse(rangeList[1]);
         }
-        string tmpStr = xmlElement.GetAttribute("isEnable");
+        tmpStr = xmlElement.GetAttribute("isEnable");
         isEnable = tmpStr == "" ? 0 : int.Parse(tmpStr);
         this.cardTexture = xmlElement.GetAttribute("CardTexture");
         this.characterTexture = xmlElement.GetAttribute("CharacterTexture");
+        if ( this.characterTexture == "" )
+        {
+            this.characterTexture = "Unit_1";
+        }
+        // 技能
+        tmpStr = xmlElement.GetAttribute("Skills");
+        tmpStrs = tmpStr.Split(',');
+        List<string> strList = new List<string>();
+        for (i=0;i<tmpStrs.Length;i++)
+        {
+            if ( tmpStrs[i] != "" )
+            {
+                strList.Add(tmpStrs[i]);
+            }
+        }
+        this.skillIds = strList.ToArray();
     }
 
     public IParser createNewInstance()

@@ -4,22 +4,21 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MainPhaseUnitAttackState : IState
+public class MainPhaseUnitAttackState : BattleStateBase
 {
     private const int STATE_ATTACK = 1;
     private const int STATE_WAITING_TIMING_PROCESSING = 2;
-
-    private IFSM _fsm;
 
     private Unit _attacker;
     private Unit _defender;
 
     public MainPhaseUnitAttackState(IFSM fsm)
+        :base(fsm)
     {
-        this._fsm = fsm;
+        
     }
 
-    public void onStateEnter()
+    public override void onStateEnter()
     {
         Debug.Log("Enter Attack State!");
         BattleInfo info = BattleGlobal.Core.battleInfo;
@@ -36,13 +35,13 @@ public class MainPhaseUnitAttackState : IState
         ProcessManager.getInstance().startProcess();
     }
 
-    public void onStateExit()
+    public override void onStateExit()
     {
         this._attacker = null;
         this._defender = null;
     }
 
-    public void update()
+    public override void update()
     {
         if ( BattleGlobal.Core.battleInfo.isProcessingComplete )
         {

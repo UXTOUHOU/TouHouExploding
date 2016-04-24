@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MainPhaseCounterAttackState : IState
+public class MainPhaseCounterAttackState : BattleStateBase
 {
     private const int STATE_CHECK_COUNTER_ATTACK = 1;
     private const int STATE_WAITING_PRE_COUNTER_ATTACK_TIMING_PROCESSING = 2;
     private const int STATE_COUNTER_ATTACK = 3;
     private const int STATE_WAITING_TIMING_PROCESSING = 4;
-
-    private IFSM _fsm;
 
     private Unit _attacker;
     private Unit _defender;
@@ -20,11 +18,12 @@ public class MainPhaseCounterAttackState : IState
     private int _nextState;
 
     public MainPhaseCounterAttackState(IFSM fsm)
+        :base(fsm)
     {
         this._fsm = fsm;
     }
 
-    public void onStateEnter()
+    public override void onStateEnter()
     {
         Debug.Log("Enter Counter Attack State!");
         BattleInfo info = BattleGlobal.Core.battleInfo;
@@ -34,13 +33,13 @@ public class MainPhaseCounterAttackState : IState
         this._nextState = STATE_CHECK_COUNTER_ATTACK;
     }
 
-    public void onStateExit()
+    public override void onStateExit()
     {
         this._attacker = null;
         this._defender = null;
     }
 
-    public void update()
+    public override void update()
     {
         if ( this._curState != this._nextState )
         {

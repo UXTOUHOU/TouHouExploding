@@ -1,5 +1,5 @@
 ﻿<THE_Data>
-    <Unit Id="Unit_0000_01" Name="毛玉" isEnable="1" CardTexture="" CharacterTexture="Unit_8" Description="这个人很懒，暂时没有简介" Provenance="杂鱼" Type="Normal" HitPoint="1" Mobility="1" MoveMethod="Walk" AttackPower="1" AttackRange="1" PhyDef="0" SpellDef="0" />
+    <Unit Id="Unit_0000_01" Name="毛玉" isEnable="1" CardTexture="" CharacterTexture="Unit_8" Description="这个人很懒，暂时没有简介" Provenance="杂鱼" Type="Normal" HitPoint="1" Mobility="1" MoveMethod="Walk" AttackPower="1" AttackRange="1" PhyDef="0" SpellDef="0" skills="skill1"/>
     <Unit Id="Unit_0000_02" Name="鸦天狗" isEnable="1" Description="这个人很懒，暂时没有简介" Provenance="杂鱼" Type="Normal" HitPoint="1" Mobility="1" MoveMethod="Walk" AttackPower="1" AttackRange="1" PhyDef="0" SpellDef="0"/>
     <Unit Id="Unit_0000_03" Name="妖精" isEnable="1" Description="这个人很懒，暂时没有简介" Provenance="杂鱼" Type="Normal" HitPoint="1" Mobility="1" MoveMethod="Walk" AttackPower="1" AttackRange="1" PhyDef="0" SpellDef="0"/>
     <Unit Id="Unit_0000_04" Name="永远亭的兔子" isEnable="1" Description="这个人很懒，暂时没有简介" Provenance="杂鱼" Type="Normal" HitPoint="1" Mobility="1" MoveMethod="Walk" AttackPower="1" AttackRange="1" PhyDef="0" SpellDef="0"/>

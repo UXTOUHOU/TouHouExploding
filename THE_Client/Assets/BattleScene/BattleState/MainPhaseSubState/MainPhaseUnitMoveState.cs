@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MainPhaseMoveUnitState : IState, ICommand
+public class MainPhaseMoveUnitState : BattleStateBase, ICommand
 {
-    private IFSM _fsm;
-
     private Unit _curUnit;
     private int[] _movePaths;
     /// <summary>
@@ -24,11 +22,11 @@ public class MainPhaseMoveUnitState : IState, ICommand
     private bool _moveComplete;
 
     public MainPhaseMoveUnitState(IFSM fsm)
+        :base(fsm)
     {
-        this._fsm = fsm;
     }
 
-    public void onStateEnter()
+    public override void onStateEnter()
     {
         this._stepOnCell = false;
         this._moveComplete = false;
@@ -39,7 +37,7 @@ public class MainPhaseMoveUnitState : IState, ICommand
         this._curUnit.startMoving(this._movePaths);
     }
 
-    public void onStateExit()
+    public override void onStateExit()
     {
         this._curUnit = null;
         this._movePaths = null;
@@ -47,7 +45,7 @@ public class MainPhaseMoveUnitState : IState, ICommand
         CommandManager.getInstance().removeCommand(BattleConsts.CMD_UnitMoveComplete, this);
     }
 
-    public void update()
+    public override void update()
     {
         if ( this._stepOnCell )
         {

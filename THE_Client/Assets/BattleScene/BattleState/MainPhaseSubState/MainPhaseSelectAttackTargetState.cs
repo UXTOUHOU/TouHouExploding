@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MainPhaseSelectAttackTargetState : IState
+public class MainPhaseSelectAttackTargetState : BattleStateBase
 {
     private const int STATE_WAITING_SELECTING = 1;
     private const int STATE_TIMING_PROCESSING = 2;
-
-    private IFSM _fsm;
 
     private Unit _curUnit;
     private Cell _targetCell;
@@ -21,11 +19,12 @@ public class MainPhaseSelectAttackTargetState : IState
     private int _step;
 
     public MainPhaseSelectAttackTargetState(IFSM fsm)
+        :base(fsm)
     {
         this._fsm = fsm;
     }
 
-    public void onStateEnter()
+    public override void onStateEnter()
     {
         Debug.Log("Enter Select Attack Target State!");
         this._curState = 0;
@@ -34,14 +33,14 @@ public class MainPhaseSelectAttackTargetState : IState
         this._nextState = STATE_WAITING_SELECTING;
     }
 
-    public void onStateExit()
+    public override void onStateExit()
     {
         this._curUnit = null;
         this._targetCell = null;
         this._targetUnit = null;
     }
 
-    public void update()
+    public override void update()
     {
         if (this._curState != this._nextState)
         {

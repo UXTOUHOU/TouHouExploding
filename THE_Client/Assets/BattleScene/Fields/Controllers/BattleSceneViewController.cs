@@ -104,19 +104,26 @@ public class BattleSceneViewController : BaseViewController
         // todo:根据条件判断是否显示查看、召唤按钮
         if ( isShow )
         {
-
+            if ( BattleGlobal.Core.battleInfo.isSummoningOpAvailabel )
+            {
+                this._summonUnitBtn.SetActive(true);
+            }
+            else
+            {
+                this._summonUnitBtn.SetActive(false);
+            }
         }
     }
 
     private void checkMyUnitPoolBtnHandler(GameObject go)
     {
         this.showMyUnitPoolBtns(false);
-        CommandManager.getInstance().runCommand(CommandConsts.CommandConsts_PopUpWindow, WindowName.UNIT_POOL_VIEW, BattleGlobal.MyPlayerId, true);
+        CommandManager.getInstance().runCommand(CommandConsts.PopUpWindow, WindowName.UNIT_POOL_VIEW, BattleGlobal.MyPlayerId, true);
     }
 
     private void SummonUnitBtnHandler(GameObject go)
     {
         this.showMyUnitPoolBtns(false);
-        CommandManager.getInstance().runCommand(CommandConsts.CommandConsts_PopUpWindow, WindowName.UNIT_POOL_VIEW, BattleGlobal.MyPlayerId, false);
+        CommandManager.getInstance().runCommand(CommandConsts.PopUpWindow, WindowName.UNIT_POOL_VIEW, BattleGlobal.MyPlayerId, false);
     }
 }

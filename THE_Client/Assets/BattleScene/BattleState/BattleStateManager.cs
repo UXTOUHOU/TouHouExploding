@@ -46,7 +46,15 @@ public class BattleStateManager : IFSM
         this._states.Add(BattleConsts.BattleState_InitGame, new InitGameState(this));
         this._states.Add(BattleConsts.BattleState_TurnStartPhase, new TurnStartPhaseState(this));
         this._states.Add(BattleConsts.BattleState_StandbyPhase, new StandbyPhaseState(this));
-        this._states.Add(BattleConsts.BattleState_MainPhase, new MainPhaseState(this));
+        this._states.Add(BattleConsts.MainPhaseSubState_Idle, new MainPhaseIdleState(this));
+        this._states.Add(BattleConsts.MainPhaseSubState_SelectUnitAction, new MainPhaseSelectUnitActionState(this));
+        this._states.Add(BattleConsts.MainPhaseSubState_SelectMovePath, new MainPhaseSelectMovePathState(this));
+        this._states.Add(BattleConsts.MainPhaseSubState_MoveUnit, new MainPhaseMoveUnitState(this));
+        this._states.Add(BattleConsts.MainPhaseSubState_SelectAttackTarget, new MainPhaseSelectAttackTargetState(this));
+        this._states.Add(BattleConsts.MainPhaseSubState_UnitAttack, new MainPhaseUnitAttackState(this));
+        this._states.Add(BattleConsts.MainPhaseSubState_CounterAttack, new MainPhaseCounterAttackState(this));
+        this._states.Add(BattleConsts.MainPhaseSubState_SummoningUnit, new MainPhaseSummonUnitState(this));
+        this._states.Add(BattleConsts.BattleState_Processing, new ProcessingState(this));
     }
 
     public void setState(int stateId)

@@ -37,6 +37,21 @@ public class Player : IID
         }
     }
 
+    /// <summary>
+    /// 当前回合召唤计数
+    /// </summary>
+    private int _curSummoningCount;
+    /// <summary>
+    /// 当前回合召唤计数
+    /// </summary>
+    public int curSummoningCount
+    {
+        get
+        {
+            return this._curSummoningCount;
+        }
+    }
+
     public void costBPoint(int value)
     {
         this._curBPoint -= value;
@@ -49,6 +64,17 @@ public class Player : IID
 
     public void resetBPoint()
     {
-        this._curBPoint = BattleConsts.DefaultBPoint;
+        this._curBPoint = BattleConsts.DEFAULT_BPOINT;
+    }
+
+    public void summonUnit()
+    {
+        this._curSummoningCount++;
+    }
+
+    public void reset()
+    {
+        this._curSummoningCount = 0;
+        this._curBPoint = BattleConsts.DEFAULT_BPOINT;
     }
 }

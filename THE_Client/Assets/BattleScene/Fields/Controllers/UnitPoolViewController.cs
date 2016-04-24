@@ -66,6 +66,16 @@ public class UnitPoolViewController : BaseViewController
         UIEventListener.Get(this._preBtn).onClick += this.preBtnHandler;
         UIEventListener.Get(this._nextBtn).onClick += this.nextBtnHandler;
         UIEventListener.Get(this._sureBtn).onClick += this.sureBtnHandler;
+        if ( !this._isCheck )
+        {
+            int i;
+            CardCell cell;
+            for (i=0;i<CountPerPage;i++)
+            {
+                cell = this._cardCells[i];
+                cell.addClickEventHandler(this.cellClickHandler);
+            }
+        }
     }
 
     private void removeListener()
@@ -73,22 +83,48 @@ public class UnitPoolViewController : BaseViewController
         UIEventListener.Get(this._preBtn).onClick -= this.preBtnHandler;
         UIEventListener.Get(this._nextBtn).onClick -= this.nextBtnHandler;
         UIEventListener.Get(this._sureBtn).onClick -= this.sureBtnHandler;
+        if (!this._isCheck)
+        {
+            int i;
+            CardCell cell;
+            for (i = 0; i < CountPerPage; i++)
+            {
+                cell = this._cardCells[i];
+                cell.removeClickEventHandler(this.cellClickHandler);
+            }
+        }
     }
 
     private void updateView()
+    {
+        // 更新title
+        if ( this._isCheck )
+        {
+            this._titleText.text = "查看单位池";
+            this._sureBtn.SetActive(true);
+        }
+        else
+        {
+            this._titleText.text = "选择要召唤的单位";
+            this._sureBtn.SetActive(false);
+        }
+        this.updateCells();
+    }
+
+    private void updateCells()
     {
         List<string> curIds = this._curUnitPool.getCurIds();
         int totalCount = curIds.Count;
         int i, j;
         CardCell cell;
-        for (i=0,j=this._curIndex;i<CountPerPage;i++,j++)
+        for (i = 0, j = this._curIndex; i < CountPerPage; i++, j++)
         {
             cell = this._cardCells[i];
-            if ( j < totalCount )
+            if (j < totalCount)
             {
                 cell.setActive(true);
                 cell.bindCellData(curIds[j], CardCellType.Unit);
-                cell.setIndexText("单位池【" + (j+1) + "】");
+                cell.setIndexText("单位池【" + (j + 1) + "】");
             }
             else
             {
@@ -102,7 +138,7 @@ public class UnitPoolViewController : BaseViewController
         if ( this._curIndex != 0 )
         {
             this._curIndex--;
-            this.updateView();
+            this.updateCells();
         }
     }
 
@@ -111,13 +147,20 @@ public class UnitPoolViewController : BaseViewController
         if ( this._curIndex + CountPerPage - 1 < BattleConsts.MAX_UNIT_POOL_COUNT - 1)
         {
             this._curIndex++;
-            this.updateView();
+            this.updateCells();
         }
     }
 
     private void sureBtnHandler(GameObject go)
     {
-        CommandManager.getInstance().runCommand(CommandConsts.CommandConsts_RemoveWindow, this._windowName);
+        CommandManager.getInstance().runCommand(CommandConsts.RemoveWindow, this._windowName);
+    }
+
+    private void cellClickHandler(string id,CardCellType type,CardCellStatus status)
+    {
+        BattleGlobal.Core.battleInfo.summoningUnitId = id;
+        CommandManager.getInstance().runCommand(CommandConsts.RemoveWindow, this._windowName);
+        BattleStateManager.getInstance().setState(BattleConsts.MainPhaseSubState_SummoningUnit);
     }
 }
 

@@ -42,6 +42,7 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
             {
                 this._row = value.location.y;
                 this._col = value.location.x;
+                this._curCell.UnitOnCell = this;
             }
         }
         get { return this._curCell; }
@@ -194,7 +195,20 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
     private int _curCounterAttackCount;
     private int _maxCounterAttackCount;
     private int _extraCounterAttackCount;
+    /// <summary>
+    /// 单位配置
+    /// </summary>
+    private UnitCfg _cfg;
+    /// <summary>
+    /// 配置id
+    /// </summary>
+    private string _sysId;
+    public string sysId
+    {
+        get { return this._sysId; }
+    }
 
+    // todo : 弃用
     public Unit(int unitID, ChessboardPosition targetPosition)
     {
         this._curCell = Chessboard.GetCell(targetPosition);
@@ -212,6 +226,8 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
         }
 
         // Test
+        this._sysId = "Unit_0001_01";
+        this._cfg = UnitManager.getInatance().getUnitCfgBySysId(sysId);
         UnitAttribute = new CardAttribute();
         this._curHp = UnitAttribute.hp;
         this._maxHp = UnitAttribute.hp;
@@ -234,6 +250,23 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
         this.initAttributes();
     }
 
+    public Unit(string sysId)
+    {
+        this._sysId = sysId;
+        this._cfg = UnitManager.getInatance().getUnitCfgBySysId(sysId);
+        // 先粘贴
+        UnitAttribute = new CardAttribute();
+        this._curHp = this._cfg.hitPoint;
+        this._maxHp = this._cfg.hitPoint;
+        //
+        //unitSprite = new UnitUI(this, targetPosition);
+        this._id = IDProvider.getInstance().applyUnitId(this);
+        UnitManager.getInatance().registerUnit(this);
+        this._buffList = new List<BuffDataDriven>();
+        InterpreterManager.getInstance().registerLightUserData(this);
+        this.initAttributes();
+    }
+
     private void initAttributes()
     {
         this._curAttackCount = 0;
@@ -252,6 +285,8 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
         this._unitSp = this._unitGo.transform.FindChild("UnitImage").GetComponent<Image>();
         this._groupSp = this._unitGo.transform.FindChild("GroupImage").GetComponent<Image>();
         this._hpText = this._unitGo.transform.FindChild("HpText").GetComponent<Text>();
+        // todo : 暂用 设置单位图片
+        this._unitSp.sprite = Resources.Load<Sprite>("Units/" + this._cfg.characterTexture);
         // 设置对应的缩放
         this._groupSp.GetComponent<RectTransform>().localScale = new Vector3(1f / BattleGlobal.Scale, 1f / BattleGlobal.Scale, 1);
         this._hpText.GetComponent<RectTransform>().localScale = new Vector3(1f / BattleGlobal.Scale, 1f / BattleGlobal.Scale, 1);
@@ -456,6 +491,37 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
     }
     #endregion
 
+    #region 召唤相关
+    /// <summary>
+    /// 召唤，后续会添加参数 summonReason等
+    /// </summary>
+    /// <param name="row"></param>
+    /// <param name="col"></param>
+    /// <returns></returns>
+    public int summon(int pos,int owner,int controller)
+    {
+        Cell cell = BattleGlobal.Core.chessboard.getCellByPos(pos);
+        if ( !cell.IsCanSummonPlace() )
+        {
+            return BattleConsts.UNIT_ACTION_FAIL;
+        }
+        // 设置格子位置
+        this.curCell = cell;
+        // 创建预制
+        this.createUnitPrefab();
+        BattleGlobal.Core.chessboard.addChildOnLayer(this._unitGo, BattleConsts.BattleFieldLayer_Unit, this._row, this._col);
+        // 设置所有权
+        this.setOwner(owner);
+        this.setController(controller);
+        // 加载技能
+        foreach(string skillId in this._cfg.skillIds)
+        {
+            InterpreterManager.getInstance().initSkill(skillId, this);
+        }
+        return BattleConsts.UNIT_ACTION_SUCCESS;
+    }
+    #endregion
+
     private void updateView()
     {
         this._hpText.text = this._curHp.ToString();
@@ -608,6 +674,8 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
             this._unitGo.transform.position = targetCell.transform.position;
             // 判断是否已经到达终点
             this._movingPathIndex++;
+            this._curCell.UnitOnCell = null;
+            this.curCell = targetCell;
             if ( this._movingPathIndex == this._movingPath.Length - 1 )
             {
                 this._isMoving = false;

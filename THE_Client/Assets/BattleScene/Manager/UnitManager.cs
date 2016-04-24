@@ -83,6 +83,15 @@ public class UnitManager
     }
 
     /// <summary>
+    /// 获取所有的单位集合
+    /// </summary>
+    /// <returns></returns>
+    public Unit[] getAllUnits()
+    {
+        return this._unitList.ToArray();
+    }
+
+    /// <summary>
     /// 根据配置id获得单位配置
     /// </summary>
     /// <param name="id"></param>

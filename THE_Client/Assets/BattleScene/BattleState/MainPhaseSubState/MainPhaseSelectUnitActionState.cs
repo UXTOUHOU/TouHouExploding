@@ -6,10 +6,8 @@ using UnityEngine;
 using UniLua;
 using System.Threading;
 
-class MainPhaseSelectUnitActionState : IState
+class MainPhaseSelectUnitActionState : BattleStateBase
 {
-    private IFSM _fsm;
-
     private bool _isInit;
 
     private GameObject _unitActionView;
@@ -23,8 +21,8 @@ class MainPhaseSelectUnitActionState : IState
     private Unit _curUnit;
 
     public MainPhaseSelectUnitActionState(IFSM fsm)
+        :base(fsm)
     {
-        this._fsm = fsm;
         this._isInit = false;
         this._isPopUp = false;
     }
@@ -37,7 +35,7 @@ class MainPhaseSelectUnitActionState : IState
         this._btnSkill = this._unitActionView.transform.FindChild("ButtonSkill").gameObject;
     }
 
-    public void onStateEnter()
+    public override void onStateEnter()
     {
         if (!this._isInit)
         {
@@ -48,13 +46,13 @@ class MainPhaseSelectUnitActionState : IState
         BattleGlobal.Core.chessboard.addClickEventHandler(this.onCellClick);
     }
 
-    public void onStateExit()
+    public override void onStateExit()
     {
         this.removeUnitActionView();
         BattleGlobal.Core.chessboard.removeClickEventHandler(this.onCellClick);
     }
 
-    public void update()
+    public override void update()
     {
         if (Input.GetMouseButton(1))
         {

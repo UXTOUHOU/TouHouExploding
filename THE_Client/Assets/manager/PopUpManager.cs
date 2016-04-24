@@ -50,9 +50,9 @@ public class PopUpManager : ICommand
         this._windowMap.Add(WindowName.UILAYER, uiLayer);
 		//Global.NGUIRoot = this._uiRoot;
 		// 消息
-		CommandManager.getInstance ().addCommand (CommandConsts.CommandConsts_PopUpWindow, this);
-		CommandManager.getInstance ().addCommand (CommandConsts.CommandConsts_RemoveWindow, this);
-		CommandManager.getInstance ().addCommand (CommandConsts.CommandConsts_DestroyWindow, this);
+		CommandManager.getInstance ().addCommand (CommandConsts.PopUpWindow, this);
+		CommandManager.getInstance ().addCommand (CommandConsts.RemoveWindow, this);
+		CommandManager.getInstance ().addCommand (CommandConsts.DestroyWindow, this);
 	}
 
 	public void registerWindow(string windowName,GameObject window,BaseViewController controller)
@@ -122,13 +122,13 @@ public class PopUpManager : ICommand
 		string windowName = args[0] as string;
 		switch ( cmdNum )
 		{
-		case CommandConsts.CommandConsts_PopUpWindow:
+		case CommandConsts.PopUpWindow:
 			this.popUpWindow(windowName,args);
 			break;
-		case CommandConsts.CommandConsts_RemoveWindow:
+		case CommandConsts.RemoveWindow:
 			this.removePopUp(windowName);
 			break;
-		case CommandConsts.CommandConsts_DestroyWindow:
+		case CommandConsts.DestroyWindow:
 			break;
 		}
 	}

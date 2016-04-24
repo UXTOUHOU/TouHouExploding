@@ -22,6 +22,9 @@ public class BattleObjectFactory
             case BattleConsts.CODE_PRE_COUNTER_ATTACK:
                 evt = new PreCounterAttackEvent(vo);
                 break;
+            case BattleConsts.CODE_SUMMON_UNIT_SUCCESS:
+                evt = new SummonUnitSuccessEvent(vo);
+                break;
         }
         return evt;
     }
@@ -42,6 +45,9 @@ public class BattleObjectFactory
                 break;
             case BattleConsts.CODE_PRE_COUNTER_ATTACK:
                 vo = new PreCounterAttackEventVO();
+                break;
+            case BattleConsts.CODE_SUMMON_UNIT_SUCCESS:
+                vo = new SummonUnitSuccessEventVO();
                 break;
         }
         return vo;
