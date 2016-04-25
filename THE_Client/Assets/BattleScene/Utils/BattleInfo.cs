@@ -18,7 +18,7 @@ public class BattleInfo
     /// <summary>
     /// 时点处理完之后的下个状态
     /// </summary>
-    public int nextState;
+    public BattleConsts.BattleState nextState;
     /// <summary>
     /// 当前状态下是否可以执行召唤单位的操作
     /// </summary>

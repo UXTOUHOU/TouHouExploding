@@ -160,7 +160,7 @@ public class UnitPoolViewController : BaseViewController
     {
         BattleGlobal.Core.battleInfo.summoningUnitId = id;
         CommandManager.getInstance().runCommand(CommandConsts.RemoveWindow, this._windowName);
-        BattleStateManager.getInstance().setState(BattleConsts.MainPhaseSubState_SummoningUnit);
+		BattleStateManager.getInstance().setState(BattleConsts.BattleState.MainPhase_SummoningUnit);
     }
 }
 

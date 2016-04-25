@@ -13,55 +13,55 @@ public class TakeDamageEventVO : EventVOBase
     public int hpRemoval;
     public int damageReason;
 
-    public override void setProperty(int propId, object value)
+    public override void setProperty(BattleConsts.Property propId, object value)
     {
         switch (propId)
         {
-            case BattleConsts.PROPERTY_DAMAGE_ATTACKER:
+            case BattleConsts.Property.DamageAttacker:
                 this.attacker = (Unit)value;
                 break;
-            case BattleConsts.PROPERTY_DAMAGE_VICTIM:
+            case BattleConsts.Property.DamageVictim:
                 this.victim = (Unit)value;
                 break;
-            case BattleConsts.PROPERTY_CALC_PHYSICAL_DAMAGE:
+            case BattleConsts.Property.CalcPhysicalDamage:
                 this.phycicsDamage = (int)value;
                 break;
-            case BattleConsts.PROPERTY_CALC_SPELL_DAMAGE:
+            case BattleConsts.Property.CalcSpellDamage:
                 this.spellDamage = (int)value;
                 break;
-            case BattleConsts.PROPERTY_CALC_HP_REMOVAL:
+            case BattleConsts.Property.CalcHpRemoval:
                 this.hpRemoval = (int)value;
                 break;
-            case BattleConsts.PROPERTY_DAMAGE_REASON:
+            case BattleConsts.Property.DamageReason:
                 this.damageReason = (int)value;
                 break;
         }
     }
 
-    public override object getProperty(int propId)
+    public override object getProperty(BattleConsts.Property propId)
     {
         switch (propId)
         {
-            case BattleConsts.PROPERTY_DAMAGE_ATTACKER:
+            case BattleConsts.Property.DamageAttacker:
                 return this.attacker;
-            case BattleConsts.PROPERTY_DAMAGE_VICTIM:
+            case BattleConsts.Property.DamageVictim:
                 return this.victim;
-            case BattleConsts.PROPERTY_CALC_PHYSICAL_DAMAGE:
+            case BattleConsts.Property.CalcPhysicalDamage:
                 return this.phycicsDamage;
-            case BattleConsts.PROPERTY_CALC_SPELL_DAMAGE:
+            case BattleConsts.Property.CalcSpellDamage:
                 return this.spellDamage;
-            case BattleConsts.PROPERTY_CALC_HP_REMOVAL:
+            case BattleConsts.Property.CalcHpRemoval:
                 return this.hpRemoval;
-            case BattleConsts.PROPERTY_DAMAGE_REASON:
+            case BattleConsts.Property.DamageReason:
                 return this.damageReason;
             default:
                 throw new NotImplementedException();
         }
     }
 
-    public override int getEventCode()
+    public override BattleConsts.Code getEventCode()
     {
-        return BattleConsts.CODE_TAKE_DAMAGE;
+        return BattleConsts.Code.TakeDamage;
     }
 }
 

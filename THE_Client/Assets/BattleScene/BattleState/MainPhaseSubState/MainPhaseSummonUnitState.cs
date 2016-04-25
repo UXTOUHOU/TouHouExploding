@@ -35,7 +35,7 @@ public class MainPhaseSummonUnitState : BattleStateBase
     {
         if ( Input.GetMouseButtonDown(1) )
         {
-            this._fsm.setState(BattleConsts.MainPhaseSubState_Idle);
+            this._fsm.setState(BattleConsts.BattleState.MainPhase_Idle);
         }
     }
 
@@ -55,14 +55,14 @@ public class MainPhaseSummonUnitState : BattleStateBase
                 player.summonUnit();
                 // 召唤单位事件
                 // todo : summonReason
-                EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.CODE_SUMMON_UNIT_SUCCESS);
-                evtVO.setProperty(BattleConsts.PROPERTY_SUMMONING_UNIT, unit);
-                evtVO.setProperty(BattleConsts.PROPERTY_SUMMONING_POS, pos);
-                BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.CODE_SUMMON_UNIT_SUCCESS, evtVO);
+                EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.Code.SummonUnitSuccess);
+                evtVO.setProperty(BattleConsts.Property.SummoningUnit, unit);
+                evtVO.setProperty(BattleConsts.Property.SummoningPos, pos);
+                BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.Code.SummonUnitSuccess, evtVO);
                 ProcessManager.getInstance().raiseEvent(evt);
                 // 设置下一个状态
-                BattleGlobal.Core.battleInfo.nextState = BattleConsts.MainPhaseSubState_Idle;
-                this._fsm.setState(BattleConsts.BattleState_Processing);
+                BattleGlobal.Core.battleInfo.nextState = BattleConsts.BattleState.MainPhase_Idle;
+                this._fsm.setState(BattleConsts.BattleState.Processing);
             }
         }
     }

@@ -24,6 +24,6 @@ public class StandbyPhaseState : BattleStateBase
 
     public override void update()
     {
-        BattleStateManager.getInstance().setState(BattleConsts.BattleState_MainPhase);
+		BattleStateManager.getInstance().setState(BattleConsts.BattleState.MainPhase);
     }
 }

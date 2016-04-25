@@ -56,7 +56,7 @@ public class MainPhaseSelectAttackTargetState : BattleStateBase
                 if (BattleGlobal.Core.battleInfo.isProcessingComplete)
                 {
                     // 判断是否进入伤害结算部分
-                    this._fsm.setState(BattleConsts.MainPhaseSubState_UnitAttack);
+                    this._fsm.setState(BattleConsts.BattleState.MainPhase_UnitAttack);
                 }
                 break;
         }
@@ -83,10 +83,10 @@ public class MainPhaseSelectAttackTargetState : BattleStateBase
                 BattleGlobal.Core.chessboard.showRangeByManhattanDis(this._curUnit.row, this._curUnit.col, this._curUnit.UnitAttribute.minAttackRangeCurrent, this._curUnit.UnitAttribute.maxAttackRangeCurrent);
                 break;
             case STATE_TIMING_PROCESSING:
-                EventVOBase vo = BattleObjectFactory.createEventVO(BattleConsts.CODE_FLAG_ATTACK_TARGET);
-                vo.setProperty(BattleConsts.PROPERTY_ATTACK_ATTACKER, this._curUnit);
-                vo.setProperty(BattleConsts.PROPERTY_ATTACK_DEFENDER, this._targetUnit);
-                BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.CODE_FLAG_ATTACK_TARGET, vo);
+                EventVOBase vo = BattleObjectFactory.createEventVO(BattleConsts.Code.FlagAttackTarget);
+                vo.setProperty(BattleConsts.Property.AttackAttacker, this._curUnit);
+                vo.setProperty(BattleConsts.Property.AttackDefender, this._targetUnit);
+                BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.Code.FlagAttackTarget, vo);
                 ProcessManager.getInstance().startProcess();
                 break;
         }

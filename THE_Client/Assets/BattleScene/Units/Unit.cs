@@ -30,7 +30,7 @@ public class UnitState
     }
 }
 
-public class Unit : IID,IBattleFieldLocation,ILuaUserData
+public class Unit : IID, IBattleFieldLocation, ILuaUserData
 {
     private Cell _curCell;                // 单位所在的cell
     public Cell curCell
@@ -360,7 +360,7 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
         return props;
     }
 
-    public void getBuffEffectsByCode(int code,List<ISkillEffect> effects)
+    public void getBuffEffectsByCode(BattleConsts.Code code,List<ISkillEffect> effects)
     {
         int len = this._buffList.Count;
         BuffDataDriven buff;
@@ -387,14 +387,14 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
             // 更新UI
             this._updateViewFlag = true;
             // 触发受伤事件
-            EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.CODE_TAKE_DAMAGE);
-            evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_ATTACKER, vo.attacker);
-            evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_VICTIM, vo.victim);
-            evtVO.setProperty(BattleConsts.PROPERTY_CALC_PHYSICAL_DAMAGE, vo.phycicsDamage);
-            evtVO.setProperty(BattleConsts.PROPERTY_CALC_SPELL_DAMAGE, vo.spellDamage);
-            evtVO.setProperty(BattleConsts.PROPERTY_CALC_HP_REMOVAL, vo.hpRemoval);
-            evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_REASON, vo.damageReason);
-            BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.CODE_TAKE_DAMAGE, evtVO);
+            EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.Code.TakeDamage);
+            evtVO.setProperty(BattleConsts.Property.DamageAttacker, vo.attacker);
+            evtVO.setProperty(BattleConsts.Property.DamageVictim, vo.victim);
+            evtVO.setProperty(BattleConsts.Property.CalcPhysicalDamage, vo.phycicsDamage);
+            evtVO.setProperty(BattleConsts.Property.CalcSpellDamage, vo.spellDamage);
+            evtVO.setProperty(BattleConsts.Property.CalcHpRemoval, vo.hpRemoval);
+            evtVO.setProperty(BattleConsts.Property.DamageReason, vo.damageReason);
+            BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.Code.TakeDamage, evtVO);
             ProcessManager.getInstance().raiseEvent(evt);
         }
     }
@@ -535,9 +535,9 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
         this._buffList.Add(buff);
     }
 
-    public void reset(int resetType)
+    public void reset(BattleConsts.ResetType resetType)
     {
-        if ( resetType == BattleConsts.RESET_TYPE_SELF_TURN_END )
+        if ( resetType == BattleConsts.ResetType.SelfTurnStart )
         {
             this._curAttackCount = 0;
             this._curCounterAttackCount = 0;

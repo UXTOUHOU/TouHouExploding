@@ -16,7 +16,7 @@ public class BattleEventBase : IBattleEvent
     /// 事件类型（时点）
     /// </summary>
     /// <returns></returns>
-    virtual public int getEventCode()
+    virtual public BattleConsts.Code getEventCode()
     {
         throw new NotImplementedException();
     }
@@ -39,7 +39,7 @@ public class BattleEventBase : IBattleEvent
         throw new NotImplementedException();
     }
 
-    virtual public object getEventVOProperty(int propId)
+    virtual public object getEventVOProperty(BattleConsts.Property propId)
     {
         return this._eventVO != null ? this._eventVO.getProperty(propId) : null;
     }

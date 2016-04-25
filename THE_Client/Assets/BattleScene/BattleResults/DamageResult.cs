@@ -10,7 +10,7 @@ public class DamageResult : IBattleResult
 
     public Unit victim;
 
-    public int damageReason;
+    public BattleConsts.DamageReason damageReason;
 
     public int physicalDamage;
 
