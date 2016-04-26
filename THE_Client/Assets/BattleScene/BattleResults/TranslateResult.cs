@@ -12,7 +12,9 @@ public class TranslateResult : IBattleResult
 
     public void execute()
     {
+        Debug.Log("excute translate result!");
         EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.Code.Translate);
+        evtVO.setProperty(BattleConsts.Property.TranslateTarget, this.target);
         evtVO.setProperty(BattleConsts.Property.TranslateOriginalRow, this.target.row);
         evtVO.setProperty(BattleConsts.Property.TranslateOriginalCol, this.target.col);
         evtVO.setProperty(BattleConsts.Property.TranslateOffsetRow, this.offsetRow);
@@ -21,7 +23,7 @@ public class TranslateResult : IBattleResult
         {
             evtVO.setProperty(BattleConsts.Property.TranslateTargetRow, this.target.row);
             evtVO.setProperty(BattleConsts.Property.TranslateTargetCol, this.target.col);
-            BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.Code.TakeDamage, evtVO);
+            BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.Code.Translate, evtVO);
             ProcessManager.getInstance().raiseEvent(evt);
         }
     }

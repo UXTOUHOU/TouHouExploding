@@ -36,11 +36,29 @@ public class UnitPool
                 this._availableIdList.Add(cfg.id);
             }
         }
+        this.fill();
     }
 
     public List<string> getCurIds()
     {
         return this._curIds;
+    }
+
+    /// <summary>
+    /// 从召唤池中取出index位置的id
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public string summonUnit(int index)
+    {
+        if ( index < 0 || index >= BattleConsts.MAX_UNIT_POOL_COUNT )
+        {
+            return "";
+        }
+        string unitId = this._curIds[index];
+        this._curIds.RemoveAt(index);
+        this.fill();
+        return unitId;
     }
 
     /// <summary>

@@ -47,22 +47,29 @@ public class MainPhaseSummonUnitState : BattleStateBase
         {
             if ( cell.IsCanSummonPlace() )
             {
+                int playerId = BattleGlobal.MyPlayerId;
                 // 召唤单位
-                Unit unit = new Unit(BattleGlobal.Core.battleInfo.summoningUnitId);
-                unit.summon(pos, BattleGlobal.MyPlayerId, BattleGlobal.MyPlayerId);
-                // 玩家召唤计数器+1
-                Player player = BattleGlobal.Core.getPlayer(BattleGlobal.MyPlayerId);
-                player.summonUnit();
-                // 召唤单位事件
-                // todo : summonReason
-                EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.Code.SummonUnitSuccess);
-                evtVO.setProperty(BattleConsts.Property.SummoningUnit, unit);
-                evtVO.setProperty(BattleConsts.Property.SummoningPos, pos);
-                BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.Code.SummonUnitSuccess, evtVO);
-                ProcessManager.getInstance().raiseEvent(evt);
-                // 设置下一个状态
-                BattleGlobal.Core.battleInfo.nextState = BattleConsts.BattleState.MainPhase_Idle;
-                this._fsm.setState(BattleConsts.BattleState.Processing);
+                string unitId = BattleGlobal.Core.getPlayer(playerId).summonUnit(BattleGlobal.Core.battleInfo.summoningUnitIndex);
+                if ( unitId != "" )
+                {
+                    Unit unit = new Unit(unitId);
+                    unit.summon(pos, playerId, playerId);
+                    // 召唤单位事件
+                    // todo : summonReason
+                    EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.Code.SummonUnitSuccess);
+                    evtVO.setProperty(BattleConsts.Property.SummoningUnit, unit);
+                    evtVO.setProperty(BattleConsts.Property.SummoningPos, pos);
+                    BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.Code.SummonUnitSuccess, evtVO);
+                    ProcessManager.getInstance().raiseEvent(evt);
+                    // 设置下一个状态
+                    BattleGlobal.Core.battleInfo.nextState = BattleConsts.BattleState.MainPhase_Idle;
+                    this._fsm.setState(BattleConsts.BattleState.Processing);
+                }
+                else
+                {
+                    Debug.Log("Summon Unit Fail ! Reason : unitId is not exist!");
+                    this._fsm.setState(BattleConsts.BattleState.MainPhase_Idle);
+                }
             }
         }
     }

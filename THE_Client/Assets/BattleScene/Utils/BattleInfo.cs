@@ -27,6 +27,10 @@ public class BattleInfo
     /// 将要召唤的单位id
     /// </summary>
     public string summoningUnitId;
+    /// <summary>
+    /// 召唤单位的单位池索引
+    /// </summary>
+    public int summoningUnitIndex;
 
     public void reset()
     {
