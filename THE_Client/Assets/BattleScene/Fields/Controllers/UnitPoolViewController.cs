@@ -49,7 +49,7 @@ public class UnitPoolViewController : BaseViewController
         base.onPopUp(args);
         this._playerId = (int)args[1];
         this._isCheck = (bool)args[2];
-        this._curUnitPool = BattleGlobal.Core.getUnitPool(this._playerId);
+        this._curUnitPool = BattleGlobal.Core.getPlayer(this._playerId).unitPool;
         this._curIndex = 0;
         this.updateView();
         this.addListener();
@@ -73,6 +73,7 @@ public class UnitPoolViewController : BaseViewController
             for (i=0;i<CountPerPage;i++)
             {
                 cell = this._cardCells[i];
+                cell.tmpData = i;
                 cell.addClickEventHandler(this.cellClickHandler);
             }
         }
@@ -156,9 +157,10 @@ public class UnitPoolViewController : BaseViewController
         CommandManager.getInstance().runCommand(CommandConsts.RemoveWindow, this._windowName);
     }
 
-    private void cellClickHandler(string id,CardCellType type,CardCellStatus status)
+    private void cellClickHandler(object data,bool isSelected)
     {
-        BattleGlobal.Core.battleInfo.summoningUnitId = id;
+        int index = (int)data;
+        BattleGlobal.Core.battleInfo.summoningUnitIndex = index;
         CommandManager.getInstance().runCommand(CommandConsts.RemoveWindow, this._windowName);
         BattleStateManager.getInstance().setState(BattleConsts.MainPhaseSubState_SummoningUnit);
     }

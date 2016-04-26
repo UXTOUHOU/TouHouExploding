@@ -52,6 +52,12 @@ public class Player : IID
         }
     }
 
+    private UnitPool _unitPool;
+    public UnitPool unitPool
+    {
+        get { return this._unitPool; }
+    }
+
     public void costBPoint(int value)
     {
         this._curBPoint -= value;
@@ -62,14 +68,30 @@ public class Player : IID
         this._id = IDProvider.getInstance().applyUnitId(this);
     }
 
+    public void init()
+    {
+        this._unitPool = new UnitPool();
+        this._unitPool.init();
+    }
+
     public void resetBPoint()
     {
         this._curBPoint = BattleConsts.DEFAULT_BPOINT;
     }
 
-    public void summonUnit()
+    /// <summary>
+    /// 从召唤池中召唤单位
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public string summonUnit(int index)
     {
-        this._curSummoningCount++;
+        string id = this._unitPool.summonUnit(index);
+        if ( id != "" )
+        {
+            this._curSummoningCount++;
+        }
+        return id;
     }
 
     public void reset()

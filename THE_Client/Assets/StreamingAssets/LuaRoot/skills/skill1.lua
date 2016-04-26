@@ -44,7 +44,7 @@ function skill1.operation(vo)
 	for i=1,2 do
 		row2 = row1 + dRow * i;
 		col2 = col1 + dCol * i;
-		if  BattleFieldLib.hasUnitOnCell(row2,col2) then
+		if BattleFieldLib.hasUnitOnCell(row2,col2) then
 			crashUnit = true;
 			local unit = BattleFieldLib.getUnitOnCell(row2,col2);
 			if  i ~= 1 then
@@ -76,9 +76,9 @@ function skill1.operation(vo)
 	if crashUnit==false then
 		translateTable =
 		{
-			unit = victim,
-			dRow = dRow * 2,
-			dCol = dCol * 2,
+			target = victim,
+			offsetRow = dRow * 2,
+			offsetCol = dCol * 2,
 		}
 		EffectLib.applyTranslate(translateTable);
 	end

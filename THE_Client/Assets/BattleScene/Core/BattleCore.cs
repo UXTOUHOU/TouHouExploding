@@ -33,33 +33,24 @@ public class BattleCore
 
     private MTRandom _random;
 
-    private UnitPool[] _unitPools;
-
     public void init()
     {
         int i;
         BattleGlobal.Core = this;
+        this._random = new MTRandom();
+        // test 设置固定随机种子
+        this.initRandomSeed();
         this._playerList = new List<Player>();
         for (i=0;i<2;i++)
         {
             this._playerList.Add(new Player());
+            this._playerList[i].init();
         }
         if (this._info == null)
         {
             this._info = new BattleInfo();
         }
         this._info.reset();
-        this._random = new MTRandom();
-        // test 设置固定随机种子
-        this.initRandomSeed();
-        // 初始化单位池
-        this._unitPools = new UnitPool[2];
-        for (i = 0; i < 2; i++)
-        {
-            this._unitPools[0] = new UnitPool();
-            this._unitPools[0].init();
-            this._unitPools[0].fill();
-        }
         this._isGameStarted = false;
         // 初始化战场区域
         this._chessboard.init();
@@ -84,20 +75,6 @@ public class BattleCore
             return null;
         }
         return this._playerList[playerId];
-    }
-
-    /// <summary>
-    /// 获取单位池
-    /// </summary>
-    /// <param name="playerId"></param>
-    /// <returns></returns>
-    public UnitPool getUnitPool(int playerId)
-    {
-        if ( playerId < 0 || playerId > 1 )
-        {
-            return null;
-        }
-        return this._unitPools[playerId];
     }
 
     public void update()

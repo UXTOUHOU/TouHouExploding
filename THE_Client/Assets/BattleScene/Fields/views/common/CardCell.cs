@@ -9,7 +9,7 @@ public class CardCell : MonoBehaviour
     private static Color UnSelectedColor = new Color(0xff, 0xff, 0xff);
     private static Color SelectedColor = new Color(0xb2,0xc3,0x4e);
 
-    public delegate void CellClickHandler(string id,CardCellType type, CardCellStatus status);
+    public delegate void CellClickHandler(object data,bool isSelected);
     private event CellClickHandler _onCellSelected;
 
     /// <summary>
@@ -26,11 +26,24 @@ public class CardCell : MonoBehaviour
     /// </summary>
     private bool _isSelectable;
 
-    private CardCellStatus _status;
+    private bool _isSelected;
     /// <summary>
     /// 是否已经添加点击事件监听
     /// </summary>
     private bool _isAddedClickHander;
+
+    /// <summary>
+    /// 临时数据
+    /// </summary>
+    private object _tmpData;
+    /// <summary>
+    /// 临时数据
+    /// </summary>
+    public object tmpData
+    {
+        set { this._tmpData = value; }
+        get { return this._tmpData; }
+    }
 
     void Awake()
     {
@@ -39,7 +52,7 @@ public class CardCell : MonoBehaviour
         this._nameText = this.transform.FindChild("NameText").GetComponent<Text>();
         this._selectedImg = this.transform.FindChild("SelectedImg").GetComponent<Image>();
         this._isAddedClickHander = false;
-        this._status = CardCellStatus.Unselected;
+        this._isSelected = false;
     }
 
     public CardCell()
@@ -124,11 +137,16 @@ public class CardCell : MonoBehaviour
         }
     }
 
+    public void clear()
+    {
+
+    }
+
     private void onCellClick(GameObject go)
     {
-        this._status = (CardCellStatus)(1 - (int)this._status);
-        this._onCellSelected(this._cardId, this._type, this._status);
-        this._selectedImg.color = this._isSelectable && this._status == CardCellStatus.Selected ? SelectedColor : UnSelectedColor;
+        this._isSelected = !this._isSelected;
+        this._onCellSelected(this._tmpData, this._isSelected);
+        this._selectedImg.color = this._isSelectable && this._isSelected  ? SelectedColor : UnSelectedColor;
     }
 }
 
@@ -136,17 +154,5 @@ public enum CardCellType
 {
     Unit = 1,
     Card = 2,
-}
-
-public enum CardCellStatus
-{
-    /// <summary>
-    /// 选择
-    /// </summary>
-    Selected = 1,
-    /// <summary>
-    /// 反选
-    /// </summary>
-    Unselected = 0,
 }
 

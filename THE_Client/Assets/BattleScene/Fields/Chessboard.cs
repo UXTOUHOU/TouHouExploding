@@ -32,6 +32,14 @@ public class Chessboard : MonoBehaviour
     private GameObject _bgLayer;
     private GameObject _unitLayer;
     private GameObject _uiLayer;
+    /// <summary>
+    /// 选择框
+    /// </summary>
+    private GameObject _selectBox;
+    /// <summary>
+    /// 是否显示选择框
+    /// </summary>
+    private bool _showSelectBox;
 
     private int[] _showRangeList;
     private int[] _moveRange;
@@ -173,6 +181,9 @@ public class Chessboard : MonoBehaviour
         this._layersMap.Add(BattleConsts.BattleFieldLayer_Bg, this._bgLayer);
         this._layersMap.Add(BattleConsts.BattleFieldLayer_Unit, this._unitLayer);
         this._layersMap.Add(BattleConsts.BattleFieldLayer_UI, this._uiLayer);
+        // 初始化selectbox
+        this._showSelectBox = false;
+        this._selectBox = this._uiLayer.transform.FindChild("SelectBox").gameObject;
     }
 
     public void addClickEventHandler(UIEventListener.UIEventHandler eventHandler)
@@ -268,13 +279,19 @@ public class Chessboard : MonoBehaviour
     private void onCellEnterHandler(GameObject go)
     {
         Cell cell = go.GetComponent<Cell>();
-        cell.SetBackgroundColor(Cell.SelectedColor);
+        //cell.SetBackgroundColor(Cell.SelectedColor);
+        if ( !this._showSelectBox )
+        {
+            this._showSelectBox = true;
+            this._selectBox.SetActive(true);
+        }
+        this._selectBox.transform.localPosition = BattleSceneUtils.getCellPosByLocation(cell.location.y, cell.location.x);
     }
 
     private void onCellExitHandler(GameObject go)
     {
         Cell cell = go.GetComponent<Cell>();
-        cell.SetBackgroundColor(Color.black);
+        //cell.SetBackgroundColor(Color.black);
     }
 
     /// <summary>
@@ -579,6 +596,12 @@ public class Chessboard : MonoBehaviour
                 cell.activeRangeImg(active);
             }
         }
+    }
+
+    public void showSelectBox(bool isShow)
+    {
+        this._showSelectBox = isShow;
+        this._selectBox.SetActive(isShow);
     }
 
     /// <summary>

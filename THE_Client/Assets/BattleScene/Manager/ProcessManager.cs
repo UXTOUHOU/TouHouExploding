@@ -65,8 +65,10 @@ public class ProcessManager
         int resultCount = this._curResultList.Count;
         if (resultCount > 0)
         {
-            foreach (IBattleResult result in this._curResultList)
+            IBattleResult result;
+            for (int i=0;i<resultCount;i++)
             {
+                result = this._curResultList[i];
                 result.execute();
             }
             Debug.Log("Execute results complete!");

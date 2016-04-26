@@ -37,6 +37,10 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
     {
         set
         {
+            if ( value == null && this._curCell != null )
+            {
+                this._curCell.UnitOnCell = null;
+            }
             this._curCell = value;
             if ( value != null )
             {
@@ -386,17 +390,16 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
             this._curHp -= totalDamage;
             // 更新UI
             this._updateViewFlag = true;
-            // 触发受伤事件
-            EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.CODE_TAKE_DAMAGE);
-            evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_ATTACKER, vo.attacker);
-            evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_VICTIM, vo.victim);
-            evtVO.setProperty(BattleConsts.PROPERTY_CALC_PHYSICAL_DAMAGE, vo.phycicsDamage);
-            evtVO.setProperty(BattleConsts.PROPERTY_CALC_SPELL_DAMAGE, vo.spellDamage);
-            evtVO.setProperty(BattleConsts.PROPERTY_CALC_HP_REMOVAL, vo.hpRemoval);
-            evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_REASON, vo.damageReason);
-            BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.CODE_TAKE_DAMAGE, evtVO);
-            ProcessManager.getInstance().raiseEvent(evt);
         }
+        EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.CODE_TAKE_DAMAGE);
+        evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_ATTACKER, vo.attacker);
+        evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_VICTIM, vo.victim);
+        evtVO.setProperty(BattleConsts.PROPERTY_CALC_PHYSICAL_DAMAGE, vo.phycicsDamage);
+        evtVO.setProperty(BattleConsts.PROPERTY_CALC_SPELL_DAMAGE, vo.spellDamage);
+        evtVO.setProperty(BattleConsts.PROPERTY_CALC_HP_REMOVAL, vo.hpRemoval);
+        evtVO.setProperty(BattleConsts.PROPERTY_DAMAGE_REASON, vo.damageReason);
+        BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.CODE_TAKE_DAMAGE, evtVO);
+        ProcessManager.getInstance().raiseEvent(evt);
     }
 
     public void recover(int recoverValue)
@@ -446,7 +449,9 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
             Debug.LogError("Unit translate fail!There is unit on targetCell!");
             return BattleConsts.UNIT_ACTION_FAIL;
         }
+        this.curCell.UnitOnCell = null;
         this.curCell = targetCell;
+        this.setUpdateViewFlag(true);
         return BattleConsts.UNIT_ACTION_SUCCESS;
     }
     #endregion
@@ -527,6 +532,12 @@ public class Unit : IID,IBattleFieldLocation,ILuaUserData
         this._hpText.text = this._curHp.ToString();
         // todo :暂用
         this._groupSp.sprite = Resources.Load<Sprite>(BattleSceneUtils.getPlayerGroupTextureName(this._controllerId));
+        this.updateViewPos();
+    }
+
+    private void updateViewPos()
+    {
+        this._unitGo.transform.localPosition = BattleSceneUtils.getCellPosByLocation(this._row, this._col);
     }
 
     public void addBuff(BuffDataDriven buff)
