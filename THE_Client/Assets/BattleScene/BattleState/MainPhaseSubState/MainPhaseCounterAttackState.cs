@@ -62,7 +62,7 @@ public class MainPhaseCounterAttackState : BattleStateBase
                 DamageResult damageResult = new DamageResult();
                 damageResult.attacker = this._defender;
                 damageResult.victim = this._attacker;
-                damageResult.damageReason = BattleConsts.DAMAGE_REASON_COUNTER_ATTACK;
+                damageResult.damageReason = BattleConsts.DamageReason.CounterAttack;
                 damageResult.physicalDamage = this._defender.UnitAttribute.attack;
                 ProcessManager.getInstance().addResult(damageResult);
                 ProcessManager.getInstance().startProcess();
@@ -91,7 +91,7 @@ public class MainPhaseCounterAttackState : BattleStateBase
             case STATE_WAITING_TIMING_PROCESSING:
                 if (BattleGlobal.Core.battleInfo.isProcessingComplete)
                 {
-                    this._fsm.setState(BattleConsts.MainPhaseSubState_Idle);
+                    this._fsm.setState(BattleConsts.BattleState.MainPhase_Idle);
                 }
                 break;
         }
@@ -101,17 +101,17 @@ public class MainPhaseCounterAttackState : BattleStateBase
     {
         if (!this._defender.canCounterAttack())
         {
-            this._fsm.setState(BattleConsts.MainPhaseSubState_Idle);
+            this._fsm.setState(BattleConsts.BattleState.MainPhase_Idle);
             return;
         }
         bool isInAttackRange = BattleFieldsUntils.isInAttackRange(this._defender, this._attacker);
         if (isInAttackRange)
         {
             // 触发反击事件
-            EventVOBase vo = BattleObjectFactory.createEventVO(BattleConsts.CODE_PRE_COUNTER_ATTACK);
-            vo.setProperty(BattleConsts.PROPERTY_ATTACK_ATTACKER, this._attacker);
-            vo.setProperty(BattleConsts.PROPERTY_ATTACK_DEFENDER, this._defender);
-            BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.CODE_PRE_COUNTER_ATTACK, vo);
+            EventVOBase vo = BattleObjectFactory.createEventVO(BattleConsts.Code.PreCounterAttack);
+            vo.setProperty(BattleConsts.Property.AttackAttacker, this._attacker);
+            vo.setProperty(BattleConsts.Property.AttackDefender, this._defender);
+            BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.Code.PreCounterAttack, vo);
             ProcessManager.getInstance().raiseEvent(evt);
             ProcessManager.getInstance().startProcess();
             this._nextState = STATE_WAITING_PRE_COUNTER_ATTACK_TIMING_PROCESSING;

@@ -15,21 +15,21 @@ public class TranslateTargetVO : IBattleVO
         throw new NotImplementedException();
     }
 
-    public object getProperty(int propId)
+    public object getProperty(BattleConsts.Property propId)
     {
         switch ( propId )
         {
-            case BattleConsts.PROPERTY_TRANSLATE_TARGET:
+            case BattleConsts.Property.TranslateTarget:
                 return this.target;
-            case BattleConsts.PROPERTY_TRANSLATE_OFFSET_ROW:
+            case BattleConsts.Property.TranslateOffsetRow:
                 return this.offsetRow;
-            case BattleConsts.PROPERTY_TRANSLATE_OFFSET_COL:
+            case BattleConsts.Property.TranslateOffsetCol:
                 return this.offsetCol;
         }
         return null;
     }
 
-    public void setProperty(int propId, object value)
+    public void setProperty(BattleConsts.Property propId, object value)
     {
         throw new NotImplementedException();
     }

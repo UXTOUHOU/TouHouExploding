@@ -503,7 +503,7 @@ public class Chessboard : MonoBehaviour
 
     public void showRangeByLineDis(int centerRow,int centerCol,int dis)
     {
-        this.showRangeByLineDis(centerRow, centerCol, 0, dis, BattleConsts.LINE_FLAG_CROSS);
+        this.showRangeByLineDis(centerRow, centerCol, 0, dis, (int)BattleConsts.LineFlag.Cross);
     }
 
     public void showRangeByLineDis(int centerRow, int centerCol,int minDis,int maxDis,int lineFlag)
@@ -518,7 +518,7 @@ public class Chessboard : MonoBehaviour
             rangeList[i] = 0;
         }
         // 横向直线
-        if ( (lineFlag & BattleConsts.LINE_FLAG_HORIZON) != 0 )
+        if ( (lineFlag & (int)BattleConsts.LineFlag.Horizon) != 0 )
         {
             for (i = minDis; i <= maxDis; i++)
             {
@@ -536,7 +536,7 @@ public class Chessboard : MonoBehaviour
             }
         }
         // 纵向直线
-        if ( (lineFlag & BattleConsts.LINE_FLAG_VERTICAL) != 0 )
+        if ( (lineFlag & (int)BattleConsts.LineFlag.Vertical) != 0 )
         {
             for (i = minDis; i <= maxDis; i++)
             {

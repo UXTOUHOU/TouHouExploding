@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MainPhaseState : BattleStateBase ,IFSM
+public class MainPhaseState : BattleStateBase, IFSM
 {
-    private Dictionary<int, IState> _subStates;
+    private Dictionary<BattleConsts.BattleState, IState> _subStates;
 
-    private int _curStateId;
+    private BattleConsts.BattleState _curStateId;
 
-    private int _nextStateId;
+    private BattleConsts.BattleState _nextStateId;
 
     private IState _curState;
 
@@ -22,7 +22,7 @@ public class MainPhaseState : BattleStateBase ,IFSM
 
     public override void onStateEnter()
     {
-        this.setState(BattleConsts.MainPhaseSubState_Idle);
+        this.setState(BattleConsts.BattleState.MainPhase_Idle);
     }
 
     public override void onStateExit()
@@ -54,17 +54,17 @@ public class MainPhaseState : BattleStateBase ,IFSM
 
     public void initStates()
     {
-        this._subStates = new Dictionary<int, IState>();
-        this._subStates.Add(BattleConsts.MainPhaseSubState_Idle, new MainPhaseIdleState(this));
-        this._subStates.Add(BattleConsts.MainPhaseSubState_SelectUnitAction, new MainPhaseSelectUnitActionState(this));
-        this._subStates.Add(BattleConsts.MainPhaseSubState_SelectMovePath, new MainPhaseSelectMovePathState(this));
-        this._subStates.Add(BattleConsts.MainPhaseSubState_MoveUnit, new MainPhaseMoveUnitState(this));
-        this._subStates.Add(BattleConsts.MainPhaseSubState_SelectAttackTarget, new MainPhaseSelectAttackTargetState(this));
-        this._subStates.Add(BattleConsts.MainPhaseSubState_UnitAttack, new MainPhaseUnitAttackState(this));
-        this._subStates.Add(BattleConsts.MainPhaseSubState_CounterAttack, new MainPhaseCounterAttackState(this));
+        this._subStates = new Dictionary<BattleConsts.BattleState, IState>();
+        this._subStates.Add(BattleConsts.BattleState.MainPhase_Idle, new MainPhaseIdleState(this));
+        this._subStates.Add(BattleConsts.BattleState.MainPhase_SelectUnitAction, new MainPhaseSelectUnitActionState(this));
+        this._subStates.Add(BattleConsts.BattleState.MainPhase_SelectMovePath, new MainPhaseSelectMovePathState(this));
+        this._subStates.Add(BattleConsts.BattleState.MainPhase_MoveUnit, new MainPhaseMoveUnitState(this));
+        this._subStates.Add(BattleConsts.BattleState.MainPhase_SelectAttackTarget, new MainPhaseSelectAttackTargetState(this));
+        this._subStates.Add(BattleConsts.BattleState.MainPhase_UnitAttack, new MainPhaseUnitAttackState(this));
+        this._subStates.Add(BattleConsts.BattleState.MainPhase_CounterAttack, new MainPhaseCounterAttackState(this));
     }
 
-    public void setState(int stateId)
+    public void setState(BattleConsts.BattleState stateId)
     {
         this._nextStateId = stateId;
     }

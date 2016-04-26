@@ -14,24 +14,24 @@ public class SelectAttackTargetProperties : IBattleProperties
 
     public int maxDisExtra;
 
-    private int _code;
+    private BattleConsts.Code _code;
 
     public SelectAttackTargetProperties()
     {
-        this._code = BattleConsts.CODE_SELECT_ATTACK_TARGET;
+        this._code = BattleConsts.Code.SelectAttackTarget;
         this.minDisExtra = 0;
         this.maxDisExtra = 0;
     }
 
     //public 
-    public void addPropertyValue(int propId, object value)
+    public void addPropertyValue(BattleConsts.Property propId, object value)
     {
         switch ( propId )
         {
-            case BattleConsts.PROPERTY_MIN_ATTACK_DIS_EXTRA:
+            case BattleConsts.Property.MinAttackDisExtra:
                 this.minDisExtra += (int)value;
                 break;
-            case BattleConsts.PROPERTY_MAX_ATTACK_DIS_EXTRA:
+            case BattleConsts.Property.MaxAttackDisExtra:
                 this.maxDisExtra += (int)value;
                 break;
             default:
@@ -39,29 +39,29 @@ public class SelectAttackTargetProperties : IBattleProperties
         }
     }
 
-    public int getCode()
+    public BattleConsts.Code getCode()
     {
         return this._code;
     }
 
-    public object getProperty(int propId)
+    public object getProperty(BattleConsts.Property propId)
     {
         switch (propId)
         {
-            case BattleConsts.PROPERTY_ATTACK_ATTACKER:
+            case BattleConsts.Property.AttackAttacker:
                 return this.attacker;
-            case BattleConsts.PROPERTY_ATTACK_DEFENDER:
+            case BattleConsts.Property.AttackDefender:
                 return this.defender;
-            case BattleConsts.PROPERTY_MIN_ATTACK_DIS_EXTRA:
+            case BattleConsts.Property.MinAttackDisExtra:
                 return this.minDisExtra;
-            case BattleConsts.PROPERTY_MAX_ATTACK_DIS_EXTRA:
+            case BattleConsts.Property.MaxAttackDisExtra:
                 return this.maxDisExtra;
             default:
                 throw new NotImplementedException();
         }
     }
 
-    public void setProperty(int propId, object value)
+    public void setProperty(BattleConsts.Property propId, object value)
     {
         throw new NotImplementedException();
     }

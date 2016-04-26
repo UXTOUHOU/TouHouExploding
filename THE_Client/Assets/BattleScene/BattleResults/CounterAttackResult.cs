@@ -21,7 +21,7 @@ public class CounterAttackResult : IBattleResult
         DamageResult dmgRes = new DamageResult();
         dmgRes.attacker = this.defender;
         dmgRes.victim = this.attacker;
-        dmgRes.damageReason = BattleConsts.DAMAGE_REASON_COUNTER_ATTACK;
+        dmgRes.damageReason = BattleConsts.DamageReason.CounterAttack;
         dmgRes.physicalDamage = this.defender.UnitAttribute.attack;
         ProcessManager.getInstance().addResult(dmgRes);
     }

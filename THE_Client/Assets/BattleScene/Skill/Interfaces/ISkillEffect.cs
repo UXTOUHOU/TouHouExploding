@@ -5,16 +5,16 @@ using System.Text;
 
 public interface ISkillEffect : ILuaUserData
 {
-    /// <summary>
-    /// 效果触发时点
-    /// </summary>
-    /// <returns></returns>
-    int getCode();
+	/// <summary>
+	/// 效果触发时点
+	/// </summary>
+	/// <returns></returns>
+	BattleConsts.Code getCode();
     /// <summary>
     /// 效果触发时点
     /// </summary>
     /// <param name="value"></param>
-    void setCode(int value);
+    void setCode(BattleConsts.Code value);
 
     int getCondition();
     void setCondition(int value);

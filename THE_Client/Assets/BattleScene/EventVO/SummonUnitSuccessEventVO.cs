@@ -9,40 +9,40 @@ public class SummonUnitSuccessEventVO : EventVOBase
     public int summoningPos;
     public int summoningReason;
 
-    public override void setProperty(int propId, object value)
+    public override void setProperty(BattleConsts.Property propId, object value)
     {
         switch (propId)
         {
-            case BattleConsts.PROPERTY_SUMMONING_UNIT:
+            case BattleConsts.Property.SummoningUnit:
                 this.summoningUnit = (Unit)value;
                 break;
-            case BattleConsts.PROPERTY_SUMMONING_POS:
+            case BattleConsts.Property.SummoningPos:
                 this.summoningPos = (int)value;
                 break;
-            case BattleConsts.PROPERTY_SUMMONING_REASON:
+            case BattleConsts.Property.SummoningReason:
                 this.summoningReason = (int)value;
                 break;
         }
     }
 
-    public override object getProperty(int propId)
+    public override object getProperty(BattleConsts.Property propId)
     {
         switch (propId)
         {
-            case BattleConsts.PROPERTY_SUMMONING_UNIT:
+            case BattleConsts.Property.SummoningUnit:
                 return this.summoningUnit;
-            case BattleConsts.PROPERTY_SUMMONING_POS:
+            case BattleConsts.Property.SummoningPos:
                 return this.summoningPos;
-            case BattleConsts.PROPERTY_SUMMONING_REASON:
+            case BattleConsts.Property.SummoningReason:
                 return this.summoningReason;
             default:
                 throw new NotImplementedException();
         }
     }
 
-    public override int getEventCode()
+    public override BattleConsts.Code getEventCode()
     {
-        return BattleConsts.CODE_SUMMON_UNIT_SUCCESS;
+        return BattleConsts.Code.SummonUnitSuccess;
     }
 }
 

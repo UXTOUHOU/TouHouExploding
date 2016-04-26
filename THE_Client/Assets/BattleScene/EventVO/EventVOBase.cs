@@ -5,7 +5,7 @@ using System.Text;
 
 public class EventVOBase : IBattleVO
 {
-    virtual public int getEventCode()
+    virtual public BattleConsts.Code getEventCode()
     {
         return 0;
     }
@@ -15,12 +15,12 @@ public class EventVOBase : IBattleVO
         throw new NotImplementedException();
     }
 
-    virtual public object getProperty(int propId)
+    virtual public object getProperty(BattleConsts.Property propId)
     {
         throw new NotImplementedException();
     }
 
-    virtual public void setProperty(int propId, object value)
+    virtual public void setProperty(BattleConsts.Property propId, object value)
     {
         throw new NotImplementedException();
     }

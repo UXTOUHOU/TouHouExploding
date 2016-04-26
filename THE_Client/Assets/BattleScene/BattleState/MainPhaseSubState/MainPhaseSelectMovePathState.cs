@@ -54,7 +54,7 @@ public class MainPhaseSelectMovePathState : BattleStateBase, ICommand
         {
             if ( !this._isSelectingMovePath )
             {
-                this._fsm.setState(BattleConsts.MainPhaseSubState_SelectUnitAction);
+                this._fsm.setState(BattleConsts.BattleState.MainPhase_SelectUnitAction);
             }
             else
             {
@@ -75,7 +75,7 @@ public class MainPhaseSelectMovePathState : BattleStateBase, ICommand
         {
             BattleGlobal.UnitToBeOperated = this._selectedUnit;
             BattleGlobal.MovePaths = this.getMovePathPosIndexArr(this._pathList);
-            this._fsm.setState(BattleConsts.MainPhaseSubState_MoveUnit);
+            this._fsm.setState(BattleConsts.BattleState.MainPhase_MoveUnit);
         }
     }
 

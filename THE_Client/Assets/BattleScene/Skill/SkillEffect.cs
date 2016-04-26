@@ -7,7 +7,7 @@ public class SkillEffect : ISkillEffect
 {
     private int _ref;
 
-    private int _code;
+    private BattleConsts.Code _code;
 
     private int _condition;
 
@@ -32,7 +32,7 @@ public class SkillEffect : ISkillEffect
         throw new NotImplementedException();
     }
 
-    public int getCode()
+    public BattleConsts.Code getCode()
     {
         return this._code;
     }
@@ -62,7 +62,7 @@ public class SkillEffect : ISkillEffect
         return this._target;
     }
 
-    public void setCode(int value)
+    public void setCode(BattleConsts.Code value)
     {
         this._code = value;
     }

@@ -29,7 +29,7 @@ public class MainPhaseUnitAttackState : BattleStateBase
         DamageResult damageResult = new DamageResult();
         damageResult.attacker = this._attacker;
         damageResult.victim = this._defender;
-        damageResult.damageReason = BattleConsts.DAMAGE_REASON_ATTACK;
+        damageResult.damageReason = BattleConsts.DamageReason.Attack;
         damageResult.physicalDamage = this._attacker.UnitAttribute.attack;
         ProcessManager.getInstance().addResult(damageResult);
         ProcessManager.getInstance().startProcess();
@@ -45,7 +45,7 @@ public class MainPhaseUnitAttackState : BattleStateBase
     {
         if ( BattleGlobal.Core.battleInfo.isProcessingComplete )
         {
-            this._fsm.setState(BattleConsts.MainPhaseSubState_CounterAttack);
+            this._fsm.setState(BattleConsts.BattleState.MainPhase_CounterAttack);
         }
     }
 }

@@ -11,33 +11,33 @@ public class HurtVO : IBattleVO
     public int phycicsDamage;
     public int spellDamage;
     public int hpRemoval;
-    public int damageReason;
+    public BattleConsts.DamageReason damageReason;
 
-    public void setProperty(int propId, object value)
+    public void setProperty(BattleConsts.Property propId, object value)
     {
         switch ( propId )
         {
-            case BattleConsts.PROPERTY_DAMAGE_ATTACKER:
+            case BattleConsts.Property.DamageAttacker:
                 this.attacker = (Unit)value;
                 break;
         }
     }
 
-    public object getProperty(int propId)
+    public object getProperty(BattleConsts.Property propId)
     {
         switch (propId)
         {
-            case BattleConsts.PROPERTY_DAMAGE_ATTACKER:
+            case BattleConsts.Property.DamageAttacker:
                 return this.attacker;
-            case BattleConsts.PROPERTY_DAMAGE_VICTIM:
+            case BattleConsts.Property.DamageVictim:
                 return this.victim;
-            case BattleConsts.PROPERTY_CALC_PHYSICAL_DAMAGE:
+            case BattleConsts.Property.CalcPhysicalDamage:
                 return this.phycicsDamage;
-            case BattleConsts.PROPERTY_CALC_SPELL_DAMAGE:
+            case BattleConsts.Property.CalcSpellDamage:
                 return this.spellDamage;
-            case BattleConsts.PROPERTY_CALC_HP_REMOVAL:
+            case BattleConsts.Property.CalcHpRemoval:
                 return this.hpRemoval;
-            case BattleConsts.PROPERTY_DAMAGE_REASON:
+            case BattleConsts.Property.DamageReason:
                 return this.damageReason;
             default:
                 throw new NotImplementedException();

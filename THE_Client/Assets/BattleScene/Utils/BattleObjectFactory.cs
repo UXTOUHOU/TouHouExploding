@@ -5,48 +5,48 @@ using System.Text;
 
 public class BattleObjectFactory
 {
-    public static BattleEventBase createBattleEvent(int code,EventVOBase vo)
+    public static BattleEventBase createBattleEvent(BattleConsts.Code code,EventVOBase vo)
     {
         BattleEventBase evt = null;
         switch ( code )
         {
-            case BattleConsts.CODE_TAKE_DAMAGE:
+            case BattleConsts.Code.TakeDamage:
                 evt = new TakeDamageEvent(vo);
                 break;
-            case BattleConsts.CODE_TRANSLATE:
+            case BattleConsts.Code.Translate:
                 evt = new TranslateTargetEvent(vo);
                 break;
-            case BattleConsts.CODE_FLAG_ATTACK_TARGET:
+            case BattleConsts.Code.FlagAttackTarget:
                 evt = new FlagAttackTargetEvent(vo);
                 break;
-            case BattleConsts.CODE_PRE_COUNTER_ATTACK:
+            case BattleConsts.Code.PreCounterAttack:
                 evt = new PreCounterAttackEvent(vo);
                 break;
-            case BattleConsts.CODE_SUMMON_UNIT_SUCCESS:
+            case BattleConsts.Code.SummonUnitSuccess:
                 evt = new SummonUnitSuccessEvent(vo);
                 break;
         }
         return evt;
     }
 
-    public static EventVOBase createEventVO(int code)
+    public static EventVOBase createEventVO(BattleConsts.Code code)
     {
         EventVOBase vo = null;
         switch ( code )
         {
-            case BattleConsts.CODE_TAKE_DAMAGE:
+            case BattleConsts.Code.TakeDamage:
                 vo = new TakeDamageEventVO();
                 break;
-            case BattleConsts.CODE_TRANSLATE:
+            case BattleConsts.Code.Translate:
                 vo = new TranslateTargetEventVO();
                 break;
-            case BattleConsts.CODE_FLAG_ATTACK_TARGET:
+            case BattleConsts.Code.FlagAttackTarget:
                 vo = new FlagAttackTargetEventVO();
                 break;
-            case BattleConsts.CODE_PRE_COUNTER_ATTACK:
+            case BattleConsts.Code.PreCounterAttack:
                 vo = new PreCounterAttackEventVO();
                 break;
-            case BattleConsts.CODE_SUMMON_UNIT_SUCCESS:
+            case BattleConsts.Code.SummonUnitSuccess:
                 vo = new SummonUnitSuccessEventVO();
                 break;
         }

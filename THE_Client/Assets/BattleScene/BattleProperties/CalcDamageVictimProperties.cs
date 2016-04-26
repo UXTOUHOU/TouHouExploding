@@ -10,7 +10,7 @@ public class CalcDamageVictimProperties : IBattleProperties
 
     public Unit victim;
 
-    public int damageReason;
+    public BattleConsts.DamageReason damageReason;
 
     public int physicalDamage;
 
@@ -36,41 +36,41 @@ public class CalcDamageVictimProperties : IBattleProperties
 
     public int hpRemoval;
 
-    public void addPropertyValue(int propId, object value)
+    public void addPropertyValue(BattleConsts.Property propId, object value)
     {
         switch (propId)
         {
-            case BattleConsts.PROPERTY_PHYSICAL_DAMAGE:
+            case BattleConsts.Property.PhysicalDamage:
                 this.physicalDamage += (int)value;
                 break;
-            case BattleConsts.PROPERTY_PHYSICAL_DAMAGE_BASE_OUTGOING:
+            case BattleConsts.Property.PhysicalDamageBaseOutgoing:
                 this.physicalDamageBaseOutgoing += (int)value;
                 break;
-            case BattleConsts.PROPERTY_PHYSICAL_DAMAGE_PERCENTAGE:
+            case BattleConsts.Property.PhysicalDamagePercentage:
                 this.physicalDamageExtraOutgoing += (int)value;
                 break;
-            case BattleConsts.PROPERTY_PHYSICAL_DAMAGE_EXTRA_OUTGOING:
+            case BattleConsts.Property.PhysicalDamageExtraOutgoing:
                 this.physicalDamageExtraOutgoing += (int)value;
                 break;
-            case BattleConsts.PROPERTY_SPELL_DAMAGE:
+            case BattleConsts.Property.SpellDamage:
                 this.spellDamage += (int)value;
                 break;
-            case BattleConsts.PROPERTY_SPELL_DAMAGE_BASE_OUTGOING:
+            case BattleConsts.Property.SpellDamageBaseOutgoing:
                 this.spellDamageBaseOutgoing += (int)value;
                 break;
-            case BattleConsts.PROPERTY_SPELL_DAMAGE_PERCENTAGE:
+            case BattleConsts.Property.SpellDamagePercentage:
                 this.spellDamagePercentage += (int)value;
                 break;
-            case BattleConsts.PROPERTY_SPELL_DAMAGE_EXTRA_OUTGOING:
+            case BattleConsts.Property.SpellDamageExtraOutgoing:
                 this.spellDamageExtraOutgoing += (int)value;
                 break;
-            case BattleConsts.PROPERTY_TOTAL_DAMAGE_REDUCTION:
+            case BattleConsts.Property.TotalDamageReduction:
                 this.totalDamageReduction += (int)value;
                 break;
-            case BattleConsts.PROPERTY_PHYSICAL_DAMAGE_REDUCTION:
+            case BattleConsts.Property.PhysicalDamageReduction:
                 this.physicalDamageReduction += (int)value;
                 break;
-            case BattleConsts.PROPERTY_SPELL_DAMAGE_REDUCTION:
+            case BattleConsts.Property.SpellDamageReduction:
                 this.spellDamageReduction += (int)value;
                 break;
             default:
@@ -78,51 +78,51 @@ public class CalcDamageVictimProperties : IBattleProperties
         }
     }
 
-    public int getCode()
+    public BattleConsts.Code getCode()
     {
-        return BattleConsts.CODE_CAlC_DAMAGE_VICTIM;
+        return BattleConsts.Code.CalcDamageVictim;
     }
 
-    public object getProperty(int propId)
+    public object getProperty(BattleConsts.Property propId)
     {
         switch (propId)
         {
-            case BattleConsts.PROPERTY_DAMAGE_REASON:
+            case BattleConsts.Property.DamageReason:
                 return this.damageReason;
-            case BattleConsts.PROPERTY_DAMAGE_ATTACKER:
+            case BattleConsts.Property.DamageAttacker:
                 return this.attacker;
-            case BattleConsts.PROPERTY_DAMAGE_VICTIM:
+            case BattleConsts.Property.DamageVictim:
                 return this.victim;
-            case BattleConsts.PROPERTY_PHYSICAL_DAMAGE:
+            case BattleConsts.Property.PhysicalDamage:
                 return this.physicalDamage;
-            case BattleConsts.PROPERTY_PHYSICAL_DAMAGE_BASE_OUTGOING:
+            case BattleConsts.Property.PhysicalDamageBaseOutgoing:
                 return this.physicalDamageBaseOutgoing;
-            case BattleConsts.PROPERTY_PHYSICAL_DAMAGE_PERCENTAGE:
+            case BattleConsts.Property.PhysicalDamagePercentage:
                 return this.physicalDamageExtraOutgoing;
-            case BattleConsts.PROPERTY_PHYSICAL_DAMAGE_EXTRA_OUTGOING:
+            case BattleConsts.Property.PhysicalDamageExtraOutgoing:
                 return this.physicalDamageExtraOutgoing;
-            case BattleConsts.PROPERTY_SPELL_DAMAGE:
+            case BattleConsts.Property.SpellDamage:
                 return this.spellDamage;
-            case BattleConsts.PROPERTY_SPELL_DAMAGE_BASE_OUTGOING:
+            case BattleConsts.Property.SpellDamageBaseOutgoing:
                 return this.spellDamageBaseOutgoing;
-            case BattleConsts.PROPERTY_SPELL_DAMAGE_PERCENTAGE:
+            case BattleConsts.Property.SpellDamagePercentage:
                 return this.spellDamagePercentage;
-            case BattleConsts.PROPERTY_SPELL_DAMAGE_EXTRA_OUTGOING:
+            case BattleConsts.Property.SpellDamageExtraOutgoing:
                 return this.spellDamageExtraOutgoing;
-            case BattleConsts.PROPERTY_TOTAL_DAMAGE_REDUCTION:
+            case BattleConsts.Property.TotalDamageReduction:
                 return this.totalDamageReduction;
-            case BattleConsts.PROPERTY_PHYSICAL_DAMAGE_REDUCTION:
+            case BattleConsts.Property.PhysicalDamageReduction:
                 return this.physicalDamageReduction;
-            case BattleConsts.PROPERTY_SPELL_DAMAGE_REDUCTION:
+            case BattleConsts.Property.SpellDamageReduction:
                 return this.spellDamageReduction;
-            case BattleConsts.PROPERTY_HP_REMOVAL:
+            case BattleConsts.Property.HpRemoval:
                 return this.hpRemoval;
             default:
                 throw new NotImplementedException();
         }
     }
 
-    public void setProperty(int propId, object value)
+    public void setProperty(BattleConsts.Property propId, object value)
     {
         throw new NotImplementedException();
     }

@@ -11,7 +11,7 @@ using System;
 public interface IFSM
 {
 	void initStates();
-	void setState(int stateId);
+	void setState(BattleConsts.BattleState stateId);
     void update();
 }
 

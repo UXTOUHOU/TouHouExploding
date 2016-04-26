@@ -11,21 +11,21 @@ public class FlagAttackTargetEvent : BattleEventBase
 
     }
 
-    override public int getEventCode()
+    override public BattleConsts.Code getEventCode()
     {
-        return BattleConsts.CODE_FLAG_ATTACK_TARGET;
+        return BattleConsts.Code.FlagAttackTarget;
     }
 
     override public List<ISkillEffect> getTriggerEffects()
     {
         List<ISkillEffect> effects = new List<ISkillEffect>();
-        Unit defender = (Unit)this._eventVO.getProperty(BattleConsts.PROPERTY_ATTACK_DEFENDER);
+        Unit defender = (Unit)this._eventVO.getProperty(BattleConsts.Property.AttackDefender);
         defender.getBuffEffectsByCode(this.getEventCode(), effects);
         ISkillEffect effect;
         for (int i = 0; i < effects.Count; i++)
         {
             effect = effects[i];
-            InterpreterManager.getInstance().addParam(this._eventVO, BattleConsts.PARAM_TYPE_VO);
+            InterpreterManager.getInstance().addParam(this._eventVO, BattleConsts.ParamType.VO);
             if (!InterpreterManager.getInstance().checkCondition(effect.getCondition(), 1))
             {
                 effects.Remove(effect);

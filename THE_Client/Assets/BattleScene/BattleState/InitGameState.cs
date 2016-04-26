@@ -27,6 +27,6 @@ public class InitGameState : BattleStateBase
 
     public override void update()
     {
-        BattleStateManager.getInstance().setState(BattleConsts.BattleState_TurnStartPhase);
+		BattleStateManager.getInstance().setState(BattleConsts.BattleState.TurnStartPhase);
     }
 }
