@@ -11,9 +11,9 @@ public class TranslateTargetEvent : BattleEventBase
 
     }
 
-    override public int getEventCode()
+    override public BattleConsts.Code getEventCode()
     {
-        return BattleConsts.CODE_TRANSLATE;
+        return BattleConsts.Code.Translate;
     }
 
 
@@ -21,13 +21,13 @@ public class TranslateTargetEvent : BattleEventBase
     override public List<ISkillEffect> getTriggerEffects()
     {
         List<ISkillEffect> effects = new List<ISkillEffect>();
-        Unit target = (Unit)this._eventVO.getProperty(BattleConsts.PROPERTY_TRANSLATE_TARGET);
+        Unit target = (Unit)this._eventVO.getProperty(BattleConsts.Property.TranslateTarget);
         target.getBuffEffectsByCode(this.getEventCode(), effects);
         ISkillEffect effect;
         for (int i = 0; i < effects.Count; i++)
         {
             effect = effects[i];
-            InterpreterManager.getInstance().addParam(this._eventVO, BattleConsts.PARAM_TYPE_VO);
+            InterpreterManager.getInstance().addParam(this._eventVO, BattleConsts.ParamType.VO);
             if (!InterpreterManager.getInstance().checkCondition(effect.getCondition(), 1))
             {
                 effects.Remove(effect);

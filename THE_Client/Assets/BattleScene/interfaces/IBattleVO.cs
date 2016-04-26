@@ -6,7 +6,7 @@ using System.Text;
 
 public interface IBattleVO
 {
-    void setProperty(int propId, object value);
-    object getProperty(int propId);
+    void setProperty(BattleConsts.Property propId, object value);
+    object getProperty(BattleConsts.Property propId);
     IBattleVO clone();
 }

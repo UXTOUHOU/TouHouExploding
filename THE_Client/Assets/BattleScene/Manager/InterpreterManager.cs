@@ -170,12 +170,12 @@ public class InterpreterManager
     /// </summary>
     /// <param name="param">参数</param>
     /// <param name="paramType">参数类型</param>
-    public void addParam(object param,int paramType)
+    public void addParam(object param, BattleConsts.ParamType paramType)
     {
         this._params.Add(this.genLuaParam(param, paramType));
     }
 
-    private LuaParam genLuaParam(object param,int paramType)
+    private LuaParam genLuaParam(object param, BattleConsts.ParamType paramType)
     {
         LuaParam luaParam = new LuaParam();
         luaParam.param = param;
@@ -194,19 +194,19 @@ public class InterpreterManager
             LuaParam it = this._params[i];
             switch ( it.paramType )
             {
-                case BattleConsts.PARAM_TYPE_BOOLEAN:
+                case BattleConsts.ParamType.Boolean:
                     this._luaState.PushBoolean((bool)it.param);
                     break;
-                case BattleConsts.PARAM_TYPE_INT:
+                case BattleConsts.ParamType.Int:
                     this._luaState.PushInteger((int)it.param);
                     break;
-                case BattleConsts.PARAM_TYPE_STRING:
+                case BattleConsts.ParamType.String:
                     this._luaState.PushString((string)it.param);
                     break;
-                case BattleConsts.PARAM_TYPE_VO:
+                case BattleConsts.ParamType.VO:
                     this._luaState.PushLightUserData(it.param);
                     break;
-                case BattleConsts.PARAM_TYPE_EVENT:
+                case BattleConsts.ParamType.Event:
                     this._luaState.PushLightUserData(it.param);
                     break;
             }
@@ -255,6 +255,6 @@ public class InterpreterManager
 class LuaParam
 {
     public object param;
-    public int paramType;
+    public BattleConsts.ParamType paramType;
 }
 

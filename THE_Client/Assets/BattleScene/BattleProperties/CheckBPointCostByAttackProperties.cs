@@ -19,21 +19,21 @@ class CheckBPointCostByAttackProperties : IBattleProperties
         get { return this.costBase + this.costBaseExtra; }
     }
 
-    private int _code;
+    private BattleConsts.Code _code;
 
     public CheckBPointCostByAttackProperties()
     {
-        this._code = BattleConsts.CODE_CHECK_BPOINT_COST_BY_ATTACK;
+        this._code = BattleConsts.Code.CheckBPointCostByAttack;
     }
 
-    public void addPropertyValue(int propId, object value)
+    public void addPropertyValue(BattleConsts.Property propId, object value)
     {
         switch (propId)
         {
-            case BattleConsts.PROPERTY_BPOINT_COST_BASE:
+            case BattleConsts.Property.BPointCostBase:
                 this.costBase += (int)value;
                 break;
-            case BattleConsts.PROPERTY_BPOINT_COST_EXTRA:
+            case BattleConsts.Property.BPointCostExtra:
                 this.costBaseExtra += (int)value;
                 break;
             default:
@@ -41,31 +41,31 @@ class CheckBPointCostByAttackProperties : IBattleProperties
         }
     }
 
-    public int getCode()
+    public BattleConsts.Code getCode()
     {
         return this._code;
     }
 
-    public object getProperty(int propId)
+    public object getProperty(BattleConsts.Property propId)
     {
         switch ( propId )
         {
-            case BattleConsts.PROPERTY_PLAYER_ID:
+            case BattleConsts.Property.PlayerId:
                 return this.playerId;
-            case BattleConsts.PROPERTY_UNIT_ID:
+            case BattleConsts.Property.UnitId:
                 return this.unitId;
-            case BattleConsts.PROPERTY_BPOINT_COST_BASE:
+            case BattleConsts.Property.BPointCostBase:
                 return this.costBase;
-            case BattleConsts.PROPERTY_BPOINT_COST_EXTRA:
+            case BattleConsts.Property.BPointCostExtra:
                 return this.costBaseExtra;
-            case BattleConsts.PROPERTY_BPOINT_COST_CURRENT:
+            case BattleConsts.Property.BPointCostCurrent:
                 return this.costCurrent;
             default:
                 throw new NotImplementedException();
         }
     }
 
-    public void setProperty(int propId, object value)
+    public void setProperty(BattleConsts.Property propId, object value)
     {
         throw new NotImplementedException();
     }

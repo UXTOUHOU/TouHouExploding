@@ -56,7 +56,7 @@ class MainPhaseSelectUnitActionState : BattleStateBase
     {
         if (Input.GetMouseButton(1))
         {
-            this._fsm.setState(BattleConsts.MainPhaseSubState_Idle);
+            this._fsm.setState(BattleConsts.BattleState.MainPhase_Idle);
         }
     }
 
@@ -98,7 +98,7 @@ class MainPhaseSelectUnitActionState : BattleStateBase
 
     private void btnMoveClickHander(GameObject go)
     {
-        this._fsm.setState(BattleConsts.MainPhaseSubState_SelectMovePath);
+        this._fsm.setState( BattleConsts.BattleState.MainPhase_SelectMovePath);
     }
 
     private void btnAttackClickHander(GameObject go)
@@ -106,11 +106,11 @@ class MainPhaseSelectUnitActionState : BattleStateBase
         // 检测攻击的cost
         //if ( BattleManager.getInstance().checkBPointCostByAttack(BattleGlobal.MyPlayerId,this._curUnit.id,1) )
         //{
-        //    this._fsm.setState(BattleConsts.MainPhaseSubState_SelectUnitAction);
+        //    this._fsm.setState( BattleConsts.BattleState.MainPhase_SelectUnitAction);
         //}
         if ( this._curUnit.canAttack() )
         {
-            this._fsm.setState(BattleConsts.MainPhaseSubState_SelectAttackTarget);
+            this._fsm.setState( BattleConsts.BattleState.MainPhase_SelectAttackTarget);
         }
     }
 

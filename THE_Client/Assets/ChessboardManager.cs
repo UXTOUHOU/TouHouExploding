@@ -4,7 +4,6 @@ using System.Collections;
 public class ChessboardManager : MonoBehaviour {
 	public GameObject chessboardPanel;
 
-	private 
 	// Use this for initialization
 	void Start () {
 		RectTransform rt = chessboardPanel.GetComponent<RectTransform>();

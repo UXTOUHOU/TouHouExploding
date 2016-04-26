@@ -20,15 +20,15 @@ public class BattleStateManager : IFSM
     /// <summary>
     /// 状态集合
     /// </summary>
-    private Dictionary<int, BattleStateBase> _states;
+    private Dictionary<BattleConsts.BattleState, BattleStateBase> _states;
     /// <summary>
     /// 当前状态
     /// </summary>
-    private int _curStateId;
+    private BattleConsts.BattleState _curStateId;
     /// <summary>
     /// 下一个状态
     /// </summary>
-    private int _nextStateId;
+    private BattleConsts.BattleState _nextStateId;
     /// <summary>
     /// 当前正在运行的状态
     /// </summary>
@@ -42,22 +42,22 @@ public class BattleStateManager : IFSM
     public void initStates()
     {
         this._curStateId = 0;
-        this._states = new Dictionary<int, BattleStateBase>();
-        this._states.Add(BattleConsts.BattleState_InitGame, new InitGameState(this));
-        this._states.Add(BattleConsts.BattleState_TurnStartPhase, new TurnStartPhaseState(this));
-        this._states.Add(BattleConsts.BattleState_StandbyPhase, new StandbyPhaseState(this));
-        this._states.Add(BattleConsts.MainPhaseSubState_Idle, new MainPhaseIdleState(this));
-        this._states.Add(BattleConsts.MainPhaseSubState_SelectUnitAction, new MainPhaseSelectUnitActionState(this));
-        this._states.Add(BattleConsts.MainPhaseSubState_SelectMovePath, new MainPhaseSelectMovePathState(this));
-        this._states.Add(BattleConsts.MainPhaseSubState_MoveUnit, new MainPhaseMoveUnitState(this));
-        this._states.Add(BattleConsts.MainPhaseSubState_SelectAttackTarget, new MainPhaseSelectAttackTargetState(this));
-        this._states.Add(BattleConsts.MainPhaseSubState_UnitAttack, new MainPhaseUnitAttackState(this));
-        this._states.Add(BattleConsts.MainPhaseSubState_CounterAttack, new MainPhaseCounterAttackState(this));
-        this._states.Add(BattleConsts.MainPhaseSubState_SummoningUnit, new MainPhaseSummonUnitState(this));
-        this._states.Add(BattleConsts.BattleState_Processing, new ProcessingState(this));
+        this._states = new Dictionary<BattleConsts.BattleState, BattleStateBase>();
+        this._states.Add(BattleConsts.BattleState.InitGame, new InitGameState(this));
+        this._states.Add(BattleConsts.BattleState.TurnStartPhase, new TurnStartPhaseState(this));
+        this._states.Add(BattleConsts.BattleState.StandbyPhase, new StandbyPhaseState(this));
+        this._states.Add(BattleConsts.BattleState.MainPhase_Idle, new MainPhaseIdleState(this));
+        this._states.Add(BattleConsts.BattleState.MainPhase_SelectUnitAction, new MainPhaseSelectUnitActionState(this));
+        this._states.Add(BattleConsts.BattleState.MainPhase_SelectMovePath, new MainPhaseSelectMovePathState(this));
+        this._states.Add(BattleConsts.BattleState.MainPhase_MoveUnit, new MainPhaseMoveUnitState(this));
+        this._states.Add(BattleConsts.BattleState.MainPhase_SelectAttackTarget, new MainPhaseSelectAttackTargetState(this));
+        this._states.Add(BattleConsts.BattleState.MainPhase_UnitAttack, new MainPhaseUnitAttackState(this));
+        this._states.Add(BattleConsts.BattleState.MainPhase_CounterAttack, new MainPhaseCounterAttackState(this));
+        this._states.Add(BattleConsts.BattleState.MainPhase_SummoningUnit, new MainPhaseSummonUnitState(this));
+        this._states.Add(BattleConsts.BattleState.Processing, new ProcessingState(this));
     }
 
-    public void setState(int stateId)
+    public void setState(BattleConsts.BattleState stateId)
     {
         this._nextStateId = stateId;
     }

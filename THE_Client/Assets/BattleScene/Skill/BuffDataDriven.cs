@@ -6,7 +6,7 @@ using UniLua;
 
 public class BuffDataDriven : ILuaUserData
 {
-    private List<int> _effectCodes;
+    private List<BattleConsts.Code> _effectCodes;
 
     private List<ISkillEffect> _effectList;
 
@@ -51,7 +51,7 @@ public class BuffDataDriven : ILuaUserData
         this._effectList.Add(effect);
     }
 
-    public void getEffectsByCode(int code,List<ISkillEffect> effects)
+    public void getEffectsByCode(BattleConsts.Code code,List<ISkillEffect> effects)
     {
         int count = this._effectList.Count;
         ISkillEffect effect;

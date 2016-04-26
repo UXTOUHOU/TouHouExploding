@@ -79,7 +79,7 @@ public class BattleCore
 
     public void update()
     {
-        BattleStateManager.getInstance().update();
+		BattleStateManager.getInstance().update();
         if (this._isGameStarted)
         {
             UnitManager.getInatance().update();

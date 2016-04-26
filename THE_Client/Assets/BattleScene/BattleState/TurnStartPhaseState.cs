@@ -26,6 +26,6 @@ public class TurnStartPhaseState : BattleStateBase
 
     public override void update()
     {
-        BattleStateManager.getInstance().setState(BattleConsts.BattleState_StandbyPhase);
+		BattleStateManager.getInstance().setState(BattleConsts.BattleState.StandbyPhase);
     }
 }

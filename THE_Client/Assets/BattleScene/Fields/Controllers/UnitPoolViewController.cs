@@ -162,7 +162,7 @@ public class UnitPoolViewController : BaseViewController
         int index = (int)data;
         BattleGlobal.Core.battleInfo.summoningUnitIndex = index;
         CommandManager.getInstance().runCommand(CommandConsts.RemoveWindow, this._windowName);
-        BattleStateManager.getInstance().setState(BattleConsts.MainPhaseSubState_SummoningUnit);
+		BattleStateManager.getInstance().setState(BattleConsts.BattleState.MainPhase_SummoningUnit);
     }
 }
 

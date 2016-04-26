@@ -18,6 +18,7 @@
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.2f1</UnityVersion>
     <RootNamespace></RootNamespace>
+    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -26,7 +27,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_2;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_2;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -36,7 +37,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE;UNITY_5_3_2;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+    <DefineConstants>TRACE;UNITY_5_3_2;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
@@ -57,46 +58,180 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\BattleScene\BattleProcess.cs" />
-    <Compile Include="Assets\BattleScene\CardAttribute.cs" />
-    <Compile Include="Assets\BattleScene\Cell.cs" />
-    <Compile Include="Assets\BattleScene\CellEvent.cs" />
+    <Compile Include="Assets\BattleScene\BattleProperties\CalcDamageAttackerProperties.cs" />
+    <Compile Include="Assets\BattleScene\BattleProperties\CalcDamageVictimProperties.cs" />
+    <Compile Include="Assets\BattleScene\BattleProperties\CheckBPointCostByAttackProperties.cs" />
+    <Compile Include="Assets\BattleScene\BattleProperties\DamageProperties.cs" />
+    <Compile Include="Assets\BattleScene\BattleProperties\SelectAttackTargetProperties.cs" />
+    <Compile Include="Assets\BattleScene\BattleProperties\UnitAttackAnnounceProperties.cs" />
+    <Compile Include="Assets\BattleScene\BattleResults\CounterAttackResult.cs" />
+    <Compile Include="Assets\BattleScene\BattleResults\DamageResult.cs" />
+    <Compile Include="Assets\BattleScene\BattleResults\SummonUnitResult.cs" />
+    <Compile Include="Assets\BattleScene\BattleResults\TranslateResult.cs" />
+    <Compile Include="Assets\BattleScene\BattleSceneMain.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\BattleStateBase.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\BattleStateManager.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\InitGameState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\MainPhaseState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\MainPhaseSubState\MainPhaseCounterAttackState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\MainPhaseSubState\MainPhaseIdleState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\MainPhaseSubState\MainPhaseSelectAttackTargetState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\MainPhaseSubState\MainPhaseSelectMovePathState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\MainPhaseSubState\MainPhaseSelectUnitActionState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\MainPhaseSubState\MainPhaseSummonUnitState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\MainPhaseSubState\MainPhaseUnitAttackState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\MainPhaseSubState\MainPhaseUnitMoveState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\ProcessingState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\StandbyPhaseState.cs" />
+    <Compile Include="Assets\BattleScene\BattleState\TurnStartPhaseState.cs" />
     <Compile Include="Assets\BattleScene\Cemetery.cs" />
-    <Compile Include="Assets\BattleScene\Chessboard.cs" />
+    <Compile Include="Assets\BattleScene\Core\BattleCore.cs" />
     <Compile Include="Assets\BattleScene\Deck.cs" />
     <Compile Include="Assets\BattleScene\DeckCardEvent.cs" />
+    <Compile Include="Assets\BattleScene\Event\BattleEventBase.cs" />
+    <Compile Include="Assets\BattleScene\Event\FlagAttackTargetEvent.cs" />
+    <Compile Include="Assets\BattleScene\Event\PreCounterAttackEvent.cs" />
+    <Compile Include="Assets\BattleScene\Event\SummonUnitSuccessEvent.cs" />
+    <Compile Include="Assets\BattleScene\Event\TakeDamageEvent.cs" />
+    <Compile Include="Assets\BattleScene\Event\TranslateTargetEvent.cs" />
+    <Compile Include="Assets\BattleScene\EventVO\EventVOBase.cs" />
+    <Compile Include="Assets\BattleScene\EventVO\FlagAttackTargetEventVO.cs" />
+    <Compile Include="Assets\BattleScene\EventVO\PreCounterAttackEventVO.cs" />
+    <Compile Include="Assets\BattleScene\EventVO\SummonUnitSuccessEventVO.cs" />
+    <Compile Include="Assets\BattleScene\EventVO\TakeDamageEventVO.cs" />
+    <Compile Include="Assets\BattleScene\EventVO\TranslateTargetEventVO.cs" />
+    <Compile Include="Assets\BattleScene\Fields\Cell.cs" />
+    <Compile Include="Assets\BattleScene\Fields\CellEvent.cs" />
+    <Compile Include="Assets\BattleScene\Fields\Chessboard.cs" />
+    <Compile Include="Assets\BattleScene\Fields\ChessboardPosition.cs" />
+    <Compile Include="Assets\BattleScene\Fields\Controllers\BattleSceneViewController.cs" />
+    <Compile Include="Assets\BattleScene\Fields\Controllers\UnitOperationViewController.cs" />
+    <Compile Include="Assets\BattleScene\Fields\Controllers\UnitPoolViewController.cs" />
+    <Compile Include="Assets\BattleScene\Fields\UnitPool.cs" />
+    <Compile Include="Assets\BattleScene\Fields\views\common\CardCell.cs" />
     <Compile Include="Assets\BattleScene\GridCellSize.cs" />
+    <Compile Include="Assets\BattleScene\Manager\BattleManager.cs" />
+    <Compile Include="Assets\BattleScene\Manager\InterpreterManager.cs" />
+    <Compile Include="Assets\BattleScene\Manager\ProcessManager.cs" />
+    <Compile Include="Assets\BattleScene\Manager\UnitManager.cs" />
     <Compile Include="Assets\BattleScene\OperateButton.cs" />
+    <Compile Include="Assets\BattleScene\Operation\CellOperationIdle.cs" />
+    <Compile Include="Assets\BattleScene\Operation\ICellOperation.cs" />
+    <Compile Include="Assets\BattleScene\Operation\OperationManager.cs" />
+    <Compile Include="Assets\BattleScene\Operation\OperationSelectUnitAction.cs" />
+    <Compile Include="Assets\BattleScene\Player\Player.cs" />
     <Compile Include="Assets\BattleScene\RayIgnore.cs" />
     <Compile Include="Assets\BattleScene\SelectDeck\ClickCard.cs" />
     <Compile Include="Assets\BattleScene\SelectDeck\SelectDeck.cs" />
     <Compile Include="Assets\BattleScene\SelectDeck\SelectDeckButton.cs" />
     <Compile Include="Assets\BattleScene\Skill.cs" />
+    <Compile Include="Assets\BattleScene\Skill\BuffDataDriven.cs" />
+    <Compile Include="Assets\BattleScene\Skill\Interfaces\IBattleProperties.cs" />
+    <Compile Include="Assets\BattleScene\Skill\Interfaces\ILuaUserData.cs" />
+    <Compile Include="Assets\BattleScene\Skill\Interfaces\ISkillEffect.cs" />
+    <Compile Include="Assets\BattleScene\Skill\SkillDataDriven.cs" />
+    <Compile Include="Assets\BattleScene\Skill\SkillEffect.cs" />
     <Compile Include="Assets\BattleScene\SkillOperate.cs" />
-    <Compile Include="Assets\BattleScene\SpellEffect.cs" />
     <Compile Include="Assets\BattleScene\Test.cs" />
-    <Compile Include="Assets\BattleScene\Unit.cs" />
-    <Compile Include="Assets\BattleScene\UnitManager.cs" />
     <Compile Include="Assets\BattleScene\UnitUI.cs" />
+    <Compile Include="Assets\BattleScene\Units\CardAttribute.cs" />
+    <Compile Include="Assets\BattleScene\Units\Unit.cs" />
+    <Compile Include="Assets\BattleScene\Utils\BattleFieldsUntils.cs" />
+    <Compile Include="Assets\BattleScene\Utils\BattleGlobal.cs" />
+    <Compile Include="Assets\BattleScene\Utils\BattleInfo.cs" />
+    <Compile Include="Assets\BattleScene\Utils\BattleObjectFactory.cs" />
+    <Compile Include="Assets\BattleScene\Utils\BattleSceneUtils.cs" />
+    <Compile Include="Assets\BattleScene\Utils\Damage\HpRemovalVO.cs" />
+    <Compile Include="Assets\BattleScene\Utils\Damage\HurtVO.cs" />
+    <Compile Include="Assets\BattleScene\Utils\Damage\PhysicsDamageVO.cs" />
+    <Compile Include="Assets\BattleScene\Utils\Damage\SpellDamageVO.cs" />
+    <Compile Include="Assets\BattleScene\Utils\Damage\TranslateTargetVO.cs" />
+    <Compile Include="Assets\BattleScene\Utils\ID\IDList.cs" />
+    <Compile Include="Assets\BattleScene\Utils\ID\IDProvider.cs" />
+    <Compile Include="Assets\BattleScene\Utils\LuaLib\BattleFieldLib.cs" />
+    <Compile Include="Assets\BattleScene\Utils\LuaLib\EffectLib.cs" />
+    <Compile Include="Assets\BattleScene\Utils\LuaLib\PropertyLib.cs" />
+    <Compile Include="Assets\BattleScene\Utils\LuaLib\TestLuaLib.cs" />
+    <Compile Include="Assets\BattleScene\Utils\MTRandom.cs" />
+    <Compile Include="Assets\BattleScene\consts\BattleConsts.cs" />
+    <Compile Include="Assets\BattleScene\consts\EffectConsts.cs" />
+    <Compile Include="Assets\BattleScene\interfaces\IBattleEvent.cs" />
+    <Compile Include="Assets\BattleScene\interfaces\IBattleFieldLocation.cs" />
+    <Compile Include="Assets\BattleScene\interfaces\IBattleResult.cs" />
+    <Compile Include="Assets\BattleScene\interfaces\IBattleVO.cs" />
+    <Compile Include="Assets\BattleScene\interfaces\IID.cs" />
     <Compile Include="Assets\ChessboardManager.cs" />
-    <Compile Include="Assets\DataManager.cs" />
     <Compile Include="Assets\DebugConsole\DebugConsole.cs" />
     <Compile Include="Assets\Menu\Common\AdjustBackgroundWithMouseLocation.cs" />
     <Compile Include="Assets\Menu\Config\Button\ConfigButton.cs" />
     <Compile Include="Assets\Menu\GameHall\Button\GameHallButton.cs" />
     <Compile Include="Assets\Menu\GameHall\GameHallManager.cs" />
     <Compile Include="Assets\Menu\MainMenu\Button\MainMenuButton.cs" />
+    <Compile Include="Assets\Network\NetCore.cs" />
+    <Compile Include="Assets\Network\THEClient.cs" />
+    <Compile Include="Assets\Network\THEClientManager.cs" />
+    <Compile Include="Assets\Network\THEServer.cs" />
+    <Compile Include="Assets\Network\THEServerManager.cs" />
+    <Compile Include="Assets\Parser\IParser.cs" />
+    <Compile Include="Assets\Parser\UnitCfg.cs" />
+    <Compile Include="Assets\UniLua\ByteString.cs" />
+    <Compile Include="Assets\UniLua\Coder.cs" />
+    <Compile Include="Assets\UniLua\Common.cs" />
+    <Compile Include="Assets\UniLua\Do.cs" />
+    <Compile Include="Assets\UniLua\Dump.cs" />
+    <Compile Include="Assets\UniLua\LLex.cs" />
+    <Compile Include="Assets\UniLua\LuaAPI.cs" />
+    <Compile Include="Assets\UniLua\LuaAuxLib.cs" />
+    <Compile Include="Assets\UniLua\LuaBaseLib.cs" />
+    <Compile Include="Assets\UniLua\LuaBitLib.cs" />
+    <Compile Include="Assets\UniLua\LuaCoroLib.cs" />
+    <Compile Include="Assets\UniLua\LuaDebug.cs" />
+    <Compile Include="Assets\UniLua\LuaDebugLib.cs" />
+    <Compile Include="Assets\UniLua\LuaEncLib.cs" />
+    <Compile Include="Assets\UniLua\LuaFFILib.cs" />
+    <Compile Include="Assets\UniLua\LuaFile.cs" />
+    <Compile Include="Assets\UniLua\LuaFunc.cs" />
+    <Compile Include="Assets\UniLua\LuaIOLib.cs" />
+    <Compile Include="Assets\UniLua\LuaMathLib.cs" />
+    <Compile Include="Assets\UniLua\LuaObject.cs" />
+    <Compile Include="Assets\UniLua\LuaOsLib.cs" />
+    <Compile Include="Assets\UniLua\LuaPkgLib.cs" />
+    <Compile Include="Assets\UniLua\LuaState.cs" />
+    <Compile Include="Assets\UniLua\LuaStrLib.cs" />
+    <Compile Include="Assets\UniLua\LuaTable.cs" />
+    <Compile Include="Assets\UniLua\LuaTableLib.cs" />
+    <Compile Include="Assets\UniLua\OpCodes.cs" />
+    <Compile Include="Assets\UniLua\Parser.cs" />
+    <Compile Include="Assets\UniLua\TagMethod.cs" />
+    <Compile Include="Assets\UniLua\ULDebug.cs" />
+    <Compile Include="Assets\UniLua\Undump.cs" />
+    <Compile Include="Assets\UniLua\Util.cs" />
+    <Compile Include="Assets\UniLua\VM.cs" />
+    <Compile Include="Assets\config\AssetBundleConfig.cs" />
+    <Compile Include="Assets\consts\CommandConsts.cs" />
+    <Compile Include="Assets\consts\WindowName.cs" />
+    <Compile Include="Assets\interface\ICommand.cs" />
+    <Compile Include="Assets\interface\IFSM.cs" />
+    <Compile Include="Assets\interface\IState.cs" />
+    <Compile Include="Assets\manager\CommandManager.cs" />
+    <Compile Include="Assets\manager\DataManager.cs" />
+    <Compile Include="Assets\manager\LoadManager.cs" />
+    <Compile Include="Assets\manager\PopUpManager.cs" />
+    <Compile Include="Assets\manager\ResourceManager.cs" />
+    <Compile Include="Assets\manager\SoundManager.cs" />
+    <Compile Include="Assets\utils\BaseViewController.cs" />
+    <Compile Include="Assets\utils\DontDestroyOnLoadScript.cs" />
+    <Compile Include="Assets\utils\Global.cs" />
+    <Compile Include="Assets\utils\UIEventListener.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\StreamingAssets\Configs\Units.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

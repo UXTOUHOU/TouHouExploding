@@ -60,7 +60,7 @@ public class MainPhaseMoveUnitState : BattleStateBase, ICommand
         {
             // todo : 各种地形，刷新buff的判定
             // 进入空闲状态
-            this._fsm.setState(BattleConsts.MainPhaseSubState_Idle);
+            this._fsm.setState(BattleConsts.BattleState.MainPhase_Idle);
         }
     }
 

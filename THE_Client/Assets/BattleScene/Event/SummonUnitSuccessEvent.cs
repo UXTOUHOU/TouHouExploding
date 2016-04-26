@@ -11,9 +11,9 @@ public class SummonUnitSuccessEvent : BattleEventBase
 
     }
 
-    override public int getEventCode()
+    override public BattleConsts.Code getEventCode()
     {
-        return BattleConsts.CODE_SUMMON_UNIT_SUCCESS;
+        return BattleConsts.Code.SummonUnitSuccess;
     }
 
     override public string getEventName()
@@ -35,7 +35,7 @@ public class SummonUnitSuccessEvent : BattleEventBase
         for (i = 0; i < effects.Count; i++)
         {
             effect = effects[i];
-            InterpreterManager.getInstance().addParam(this._eventVO, BattleConsts.PARAM_TYPE_VO);
+            InterpreterManager.getInstance().addParam(this._eventVO, BattleConsts.ParamType.VO);
             if (!InterpreterManager.getInstance().checkCondition(effect.getCondition(), 1))
             {
                 effects.Remove(effect);

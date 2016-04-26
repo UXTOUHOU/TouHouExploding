@@ -97,7 +97,7 @@ public class ProcessManager
                 effects = evt.getTriggerEffects();
                 for (int j = 0; j < effects.Count; j++)
                 {
-                    InterpreterManager.getInstance().addParam(evt.getEventVO(), BattleConsts.PARAM_TYPE_VO);
+                    InterpreterManager.getInstance().addParam(evt.getEventVO(), BattleConsts.ParamType.VO);
                     InterpreterManager.getInstance().callFunction(effects[j].getOperation(), 1);
                 }
             }

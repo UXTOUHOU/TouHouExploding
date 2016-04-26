@@ -37,7 +37,7 @@ public class PropertyLib
         {
             throw new ArgumentException("effect is null!");
         }
-        int code = luaState.ToInteger(-1);
+		BattleConsts.Code code = (BattleConsts.Code)luaState.ToInteger(-1);
         effect.setCode(code);
         return 0;
     }
@@ -49,7 +49,7 @@ public class PropertyLib
         {
             throw new ArgumentException("effect is null!");
         }
-        luaState.PushInteger(effect.getCode());
+        luaState.PushInteger((int)effect.getCode());
         return 1;
     }
 
@@ -188,7 +188,7 @@ public class PropertyLib
         }
         else
         {
-            int propId = luaState.ToInteger(-1);
+			BattleConsts.Property propId = (BattleConsts.Property)luaState.ToInteger(-1);
             object prop = evt.getEventVOProperty(propId);
             if ( prop == null )
             {
@@ -216,7 +216,7 @@ public class PropertyLib
         }
         else
         {
-            int propId = luaState.ToInteger(-1);
+			BattleConsts.Property propId = (BattleConsts.Property)luaState.ToInteger(-1);
             object prop = vo.getProperty(propId);
             if (prop == null)
             {

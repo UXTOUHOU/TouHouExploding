@@ -13,17 +13,17 @@ public class TranslateResult : IBattleResult
     public void execute()
     {
         Debug.Log("excute translate result!");
-        EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.CODE_TRANSLATE);
-        evtVO.setProperty(BattleConsts.PROPERTY_TRANSLATE_TARGET, this.target);
-        evtVO.setProperty(BattleConsts.PROPERTY_TRANSLATE_ORIGINAL_ROW,this.target.row);
-        evtVO.setProperty(BattleConsts.PROPERTY_TRANSLATE_ORIGINAL_COL,this.target.col);
-        evtVO.setProperty(BattleConsts.PROPERTY_TRANSLATE_OFFSET_ROW,this.offsetRow);
-        evtVO.setProperty(BattleConsts.PROPERTY_TRANSLATE_OFFSET_COL,this.offsetCol);
+        EventVOBase evtVO = BattleObjectFactory.createEventVO(BattleConsts.Code.Translate);
+        evtVO.setProperty(BattleConsts.Property.TranslateTarget, this.target);
+        evtVO.setProperty(BattleConsts.Property.TranslateOriginalRow, this.target.row);
+        evtVO.setProperty(BattleConsts.Property.TranslateOriginalCol, this.target.col);
+        evtVO.setProperty(BattleConsts.Property.TranslateOffsetRow, this.offsetRow);
+        evtVO.setProperty(BattleConsts.Property.TranslateOffsetCol, this.offsetCol);
         if ( target.translate(offsetRow, offsetCol) == BattleConsts.UNIT_ACTION_SUCCESS )
         {
-            evtVO.setProperty(BattleConsts.PROPERTY_TRANSLATE_TARGET_ROW, this.target.row);
-            evtVO.setProperty(BattleConsts.PROPERTY_TRANSLATE_TARGET_COL, this.target.col);
-            BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.CODE_TRANSLATE, evtVO);
+            evtVO.setProperty(BattleConsts.Property.TranslateTargetRow, this.target.row);
+            evtVO.setProperty(BattleConsts.Property.TranslateTargetCol, this.target.col);
+            BattleEventBase evt = BattleObjectFactory.createBattleEvent(BattleConsts.Code.Translate, evtVO);
             ProcessManager.getInstance().raiseEvent(evt);
         }
     }

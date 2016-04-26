@@ -45,7 +45,7 @@ public class MainPhaseIdleState : BattleStateBase
             {
                 BattleInfo info = BattleGlobal.Core.battleInfo;
                 info.unitSelected = cell.UnitOnCell;
-                this._fsm.setState(BattleConsts.MainPhaseSubState_SelectUnitAction);
+				this._fsm.setState(BattleConsts.BattleState.MainPhase_SelectUnitAction);
             }
         }
     }

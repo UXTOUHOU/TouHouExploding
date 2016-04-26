@@ -16,60 +16,60 @@ public class TranslateTargetEventVO : EventVOBase
     public int translateReason;
     public List<int> paths;
 
-    public override void setProperty(int propId, object value)
+    public override void setProperty(BattleConsts.Property propId, object value)
     {
         switch (propId)
         {
-            case BattleConsts.PROPERTY_TRANSLATE_TARGET:
+            case BattleConsts.Property.TranslateTarget:
                 this.target = (Unit)value;
                 break;
-            case BattleConsts.PROPERTY_TRANSLATE_ORIGINAL_ROW:
+            case BattleConsts.Property.TranslateOriginalRow:
                 this.originalRow = (int)value;
                 break;
-            case BattleConsts.PROPERTY_TRANSLATE_ORIGINAL_COL:
+            case BattleConsts.Property.TranslateOriginalCol:
                 this.originalCol = (int)value;
                 break;
-            case BattleConsts.PROPERTY_TRANSLATE_OFFSET_ROW:
+            case BattleConsts.Property.TranslateOffsetRow:
                 this.offsetRow = (int)value;
                 break;
-            case BattleConsts.PROPERTY_TRANSLATE_OFFSET_COL:
+            case BattleConsts.Property.TranslateOffsetCol:
                 this.offsetCol = (int)value;
                 break;
-            case BattleConsts.PROPERTY_TRANSLATE_TARGET_ROW:
+            case BattleConsts.Property.TranslateTargetRow:
                 this.targetRow = (int)value;
                 break;
-            case BattleConsts.PROPERTY_TRANSLATE_TARGET_COL:
+            case BattleConsts.Property.TranslateTargetCol:
                 this.targetCol = (int)value;
                 break;
         }
     }
 
-    public override object getProperty(int propId)
+    public override object getProperty(BattleConsts.Property propId)
     {
         switch (propId)
         {
-            case BattleConsts.PROPERTY_TRANSLATE_TARGET:
+            case BattleConsts.Property.TranslateTarget:
                 return this.target;
-            case BattleConsts.PROPERTY_TRANSLATE_ORIGINAL_ROW:
+            case BattleConsts.Property.TranslateOriginalRow:
                 return this.originalRow;
-            case BattleConsts.PROPERTY_TRANSLATE_ORIGINAL_COL:
+            case BattleConsts.Property.TranslateOriginalCol:
                 return this.originalCol;
-            case BattleConsts.PROPERTY_TRANSLATE_OFFSET_ROW:
+            case BattleConsts.Property.TranslateOffsetRow:
                 return this.offsetRow;
-            case BattleConsts.PROPERTY_TRANSLATE_OFFSET_COL:
+            case BattleConsts.Property.TranslateOffsetCol:
                 return this.offsetCol;
-            case BattleConsts.PROPERTY_TRANSLATE_TARGET_ROW:
+            case BattleConsts.Property.TranslateTargetRow:
                 return this.targetRow;
-            case BattleConsts.PROPERTY_TRANSLATE_TARGET_COL:
+            case BattleConsts.Property.TranslateTargetCol:
                 return this.targetCol;
             default:
                 throw new NotImplementedException();
         }
     }
 
-    public override int getEventCode()
+    public override BattleConsts.Code getEventCode()
     {
-        return BattleConsts.CODE_TRANSLATE;
+        return BattleConsts.Code.Translate;
     }
 }
 
