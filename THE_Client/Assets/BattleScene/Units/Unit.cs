@@ -237,7 +237,7 @@ public class Unit : IID, IBattleFieldLocation, ILuaUserData
         this._maxHp = UnitAttribute.hp;
         //
         this.createUnitPrefab();
-        BattleGlobal.Core.chessboard.addChildOnLayer(this._unitGo, BattleConsts.BattleFieldLayer_Unit, targetPosition.y, targetPosition.x);
+        Chessboard.addChildOnLayer(this._unitGo, BattleConsts.BattleFieldLayer_Unit, targetPosition.y, targetPosition.x);
         //unitSprite = new UnitUI(this, targetPosition);
         this._id = IDProvider.getInstance().applyUnitId(this);
         UnitManager.getInatance().registerUnit(this);
@@ -319,7 +319,7 @@ public class Unit : IID, IBattleFieldLocation, ILuaUserData
         this._moveRange[stack[0]] = 0;
         Cell cell;
         int[,] offsets = new int[4,2] { {0,-1}, {0,1}, {-1,0}, {1,0} };
-        Chessboard battleField = BattleGlobal.Core.chessboard;
+        //Chessboard battleField = Chessboard;
         while ( index < stackLen )
         {
             if (this._moveRange[stack[index]] >= this.UnitAttribute.motilityCurrent )
@@ -331,7 +331,7 @@ public class Unit : IID, IBattleFieldLocation, ILuaUserData
                 tmpRow = stack[index] / colLimit + offsets[i,0];
                 tmpCol = stack[index] % colLimit + offsets[i,1];
                 tmpPos = tmpRow * colLimit + tmpCol;
-                cell = battleField.getCellByPos(tmpRow,tmpCol);
+                cell = Chessboard.getCellByPos(tmpRow,tmpCol);
                 // 判断cell是否为可移动的位置,地形判断随后添加
                 if ( cell != null && this._moveRange[tmpPos] == -1 && cell.UnitOnCell == null )
                 {
@@ -444,7 +444,7 @@ public class Unit : IID, IBattleFieldLocation, ILuaUserData
     {
         int targetRow = this._row + offsetRow;
         int targetCol = this._col + offsetCol;
-        Cell targetCell = BattleGlobal.Core.chessboard.getCellByPos(targetRow, targetCol);
+        Cell targetCell = Chessboard.getCellByPos(targetRow, targetCol);
         if ( targetCell.UnitOnCell != null )
         {
             Debug.LogError("Unit translate fail!There is unit on targetCell!");
@@ -506,7 +506,7 @@ public class Unit : IID, IBattleFieldLocation, ILuaUserData
     /// <returns></returns>
     public int summon(int pos,int owner,int controller)
     {
-        Cell cell = BattleGlobal.Core.chessboard.getCellByPos(pos);
+        Cell cell = Chessboard.getCellByPos(pos);
         if ( !cell.IsCanSummonPlace() )
         {
             return BattleConsts.UNIT_ACTION_FAIL;
@@ -515,7 +515,7 @@ public class Unit : IID, IBattleFieldLocation, ILuaUserData
         this.curCell = cell;
         // 创建预制
         this.createUnitPrefab();
-        BattleGlobal.Core.chessboard.addChildOnLayer(this._unitGo, BattleConsts.BattleFieldLayer_Unit, this._row, this._col);
+        Chessboard.addChildOnLayer(this._unitGo, BattleConsts.BattleFieldLayer_Unit, this._row, this._col);
         // 设置所有权
         this.setOwner(owner);
         this.setController(controller);
@@ -664,8 +664,8 @@ public class Unit : IID, IBattleFieldLocation, ILuaUserData
             return;
         }
         this._isWaitingToMove = false;
-        Cell curCell = BattleGlobal.Core.chessboard.getCellByPos(this._movingPath[this._movingPathIndex]);
-        Cell targetCell = BattleGlobal.Core.chessboard.getCellByPos(this._movingPath[this._movingPathIndex+1]);
+        Cell curCell = Chessboard.getCellByPos(this._movingPath[this._movingPathIndex]);
+        Cell targetCell = Chessboard.getCellByPos(this._movingPath[this._movingPathIndex+1]);
         // 初始化时间
         this._movingTime = 0;
         this._movingTotalTime = BattleConsts.DefaultMoveTimePerCell;
@@ -682,7 +682,7 @@ public class Unit : IID, IBattleFieldLocation, ILuaUserData
         this._movingTime += Time.deltaTime;
         if ( this._movingTime >= this._movingTotalTime )
         {
-            Cell targetCell = BattleGlobal.Core.chessboard.getCellByPos(this._movingPath[this._movingPathIndex + 1]);
+            Cell targetCell = Chessboard.getCellByPos(this._movingPath[this._movingPathIndex + 1]);
             this._unitGo.transform.position = targetCell.transform.position;
             // 判断是否已经到达终点
             this._movingPathIndex++;

@@ -2,16 +2,15 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
+using System.Threading;
 
-public class Chessboard : MonoBehaviour
+[System.Runtime.InteropServices.Guid("8E332A3A-1CC1-4F2D-A30A-A9BCE2D9E5DD")]
+public static class Chessboard
 {
-    public GameObject ChessboardRect;
-    public GameObject ChessboardCellPrefab;
-    public GameObject ChessboardDialog;
-    public GameObject CanvasObject;
-    public GameObject Background;               // Background所在的Panel
 
-    public static bool UnitMove = false;        // 是否有单位正在移动
+	//public static Mutex DialogMutex;
+
+	public static bool UnitMove = false;        // 是否有单位正在移动
 
     public static Cell SelectedCell;
     public static GameObject SelectedCard;
@@ -20,51 +19,45 @@ public class Chessboard : MonoBehaviour
     public static bool RecordingMovePath;
     public static List<ChessboardPosition> ListMovePath = new List<ChessboardPosition>();
 
-    private static Chessboard singleton = null;
-    private Cell[,] cellArray = new Cell[12, 8];
-    public const int ChessboardMaxX = 12;
-    public const int ChessboardMaxY = 8;
+    private static Cell[,] cellArray = new Cell[12, 8];
+    //public const int ChessboardMaxX = 12;
+    //public const int ChessboardMaxY = 8;
 
-    public const int BlueSideSummonColumn = 0;                      // 蓝色方可以召唤的列
-    public const int RedSideSummonColumn = ChessboardMaxX - 1;      // 红色方可以召唤的列
+    //public const int BlueSideSummonColumn = 0;                      // 蓝色方可以召唤的列
+    //public const int RedSideSummonColumn = ChessboardMaxX - 1;      // 红色方可以召唤的列
 
-    private RectTransform _rectTrans;
-    private GameObject _bgLayer;
-    private GameObject _unitLayer;
-    private GameObject _uiLayer;
+    private static RectTransform _rectTrans;
+    private static GameObject _bgLayer;
+    private static GameObject _unitLayer;
+    private static GameObject _uiLayer;
     /// <summary>
     /// 选择框
     /// </summary>
-    private GameObject _selectBox;
+    private static GameObject _selectBox;
     /// <summary>
     /// 是否显示选择框
     /// </summary>
-    private bool _showSelectBox;
+    private static bool _showSelectBox;
 
-    private int[] _showRangeList;
-    private int[] _moveRange;
-    private int[] _movePaths;
-    /// <summary>
-    /// 当前是否正在显示移动范围
-    /// </summary>
-    private bool _isShowingRange;
-    /// <summary>
-    /// 当前是否正在显示移动范围
-    /// </summary>
-    public bool isShowingMoveRange
+    private static int[] _showRangeList;
+    private static int[] _moveRange;
+	private static int[] _movePaths;
+	/// <summary>
+	/// 当前是否正在显示移动范围
+	/// </summary>
+	private static bool _isShowingRange;
+	/// <summary>
+	/// 当前是否正在显示移动范围
+	/// </summary>
+	public static bool isShowingMoveRange
     {
-        get { return this._isShowingRange;  }
+        get { return _isShowingRange;  }
     }
 
-    /// <summary>
-    /// 记录BattleField里对应的层
-    /// </summary>
-    private Dictionary<int, GameObject> _layersMap;
-
-    public static Chessboard GetInstance()
-    {
-        return singleton;
-    }
+	/// <summary>
+	/// 记录BattleField里对应的层
+	/// </summary>
+	private static Dictionary<int, GameObject> _layersMap;
 
     /// <summary>
     /// 得到x，y坐标表示的cell
@@ -75,7 +68,7 @@ public class Chessboard : MonoBehaviour
     {
         try
         {
-            return GetInstance().cellArray[position.x, position.y];
+            return cellArray[position.x, position.y];
         }
         catch (Exception)
         {
@@ -88,26 +81,19 @@ public class Chessboard : MonoBehaviour
     /// </summary>
     public static void ClearBackground()
     {
-        foreach (var it in singleton.cellArray)
+        foreach (var it in cellArray)
             it.SetBackgroundColor(Color.black);
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-        //Init
-        singleton = this;
     }
 
     /// <summary>
     /// 初始化地图基本单元格
     /// </summary>
-    public void init()
+    public static void init()
     {
-        //this._rectTrans = this.GetComponent<RectTransform>();
+        //_rectTrans = GetComponent<RectTransform>();
         ////RectTransform anchor = ChessboardRect.GetComponent<RectTransform>();
-        //Vector2 chessboardSize = new Vector2(Screen.width * (this._rectTrans.anchorMax.x - this._rectTrans.anchorMin.x),
-        //    Screen.height * (this._rectTrans.anchorMax.y - this._rectTrans.anchorMin.y));
+        //Vector2 chessboardSize = new Vector2(Screen.width * (_rectTrans.anchorMax.x - _rectTrans.anchorMin.x),
+        //    Screen.height * (_rectTrans.anchorMax.y - _rectTrans.anchorMin.y));
         //CellSize = Math.Min(chessboardSize.x / ChessboardMaxX, chessboardSize.y / ChessboardMaxY);
         //BattleGlobal.CellStartX = 0;
         //BattleGlobal.CellStartY = 0;
@@ -116,17 +102,17 @@ public class Chessboard : MonoBehaviour
         //BattleGlobal.Scale = cellSize / BattleConsts.DefaultCellSize;
         BattleGlobal.CellSize = BattleConsts.DefaultCellSize;
         BattleGlobal.Scale = 1f;
-        this.initLayers();
+        initLayers();
         GameObject cellGo;
         Cell cell;
-        for (int x = 0; x < ChessboardMaxX; ++x)
+        for (int x = 0; x < BattleConsts.MapMaxCol; ++x)
         {
-            for (int y = 0; y < ChessboardMaxY; ++y)
+            for (int y = 0; y < BattleConsts.MapMaxRow; ++y)
             {
-                cellGo = Instantiate(Resources.Load("Prefabs/ChessboardCellPrefab")) as GameObject;
+                cellGo = GameObject.Instantiate(Resources.Load("Prefabs/ChessboardCellPrefab")) as GameObject;
                 cell = cellGo.GetComponent<Cell>();
                 cellArray[x, y] = cell;
-                cell.transform.SetParent(this._bgLayer.transform);
+                cell.transform.SetParent(_bgLayer.transform);
                 cell.transform.localScale = Vector3.one;
                 cell.location = new ChessboardPosition(x, y);
                 //每个格子的背景
@@ -138,12 +124,12 @@ public class Chessboard : MonoBehaviour
                 //cell.transform.localScale = new Vector3(CellSize / 75, CellSize / 75, 1);
             }
         }
-        this.addClickEventHandler(this.testCell);
-        this.addEnterEventHandler(this.onCellEnterHandler);
-        this.addExitEventHandler(this.onCellExitHandler);
+        addClickEventHandler(testCell);
+        addEnterEventHandler(onCellEnterHandler);
+        addExitEventHandler(onCellExitHandler);
 
-        for (int x = 0; x < ChessboardMaxX; ++x)
-            for (int y = 0; y < ChessboardMaxY; ++y)
+        for (int x = 0; x < BattleConsts.MapMaxCol; ++x)
+            for (int y = 0; y < BattleConsts.MapMaxRow; ++y)
             {
                 cell = cellArray[x, y];
                 if (y == 0)
@@ -156,37 +142,38 @@ public class Chessboard : MonoBehaviour
             }
     }
 
-    public void testMove(GameObject go)
+	public static void testMove(GameObject go)
     {
         Vector3 vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(this.transform.InverseTransformPoint(vec));
-        //this.transform.InverseTransformVector
+        //Debug.Log(transform.InverseTransformPoint(vec));
+        //transform.InverseTransformVector
     }
 
-    /// <summary>
-    /// 初始化BattleField上的层
-    /// </summary>
-    private void initLayers()
-    {
+	/// <summary>
+	/// 初始化BattleField上的层
+	/// </summary>
+	private static void initLayers()
+	{
+		var chessboardObject = ChessboardObject.GetInstance();
         // 获取层
-        this._bgLayer = this.transform.FindChild("BgLayer").gameObject;
-        this._unitLayer = this.transform.FindChild("UnitLayer").gameObject;
-        this._uiLayer = this.transform.FindChild("UILayer").gameObject;
+        _bgLayer = chessboardObject.BgLayer;
+        _unitLayer = chessboardObject.UnitLayer;
+        _uiLayer = chessboardObject.UILayer;
         // 设置全局缩放
-        this._bgLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
-        this._unitLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
-        this._uiLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
+        _bgLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
+        _unitLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
+        _uiLayer.transform.localScale = Vector3.one * BattleGlobal.Scale;
         // 添加到Map
-        this._layersMap = new Dictionary<int, GameObject>();
-        this._layersMap.Add(BattleConsts.BattleFieldLayer_Bg, this._bgLayer);
-        this._layersMap.Add(BattleConsts.BattleFieldLayer_Unit, this._unitLayer);
-        this._layersMap.Add(BattleConsts.BattleFieldLayer_UI, this._uiLayer);
+        _layersMap = new Dictionary<int, GameObject>();
+        _layersMap.Add(BattleConsts.BattleFieldLayer_Bg, _bgLayer);
+        _layersMap.Add(BattleConsts.BattleFieldLayer_Unit, _unitLayer);
+        _layersMap.Add(BattleConsts.BattleFieldLayer_UI, _uiLayer);
         // 初始化selectbox
-        this._showSelectBox = false;
-        this._selectBox = this._uiLayer.transform.FindChild("SelectBox").gameObject;
+        _showSelectBox = false;
+        _selectBox = _uiLayer.transform.FindChild("SelectBox").gameObject;
     }
 
-    public void addClickEventHandler(UIEventListener.UIEventHandler eventHandler)
+	public static void addClickEventHandler(UIEventListener.UIEventHandler eventHandler)
     {
         int i, j;
         int rowLimit = BattleConsts.MapMaxRow;
@@ -200,7 +187,7 @@ public class Chessboard : MonoBehaviour
         }
     }
 
-    public void addEnterEventHandler(UIEventListener.UIEventHandler eventHandler)
+	public static void addEnterEventHandler(UIEventListener.UIEventHandler eventHandler)
     {
         int i, j;
         int rowLimit = BattleConsts.MapMaxRow;
@@ -214,7 +201,7 @@ public class Chessboard : MonoBehaviour
         }
     }
 
-    public void addExitEventHandler(UIEventListener.UIEventHandler eventHandler)
+	public static void addExitEventHandler(UIEventListener.UIEventHandler eventHandler)
     {
         int i, j;
         int rowLimit = BattleConsts.MapMaxRow;
@@ -228,7 +215,7 @@ public class Chessboard : MonoBehaviour
         }
     }
 
-    public void removeClickEventHandler(UIEventListener.UIEventHandler eventHandler)
+	public static void removeClickEventHandler(UIEventListener.UIEventHandler eventHandler)
     {
         int i, j;
         int rowLimit = BattleConsts.MapMaxRow;
@@ -242,7 +229,7 @@ public class Chessboard : MonoBehaviour
         }
     }
 
-    public void removeEnterEventHandler(UIEventListener.UIEventHandler eventHandler)
+	public static void removeEnterEventHandler(UIEventListener.UIEventHandler eventHandler)
     {
         int i, j;
         int rowLimit = BattleConsts.MapMaxRow;
@@ -256,7 +243,7 @@ public class Chessboard : MonoBehaviour
         }
     }
 
-    public void removeExitEventHandler(UIEventListener.UIEventHandler eventHandler)
+	public static void removeExitEventHandler(UIEventListener.UIEventHandler eventHandler)
     {
         int i, j;
         int rowLimit = BattleConsts.MapMaxRow;
@@ -270,39 +257,39 @@ public class Chessboard : MonoBehaviour
         }
     }
 
-    private void testCell(GameObject go)
+	private static void testCell(GameObject go)
     {
         Cell cell = go.GetComponent<Cell>();
         //Debug.Log(cell.location.y + " " + cell.location.x);
     }
 
-    private void onCellEnterHandler(GameObject go)
+	private static void onCellEnterHandler(GameObject go)
     {
         Cell cell = go.GetComponent<Cell>();
         //cell.SetBackgroundColor(Cell.SelectedColor);
-        if ( !this._showSelectBox )
+        if ( !_showSelectBox )
         {
-            this._showSelectBox = true;
-            this._selectBox.SetActive(true);
+            _showSelectBox = true;
+            _selectBox.SetActive(true);
         }
-        this._selectBox.transform.localPosition = BattleSceneUtils.getCellPosByLocation(cell.location.y, cell.location.x);
+        _selectBox.transform.localPosition = BattleSceneUtils.getCellPosByLocation(cell.location.y, cell.location.x);
     }
 
-    private void onCellExitHandler(GameObject go)
+	private static void onCellExitHandler(GameObject go)
     {
         Cell cell = go.GetComponent<Cell>();
         //cell.SetBackgroundColor(Color.black);
     }
 
-    /// <summary>
-    /// 添加对象到指定层
-    /// </summary>
-    /// <param name="child"></param>
-    /// <param name="layerIndex"></param>
-    public void addChildOnLayer(GameObject child, int layerIndex)
+	/// <summary>
+	/// 添加对象到指定层
+	/// </summary>
+	/// <param name="child"></param>
+	/// <param name="layerIndex"></param>
+	public static void addChildOnLayer(GameObject child, int layerIndex)
     {
         GameObject layer;
-        if (this._layersMap.TryGetValue(layerIndex, out layer))
+        if (_layersMap.TryGetValue(layerIndex, out layer))
         {
             Vector3 tmpScale = child.transform.localScale;
             child.transform.SetParent(layer.transform);
@@ -311,17 +298,17 @@ public class Chessboard : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 添加对象到指定层的对应行列位置
-    /// </summary>
-    /// <param name="child">对象</param>
-    /// <param name="layerIndex">层的索引</param>
-    /// <param name="row">行</param>
-    /// <param name="col">列</param>
-    public void addChildOnLayer(GameObject child,int layerIndex,int row,int col)
+	/// <summary>
+	/// 添加对象到指定层的对应行列位置
+	/// </summary>
+	/// <param name="child">对象</param>
+	/// <param name="layerIndex">层的索引</param>
+	/// <param name="row">行</param>
+	/// <param name="col">列</param>
+	public static void addChildOnLayer(GameObject child,int layerIndex,int row,int col)
     {
         GameObject layer;
-        if (this._layersMap.TryGetValue(layerIndex, out layer))
+        if (_layersMap.TryGetValue(layerIndex, out layer))
         {
             Vector3 tmpScale = child.transform.localScale;
             child.transform.SetParent(layer.transform);
@@ -330,48 +317,48 @@ public class Chessboard : MonoBehaviour
             child.transform.localPosition = BattleSceneUtils.getCellPosByLocation(row, col);
         }
     }
-    /// <summary>
-    /// 根据行列拿到对应的单元格
-    /// </summary>
-    /// <param name="row">行</param>
-    /// <param name="col">列</param>
-    /// <returns></returns>
-    public Cell getCellByPos(int row,int col)
+	/// <summary>
+	/// 根据行列拿到对应的单元格
+	/// </summary>
+	/// <param name="row">行</param>
+	/// <param name="col">列</param>
+	/// <returns></returns>
+	public static Cell getCellByPos(int row,int col)
     {
         if ( row >= BattleConsts.MapMaxRow || row < 0 || col >= BattleConsts.MapMaxCol || col < 0 )
         {
             return null;
         }
-        return this.cellArray[col, row];
+        return cellArray[col, row];
     }
-    /// <summary>
-    /// 根据位置拿到对应的单元格
-    /// </summary>
-    /// <param name="pos">一维数组的对应位置下标</param>
-    /// <returns></returns>
-    public Cell getCellByPos(int pos)
+	/// <summary>
+	/// 根据位置拿到对应的单元格
+	/// </summary>
+	/// <param name="pos">一维数组的对应位置下标</param>
+	/// <returns></returns>
+	public static Cell getCellByPos(int pos)
     {
         return getCellByPos(pos / BattleConsts.MapMaxCol, pos % BattleConsts.MapMaxCol);
     }
 
-    public Unit getUnitByPos(int row,int col)
+	public static Unit getUnitByPos(int row,int col)
     {
-        Cell cell = this.getCellByPos(row, col);
+        Cell cell = getCellByPos(row, col);
         return cell == null || cell.UnitOnCell == null ? null : cell.UnitOnCell;
     }
 
-    public Unit getUnitByPos(int pos)
+	public static Unit getUnitByPos(int pos)
     {
-        Cell cell = this.getCellByPos(pos);
+        Cell cell = getCellByPos(pos);
         return cell == null || cell.UnitOnCell == null ? null : cell.UnitOnCell;
     }
 
-    /// <summary>
-    /// 显示移动范围
-    /// </summary>
-    /// <param name="isShow">是否显示，为false表示取消</param>
-    /// <param name="range">移动范围的一维数组</param>
-    public void showAvailableMoveRange(bool isShow,int[] range=null)
+	/// <summary>
+	/// 显示移动范围
+	/// </summary>
+	/// <param name="isShow">是否显示，为false表示取消</param>
+	/// <param name="range">移动范围的一维数组</param>
+	public static void showAvailableMoveRange(bool isShow,int[] range=null)
     {
         int tmpRow, tmpCol,i,j;
         Cell cell;
@@ -387,30 +374,30 @@ public class Chessboard : MonoBehaviour
                 cell.activeRangeImg(isShow);
             }
         }
-        this._isShowingRange = isShow;
+        _isShowingRange = isShow;
         if ( !isShow )
         {
-            this._movePaths = null;
-            this._moveRange = null;
+            _movePaths = null;
+            _moveRange = null;
             return;
         }
         int len = range.Length;
-        this._moveRange = range;
+        _moveRange = range;
         for (i=0;i< len;i++)
         {
-            if ( this._moveRange[i] >= 0 )
+            if ( _moveRange[i] >= 0 )
             {
                 tmpRow = i / colLimit;
                 tmpCol = i % colLimit;
-                cell = this.cellArray[tmpCol, tmpRow];
+                cell = cellArray[tmpCol, tmpRow];
                 cell.setRangeColor(Cell.MovableColor);
             }
         }
     }
 
-    public void showMovePath(int[] paths)
+	public static void showMovePath(int[] paths)
     {
-        if ( !this._isShowingRange )
+        if ( !_isShowingRange )
         {
             return;
         }
@@ -418,29 +405,29 @@ public class Chessboard : MonoBehaviour
         int tmpRow, tmpCol,len,posIndex,i;
         Cell cell;
         // 还原之前的颜色
-        if ( this._movePaths != null )
+        if ( _movePaths != null )
         {
-            len = this._movePaths.Length;
+            len = _movePaths.Length;
             for (i=0;i< len;i++)
             {
-                posIndex = this._movePaths[i];
+                posIndex = _movePaths[i];
                 tmpRow = posIndex / colLimit;
                 tmpCol = posIndex % colLimit;
-                cell = this.cellArray[tmpCol, tmpRow];
+                cell = cellArray[tmpCol, tmpRow];
                 cell.setRangeColor(Cell.MovableColor);
             }
         }
         // 高亮选中的路径
-        this._movePaths = paths;
-        if (this._movePaths != null)
+        _movePaths = paths;
+        if (_movePaths != null)
         {
-            len = this._movePaths.Length;
+            len = _movePaths.Length;
             for (i = 0; i < len; i++)
             {
-                posIndex = this._movePaths[i];
+                posIndex = _movePaths[i];
                 tmpRow = posIndex / colLimit;
                 tmpCol = posIndex % colLimit;
-                cell = this.cellArray[tmpCol, tmpRow];
+                cell = cellArray[tmpCol, tmpRow];
                 cell.setRangeColor(Cell.HighLightMovableColor);
             }
         }
@@ -453,19 +440,19 @@ public class Chessboard : MonoBehaviour
     /// <param name="centerRow"></param>
     /// <param name="centerCol"></param>
     /// <param name="dis"></param>
-    public void showRangeByManhattanDis(int centerRow,int centerCol,int dis)
+    public static void showRangeByManhattanDis(int centerRow,int centerCol,int dis)
     {
-        this.showRangeByManhattanDis(centerRow, centerCol, 0, dis);
+        showRangeByManhattanDis(centerRow, centerCol, 0, dis);
     }
 
-    /// <summary>
-    /// 根据曼哈顿距离显示范围
-    /// </summary>
-    /// <param name="centerRow"></param>
-    /// <param name="centerCol"></param>
-    /// <param name="minDis"></param>
-    /// <param name="maxDis"></param>
-    public void showRangeByManhattanDis(int centerRow, int centerCol, int minDis,int maxDis)
+	/// <summary>
+	/// 根据曼哈顿距离显示范围
+	/// </summary>
+	/// <param name="centerRow"></param>
+	/// <param name="centerCol"></param>
+	/// <param name="minDis"></param>
+	/// <param name="maxDis"></param>
+	public static void showRangeByManhattanDis(int centerRow, int centerCol, int minDis,int maxDis)
     {
         int tmpDis,tmpRow, tmpCol, i, j;
         int rowLimit = BattleConsts.MapMaxRow;
@@ -498,15 +485,15 @@ public class Chessboard : MonoBehaviour
                 }
             }
         }
-        this.showRangeByRangeList(rangeList);
+        showRangeByRangeList(rangeList);
     }
 
-    public void showRangeByLineDis(int centerRow,int centerCol,int dis)
+	public static void showRangeByLineDis(int centerRow,int centerCol,int dis)
     {
-        this.showRangeByLineDis(centerRow, centerCol, 0, dis, (int)BattleConsts.LineFlag.Cross);
+        showRangeByLineDis(centerRow, centerCol, 0, dis, (int)BattleConsts.LineFlag.Cross);
     }
 
-    public void showRangeByLineDis(int centerRow, int centerCol,int minDis,int maxDis,int lineFlag)
+	public static void showRangeByLineDis(int centerRow, int centerCol,int minDis,int maxDis,int lineFlag)
     {
         int tmpRow, tmpCol, i, j;
         int rowLimit = BattleConsts.MapMaxRow;
@@ -553,35 +540,35 @@ public class Chessboard : MonoBehaviour
                 }
             }
         }
-        this.showRangeByRangeList(rangeList);
+        showRangeByRangeList(rangeList);
     }
 
-    public void showRangeByRangeList(int[] rangeList)
+	public static void showRangeByRangeList(int[] rangeList)
     {
-        this.activeRangeShow(true);
+        activeRangeShow(true);
         int tmpRow, tmpCol, i, j;
         Cell cell;
         int rowLimit = BattleConsts.MapMaxRow;
         int colLimit = BattleConsts.MapMaxCol;
         int len = rowLimit * colLimit;
-        this._showRangeList = rangeList;
+        _showRangeList = rangeList;
         for (i = 0; i < len; i++)
         {
             if (rangeList[i] > 0)
             {
                 tmpRow = i / colLimit;
                 tmpCol = i % colLimit;
-                cell = this.cellArray[tmpCol, tmpRow];
+                cell = cellArray[tmpCol, tmpRow];
                 cell.setRangeColor(Cell.MovableColor);
             }
         }
     }
 
-    /// <summary>
-    /// 激活/禁用所有范围显示
-    /// </summary>
-    /// <param name="active">true为激活</param>
-    public void activeRangeShow(bool active)
+	/// <summary>
+	/// 激活/禁用所有范围显示
+	/// </summary>
+	/// <param name="active">true为激活</param>
+	public static void activeRangeShow(bool active)
     {
         int i, j;
         Cell cell;
@@ -598,29 +585,22 @@ public class Chessboard : MonoBehaviour
         }
     }
 
-    public void showSelectBox(bool isShow)
+	public static void showSelectBox(bool isShow)
     {
-        this._showSelectBox = isShow;
-        this._selectBox.SetActive(isShow);
+        _showSelectBox = isShow;
+        _selectBox.SetActive(isShow);
     }
 
-    /// <summary>
-    /// </summary>
-    /// <param name="position">左下为(0, 0)</param>
-    /// <returns></returns>
-    private Vector2 GetCellPosition(ChessboardPosition position)
+	/// <summary>
+	/// </summary>
+	/// <param name="position">左下为(0, 0)</param>
+	/// <returns></returns>
+	private static Vector2 GetCellPosition(ChessboardPosition position)
     {
         const float pivot = 0.5F;
-        RectTransform anchor = ChessboardRect.GetComponent<RectTransform>();
+        RectTransform anchor = ChessboardObject.GetInstance().GetComponent<RectTransform>();
         return new Vector2(anchor.localPosition.x + (position.x + pivot) * CellSize,
-            anchor.localPosition.y - (ChessboardMaxY - position.y - pivot) * CellSize);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (UnitMove)
-            SelectedCell.UnitOnCell.MoveWithPath(ListMovePath);
+            anchor.localPosition.y - (BattleConsts.MapMaxRow - position.y - pivot) * CellSize);
     }
 
     /// <summary>
@@ -685,21 +665,6 @@ public class Chessboard : MonoBehaviour
         ListMovePath.Clear();
     }
 
-    public static void SetDialogString(string message)
-    {
-        var dialog = Chessboard.GetInstance().ChessboardDialog;
-        dialog.transform.Find("Text").GetComponent<Text>().text = message;
-    }
-
-    /// <summary>
-    /// 显示或隐藏对话框。实际是修改了DialogObject的Active属性
-    /// </summary>
-    /// <param name="visible"></param>
-    public static void SetChessboardDialogVisible(bool visible)
-    {
-        Chessboard.GetInstance().ChessboardDialog.SetActive(visible);
-    }
-
     public static void SetSkillRange(int range)
     {
         throw new NotImplementedException();
@@ -727,8 +692,8 @@ public class Chessboard : MonoBehaviour
     /// <param name="color"></param>
     public static void SetBackgroundColor(Func<Cell, bool> isChangeColor, Color color)
     {
-        for (int x = 0; x < ChessboardMaxX; ++x)
-            for (int y = 0; y < ChessboardMaxY; ++y)
+        for (int x = 0; x < BattleConsts.MapMaxCol; ++x)
+            for (int y = 0; y < BattleConsts.MapMaxRow; ++y)
             {
                 var cell = GetCell(new ChessboardPosition(x, y));
                 if (isChangeColor(cell))

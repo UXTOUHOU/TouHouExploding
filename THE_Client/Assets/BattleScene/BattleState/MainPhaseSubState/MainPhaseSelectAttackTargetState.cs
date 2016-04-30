@@ -67,8 +67,8 @@ public class MainPhaseSelectAttackTargetState : BattleStateBase
         switch (stateId)
         {
             case STATE_WAITING_SELECTING:
-                BattleGlobal.Core.chessboard.removeClickEventHandler(this.cellClickHandler);
-                BattleGlobal.Core.chessboard.activeRangeShow(false);
+                Chessboard.removeClickEventHandler(this.cellClickHandler);
+                Chessboard.activeRangeShow(false);
                 break;
         }
     }
@@ -78,9 +78,9 @@ public class MainPhaseSelectAttackTargetState : BattleStateBase
         switch (stateId)
         {
             case STATE_WAITING_SELECTING:
-                BattleGlobal.Core.chessboard.addClickEventHandler(this.cellClickHandler);
+                Chessboard.addClickEventHandler(this.cellClickHandler);
                 // 显示攻击范围
-                BattleGlobal.Core.chessboard.showRangeByManhattanDis(this._curUnit.row, this._curUnit.col, this._curUnit.UnitAttribute.minAttackRangeCurrent, this._curUnit.UnitAttribute.maxAttackRangeCurrent);
+                Chessboard.showRangeByManhattanDis(this._curUnit.row, this._curUnit.col, this._curUnit.UnitAttribute.minAttackRangeCurrent, this._curUnit.UnitAttribute.maxAttackRangeCurrent);
                 break;
             case STATE_TIMING_PROCESSING:
                 EventVOBase vo = BattleObjectFactory.createEventVO(BattleConsts.Code.FlagAttackTarget);

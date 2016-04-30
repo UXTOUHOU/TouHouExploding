@@ -6,15 +6,15 @@ using System.Threading;
 
 public class BattleCore
 {
-    private Chessboard _chessboard;
-    /// <summary>
-    /// 通过这个方法拿到地图的ui控制类
-    /// </summary>
-    public Chessboard chessboard
-    {
-        get { return this._chessboard; }
-        set { this._chessboard = value; }
-    }
+    //private Chessboard _chessboard;
+    ///// <summary>
+    ///// 通过这个方法拿到地图的ui控制类
+    ///// </summary>
+    //public Chessboard chessboard
+    //{
+    //    get { return this._chessboard; }
+    //    set { this._chessboard = value; }
+    //}
 
     private List<Player> _playerList;
 
@@ -53,7 +53,7 @@ public class BattleCore
         this._info.reset();
         this._isGameStarted = false;
         // 初始化战场区域
-        this._chessboard.init();
+        Chessboard.init();
     }
 
     public void startGame()

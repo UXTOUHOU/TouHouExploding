@@ -25,9 +25,9 @@ public class OperationManager : ICommand
     {
         this._cellOpsMap = new Dictionary<int, ICellOperation>();
         this._cellOpsMap.Add(BattleConsts.CellOp_Idle, new CellOperationIdle());
-        BattleGlobal.Core.chessboard.addClickEventHandler(this.onCellClickHandler);
-        BattleGlobal.Core.chessboard.addEnterEventHandler(this.onCellEnterHandler);
-        BattleGlobal.Core.chessboard.addExitEventHandler(this.onCellExitHandler);
+        Chessboard.addClickEventHandler(this.onCellClickHandler);
+        Chessboard.addEnterEventHandler(this.onCellEnterHandler);
+        Chessboard.addExitEventHandler(this.onCellExitHandler);
     }
 
     public void setOperation(int opId)

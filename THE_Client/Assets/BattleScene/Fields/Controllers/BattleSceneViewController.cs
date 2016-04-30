@@ -25,9 +25,9 @@ public class BattleSceneViewController : BaseViewController
 	// Use this for initialization
 	void Start ()
 	{
-		// 战场区域
-		Chessboard battleField = this.transform.FindChild("BattleField").GetComponent<Chessboard>();
-		BattleGlobal.Core.chessboard = battleField;
+		//// 战场区域
+		//Chessboard battleField = this.transform.FindChild("BattleField").GetComponent<Chessboard>();
+		//Chessboard = battleField;
 		// 手牌区域（暂时也用作单位池）
 		// 获取组件
 		this._giveUpBtn = this.transform.FindChild("ButtonGiveUp").gameObject;

@@ -20,14 +20,14 @@ public class MainPhaseIdleState : BattleStateBase
         {
             info.isSummoningOpAvailabel = true;
         }
-        BattleGlobal.Core.chessboard.addClickEventHandler(this.onCellClick);
+        Chessboard.addClickEventHandler(this.onCellClick);
     }
 
     public override void onStateExit()
     {
         BattleInfo info = BattleGlobal.Core.battleInfo;
         info.isSummoningOpAvailabel = false;
-        BattleGlobal.Core.chessboard.removeClickEventHandler(this.onCellClick);
+		Chessboard.removeClickEventHandler(this.onCellClick);
     }
 
     public override void update()

@@ -28,9 +28,9 @@ public class MainPhaseSelectMovePathState : BattleStateBase, ICommand
         this._selectedCell = BattleGlobal.SelectedCell;
         this._selectedUnit = this._selectedCell.UnitOnCell;
         this._moveRange = this._selectedUnit.getAvailableMoveRange();
-        BattleGlobal.Core.chessboard.showAvailableMoveRange(true,this._moveRange);
+        Chessboard.showAvailableMoveRange(true,this._moveRange);
         this._isSelectingMovePath = false;
-        BattleGlobal.Core.chessboard.addEnterEventHandler(this.onCellEnter);
+        Chessboard.addEnterEventHandler(this.onCellEnter);
         //OperationManager.getInstance().setOperation(BattleConsts.CellOp_Idle);
         //CommandManager.getInstance().addCommand(BattleConsts.CMD_OnCellSelected, this);
     }
@@ -41,9 +41,9 @@ public class MainPhaseSelectMovePathState : BattleStateBase, ICommand
         this._selectedUnit = null;
         this._moveRange = null;
         this._pathList.Clear();
-        BattleGlobal.Core.chessboard.showAvailableMoveRange(false);
-        BattleGlobal.Core.chessboard.removeEnterEventHandler(this.onCellEnter);
-        BattleGlobal.Core.chessboard.removeClickEventHandler(this.onCellClick);
+        Chessboard.showAvailableMoveRange(false);
+        Chessboard.removeEnterEventHandler(this.onCellEnter);
+        Chessboard.removeClickEventHandler(this.onCellClick);
         //CommandManager.getInstance().removeCommand(BattleConsts.CMD_OnCellSelected, this);
     }
 
@@ -61,8 +61,8 @@ public class MainPhaseSelectMovePathState : BattleStateBase, ICommand
                 this._isSelectingMovePath = false;
                 this._pathCount = 0;
                 this._pathList.Clear();
-                BattleGlobal.Core.chessboard.removeClickEventHandler(this.onCellClick);
-                BattleGlobal.Core.chessboard.showMovePath(this.getMovePathPosIndexArr(this._pathList));
+                Chessboard.removeClickEventHandler(this.onCellClick);
+                Chessboard.showMovePath(this.getMovePathPosIndexArr(this._pathList));
             }
         }
     }
@@ -93,8 +93,8 @@ public class MainPhaseSelectMovePathState : BattleStateBase, ICommand
                 this._pathCount = 0;
                 this._pathList.Add(cell);
                 this._pathCount++;
-                BattleGlobal.Core.chessboard.addClickEventHandler(this.onCellClick);
-                BattleGlobal.Core.chessboard.showMovePath(this.getMovePathPosIndexArr(this._pathList));
+                Chessboard.addClickEventHandler(this.onCellClick);
+                Chessboard.showMovePath(this.getMovePathPosIndexArr(this._pathList));
             }
         }
         else
@@ -109,7 +109,7 @@ public class MainPhaseSelectMovePathState : BattleStateBase, ICommand
                 {
                     this._pathList.RemoveRange(index+1, this._pathCount-(index+1));
                     this._pathCount = index + 1;
-                    BattleGlobal.Core.chessboard.showMovePath(this.getMovePathPosIndexArr(this._pathList));
+                    Chessboard.showMovePath(this.getMovePathPosIndexArr(this._pathList));
                 }
             }
             else
@@ -131,7 +131,7 @@ public class MainPhaseSelectMovePathState : BattleStateBase, ICommand
                 {
                     this._pathList.Add(cell);
                     this._pathCount++;
-                    BattleGlobal.Core.chessboard.showMovePath(this.getMovePathPosIndexArr(this._pathList));
+                    Chessboard.showMovePath(this.getMovePathPosIndexArr(this._pathList));
                     //Debug.Log("添加至新路径 " + this._pathCount);
                 }
             }

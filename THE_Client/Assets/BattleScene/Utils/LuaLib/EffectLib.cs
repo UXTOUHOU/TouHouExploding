@@ -20,8 +20,6 @@ public class EffectLib
 			new NameFuncPair("applyDamage",applyDamage),
 			new NameFuncPair("applyTranslate",applyTranslate),
 			new NameFuncPair("showChessboardDialog", showChessboardDialog),
-			new NameFuncPair("costBPoint", costBPoint),
-			new NameFuncPair("getBPoint", getBPoint),
 			new NameFuncPair("terrainTranslate", terrainTranslate)
 		};
 		luaState.L_NewLib(define);
@@ -148,49 +146,13 @@ public class EffectLib
 
 	/// <summary>
 	/// 显示棋盘对话框
+	/// <para>string message</para>
 	/// </summary>
 	public static int showChessboardDialog(ILuaState luaState)
 	{
 		string message = luaState.ToString(1);
-		Chessboard.SetDialogString(message);
-		Chessboard.SetChessboardDialogVisible(true);
-		return 0;
-	}
-
-	/// <summary>
-	/// 使用Bomb
-	/// </summary>
-	/// <returns>返回是否成功扣除B点</returns>
-	public static int costBPoint(ILuaState luaState)
-	{
-		bool res;
-		int cost = luaState.ToInteger(1),
-			playerID = luaState.ToInteger(2);
-
-		var player = BattleGlobal.Core.getPlayer(playerID);
-		if (player.curBPoint < cost)
-		{
-			res = false;
-		}
-		else
-		{
-			player.costBPoint(cost);
-			res = true;
-		}
-
-		luaState.PushBoolean(res);
-		return 1;
-	}
-
-	/// <summary>
-	/// 获取剩余Bomb数目
-	/// </summary>
-	/// <returns></returns>
-	public static int getBPoint(ILuaState luaState)
-	{
-		int playerID = luaState.ToInteger(1);
-		var player = BattleGlobal.Core.getPlayer(playerID);
-		luaState.PushInteger(player.curBPoint);
+		ChessboardDialogControl.SetDialogString(message);
+		luaState.PushBoolean(ChessboardDialogControl.GetClickedButton());
 		return 1;
 	}
 

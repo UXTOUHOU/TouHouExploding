@@ -20,15 +20,15 @@ public class MainPhaseSummonUnitState : BattleStateBase
         // 获取当前可召唤的位置
         this.getSummoningPosByPlayerId(BattleGlobal.MyPlayerId, this._summoningPosList);
         // 显示当前可召唤的位置
-        BattleGlobal.Core.chessboard.showRangeByRangeList(this._summoningPosList);
+        Chessboard.showRangeByRangeList(this._summoningPosList);
         // 添加点击事件
-        BattleGlobal.Core.chessboard.addClickEventHandler(this.onCellClick);
+        Chessboard.addClickEventHandler(this.onCellClick);
     }
 
     public override void onStateExit()
     {
-        BattleGlobal.Core.chessboard.activeRangeShow(false);
-        BattleGlobal.Core.chessboard.removeClickEventHandler(this.onCellClick);
+        Chessboard.activeRangeShow(false);
+        Chessboard.removeClickEventHandler(this.onCellClick);
     }
 
     public override void update()

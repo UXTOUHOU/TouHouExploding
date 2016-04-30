@@ -44,20 +44,12 @@ namespace BattleScene
 
 		public void OnClickButtonDialogYes()
 		{
-			SkillOperate.MutexDialog.WaitOne();
-			SkillOperate.DialogReturn = true;
-			SkillOperate.ClickDialogButton = true;
-			Chessboard.SetChessboardDialogVisible(false);
-			SkillOperate.MutexDialog.ReleaseMutex();
+			ChessboardDialogControl.OnClickButtonDialogYes();
 		}
 
 		public void OnClickButtonDialogNo()
 		{
-			SkillOperate.MutexDialog.WaitOne();
-			SkillOperate.DialogReturn = false;
-			SkillOperate.ClickDialogButton = true;
-			Chessboard.SetChessboardDialogVisible(false);
-			SkillOperate.MutexDialog.ReleaseMutex();
+			ChessboardDialogControl.OnClickButtonDialogNo();
 		}
 
 		public void OnButtonGiveUp()

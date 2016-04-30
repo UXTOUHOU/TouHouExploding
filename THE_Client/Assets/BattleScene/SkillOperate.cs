@@ -54,42 +54,42 @@ public class SkillOperate
         target.NormalHurt(damage);
     }
 
-    public static bool ChangeDialogAttribute = false;
-    private static string dialogMessage;
-    private static bool dialogVisible = false;
-    public static void MainThreadChessboardDialog()
-    {
-        MutexDialog.WaitOne();
-        Chessboard.SetDialogString(dialogMessage);
-        Chessboard.SetChessboardDialogVisible(dialogVisible);
-        ChangeDialogAttribute = false;
-        MutexDialog.ReleaseMutex();
-    }
+    //public static bool ChangeDialogAttribute = false;
+    //private static string dialogMessage;
+    //private static bool dialogVisible = false;
+    //public static void MainThreadChessboardDialog()
+    //{
+    //    MutexDialog.WaitOne();
+    //    Chessboard.SetDialogString(dialogMessage);
+    //    ChessboardDialogControl.SetChessboardDialogVisible(dialogVisible);
+    //    ChangeDialogAttribute = false;
+    //    MutexDialog.ReleaseMutex();
+    //}
 
-    public static Mutex MutexDialog = new Mutex();
-    public static bool ClickDialogButton = false;
-    public static bool DialogReturn = false;
-    public static bool ChessboardDialog(string message)
-    {
-        ChangeDialogAttribute = true;
-        dialogMessage = message;
-        dialogVisible = true;
-        ClickDialogButton = false;
-        bool res = false;
-        while (true)
-        {
-            MutexDialog.WaitOne();
-            if (ClickDialogButton)
-            {
-                res = DialogReturn;
-                MutexDialog.ReleaseMutex();
-                break;
-            }
-            MutexDialog.ReleaseMutex();
-            Thread.Sleep(1);
-        }
-        return res;
-    }
+    //public static Mutex MutexDialog = new Mutex();
+    //public static bool ClickDialogButton = false;
+    //public static bool DialogReturn = false;
+    //public static bool ChessboardDialog(string message)
+    //{
+    //    ChangeDialogAttribute = true;
+    //    dialogMessage = message;
+    //    dialogVisible = true;
+    //    ClickDialogButton = false;
+    //    bool res = false;
+    //    while (true)
+    //    {
+    //        MutexDialog.WaitOne();
+    //        if (ClickDialogButton)
+    //        {
+    //            res = DialogReturn;
+    //            MutexDialog.ReleaseMutex();
+    //            break;
+    //        }
+    //        MutexDialog.ReleaseMutex();
+    //        Thread.Sleep(1);
+    //    }
+    //    return res;
+    //}
 
     /// <summary>
     /// 技能发动时间

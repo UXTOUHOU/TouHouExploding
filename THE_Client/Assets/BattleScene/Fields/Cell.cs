@@ -176,10 +176,10 @@ public class Cell : MonoBehaviour
     {
         var attribute = UnitOnCell.UnitAttribute;
         for (int x = Math.Max(0, Position.x - attribute.motility);
-            x <= Math.Min(Chessboard.ChessboardMaxX - 1, Position.x + attribute.motility);
+            x <= Math.Min(BattleConsts.MapMaxCol - 1, Position.x + attribute.motility);
             ++x)
             for (int y = Math.Max(0, Position.y - attribute.motility);
-                y <= Math.Min(Chessboard.ChessboardMaxY - 1, Position.y + attribute.motility);
+                y <= Math.Min(BattleConsts.MapMaxRow - 1, Position.y + attribute.motility);
                 ++y)
             {
                 var itPosition = new ChessboardPosition(x, y);
@@ -230,10 +230,10 @@ public class Cell : MonoBehaviour
     {
         var attribute = UnitOnCell.UnitAttribute;
         for (int x = Math.Max(0, Position.x - attribute.maxAtkRange);
-            x <= Math.Min(Chessboard.ChessboardMaxX, Position.x + attribute.maxAtkRange);
+            x <= Math.Min(BattleConsts.MapMaxCol, Position.x + attribute.maxAtkRange);
             ++x)
             for (int y = Math.Max(0, Position.y - attribute.maxAtkRange);
-                y <= Math.Min(Chessboard.ChessboardMaxY, Position.y + attribute.maxAtkRange);
+                y <= Math.Min(BattleConsts.MapMaxRow, Position.y + attribute.maxAtkRange);
                 ++y)
             {
                 var itPosition = new ChessboardPosition(x, y);

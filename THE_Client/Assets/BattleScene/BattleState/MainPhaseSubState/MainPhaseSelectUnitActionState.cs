@@ -43,13 +43,13 @@ class MainPhaseSelectUnitActionState : BattleStateBase
         }
         this._curUnit = BattleGlobal.Core.battleInfo.unitSelected;
         this.showUnitActionView();
-        BattleGlobal.Core.chessboard.addClickEventHandler(this.onCellClick);
+        Chessboard.addClickEventHandler(this.onCellClick);
     }
 
     public override void onStateExit()
     {
         this.removeUnitActionView();
-        BattleGlobal.Core.chessboard.removeClickEventHandler(this.onCellClick);
+        Chessboard.removeClickEventHandler(this.onCellClick);
     }
 
     public override void update()
@@ -76,7 +76,7 @@ class MainPhaseSelectUnitActionState : BattleStateBase
     private void showUnitActionView()
     {
         Cell cell = BattleGlobal.SelectedCell;
-        BattleGlobal.Core.chessboard.addChildOnLayer(this._unitActionView, BattleConsts.BattleFieldLayer_UI, cell.location.y, cell.location.x);
+        Chessboard.addChildOnLayer(this._unitActionView, BattleConsts.BattleFieldLayer_UI, cell.location.y, cell.location.x);
         if (!this._isPopUp)
         {
             this._unitActionView.SetActive(true);
