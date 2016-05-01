@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-public class BattleFieldsUntils
+public class BattleFieldsUtils
 {
     public static int getManhattanDis(IBattleFieldLocation a,IBattleFieldLocation b)
     {
@@ -76,7 +76,7 @@ public class BattleFieldsUntils
     /// <returns></returns>
     public static bool isInAttackRange(Unit attacker,Unit defender)
     {
-        int manhattanDis = BattleFieldsUntils.getManhattanDis(attacker,defender);
+        int manhattanDis = BattleFieldsUtils.getManhattanDis(attacker,defender);
         int minAttackDis = attacker.UnitAttribute.minAttackRangeCurrent;
         int maxAttackDis = attacker.UnitAttribute.maxAttackRangeCurrent;
         return manhattanDis >= minAttackDis && manhattanDis <= maxAttackDis;

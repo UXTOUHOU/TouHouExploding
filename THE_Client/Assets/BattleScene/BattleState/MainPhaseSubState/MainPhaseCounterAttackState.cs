@@ -104,7 +104,7 @@ public class MainPhaseCounterAttackState : BattleStateBase
             this._fsm.setState(BattleConsts.BattleState.MainPhase_Idle);
             return;
         }
-        bool isInAttackRange = BattleFieldsUntils.isInAttackRange(this._defender, this._attacker);
+        bool isInAttackRange = BattleFieldsUtils.isInAttackRange(this._defender, this._attacker);
         if (isInAttackRange)
         {
             // 触发反击事件

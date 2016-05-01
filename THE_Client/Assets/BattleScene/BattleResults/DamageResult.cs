@@ -50,18 +50,18 @@ public class DamageResult : IBattleResult
         phyVO.damageBaseOutgoing = attackerProps.physicalDamageBaseOutgoing + victimProps.physicalDamageBaseOutgoing;
         phyVO.damagePercentage = attackerProps.physicalDamagePercentage + victimProps.physicalDamagePercentage;
         phyVO.damageExtraOutgoing = attackerProps.physicalDamageExtraOutgoing + victimProps.physicalDamageExtraOutgoing;
-        vo.phycicsDamage = BattleFieldsUntils.getFinalPhysicsDamage(phyVO);
+        vo.phycicsDamage = BattleFieldsUtils.getFinalPhysicsDamage(phyVO);
         // 魔法伤害
         SpellDamageVO spellVO = new SpellDamageVO();
         spellVO.damage = this.spellDamage;
         spellVO.damageBaseOutgoing = attackerProps.spellDamageBaseOutgoing + victimProps.spellDamageBaseOutgoing;
         spellVO.damagePercentage = attackerProps.spellDamagePercentage + victimProps.spellDamagePercentage;
         spellVO.damageExtraOutgoing = attackerProps.spellDamageExtraOutgoing + victimProps.spellDamageExtraOutgoing;
-        vo.spellDamage = BattleFieldsUntils.getFinalSpellDamage(spellVO);
+        vo.spellDamage = BattleFieldsUtils.getFinalSpellDamage(spellVO);
         // 生命流失
         HpRemovalVO hpRemovalVO = new HpRemovalVO();
         hpRemovalVO.damage = this.hpRemoval;
-        vo.hpRemoval = BattleFieldsUntils.getFinalHpRemoval(hpRemovalVO);
+        vo.hpRemoval = BattleFieldsUtils.getFinalHpRemoval(hpRemovalVO);
         // hurt
         this.victim.hurt(vo);
     }

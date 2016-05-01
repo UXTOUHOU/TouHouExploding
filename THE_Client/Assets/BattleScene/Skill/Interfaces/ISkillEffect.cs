@@ -10,25 +10,25 @@ public interface ISkillEffect : ILuaUserData
 	/// </summary>
 	/// <returns></returns>
 	BattleConsts.Code getCode();
-    /// <summary>
-    /// 效果触发时点
-    /// </summary>
-    /// <param name="value"></param>
-    void setCode(BattleConsts.Code value);
+	/// <summary>
+	/// 效果触发时点
+	/// </summary>
+	/// <param name="value"></param>
+	void setCode(BattleConsts.Code value);
 
-    int getCondition();
-    void setCondition(int value);
+	int getCondition();
+	void setCondition(int value);
 
-    int getOperation();
-    void setOperation(int value);
+	int getOperation();
+	void setOperation(int value);
 
-    int getTarget();
+	int getTarget();
 
-    void setTarget(int value);
+	void setTarget(int value);
 
-    int getCost();
+	int getCost();
 
-    void setCost(int value);
+	void setCost(int value);
 
-    IBattleProperties applyTo(IBattleProperties props);
+	IBattleProperties applyTo(IBattleProperties props);
 }

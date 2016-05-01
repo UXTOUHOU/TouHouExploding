@@ -102,7 +102,7 @@ public class MainPhaseSelectAttackTargetState : BattleStateBase
             props.attacker = this._curUnit;
             props.defender = cell.UnitOnCell;
             this._curUnit.applyEffects(props);
-            int manhattanDis = BattleFieldsUntils.getManhattanDis(props.attacker, props.defender);
+            int manhattanDis = BattleFieldsUtils.getManhattanDis(props.attacker, props.defender);
             int minAttackDis = props.attacker.UnitAttribute.minAttackRangeCurrent + props.minDisExtra;
             int maxAttackDis = props.attacker.UnitAttribute.maxAttackRangeCurrent + props.maxDisExtra;
             if (manhattanDis >= minAttackDis && manhattanDis <= maxAttackDis)
