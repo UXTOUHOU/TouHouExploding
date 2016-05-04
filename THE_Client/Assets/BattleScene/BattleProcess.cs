@@ -139,18 +139,19 @@ public class BattleProcess : MonoBehaviour
 	/// <param name="group"></param>
 	public static void NewRound(EGroupType group)
 	{
-		foreach (var unit in UnitManager.UnitList)
-		{
-			if (unit.GroupType != group) continue;
-			unit.Movable = true;
-			unit.Attackable = true;
-			if (unit.Skill_1 != null)
-				unit.Skill_1.OnNewRound(group);
-			if (unit.Skill_2 != null)
-				unit.Skill_2.OnNewRound(group);
-			if (unit.Skill_3 != null)
-				unit.Skill_3.OnNewRound(group);
-		}
+		throw new System.Exception();
+		//foreach (var unit in UnitManager.UnitList)
+		//{
+		//	if (unit.GroupType != group) continue;
+		//	unit.Movable = true;
+		//	unit.Attackable = true;
+		//	if (unit.Skill_1 != null)
+		//		unit.Skill_1.OnNewRound(group);
+		//	if (unit.Skill_2 != null)
+		//		unit.Skill_2.OnNewRound(group);
+		//	if (unit.Skill_3 != null)
+		//		unit.Skill_3.OnNewRound(group);
+		//}
 	}
 
 	// Use this for initialization

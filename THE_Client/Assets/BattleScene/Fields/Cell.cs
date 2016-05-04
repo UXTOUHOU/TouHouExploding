@@ -43,7 +43,7 @@ public class Cell : MonoBehaviour
     /// </summary>
     public int posIndex
     {
-        get { return this._location.y * BattleConsts.MapMaxCol + this._location.x; }
+        get { return this._location.row * BattleConsts.MapMaxCol + this._location.col; }
     }
 
     /*private int _row;
@@ -106,11 +106,11 @@ public class Cell : MonoBehaviour
         btnMove.SetActive(true);
         btnAttack.SetActive(true);
         btnSkill.SetActive(true);
-        //设置按钮是否被禁用
-        Debug.Log("Movable" + UnitOnCell.Movable);
-        btnMove.GetComponent<Button>().interactable = UnitOnCell.Movable;
-        Debug.Log("Attackable" + UnitOnCell.Attackable);
-        btnAttack.GetComponent<Button>().interactable = UnitOnCell.Attackable;
+        ////设置按钮是否被禁用
+        //Debug.Log("Movable" + UnitOnCell.Movable);
+        //btnMove.GetComponent<Button>().interactable = UnitOnCell.Movable;
+        //Debug.Log("Attackable" + UnitOnCell.Attackable);
+        //btnAttack.GetComponent<Button>().interactable = UnitOnCell.Attackable;
         //更新按钮位置
         btnMove.transform.position = this._bgImg.transform.position + new Vector3(0, cellSize / 1.3F, 0);
         btnAttack.transform.position = this._bgImg.transform.position + new Vector3(-cellSize / 1.5F, cellSize / 2F, 0);
@@ -175,11 +175,11 @@ public class Cell : MonoBehaviour
     public void ShowMovableRange()
     {
         var attribute = UnitOnCell.UnitAttribute;
-        for (int x = Math.Max(0, Position.x - attribute.motility);
-            x <= Math.Min(BattleConsts.MapMaxCol - 1, Position.x + attribute.motility);
+        for (int x = Math.Max(0, Position.col - attribute.motility);
+            x <= Math.Min(BattleConsts.MapMaxCol - 1, Position.col + attribute.motility);
             ++x)
-            for (int y = Math.Max(0, Position.y - attribute.motility);
-                y <= Math.Min(BattleConsts.MapMaxRow - 1, Position.y + attribute.motility);
+            for (int y = Math.Max(0, Position.row - attribute.motility);
+                y <= Math.Min(BattleConsts.MapMaxRow - 1, Position.row + attribute.motility);
                 ++y)
             {
                 var itPosition = new ChessboardPosition(x, y);
@@ -229,11 +229,11 @@ public class Cell : MonoBehaviour
     public void ShowAttackableRange()
     {
         var attribute = UnitOnCell.UnitAttribute;
-        for (int x = Math.Max(0, Position.x - attribute.maxAtkRange);
-            x <= Math.Min(BattleConsts.MapMaxCol, Position.x + attribute.maxAtkRange);
+        for (int x = Math.Max(0, Position.col - attribute.maxAtkRange);
+            x <= Math.Min(BattleConsts.MapMaxCol, Position.col + attribute.maxAtkRange);
             ++x)
-            for (int y = Math.Max(0, Position.y - attribute.maxAtkRange);
-                y <= Math.Min(BattleConsts.MapMaxRow, Position.y + attribute.maxAtkRange);
+            for (int y = Math.Max(0, Position.row - attribute.maxAtkRange);
+                y <= Math.Min(BattleConsts.MapMaxRow, Position.row + attribute.maxAtkRange);
                 ++y)
             {
                 var itPosition = new ChessboardPosition(x, y);

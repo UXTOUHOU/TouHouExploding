@@ -17,7 +17,7 @@ public class UnitOperationViewController : BaseViewController
         // 设置位置
         Cell cell = BattleGlobal.SelectedCell;
         // 添加到UILayer
-        Chessboard.addChildOnLayer(this.gameObject, BattleConsts.BattleFieldLayer_UI, cell.location.y, cell.location.x);
+        Chessboard.addChildOnLayer(this.gameObject, BattleConsts.BattleFieldLayer_UI, cell.location.row, cell.location.col);
         this.gameObject.SetActive(true);
     }
 

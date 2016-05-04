@@ -120,7 +120,7 @@ public class MainPhaseSelectMovePathState : BattleStateBase, ICommand
                     return;
                 }
                 // 判断是否在可移动的格子内
-                int posIndex = cell.location.y * BattleConsts.MapMaxCol + cell.location.x;
+                int posIndex = cell.location.row * BattleConsts.MapMaxCol + cell.location.col;
                 if ( this._moveRange[posIndex] < 0 )
                 {
                     return;
@@ -150,7 +150,7 @@ public class MainPhaseSelectMovePathState : BattleStateBase, ICommand
         for (int i=0;i<this._pathCount;i++)
         {
             location = movePath[i].location;
-            movePathPosIndexList.Add(location.x + location.y * colLimit);
+            movePathPosIndexList.Add(location.col + location.row * colLimit);
         }
         return movePathPosIndexList.ToArray();
     }

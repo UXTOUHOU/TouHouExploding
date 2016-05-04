@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class ChessboardPosition
 {
-    public int x;
-    public int y;
-    public ChessboardPosition(int new_x, int new_y)
+    public int col;
+    public int row;
+    public ChessboardPosition(int newCol, int newRow)
     {
-        x = new_x;
-        y = new_y;
+        col = newCol;
+        row = newRow;
     }
 
     /// <summary>
@@ -21,7 +21,7 @@ public class ChessboardPosition
     /// <returns></returns>
     public bool Adjacent(ChessboardPosition position)
     {
-        return Math.Abs(position.x - x) + Math.Abs(position.y - y) == 1;
+        return Math.Abs(position.col - col) + Math.Abs(position.row - row) == 1;
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ public class ChessboardPosition
     /// <returns></returns>
     public int Distance(ChessboardPosition position)
     {
-        return Math.Abs(x - position.x) + Math.Abs(y - position.y);
+        return Math.Abs(col - position.col) + Math.Abs(row - position.row);
     }
 
     public Vector3 GetLocalPosition()

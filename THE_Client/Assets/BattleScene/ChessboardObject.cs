@@ -17,6 +17,9 @@ public class ChessboardObject : MonoBehaviour
 	public GameObject UnitLayer;
 	public GameObject UILayer;
 
+	public GameObject HpText;
+	public GameObject BombText;
+
 	private static ChessboardObject _instance;
 
 	public static ChessboardObject GetInstance()

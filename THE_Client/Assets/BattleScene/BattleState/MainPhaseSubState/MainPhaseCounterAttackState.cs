@@ -99,7 +99,7 @@ public class MainPhaseCounterAttackState : BattleStateBase
 
     private void checkCounterAttack()
     {
-        if (!this._defender.canCounterAttack())
+        if (!this._defender.CanCounterAttack)
         {
             this._fsm.setState(BattleConsts.BattleState.MainPhase_Idle);
             return;

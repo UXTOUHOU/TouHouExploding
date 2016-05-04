@@ -128,6 +128,88 @@ public class BattleConsts
 		SummonUnitSuccess = 12,		// 召唤单位成功时
 	}
 
+	//public enum EffectType
+	//{
+	//	HitPointCurrentIncreasePoint,				// 增加当前生命值（点数）
+	//	HitPointCurrentIncreasePercent,				// 增加当前生命值（百分比）
+	//	HitPointCurrentDecreasePoint,				// 减少当前生命值（点数）
+	//	HitPointCurrentDecreasePercent,				// 减少当前生命值（百分比）
+	//	HitPointCurrentChangeTo,					// 改变当前生命值
+	//	HitPointUpperBoundIncreasePoint,			// 增加当前生命值上限（点数）
+	//	HitPointUpperBoundIncreasePercent,			// 增加当前生命值上限（百分比）
+	//	HitPointUpperBoundDecreasePoint,			// 减少当前生命值上限（点数）
+	//	HitPointUpperBoundDecreasePercent,			// 减少当前生命值上限（百分比）
+	//	HitPointUpperBoundChangeTo,					// 改变当前生命值上限
+	//	AttackPowerCurrentIncreasePoint,			// 增加当前攻击力（点数）
+	//	AttackPowerCurrentIncreasePercent,			// 增加当前攻击力（百分比）
+	//	AttackPowerCurrentDecreasePoint,			// 减少当前攻击力（点数）
+	//	AttackPowerCurrentDecreasePercent,			// 减少当前攻击力（百分比）
+	//	AttackPowerCurrentChangeTo,					// 改变当前攻击力
+	//	AttackPowerUpperBoundIncreasePoint,			// 增加当前攻击力上限（点数）
+	//	AttackPowerUpperBoundIncreasePercent,		// 增加当前攻击力上限（百分比）
+	//	AttackPowerUpperBoundDecreasePoint,			// 减少当前攻击力上限（点数）
+	//	AttackPowerUpperBoundDecreasePercent,		// 减少当前攻击力上限（百分比）
+	//	AttackPowerUpperBoundChangeTo,				// 改变当前攻击力上限
+	//	AttackRangeCurrentIncreasePoint,			// 增加当前攻击范围（点数）
+	//	AttackRangeCurrentIncreasePercent,			// 增加当前攻击范围（百分比）
+	//	AttackRangeCurrentDecreasePoint,			// 减少当前攻击范围（点数）
+	//	AttackRangeCurrentDecreasePercent,			// 减少当前攻击范围（百分比）
+	//	AttackRangeCurrentChangeTo,					// 改变当前攻击范围
+	//	AttackRangeUpperBoundIncreasePoint,			// 增加当前攻击范围上限（点数）
+	//	AttackRangeUpperBoundIncreasePercent,		// 增加当前攻击范围上限（百分比）
+	//	AttackRangeUpperBoundDecreasePoint,			// 减少当前攻击范围上限（点数）
+	//	AttackRangeUpperBoundDecreasePercent,		// 减少当前攻击范围上限（百分比）
+	//	AttackRangeUpperBoundChangeTo,				// 改变当前攻击范围上限
+	//	MobilityCurrentIncreasePoint,				// 增加当前移动力（点数）
+	//	MobilityCurrentIncreasePercent,				// 增加当前移动力（百分比）
+	//	MobilityCurrentDecreasePoint,				// 减少当前移动力（点数）
+	//	MobilityCurrentDecreasePercent,				// 减少当前移动力（百分比）
+	//	MobilityCurrentChangeTo,					// 改变当前移动力
+	//	MobilityUpperBoundIncreasePoint,			// 增加当前移动力上限（点数）
+	//	MobilityUpperBoundIncreasePercent,			// 增加当前移动力上限（百分比）
+	//	MobilityUpperBoundDecreasePoint,			// 减少当前移动力上限（点数）
+	//	MobilityUpperBoundDecreasePercent,			// 减少当前移动力上限（百分比）
+	//	MobilityUpperBoundChangeTo,					// 改变当前移动力上限
+	//	PositionMoveTo,								// 移动到指定地点
+	//	DamageIncreasePoint,						// 增加伤害（点数）
+	//	DamageIncreasePercent,						// 增加伤害（百分比）
+	//	DamageDecreasePoint,						// 减少伤害（点数）
+	//	DamageDecreasePercent,						// 减少伤害（百分比）
+	//	DamageChangeTo,								// 改变伤害
+	//	SkillActive,								// 施放技能
+	//	SkillAttach,								// 技能附加到单位
+	//	SkillRelease,								// 技能从单位移除
+	//	ImprisonActive,								// 定身激活
+	//	ImprisonRelease,							// 定身解除
+	//	DisarmActive,								// 缴械激活
+	//	DisarmRelease,								// 缴械解除
+	//	SlientActive,								// 沉默激活
+	//	SlientRelease,								// 沉默解除
+	//	StunActive,									// 眩晕激活
+	//	StunRelease,								// 眩晕解除
+	//	ImmunityActive,								// 免疫激活
+	//	ImmunityRelease,							// 免疫解除
+	//	ShieldActive,								// 护盾激活
+	//	ShieldRelease,								// 护盾解除
+	//	HideActive,									// 隐蔽激活
+	//	HideRelease,								// 隐蔽解除
+	//	InvisibleActive,							// 隐身激活
+	//	InvisibleRelease,							// 隐身解除
+	//	SummonMinion,								// 召唤小兵
+	//	SummonServant,								// 召唤从者
+	//	SummonGirl,									// 召唤少女
+	//	SummonDisappear,							// 召唤物消失
+	//	SummonSpoolAdd,								// 召唤池内单位增加
+	//	SummonSpoolFill,							// 召唤池单位补满
+	//	SummonSpoolRefresh,							// 召唤池单位刷新并补满
+	//	CardSpoolAdd,								// 卡片池卡片增加
+	//	CardSpoolRemove,							// 卡片池卡片移除
+	//	CancelMove,									// 取消移动
+	//	CancelAttack,								// 取消攻击
+	//	CancelSkill,								// 取消技能
+	//	CancelAll,									// 取消所有行为
+	//}
+
 	public enum DamageReason
 	{
 		Attack = 1,
@@ -168,6 +250,11 @@ public class BattleConsts
 	/// 玩家2队伍id
 	/// </summary>
 	public const int TeamId_Player2 = 1;
+
+	/// <summary>
+	/// 默认HP
+	/// </summary>
+	public const int DEFAULT_HP = 30;
 	/// <summary>
 	/// 默认B点
 	/// </summary>
@@ -200,7 +287,7 @@ public class BattleConsts
 	{
 		Unit = 1,
 		Card = 2,
-    }
+	}
 
 	/// <summary>
 	/// 单位池最大单位数量

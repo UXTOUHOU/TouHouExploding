@@ -6,5 +6,5 @@ using System.Text;
 public interface IBattleProperties : IBattleVO
 {
 	BattleConsts.Code getCode();
-    void addPropertyValue(BattleConsts.Property propId, object value);
+    //void addPropertyValue(BattleConsts.Property propId, object value);
 }

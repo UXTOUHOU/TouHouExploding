@@ -79,7 +79,7 @@ public class BattleFieldsUtils
         int manhattanDis = BattleFieldsUtils.getManhattanDis(attacker,defender);
         int minAttackDis = attacker.UnitAttribute.minAttackRangeCurrent;
         int maxAttackDis = attacker.UnitAttribute.maxAttackRangeCurrent;
-        return manhattanDis >= minAttackDis && manhattanDis <= maxAttackDis;
+        return minAttackDis <= manhattanDis && manhattanDis <= maxAttackDis;
     }
 }
 

@@ -9,23 +9,23 @@ using UnityEngine;
 /// </summary>
 public class TurnStartPhaseState : BattleStateBase
 {
-    public TurnStartPhaseState(IFSM fsm)
-        :base(fsm)
-    {
+	public TurnStartPhaseState(IFSM fsm)
+		:base(fsm)
+	{
 
-    }
+	}
 
-    public override void onStateEnter()
-    {
-        BattleGlobal.Core.getPlayer(BattleGlobal.MyPlayerId).resetBPoint();
-    }
+	public override void onStateEnter()
+	{
+		BattleGlobal.Core.getPlayer(BattleGlobal.MyPlayerId).resetBPoint();
+	}
 
-    public override void onStateExit()
-    {
-    }
+	public override void onStateExit()
+	{
+	}
 
-    public override void update()
-    {
+	public override void update()
+	{
 		BattleStateManager.getInstance().setState(BattleConsts.BattleState.StandbyPhase);
-    }
+	}
 }
